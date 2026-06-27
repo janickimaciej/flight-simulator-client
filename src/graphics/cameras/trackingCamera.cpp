@@ -31,4 +31,4 @@ namespace Graphics
 		state.setOrientation(glm::normalize(state.position - modelPosition));
 		setState(state);
 	}
-};
+}

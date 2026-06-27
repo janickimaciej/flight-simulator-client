@@ -10,4 +10,4 @@ namespace Graphics
 		glm::vec2 texturePosition{};
 		glm::vec3 normalVector{};
 	};
-};
+}

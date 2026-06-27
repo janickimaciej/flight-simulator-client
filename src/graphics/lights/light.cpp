@@ -36,4 +36,4 @@ namespace Graphics
 	{
 		return glm::normalize(glm::mat3{modelMatrix} * getState().direction());
 	}
-};
+}

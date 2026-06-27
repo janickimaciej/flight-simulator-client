@@ -21,4 +21,4 @@ namespace Graphics
 		virtual void scale(float scaleRatio) override; // locally
 		virtual ~Model() = default;
 	};
-};
+}

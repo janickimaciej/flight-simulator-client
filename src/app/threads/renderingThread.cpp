@@ -81,7 +81,7 @@ namespace App
 		const int initialWindowWidth = glfwGetVideoMode(glfwGetPrimaryMonitor())->width;
 		const int initialWindowHeight = glfwGetVideoMode(glfwGetPrimaryMonitor())->height;
 		m_windowPayload.aspectRatio = static_cast<float>(initialWindowWidth) / initialWindowHeight;
-		const std::string windowTitle = "plane-opengl-client";
+		const std::string windowTitle = "flight-simulator-client";
 		m_window = glfwCreateWindow(initialWindowWidth, initialWindowHeight, windowTitle.c_str(),
 			glfwGetPrimaryMonitor(), nullptr);
 		glfwSetWindowUserPointer(m_window, &m_windowPayload);
@@ -114,4 +114,4 @@ namespace App
 		const Physics::PlayerInput& ownInput = m_windowInput.getCurrentInput();
 		m_ownInput.setOwnInput(ownInput);
 	}
-};
+}

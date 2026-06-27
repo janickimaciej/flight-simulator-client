@@ -6,4 +6,4 @@ namespace App
 	{
 		float aspectRatio;
 	};
-};
+}

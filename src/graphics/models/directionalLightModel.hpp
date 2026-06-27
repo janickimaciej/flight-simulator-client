@@ -21,4 +21,4 @@ namespace Graphics
 	private:
 		DirectionalLight m_light;
 	};
-};
+}

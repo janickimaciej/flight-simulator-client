@@ -30,4 +30,4 @@ namespace Graphics
 		glm::vec3 getGlobalPosition(const glm::mat4& modelMatrix) const;
 		glm::vec3 getGlobalDirection(const glm::mat4& modelMatrix) const;
 	};
-};
+}

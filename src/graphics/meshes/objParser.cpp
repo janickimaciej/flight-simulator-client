@@ -185,4 +185,4 @@ namespace Graphics
 		
 		return triangle;
 	}
-};
+}

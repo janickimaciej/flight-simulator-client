@@ -22,4 +22,4 @@ namespace Graphics
 		static const std::string suffix = ".png";
 		return prefix + modelName + "/" + submodelName + suffix;
 	}
-};
+}

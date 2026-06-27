@@ -8,4 +8,4 @@ namespace Graphics
 		bullet,
 		hills
 	};
-};
+}

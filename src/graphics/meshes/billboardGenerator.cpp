@@ -39,4 +39,4 @@ namespace Graphics
 
 		return vertices;
 	}
-};
+}

@@ -246,7 +246,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{057b7695-4ea7-4cc6-9eaa-c98fd27b337d}</ProjectGuid>
-    <RootNamespace>plane-opengl-client</RootNamespace>
+    <RootNamespace>flight-simulator-client</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -376,8 +376,7 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)src\graphics\shaders\ $(TargetDir)src\graphics\shaders\ /E/Y
-xcopy $(SolutionDir)res\ $(TargetDir)res\ /E/Y</Command>
+      <Command>xcopy "$(SolutionDir)src\" "$(TargetDir)src\" /E/Y &amp;&amp; xcopy "$(SolutionDir)res\" "$(TargetDir)res\" /E/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -404,8 +403,7 @@ xcopy $(SolutionDir)res\ $(TargetDir)res\ /E/Y</Command>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)src\graphics\shaders\ $(TargetDir)src\graphics\shaders\ /E/Y
-xcopy $(SolutionDir)res\ $(TargetDir)res\ /E/Y</Command>
+      <Command>xcopy "$(SolutionDir)src\" "$(TargetDir)src\" /E/Y &amp;&amp; xcopy "$(SolutionDir)res\" "$(TargetDir)res\" /E/Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

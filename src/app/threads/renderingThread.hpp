@@ -42,4 +42,4 @@ namespace App
 		static void resizeWindow(GLFWwindow* window, int width, int height);
 		void processInput();
 	};
-};
+}

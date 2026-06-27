@@ -37,4 +37,4 @@ namespace Graphics
 
 		void updateShaders(const glm::mat4& modelSubmodelMatrix) const;
 	};
-};
+}

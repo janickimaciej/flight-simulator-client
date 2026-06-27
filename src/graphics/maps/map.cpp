@@ -43,4 +43,4 @@ namespace Graphics
 	Map::Map(std::unique_ptr<Common::Terrains::Map> terrain) :
 		m_terrain{std::move(terrain)}
 	{ }
-};
+}

@@ -55,4 +55,4 @@ namespace App
 		void setReceiveSocketTimeout(const std::chrono::duration<float>& timeout);
 		static void completionHandler(std::shared_ptr<std::vector<std::uint8_t>>);
 	};
-};
+}

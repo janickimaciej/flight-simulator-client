@@ -36,4 +36,4 @@ namespace Graphics
 	{
 		m_ground.render(getMatrix());
 	}
-};
+}

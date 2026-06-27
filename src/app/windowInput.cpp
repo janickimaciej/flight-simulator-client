@@ -152,4 +152,4 @@ namespace App
 
 		return m_ownInput;
 	}
-};
+}

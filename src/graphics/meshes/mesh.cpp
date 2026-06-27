@@ -61,4 +61,4 @@ namespace Graphics
 
 		glBindVertexArray(0);
 	}
-};
+}

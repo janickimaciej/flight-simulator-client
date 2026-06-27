@@ -13,4 +13,4 @@ namespace Graphics
 		glm::vec3{0, 5, 16},
 		glm::vec3{0, 10, 25}
 	};
-};
+}

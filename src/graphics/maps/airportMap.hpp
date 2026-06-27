@@ -40,4 +40,4 @@ namespace Graphics
 
 		void setModels();
 	};
-};
+}

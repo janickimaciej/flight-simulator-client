@@ -49,4 +49,4 @@ namespace Graphics
 	{
 		m_fogDensity = fogDensity;
 	}
-};
+}

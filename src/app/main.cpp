@@ -18,7 +18,7 @@ namespace App
 		Common::MapName& mapName, std::string& serverIPAddress, int& serverNetworkThreadPort,
 		int& serverPhysicsThreadPort, int& clientNetworkThreadPort, int& clientPhysicsThreadPort);
 	bool isValidIPAddress(const std::string& serverIPAddress);
-};
+}
 
 int main(int argc, char** argv)
 {
@@ -188,4 +188,4 @@ namespace App
 			return false;
 		}
 	}
-};
+}

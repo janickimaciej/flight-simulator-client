@@ -16,4 +16,4 @@ namespace App
 		Physics::PlayerInput m_ownInput{};
 		mutable std::mutex m_mutex{};
 	};
-};
+}

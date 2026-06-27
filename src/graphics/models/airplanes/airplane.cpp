@@ -47,4 +47,4 @@ namespace Graphics
 	{
 		m_hp = hp;
 	}
-};
+}

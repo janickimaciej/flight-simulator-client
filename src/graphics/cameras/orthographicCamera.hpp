@@ -16,4 +16,4 @@ namespace Graphics
 	private:
 		float m_width{};
 	};
-};
+}

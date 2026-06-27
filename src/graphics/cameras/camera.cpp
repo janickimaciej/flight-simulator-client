@@ -53,4 +53,4 @@ namespace Graphics
 	{
 		return glm::inverse(getCameraMatrix());
 	}
-};
+}

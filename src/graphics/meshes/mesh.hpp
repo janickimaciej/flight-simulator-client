@@ -24,4 +24,4 @@ namespace Graphics
 
 		void createBuffers(const std::vector<Vertex>& vertices);
 	};
-};
+}

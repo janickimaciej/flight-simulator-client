@@ -19,4 +19,4 @@ namespace Graphics
 		static glm::vec3 calcNormalVector(float x, float z,
 			const Common::Terrains::Map& map);
 	};
-};
+}

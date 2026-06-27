@@ -30,4 +30,4 @@ namespace Graphics
 		glm::vec3 getCameraPosition() const;
 		glm::mat4 getViewMatrix() const;
 	};
-};
+}

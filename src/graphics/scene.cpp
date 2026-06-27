@@ -152,4 +152,4 @@ namespace Graphics
 			m_bullets.at(i)->setState(bulletInfos.at(i).state);
 		}
 	}
-};
+}

@@ -57,4 +57,4 @@ namespace Graphics
 		void renderHUD() const;
 		void refresh(TextField& textField, int value, int numberOfDigits, bool isSigned);
 	};
-};
+}

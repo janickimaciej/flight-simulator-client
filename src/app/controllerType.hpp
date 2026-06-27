@@ -9,4 +9,4 @@ namespace App
 		keyboard,
 		gamepad
 	};
-};
+}

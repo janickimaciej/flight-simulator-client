@@ -16,4 +16,4 @@ namespace Graphics
 		static std::chrono::time_point<std::chrono::system_clock> m_time;
 		static std::chrono::duration<float> m_deltaTime;
 	};
-};
+}

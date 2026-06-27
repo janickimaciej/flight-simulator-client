@@ -32,4 +32,4 @@ namespace Graphics
 		}
 		return std::vector<Vertex>{};
 	}
-};
+}

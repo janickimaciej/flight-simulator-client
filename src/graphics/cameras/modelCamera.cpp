@@ -20,4 +20,4 @@ namespace Graphics
 	{
 		return m_model.getModelMatrix() * getMatrix();
 	}
-};
+}

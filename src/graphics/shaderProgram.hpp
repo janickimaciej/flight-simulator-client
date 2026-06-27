@@ -32,4 +32,4 @@ namespace Graphics
 		void printCompilationError(GLenum shaderType, unsigned int shaderId) const;
 		void printLinkingError(unsigned int programId) const;
 	};
-};
+}

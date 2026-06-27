@@ -15,4 +15,4 @@ namespace Graphics
 		m_projectionMatrix = glm::ortho(-m_width / 2, m_width / 2, -height / 2, height / 2,
 			m_nearPlane, m_farPlane);
 	}
-};
+}

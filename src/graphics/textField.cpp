@@ -58,4 +58,4 @@ namespace Graphics
 			submodel.render(modelMatrix);
 		}
 	}
-};
+}

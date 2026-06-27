@@ -143,4 +143,4 @@ namespace Graphics
 		m_leftLightSubmodel.render(getMatrix());
 		m_rightLightSubmodel.render(getMatrix());
 	}
-};
+}

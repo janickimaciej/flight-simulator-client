@@ -26,4 +26,4 @@ namespace Graphics
 		float getLightCoefficient();
 		float getFogCoefficient();
 	};
-};
+}

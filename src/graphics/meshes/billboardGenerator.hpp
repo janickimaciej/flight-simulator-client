@@ -13,4 +13,4 @@ namespace Graphics
 	public:
 		static std::vector<Vertex> generate(float width, float height);
 	};
-};
+}

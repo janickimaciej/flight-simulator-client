@@ -12,4 +12,4 @@ namespace Graphics
 		shininess{shininess},
 		isMetal{isMetal}
 	{ }
-};
+}

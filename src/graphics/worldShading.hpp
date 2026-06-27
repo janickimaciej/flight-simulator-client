@@ -27,4 +27,4 @@ namespace Graphics
 		const ShaderProgram& m_surfaceShaderProgram;
 		const ShaderProgram& m_lightShaderProgram;
 	};
-};
+}

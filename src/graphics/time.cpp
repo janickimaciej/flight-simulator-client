@@ -31,4 +31,4 @@ namespace Graphics
 
 	std::chrono::time_point<std::chrono::system_clock> Time::m_time{};
 	std::chrono::duration<float> Time::m_deltaTime{};
-};
+}

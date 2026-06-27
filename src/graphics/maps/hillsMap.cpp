@@ -59,4 +59,4 @@ namespace Graphics
 		m_sun.rotatePitch(glm::radians(sunRotationPitchDeg));
 		m_sun.rotateYaw(glm::radians(sunRotationYawDeg));
 	}
-};
+}

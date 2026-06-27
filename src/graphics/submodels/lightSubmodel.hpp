@@ -24,4 +24,4 @@ namespace Graphics
 	private:
 		const Light& m_light;
 	};
-};
+}

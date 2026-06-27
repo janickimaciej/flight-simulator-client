@@ -60,4 +60,4 @@ namespace App
 		void handleStateFrame(const Physics::Timestep& timestep,
 			const std::unordered_map<int, Physics::PlayerInfo>& playerInfos);
 	};
-};
+}

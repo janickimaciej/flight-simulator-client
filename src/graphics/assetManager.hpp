@@ -40,4 +40,4 @@ namespace Graphics
 			return asset;
 		}
 	}
-};
+}

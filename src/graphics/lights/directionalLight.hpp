@@ -26,4 +26,4 @@ namespace Graphics
 
 		static unsigned int getAvailableId(const ShaderProgram& surfaceShaderProgram);
 	};
-};
+}

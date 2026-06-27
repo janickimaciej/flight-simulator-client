@@ -102,4 +102,4 @@ namespace Graphics
 		m_shaderProgram.setUniform1b("material.isMetal", m_material.isMetal);
 		m_shaderProgram.setUniform1b("isTextureEnabled", static_cast<bool>(m_texture));
 	}
-};
+}

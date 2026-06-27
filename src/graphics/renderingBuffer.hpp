@@ -29,4 +29,4 @@ namespace Graphics
 		unsigned int m_beingRendered{};
 		std::mutex m_mutex{};
 	};
-};
+}

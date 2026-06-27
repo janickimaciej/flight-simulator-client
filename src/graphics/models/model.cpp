@@ -22,4 +22,4 @@ namespace Graphics
 	{
 		Transformable::scale(scaleRatio);
 	}
-};
+}

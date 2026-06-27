@@ -169,4 +169,4 @@ namespace Graphics
 			textField.setCharacter(isSigned ? i + 1 + offset : i + offset, text[i]);
 		}
 	}
-};
+}

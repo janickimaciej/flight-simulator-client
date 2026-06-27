@@ -29,4 +29,4 @@ namespace Graphics
 		
 		void renderSurfaces() const;
 	};
-};
+}

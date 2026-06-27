@@ -62,4 +62,4 @@ namespace Graphics
 		void removeAirplanes(const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);
 		void updateBullets(const std::vector<Common::BulletInfo>& bulletInfos);
 	};
-};
+}

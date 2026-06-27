@@ -27,4 +27,4 @@ namespace Graphics
 	{
 		return m_light.getState().matrix() * getMatrix();
 	}
-};
+}

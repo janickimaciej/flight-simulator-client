@@ -21,4 +21,4 @@ namespace App
 		const Physics::PlayerInput& getCurrentInputKeyboard();
 		const Physics::PlayerInput& getCurrentInputGamepad();
 	};
-};
+}

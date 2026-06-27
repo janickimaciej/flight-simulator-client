@@ -22,4 +22,4 @@ namespace App
 	};
 
 	std::size_t toSizeT(CommandLineArgument commandLineArgument);
-};
+}

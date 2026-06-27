@@ -17,4 +17,4 @@ namespace Graphics
 		void create();
 		void load(const std::string& path) const;
 	};
-};
+}

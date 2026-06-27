@@ -143,4 +143,4 @@ namespace Graphics
 		glGetProgramInfoLog(programId, errorLogSize, nullptr, errorLog.data());
 		std::cerr << "Error linking shader program:\n" << errorLog.data() << '\n';
 	}
-};
+}

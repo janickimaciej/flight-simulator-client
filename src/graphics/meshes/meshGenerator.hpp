@@ -15,4 +15,4 @@ namespace Graphics
 	public:
 		static std::vector<Vertex> generate(ProceduralMeshName name);
 	};
-};
+}

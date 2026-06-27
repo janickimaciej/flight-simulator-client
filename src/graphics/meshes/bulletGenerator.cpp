@@ -48,4 +48,4 @@ namespace Graphics
 		vertices.push_back(triangle[1]);
 		vertices.push_back(triangle[0]);
 	}
-};
+}

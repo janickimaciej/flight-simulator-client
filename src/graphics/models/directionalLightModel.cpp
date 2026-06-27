@@ -25,4 +25,4 @@ namespace Graphics
 
 	void DirectionalLightModel::render() const
 	{ }
-};
+}

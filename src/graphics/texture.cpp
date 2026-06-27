@@ -53,4 +53,4 @@ namespace Graphics
 		}
 		stbi_image_free(textureData);
 	}
-};
+}

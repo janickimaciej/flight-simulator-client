@@ -26,4 +26,4 @@ namespace Graphics
 			const std::vector<glm::vec3>& positions, const std::vector<glm::vec2>& texturePositions,
 			const std::vector<glm::vec3>& normalVectors);
 	};
-};
+}

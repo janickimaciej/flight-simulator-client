@@ -67,4 +67,4 @@ namespace Graphics
 		static constexpr float sunRotationPitchDeg = -135;
 		m_sun.rotatePitch(glm::radians(sunRotationPitchDeg));
 	}
-};
+}

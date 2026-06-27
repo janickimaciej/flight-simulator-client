@@ -38,4 +38,4 @@ namespace Graphics
 	{
 		m_body.render(getMatrix());
 	}
-};
+}

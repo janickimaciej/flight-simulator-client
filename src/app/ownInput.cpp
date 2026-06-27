@@ -23,4 +23,4 @@ namespace App
 
 		return ownInput;
 	}
-};
+}

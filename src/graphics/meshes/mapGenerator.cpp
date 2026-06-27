@@ -90,4 +90,4 @@ namespace Graphics
 	{
 		return glm::normalize(glm::vec3{-map.heightDerivX(x, z), 1, -map.heightDerivZ(x, z)});
 	}
-};
+}

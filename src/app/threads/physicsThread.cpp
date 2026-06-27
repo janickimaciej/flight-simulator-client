@@ -104,4 +104,4 @@ namespace App
 			currentTimestep = m_simulationClock.getTime();
 		}
 	}
-};
+}

@@ -29,4 +29,4 @@ namespace Graphics
 	protected:
 		int m_hp{};
 	};
-};
+}

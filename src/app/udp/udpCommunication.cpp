@@ -199,4 +199,4 @@ namespace App
 
 	void UDPCommunication::completionHandler(std::shared_ptr<std::vector<std::uint8_t>>)
 	{ }
-};
+}

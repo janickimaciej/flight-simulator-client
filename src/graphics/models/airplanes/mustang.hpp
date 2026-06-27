@@ -45,4 +45,4 @@ namespace Graphics
 		void renderSurfaces() const;
 		void renderLights() const;
 	};
-};
+}

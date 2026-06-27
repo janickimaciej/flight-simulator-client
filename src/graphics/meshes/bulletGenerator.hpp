@@ -18,4 +18,4 @@ namespace Graphics
 			const glm::vec3& vertex1Position, const glm::vec3& vertex2Position,
 			const glm::vec3& vertex3Position);
 	};
-};
+}

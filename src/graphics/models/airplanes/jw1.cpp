@@ -239,4 +239,4 @@ namespace Graphics
 		m_leftNozzleGlass.render(getMatrix());
 		m_rightNozzleGlass.render(getMatrix());
 	}
-};
+}

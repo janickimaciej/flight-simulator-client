@@ -18,4 +18,4 @@ namespace Graphics
 	{
 		m_projectionMatrix = glm::perspective(m_fovRad, m_aspectRatio, m_nearPlane, m_farPlane);
 	}
-};
+}

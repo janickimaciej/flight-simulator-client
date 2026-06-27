@@ -33,4 +33,4 @@ namespace Graphics
 
 		Map(std::unique_ptr<Common::Terrains::Map> terrain);
 	};
-};
+}

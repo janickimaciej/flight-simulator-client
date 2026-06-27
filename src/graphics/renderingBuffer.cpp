@@ -50,4 +50,4 @@ namespace Graphics
 		m_scene->updateShaders();
 		m_scene->render(aspectRatio);
 	}
-};
+}

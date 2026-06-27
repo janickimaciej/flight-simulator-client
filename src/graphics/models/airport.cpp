@@ -153,4 +153,4 @@ namespace Graphics
 			lightSubmodel.render(getMatrix());
 		}
 	}
-};
+}

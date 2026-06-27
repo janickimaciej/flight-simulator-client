@@ -23,4 +23,4 @@ namespace Graphics
 	{
 		m_tracer.render(getMatrix());
 	}
-};
+}

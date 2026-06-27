@@ -17,4 +17,4 @@ namespace Graphics
 	private:
 		float m_fovRad{};
 	};
-};
+}

@@ -230,4 +230,4 @@ namespace App
 		m_simulationBuffer->writeStateFrame(timestep, playerInfos);
 		m_notification.setNotification(timestep, true);
 	}
-};
+}

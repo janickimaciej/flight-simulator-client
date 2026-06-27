@@ -20,4 +20,4 @@ namespace Graphics
 
 		void aimAtModel();
 	};
-};
+}

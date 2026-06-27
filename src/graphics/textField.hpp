@@ -28,4 +28,4 @@ namespace Graphics
 		std::vector<Submodel> m_textSubmodels{};
 		AssetManager<std::string, const Texture>& m_textureManager;
 	};
-};
+}

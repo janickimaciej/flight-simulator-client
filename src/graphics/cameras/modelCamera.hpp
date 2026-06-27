@@ -21,4 +21,4 @@ namespace Graphics
 
 		virtual glm::mat4 getCameraMatrix() const override;
 	};
-};
+}
