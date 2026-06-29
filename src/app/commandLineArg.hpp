@@ -4,10 +4,10 @@
 
 namespace App
 {
-	inline constexpr int multiplayerArgumentCount = 10;
-	inline constexpr int singleplayerArgumentCount = 5;
+	inline constexpr int multiplayerArgCount = 10;
+	inline constexpr int singleplayerArgCount = 5;
 
-	enum class CommandLineArgument
+	enum class CommandLineArg
 	{
 		programName,
 		gameMode,
@@ -21,5 +21,5 @@ namespace App
 		clientPhysicsThreadPort
 	};
 
-	std::size_t toSizeT(CommandLineArgument commandLineArgument);
+	std::size_t toSizeT(CommandLineArg commandLineArg);
 }

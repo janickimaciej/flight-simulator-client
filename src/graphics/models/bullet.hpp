@@ -17,7 +17,7 @@ namespace Graphics
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		virtual ~Bullet() = default;
-		
+
 	private:
 		const ShaderProgram& m_lightShaderProgram;
 

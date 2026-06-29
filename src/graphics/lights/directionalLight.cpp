@@ -49,7 +49,7 @@ namespace Graphics
 			m_surfaceShaderProgram.setUniform1b(m_prefix + "isActive", false);
 		}
 	}
-	
+
 	std::array<int, DirectionalLight::maxDirectionalLightCount> DirectionalLight::m_isActive{};
 
 	unsigned int DirectionalLight::getAvailableId(const ShaderProgram& surfaceShaderProgram)

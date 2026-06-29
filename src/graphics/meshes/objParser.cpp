@@ -23,7 +23,7 @@ namespace Graphics
 			assert(false);
 			return std::vector<Vertex>{};
 		}
-		
+
 		std::vector<Vertex> vertices{};
 
 		std::vector<glm::vec3> positions{};
@@ -182,7 +182,7 @@ namespace Graphics
 			triangle[vertexIndex].texturePosition = texturePositions[texturePositionIndex - 1];
 			triangle[vertexIndex].normalVector = normalVectors[normalVectorIndex - 1];
 		}
-		
+
 		return triangle;
 	}
 }

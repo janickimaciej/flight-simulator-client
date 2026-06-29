@@ -61,7 +61,7 @@ namespace Graphics
 			m_surfaceShaderProgram.setUniform1b(m_prefix + "isActive", false);
 		}
 	}
-	
+
 	std::array<int, PointLight::maxPointLightCount> PointLight::m_isActive{};
 
 	unsigned int PointLight::getAvailableId(const ShaderProgram& surfaceShaderProgram)

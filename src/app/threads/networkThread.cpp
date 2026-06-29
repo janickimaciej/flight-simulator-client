@@ -145,7 +145,7 @@ namespace App
 		renderingBuffer = std::make_unique<Graphics::RenderingBuffer>(ownId);
 
 		Physics::Timestep initialTimestep = m_simulationClock.getTime();
-		
+
 		Physics::PlayerInfo ownInfo;
 
 		ownInfo.state.hp = Physics::airplaneDefinitions[toSizeT(airplaneTypeName)].initialHP;
@@ -179,7 +179,7 @@ namespace App
 				m_exitSignal.exit(ExitCode::connectionLost);
 				return;
 			}
-			
+
 			static constexpr Physics::Timestep frameAgeCutoffOffset{0,
 				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
 			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;

@@ -26,7 +26,7 @@ namespace Graphics
 		const ShaderProgram& m_surfaceShaderProgram;
 
 		Submodel m_ground;
-		
+
 		void renderSurfaces() const;
 	};
 }

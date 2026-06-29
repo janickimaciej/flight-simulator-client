@@ -3,11 +3,8 @@
 #include "app/controllerType.hpp"
 #include "app/exitCode.hpp"
 #include "app/exitSignal.hpp"
-#include "app/gameMode.hpp"
 #include "app/threads/networkThread.hpp"
 #include "app/windowPayload.hpp"
-#include "common/airplaneTypeName.hpp"
-#include "common/mapName.hpp"
 #include "graphics/time.hpp"
 #include "physics/playerInput.hpp"
 
@@ -25,9 +22,7 @@ namespace App
 		m_windowInput{m_window, controllerType}
 	{ }
 
-	void RenderingThread::start(GameMode gameMode, Common::AirplaneTypeName airplaneTypeName,
-		Common::MapName mapName, const std::string& serverIPAddress, int serverNetworkThreadPort,
-		int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort)
+	void RenderingThread::start(const CommandLineArgs& args)
 	{
 		std::shared_ptr<std::binary_semaphore> semaphore =
 			std::make_shared<std::binary_semaphore>(0);
@@ -36,16 +31,16 @@ namespace App
 				semaphore->release();
 			});
 
-		NetworkThread networkThread{m_exitSignal, gameMode, airplaneTypeName, mapName,
-			serverIPAddress, serverNetworkThreadPort, serverPhysicsThreadPort,
-			clientNetworkThreadPort, clientPhysicsThreadPort, m_ownInput, m_renderingBuffer,
-			semaphore};
+		NetworkThread networkThread{m_exitSignal, args.gameMode, args.airplaneTypeName,
+			args.mapName, args.serverIPAddress, args.serverNetworkThreadPort,
+			args.serverPhysicsThreadPort, args.clientNetworkThreadPort,
+			args.clientPhysicsThreadPort, m_ownInput, m_renderingBuffer, semaphore};
 
 		initializeWindow();
 		semaphore->acquire();
 		if (!m_exitSignal.shouldStop())
 		{
-			m_renderingBuffer->initialize(airplaneTypeName, mapName);
+			m_renderingBuffer->initialize(args.airplaneTypeName, args.mapName);
 			mainLoop();
 			glfwTerminate();
 		}

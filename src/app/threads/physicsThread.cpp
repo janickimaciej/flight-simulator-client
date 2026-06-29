@@ -51,7 +51,7 @@ namespace App
 		Physics::Timestep initialTimestep{};
 
 		m_notification.forceGetNotification(initialTimestep);
-		
+
 		m_simulationBuffer.writeControlFrame(initialTimestep, m_ownId, Physics::PlayerInput{});
 		m_simulationBuffer.update(initialTimestep);
 

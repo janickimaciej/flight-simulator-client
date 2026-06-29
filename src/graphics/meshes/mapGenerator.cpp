@@ -71,7 +71,7 @@ namespace Graphics
 					glm::vec2{highXTexturePosition, highZTexturePosition};
 				triangle2[2].normalVector = calcNormalVector((i + 1) * spacingX, (j + 1) * spacingZ,
 					terrain);
-				
+
 				vertices.push_back(triangle2[0]);
 				vertices.push_back(triangle2[1]);
 				vertices.push_back(triangle2[2]);
@@ -80,7 +80,7 @@ namespace Graphics
 
 		return vertices;
 	}
-	
+
 	glm::vec3 MapGenerator::calcPosition(float x, float z, const Common::Terrains::Map& map)
 	{
 		return glm::vec3{x, map.height(x, z), z};

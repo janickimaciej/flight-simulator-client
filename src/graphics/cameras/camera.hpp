@@ -23,7 +23,7 @@ namespace Graphics
 		const ShaderProgram& m_surfaceShaderProgram;
 		const ShaderProgram& m_lightShaderProgram;
 		const ShaderProgram& m_hudShaderProgram;
-	
+
 		Camera(float nearPlane, float farPlane, const ShaderProgram& surfaceShaderProgram,
 			const ShaderProgram& lightShaderProgram, const ShaderProgram& hudShaderProgram);
 		virtual glm::mat4 getCameraMatrix() const;

@@ -22,7 +22,7 @@ namespace Graphics
 		Submodel{lightSubmodel},
 		m_light{light}
 	{ }
-	
+
 	glm::mat4 LightSubmodel::getSubmodelMatrix() const
 	{
 		return m_light.getState().matrix() * getMatrix();

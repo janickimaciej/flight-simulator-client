@@ -72,7 +72,7 @@ namespace Graphics
 			m_surfaceShaderProgram.setUniform1b(m_prefix + "isActive", false);
 		}
 	}
-	
+
 	std::array<int, SpotLight::maxSpotLightCount> SpotLight::m_isActive{};
 
 	unsigned int SpotLight::getAvailableId(const ShaderProgram& surfaceShaderProgram)

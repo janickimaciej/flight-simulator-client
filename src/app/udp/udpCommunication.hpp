@@ -45,7 +45,7 @@ namespace App
 		asio::ip::udp::endpoint m_serverNetworkThread{};
 		asio::ip::udp::endpoint m_serverPhysicsThread{};
 		asio::ip::udp::socket m_networkThreadSocket;
-		
+
 		asio::io_context m_physicsThreadIOContext{};
 		asio::ip::udp::socket m_physicsThreadSocket;
 

@@ -16,7 +16,7 @@ namespace Graphics
 		Mesh(ProceduralMeshName name);
 		void render() const;
 		~Mesh();
-	
+
 	private:
 		std::size_t m_vertexCount{};
 		unsigned int m_VBO{};

@@ -17,7 +17,7 @@
 namespace Graphics
 {
 	static const std::string modelName = "mustang";
-	
+
 	static const std::string capPath = meshPath(modelName, "cap");
 	static const std::string propellerPath = meshPath(modelName, "propeller");
 	static const std::string fuselagePath = meshPath(modelName, "body");
@@ -128,7 +128,7 @@ namespace Graphics
 		}
 		Airplane::setHP(hp);
 	}
-	
+
 	void Mustang::renderSurfaces() const
 	{
 		m_cap.render(getMatrix());

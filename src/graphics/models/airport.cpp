@@ -28,9 +28,9 @@ namespace Graphics
 	static const std::string lightBodyPath = meshPath(modelName, "lightBody");
 	static const std::string runwayPath = meshPath(modelName, "runway");
 	static const std::string towerPath = meshPath(modelName, "tower");
-	
+
 	static const std::string asphaltPath = texturePath(modelName, "asphalt");
-	static const std::string asphaltBrightPath = texturePath(modelName, "asphaltBright"); 
+	static const std::string asphaltBrightPath = texturePath(modelName, "asphaltBright");
 	static const std::string concretePath = texturePath(modelName, "concrete");
 	static const std::string grassPath = texturePath(modelName, "grass");
 	static const std::string tentPath = texturePath(modelName, "tent");

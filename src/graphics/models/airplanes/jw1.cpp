@@ -14,7 +14,7 @@
 namespace Graphics
 {
 	static const std::string modelName = "jw1";
-	
+
 	static const std::string conePath = meshPath(modelName, "cone");
 	static const std::string gunPath = meshPath(modelName, "gun");
 	static const std::string cockpitPath = meshPath(modelName, "cockpit");
@@ -35,12 +35,12 @@ namespace Graphics
 	static constexpr float lightsAttenuationLinear = 0.0005f;
 	static constexpr float lightsAttenuationConstant = 1;
 	static constexpr glm::vec3 lightsColor{1, 1, 1};
-	
+
 	static const Material texturedMetal{glm::vec3{1, 1, 1}, 0.2f, 0.2f, 30, true};
 	static const Material darkMetal{glm::vec3{0.4f, 0.4f, 0.4f}, 0.2f, 0.2f, 30, true};
 	static const Material defaultNozzleGlass{glm::vec3{0, 0, 0}, 1, 1, 1, false};
 	static const Material blackGlass{glm::vec3{0, 0, 0}, 0.75f, 1, 50, false};
-	
+
 	JW1::JW1(const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
@@ -92,7 +92,7 @@ namespace Graphics
 		m_leftElevator.mirrorX();
 		m_leftRudder.mirrorX();
 		m_leftAileron.mirrorX();
-		
+
 		m_leftElevator.translate(glm::vec3{0, 0, 16.6f});
 		m_rightElevator.translate(glm::vec3{0, 0, 16.6f});
 		m_leftRudder.translate(glm::vec3{-1.375f, 0.533f, 18.92f});

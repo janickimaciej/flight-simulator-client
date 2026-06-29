@@ -1,20 +1,16 @@
 #pragma once
 
+#include "app/commandLineArgs.hpp"
 #include "app/controllerType.hpp"
 #include "app/exitSignal.hpp"
-#include "app/gameMode.hpp"
 #include "app/ownInput.hpp"
-#include "app/threads/networkThread.hpp"
 #include "app/windowInput.hpp"
 #include "app/windowPayload.hpp"
-#include "common/airplaneTypeName.hpp"
-#include "common/mapName.hpp"
 #include "graphics/renderingBuffer.hpp"
 
 #include <glfw/glfw3.h>
 
 #include <memory>
-#include <string>
 
 namespace App
 {
@@ -22,10 +18,7 @@ namespace App
 	{
 	public:
 		RenderingThread(ExitSignal& exitSignal, ControllerType controllerType);
-		void start(GameMode gameMode, Common::AirplaneTypeName airplaneTypeName,
-			Common::MapName mapName, const std::string& serverIPAddress,
-			int serverNetworkThreadPort, int serverPhysicsThreadPort, int clientNetworkThreadPort,
-			int clientPhysicsThreadPort);
+		void start(const CommandLineArgs& args);
 
 	private:
 		ExitSignal& m_exitSignal;

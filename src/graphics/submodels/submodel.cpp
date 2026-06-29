@@ -81,7 +81,7 @@ namespace Graphics
 	{
 		return getMatrix();
 	}
-	
+
 	void Submodel::setMaterial(const Material& material)
 	{
 		m_material = material;

@@ -35,11 +35,11 @@ namespace App
 		int ctrlYawNegative = glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS;
 		int ctrlYawPositive = glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS;
 		m_ownInput.yaw = static_cast<float>(ctrlYawPositive - ctrlYawNegative);
-	
+
 		int ctrlRollNegative = glfwGetKey(m_window, GLFW_KEY_LEFT) == GLFW_PRESS;
 		int ctrlRollPositive = glfwGetKey(m_window, GLFW_KEY_RIGHT) == GLFW_PRESS;
 		m_ownInput.roll = static_cast<float>(ctrlRollPositive - ctrlRollNegative);
-	
+
 		static bool wasDecreaseThrustPressed = false;
 		if (glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
 		{

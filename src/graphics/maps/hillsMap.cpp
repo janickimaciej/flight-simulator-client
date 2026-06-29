@@ -46,7 +46,7 @@ namespace Graphics
 	{
 		m_hills.render();
 	}
-	
+
 	void HillsMap::setModels()
 	{
 		static constexpr float moonRotationPitchDeg = -15;
