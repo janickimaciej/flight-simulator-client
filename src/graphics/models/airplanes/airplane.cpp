@@ -1,7 +1,7 @@
 #include "graphics/models/airplanes/airplane.hpp"
 
 #include "common/airplaneCtrl.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/lights/spotLight.hpp"
 #include "graphics/meshes/mesh.hpp"
@@ -23,17 +23,17 @@ namespace Graphics
 		const ShaderProgram& lightShaderProgram,
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager,
-		Common::AirplaneTypeName airplaneTypeName)
+		Common::AirplaneType airplaneType)
 	{
-		switch (airplaneTypeName)
+		switch (airplaneType)
 		{
-			case Common::AirplaneTypeName::mustang:
+			case Common::AirplaneType::mustang:
 				return std::make_unique<Mustang>(surfaceShaderProgram, lightShaderProgram,
 					fileMeshManager, textureManager);
 
-			case Common::AirplaneTypeName::jw1:
-				return std::make_unique<JW1>(surfaceShaderProgram, lightShaderProgram, fileMeshManager,
-					textureManager);
+			case Common::AirplaneType::jw1:
+				return std::make_unique<JW1>(surfaceShaderProgram, lightShaderProgram,
+					fileMeshManager, textureManager);
 		}
 		return nullptr;
 	}

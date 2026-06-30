@@ -68,7 +68,7 @@ namespace Graphics
 
 	unsigned int ShaderProgram::createShader(GLenum shaderType, const std::string& shaderPath) const
 	{
-		std::string shaderCode = "#version 330 core\n\n";
+		std::string shaderCode = "#version 420 core\n\n";
 		shaderCode += "#define MAX_DIRECTIONAL_LIGHT_COUNT " +
 			std::to_string(DirectionalLight::maxDirectionalLightCount) + "\n";
 		shaderCode += "#define MAX_POINT_LIGHT_COUNT " +

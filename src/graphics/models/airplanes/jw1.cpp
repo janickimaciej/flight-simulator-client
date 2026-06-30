@@ -101,7 +101,7 @@ namespace Graphics
 		m_rightAileron.translate(glm::vec3{4.107f, 0.535f, 14.57f});
 
 		static constexpr glm::vec3 nosePosition = -Common::airplaneCentersOfMass[
-			toSizeT(Common::AirplaneTypeName::jw1)];
+			toSizeT(Common::AirplaneType::jw1)];
 		m_cone.translate(nosePosition);
 		m_gun.translate(nosePosition);
 		m_cockpit.translate(nosePosition);

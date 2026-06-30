@@ -40,7 +40,7 @@
     <ClCompile Include="src\app\exitCode.cpp" />
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
-    <ClCompile Include="core\common\airplaneTypeName.cpp" />
+    <ClCompile Include="core\common\airplaneType.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\common\transformable.cpp" />
     <ClCompile Include="core\physics\airplaneParams\airplaneParams.cpp" />
@@ -87,6 +87,8 @@
     <ClCompile Include="src\graphics\cameras\orthographicCamera.cpp" />
     <ClCompile Include="core\physics\spawner.cpp" />
     <ClCompile Include="src\app\commandLineArgs.cpp" />
+    <ClCompile Include="src\app\window.cpp" />
+    <ClCompile Include="src\graphics\shaderPrograms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />
@@ -104,7 +106,6 @@
     <ClInclude Include="src\graphics\lights\spotLight.hpp" />
     <ClInclude Include="src\graphics\cameras\trackingCamera.hpp" />
     <ClInclude Include="src\graphics\meshes\vertex.hpp" />
-    <ClInclude Include="src\app\windowPayload.hpp" />
     <ClInclude Include="src\graphics\path.hpp" />
     <ClInclude Include="dep\stb_image.h" />
     <ClInclude Include="src\graphics\texture.hpp" />
@@ -139,7 +140,7 @@
     <ClInclude Include="core\common\airplaneCentersOfMass.hpp" />
     <ClInclude Include="core\common\airplaneCtrl.hpp" />
     <ClInclude Include="core\common\airplaneInfo.hpp" />
-    <ClInclude Include="core\common\airplaneTypeName.hpp" />
+    <ClInclude Include="core\common\airplaneType.hpp" />
     <ClInclude Include="core\common\state.hpp" />
     <ClInclude Include="core\common\transformable.hpp" />
     <ClInclude Include="core\physics\airplaneParams\airplaneParams.hpp" />
@@ -211,6 +212,8 @@
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
     <ClInclude Include="core\physics\spawner.hpp" />
     <ClInclude Include="src\app\commandLineArgs.hpp" />
+    <ClInclude Include="src\app\window.hpp" />
+    <ClInclude Include="src\graphics\shaderPrograms.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\graphics\shaders\lightFS.glsl" />

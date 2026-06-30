@@ -22,7 +22,7 @@
     <ClCompile Include="core\app\exitSignal.cpp" />
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
-    <ClCompile Include="core\common\airplaneTypeName.cpp" />
+    <ClCompile Include="core\common\airplaneType.cpp" />
     <ClCompile Include="core\common\mapName.cpp" />
     <ClCompile Include="core\common\terrains\compositeTerrain.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
@@ -63,6 +63,7 @@
     <ClCompile Include="src\app\threads\physicsThread.cpp" />
     <ClCompile Include="src\app\threads\renderingThread.cpp" />
     <ClCompile Include="src\app\udp\udpCommunication.cpp" />
+    <ClCompile Include="src\app\window.cpp" />
     <ClCompile Include="src\app\windowInput.cpp" />
     <ClCompile Include="src\graphics\cameras\camera.cpp" />
     <ClCompile Include="src\graphics\cameras\modelCamera.cpp" />
@@ -81,6 +82,7 @@
     <ClCompile Include="src\graphics\models\hills.cpp" />
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
     <ClCompile Include="src\graphics\models\hud.cpp" />
+    <ClCompile Include="src\graphics\shaderPrograms.cpp" />
     <ClCompile Include="src\graphics\submodels\lightSubmodel.cpp" />
     <ClCompile Include="src\graphics\maps\airportMap.cpp" />
     <ClCompile Include="src\graphics\maps\map.cpp" />
@@ -118,7 +120,7 @@
     <ClInclude Include="core\common\airplaneCentersOfMass.hpp" />
     <ClInclude Include="core\common\airplaneCtrl.hpp" />
     <ClInclude Include="core\common\airplaneInfo.hpp" />
-    <ClInclude Include="core\common\airplaneTypeName.hpp" />
+    <ClInclude Include="core\common\airplaneType.hpp" />
     <ClInclude Include="core\common\bulletInfo.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
@@ -182,6 +184,7 @@
     <ClInclude Include="src\app\threads\physicsThread.hpp" />
     <ClInclude Include="src\app\threads\renderingThread.hpp" />
     <ClInclude Include="src\app\udp\udpCommunication.hpp" />
+    <ClInclude Include="src\app\window.hpp" />
     <ClInclude Include="src\app\windowInput.hpp" />
     <ClInclude Include="src\graphics\airplaneCameraPositions.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
@@ -198,6 +201,7 @@
     <ClInclude Include="src\graphics\models\hills.hpp" />
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\proceduralMeshName.hpp" />
+    <ClInclude Include="src\graphics\shaderPrograms.hpp" />
     <ClInclude Include="src\graphics\submodels\lightSubmodel.hpp" />
     <ClInclude Include="src\graphics\renderingBuffer.hpp" />
     <ClInclude Include="src\graphics\textField.hpp" />
@@ -228,7 +232,6 @@
     <ClInclude Include="src\graphics\shaderProgram.hpp" />
     <ClInclude Include="src\graphics\material.hpp" />
     <ClInclude Include="src\graphics\meshes\vertex.hpp" />
-    <ClInclude Include="src\app\windowPayload.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

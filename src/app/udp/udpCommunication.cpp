@@ -2,7 +2,7 @@
 
 #include "app/udp/udpFrameType.hpp"
 #include "app/udp/udpSerializer.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
 #include "physics/timestamp.hpp"
@@ -34,11 +34,10 @@ namespace App
 			static_cast<asio::ip::port_type>(clientPhysicsThreadPort)}}
 	{ }
 
-	void UDPCommunication::sendInitReqFrame(Common::AirplaneTypeName airplaneTypeName)
+	void UDPCommunication::sendInitReqFrame(Common::AirplaneType airplaneType)
 	{
 		std::vector<std::uint8_t> buffer{};
-		UDPSerializer::serializeInitReqFrame(Physics::Timestamp::systemNow(), airplaneTypeName,
-			buffer);
+		UDPSerializer::serializeInitReqFrame(Physics::Timestamp::systemNow(), airplaneType, buffer);
 
 		m_networkThreadSocket.send_to(asio::buffer(buffer), m_serverNetworkThread);
 	}

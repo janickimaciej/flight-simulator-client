@@ -22,7 +22,7 @@ namespace Graphics
 		float getHeight(float x, float z) const;
 		virtual ~Map() = default;
 
-		static std::unique_ptr<Map> createMap(Common::MapName mapName, WorldShading& worldShading,
+		static std::unique_ptr<Map> createMap(Common::MapName map, WorldShading& worldShading,
 			const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
 			AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,

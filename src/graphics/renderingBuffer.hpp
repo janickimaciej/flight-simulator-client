@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
 #include "graphics/scene.hpp"
@@ -15,7 +15,7 @@ namespace Graphics
 	{
 	public:
 		RenderingBuffer(int ownId);
-		void initialize(Common::AirplaneTypeName ownAirplaneTypeName, Common::MapName mapName);
+		void initialize(Common::AirplaneType ownAirplaneType, Common::MapName map);
 		void updateBuffer(const Common::SceneInfo& sceneInfo);
 		void updateAndRenderScene(float aspectRatio);
 

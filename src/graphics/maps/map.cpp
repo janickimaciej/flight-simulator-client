@@ -13,13 +13,13 @@
 
 namespace Graphics
 {
-	std::unique_ptr<Map> Map::createMap(Common::MapName mapName, WorldShading& worldShading,
+	std::unique_ptr<Map> Map::createMap(Common::MapName map, WorldShading& worldShading,
 		const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager)
 	{
-		switch (mapName)
+		switch (map)
 		{
 			case Common::MapName::airport:
 				return std::make_unique<AirportMap>(worldShading, surfaceShaderProgram,

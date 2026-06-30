@@ -10,15 +10,18 @@ namespace App
 	class WindowInput
 	{
 	public:
-		WindowInput(GLFWwindow*& window, ControllerType controller);
-		const Physics::PlayerInput& getCurrentInput();
+		WindowInput(GLFWwindow* window);
+		Physics::PlayerInput getCurrentInput();
+		void setControllerType(ControllerType controllerType);
 
 	private:
 		Physics::PlayerInput m_ownInput{};
-		GLFWwindow*& m_window;
-		ControllerType m_controller{};
+		GLFWwindow* m_windowPtr;
+		ControllerType m_controllerType{};
 
-		const Physics::PlayerInput& getCurrentInputKeyboard();
-		const Physics::PlayerInput& getCurrentInputGamepad();
+		void updateCurrentInputKeyboard();
+		void updateCurrentInputGamepad();
+
+		bool isKeyPressed(int key);
 	};
 }

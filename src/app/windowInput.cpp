@@ -6,42 +6,47 @@
 
 namespace App
 {
-	WindowInput::WindowInput(GLFWwindow*& window, ControllerType controller) :
-		m_window{window},
-		m_controller{controller}
+	WindowInput::WindowInput(GLFWwindow* windowPtr) :
+		m_windowPtr{windowPtr}
 	{ }
 
-	const Physics::PlayerInput& WindowInput::getCurrentInput()
+	Physics::PlayerInput WindowInput::getCurrentInput()
 	{
-		switch (m_controller)
+		switch (m_controllerType)
 		{
 			case ControllerType::keyboard:
-				return getCurrentInputKeyboard();
+				updateCurrentInputKeyboard();
+				break;
 
 			case ControllerType::gamepad:
-				return getCurrentInputGamepad();
-
-			default:
-				return getCurrentInputKeyboard();
+				updateCurrentInputGamepad();
+				break;
 		}
+
+		return m_ownInput;
 	}
 
-	const Physics::PlayerInput& WindowInput::getCurrentInputKeyboard()
+	void WindowInput::setControllerType(ControllerType controllerType)
 	{
-		int ctrlPitchNegative = glfwGetKey(m_window, GLFW_KEY_UP) == GLFW_PRESS;
-		int ctrlPitchPositive = glfwGetKey(m_window, GLFW_KEY_DOWN) == GLFW_PRESS;
+		m_controllerType = controllerType;
+	}
+
+	void WindowInput::updateCurrentInputKeyboard()
+	{
+		int ctrlPitchNegative = isKeyPressed(GLFW_KEY_UP);
+		int ctrlPitchPositive = isKeyPressed(GLFW_KEY_DOWN);
 		m_ownInput.pitch = static_cast<float>(ctrlPitchPositive - ctrlPitchNegative);
 
-		int ctrlYawNegative = glfwGetKey(m_window, GLFW_KEY_A) == GLFW_PRESS;
-		int ctrlYawPositive = glfwGetKey(m_window, GLFW_KEY_D) == GLFW_PRESS;
+		int ctrlYawNegative = isKeyPressed(GLFW_KEY_A);
+		int ctrlYawPositive = isKeyPressed(GLFW_KEY_D);
 		m_ownInput.yaw = static_cast<float>(ctrlYawPositive - ctrlYawNegative);
 
-		int ctrlRollNegative = glfwGetKey(m_window, GLFW_KEY_LEFT) == GLFW_PRESS;
-		int ctrlRollPositive = glfwGetKey(m_window, GLFW_KEY_RIGHT) == GLFW_PRESS;
+		int ctrlRollNegative = isKeyPressed(GLFW_KEY_LEFT);
+		int ctrlRollPositive = isKeyPressed(GLFW_KEY_RIGHT);
 		m_ownInput.roll = static_cast<float>(ctrlRollPositive - ctrlRollNegative);
 
 		static bool wasDecreaseThrustPressed = false;
-		if (glfwGetKey(m_window, GLFW_KEY_S) == GLFW_PRESS)
+		if (isKeyPressed(GLFW_KEY_S))
 		{
 			if (!wasDecreaseThrustPressed)
 			{
@@ -59,7 +64,7 @@ namespace App
 		}
 
 		static bool wasIncreaseThrustPressed = false;
-		if (glfwGetKey(m_window, GLFW_KEY_W) == GLFW_PRESS)
+		if (isKeyPressed(GLFW_KEY_W))
 		{
 			if (!wasIncreaseThrustPressed)
 			{
@@ -76,22 +81,20 @@ namespace App
 			m_ownInput.thrust = 1;
 		}
 
-		if (glfwGetKey(m_window, GLFW_KEY_Q) == GLFW_PRESS)
+		if (isKeyPressed(GLFW_KEY_Q))
 		{
 			m_ownInput.thrust = 0;
 		}
 
-		if (glfwGetKey(m_window, GLFW_KEY_E) == GLFW_PRESS)
+		if (isKeyPressed(GLFW_KEY_E))
 		{
 			m_ownInput.thrust = 1;
 		}
 
-		m_ownInput.trigger = glfwGetKey(m_window, GLFW_KEY_SPACE) == GLFW_PRESS;
-
-		return m_ownInput;
+		m_ownInput.trigger = isKeyPressed(GLFW_KEY_SPACE);
 	}
 
-	const Physics::PlayerInput& WindowInput::getCurrentInputGamepad()
+	void WindowInput::updateCurrentInputGamepad()
 	{
 		GLFWgamepadstate gamepad{};
 		glfwGetGamepadState(GLFW_JOYSTICK_1, &gamepad);
@@ -149,7 +152,10 @@ namespace App
 		}
 
 		m_ownInput.trigger = gamepad.buttons[5] == GLFW_PRESS;
+	}
 
-		return m_ownInput;
+	bool WindowInput::isKeyPressed(int key)
+	{
+		return glfwGetKey(m_windowPtr, key) == GLFW_PRESS;
 	}
 }

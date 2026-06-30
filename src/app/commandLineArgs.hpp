@@ -2,7 +2,7 @@
 
 #include "app/controllerType.hpp"
 #include "app/gameMode.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "common/mapName.hpp"
 
 #include <string>
@@ -13,8 +13,8 @@ namespace App
 	{
 		GameMode gameMode{};
 		ControllerType controllerType{};
-		Common::AirplaneTypeName airplaneTypeName{};
-		Common::MapName mapName{};
+		Common::AirplaneType airplaneType{};
+		Common::MapName map{};
 		std::string serverIPAddress{};
 		int serverNetworkThreadPort{};
 		int serverPhysicsThreadPort{};

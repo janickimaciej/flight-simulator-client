@@ -39,20 +39,19 @@ namespace App
 		}
 		args.controllerType = static_cast<ControllerType>(controllerTypeIndex);
 
-		int airplaneTypeNameIndex =
-			std::stoi(argv[toSizeT(CommandLineArg::airplaneType)]);
-		if (airplaneTypeNameIndex < 0 || airplaneTypeNameIndex >= Common::airplaneTypeCount)
+		int airplaneTypeIndex = std::stoi(argv[toSizeT(CommandLineArg::airplaneType)]);
+		if (airplaneTypeIndex < 0 || airplaneTypeIndex >= Common::airplaneTypeCount)
 		{
 			return false;
 		}
-		args.airplaneTypeName = static_cast<Common::AirplaneTypeName>(airplaneTypeNameIndex);
+		args.airplaneType = static_cast<Common::AirplaneType>(airplaneTypeIndex);
 
-		int mapNameIndex = std::stoi(argv[toSizeT(CommandLineArg::map)]);
-		if (mapNameIndex < 0 || mapNameIndex >= Common::mapCount)
+		int mapIndex = std::stoi(argv[toSizeT(CommandLineArg::map)]);
+		if (mapIndex < 0 || mapIndex >= Common::mapCount)
 		{
 			return false;
 		}
-		args.mapName = static_cast<Common::MapName>(mapNameIndex);
+		args.map = static_cast<Common::MapName>(mapIndex);
 
 		if (args.gameMode == GameMode::singleplayer)
 		{

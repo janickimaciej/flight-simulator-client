@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common/airplaneCtrl.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
@@ -20,7 +20,7 @@ namespace Graphics
 			const ShaderProgram& lightShaderProgram,
 			AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<std::string, const Texture>& textureManager,
-			Common::AirplaneTypeName airplaneTypeName);
+			Common::AirplaneType airplaneType);
 		virtual void setCtrl(const Common::AirplaneCtrl& airplaneCtrl) = 0;
 		virtual int getHP() const;
 		virtual void setHP(int hp);

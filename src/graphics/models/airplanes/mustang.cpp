@@ -69,7 +69,7 @@ namespace Graphics
 		m_rightLight.translate(glm::vec3{-lightsPositionXAbs, lightsPositionY, lightsPositionZ});
 
 		static constexpr glm::vec3 nosePosition = -Common::airplaneCentersOfMass[
-			toSizeT(Common::AirplaneTypeName::mustang)];
+			toSizeT(Common::AirplaneType::mustang)];
 		m_cap.translate(nosePosition);
 		m_propeller.translate(nosePosition);
 		m_body.translate(nosePosition);

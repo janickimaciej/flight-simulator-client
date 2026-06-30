@@ -1,7 +1,7 @@
 #include "graphics/scene.hpp"
 
 #include "common/airplaneInfo.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "common/bulletInfo.hpp"
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
@@ -33,27 +33,31 @@ namespace Graphics
 	static constexpr float hudCameraNearPlane = 0;
 	static constexpr float hudCameraFarPlane = 1;
 
-	Scene::Scene(int ownId, Common::AirplaneTypeName ownAirplaneTypeName, Common::MapName mapName) :
+	Scene::Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map) :
 		m_ownId{ownId},
-		m_ownAirplaneTypeName{ownAirplaneTypeName},
+		m_ownAirplaneType{ownAirplaneType},
 		m_worldShading{m_surfaceShaderProgram, m_lightShaderProgram},
 		m_hud{m_hudShaderProgram, m_proceduralMeshManager, m_textureManager}
 	{
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_MULTISAMPLE);
+
 		m_airplanes.insert({ownId, Airplane::createAirplane(m_surfaceShaderProgram,
-			m_lightShaderProgram, m_fileMeshManager, m_textureManager, ownAirplaneTypeName)});
+			m_lightShaderProgram, m_fileMeshManager, m_textureManager, ownAirplaneType)});
 
 		m_worldCamera = std::make_unique<ModelCamera>(*m_airplanes.at(ownId),
 			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane,
 			m_surfaceShaderProgram, m_lightShaderProgram, m_hudShaderProgram);
 		static constexpr float cameraPitchDeg = -10;
 		m_worldCamera->rotatePitch(glm::radians(cameraPitchDeg));
-		m_worldCamera->translate(airplaneCameraPositions[Common::toSizeT(ownAirplaneTypeName)]);
+		m_worldCamera->translate(airplaneCameraPositions[Common::toSizeT(ownAirplaneType)]);
 
 		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraWidth, hudCameraNearPlane,
 			hudCameraFarPlane, m_surfaceShaderProgram, m_lightShaderProgram, m_hudShaderProgram);
 
-		m_map = Map::createMap(mapName, m_worldShading, m_surfaceShaderProgram,
-			m_lightShaderProgram, m_fileMeshManager, m_proceduralMeshManager, m_textureManager);
+		m_map = Map::createMap(map, m_worldShading, m_surfaceShaderProgram, m_lightShaderProgram,
+			m_fileMeshManager, m_proceduralMeshManager, m_textureManager);
 
 		m_hud.translate(glm::vec3{0, 0, -0.01f});
 	}
@@ -108,7 +112,7 @@ namespace Graphics
 						m_lightShaderProgram,
 						m_fileMeshManager,
 						m_textureManager,
-						airplaneInfo.second.airplaneTypeName
+						airplaneInfo.second.airplaneType
 					)});
 			}
 			m_airplanes.at(airplaneInfo.first)->setState(airplaneInfo.second.state);

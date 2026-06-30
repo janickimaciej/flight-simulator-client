@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common/airplaneInfo.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "common/bulletInfo.hpp"
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
@@ -28,14 +28,14 @@ namespace Graphics
 	class Scene
 	{
 	public:
-		Scene(int ownId, Common::AirplaneTypeName ownAirplaneTypeName, Common::MapName mapName);
+		Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map);
 		void update(const Common::SceneInfo& sceneInfo);
 		void updateShaders();
 		void render(float aspectRatio) const;
 
 	private:
 		int m_ownId{};
-		Common::AirplaneTypeName m_ownAirplaneTypeName{};
+		Common::AirplaneType m_ownAirplaneType{};
 
 		const ShaderProgram m_surfaceShaderProgram{shaderPath("surfaceV"),
 			shaderPath("surfaceF")};

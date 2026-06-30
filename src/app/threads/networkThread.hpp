@@ -4,7 +4,7 @@
 #include "app/gameMode.hpp"
 #include "app/ownInput.hpp"
 #include "app/udp/udpCommunication.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "common/mapName.hpp"
 #include "graphics/renderingBuffer.hpp"
 #include "physics/notification.hpp"
@@ -23,7 +23,7 @@ namespace App
 	{
 	public:
 		NetworkThread(ExitSignal& exitSignal, GameMode gameMode,
-			Common::AirplaneTypeName airplaneTypeName, Common::MapName mapName,
+			Common::AirplaneType airplaneType, Common::MapName map,
 			const std::string& serverIPAddress, int serverNetworkThreadPort,
 			int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort,
 			OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
@@ -43,13 +43,12 @@ namespace App
 		Physics::Timestep m_frameCutoff{};
 		std::unique_ptr<UDPCommunication> m_udpCommunication;
 
-		void start(GameMode gameMode, Common::AirplaneTypeName airplaneTypeName,
-			Common::MapName mapName, OwnInput& ownInput,
-			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+		void start(GameMode gameMode, Common::AirplaneType airplaneType, Common::MapName map,
+			OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 			std::shared_ptr<std::binary_semaphore> renderingThreadSemaphore);
-		bool startMultiplayer(Common::AirplaneTypeName airplaneTypeName, Common::MapName mapName,
+		bool startMultiplayer(Common::AirplaneType airplaneType, Common::MapName map,
 			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer);
-		void startSingleplayer(Common::AirplaneTypeName airplaneTypeName, Common::MapName mapName,
+		void startSingleplayer(Common::AirplaneType airplaneType, Common::MapName map,
 			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer);
 		void mainLoopMultiplayer();
 

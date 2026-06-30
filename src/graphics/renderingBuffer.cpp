@@ -13,10 +13,9 @@ namespace Graphics
 		m_ownId{ownId}
 	{ }
 
-	void RenderingBuffer::initialize(Common::AirplaneTypeName ownAirplaneTypeName,
-		Common::MapName mapName)
+	void RenderingBuffer::initialize(Common::AirplaneType ownAirplaneType, Common::MapName map)
 	{
-		m_scene = std::make_unique<Scene>(m_ownId, ownAirplaneTypeName, mapName);
+		m_scene = std::make_unique<Scene>(m_ownId, ownAirplaneType, map);
 	}
 
 	void RenderingBuffer::updateBuffer(const Common::SceneInfo& sceneInfo)

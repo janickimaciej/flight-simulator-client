@@ -1,7 +1,7 @@
 #pragma once
 
 #include "app/udp/udpFrameType.hpp"
-#include "common/airplaneTypeName.hpp"
+#include "common/airplaneType.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
 #include "physics/timestamp.hpp"
@@ -24,7 +24,7 @@ namespace App
 		UDPCommunication(const std::string& serverIPAddress, int serverNetworkThreadPort,
 			int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort);
 
-		void sendInitReqFrame(Common::AirplaneTypeName airplaneTypeName);
+		void sendInitReqFrame(Common::AirplaneType airplaneType);
 		void sendControlFrame(const Physics::Timestep& timestep, int playerId,
 			const Physics::PlayerInput& playerInput);
 		void sendKeepaliveFrames();

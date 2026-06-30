@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 	}
 
 	ExitSignal exitSignal{};
-	RenderingThread renderingThread{exitSignal, args.controllerType};
+	RenderingThread renderingThread{exitSignal};
 	renderingThread.start(args);
 
 	return toInt(exitSignal.getExitCode());
