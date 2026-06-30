@@ -7,9 +7,7 @@ namespace Graphics
 	class OrthographicCamera : public Camera
 	{
 	public:
-		OrthographicCamera(float width, float nearPlane, float farPlane,
-			const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-			const ShaderProgram& hudShaderProgram);
+		OrthographicCamera(float width, float nearPlane, float farPlane);
 		virtual void updateProjectionMatrix() override;
 		virtual ~OrthographicCamera() = default;
 

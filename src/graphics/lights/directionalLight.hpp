@@ -1,7 +1,6 @@
 #pragma once
 
 #include "graphics/lights/light.hpp"
-#include "graphics/shaderProgram.hpp"
 
 #include <glm/glm.hpp>
 
@@ -15,7 +14,7 @@ namespace Graphics
 	public:
 		static constexpr std::size_t maxDirectionalLightCount = 2;
 
-		DirectionalLight(const ShaderProgram& surfaceShaderProgram, const glm::vec3& color);
+		DirectionalLight(const glm::vec3& color);
 		DirectionalLight(const DirectionalLight& directionalLight);
 		DirectionalLight(DirectionalLight&& directionalLight) noexcept;
 		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
@@ -24,6 +23,6 @@ namespace Graphics
 	private:
 		static std::array<int, maxDirectionalLightCount> m_isActive;
 
-		static unsigned int getAvailableId(const ShaderProgram& surfaceShaderProgram);
+		static unsigned int getAvailableId();
 	};
 }

@@ -8,7 +8,6 @@
 #include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/models/directionalLightModel.hpp"
 #include "graphics/models/hills.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -19,7 +18,7 @@ namespace Graphics
 	class HillsMap : public Map
 	{
 	public:
-		HillsMap(WorldShading& worldShading, const ShaderProgram& surfaceShaderProgram,
+		HillsMap(WorldShading& worldShading,
 			AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 			AssetManager<std::string, const Texture>& textureManager,
 			std::unique_ptr<Common::Terrains::Map> terrain);

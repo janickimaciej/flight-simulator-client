@@ -14,7 +14,6 @@
 namespace Graphics
 {
 	std::unique_ptr<Map> Map::createMap(Common::MapName map, WorldShading& worldShading,
-		const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager)
@@ -22,14 +21,12 @@ namespace Graphics
 		switch (map)
 		{
 			case Common::MapName::airport:
-				return std::make_unique<AirportMap>(worldShading, surfaceShaderProgram,
-					lightShaderProgram, fileMeshManager, textureManager,
+				return std::make_unique<AirportMap>(worldShading, fileMeshManager, textureManager,
 					std::make_unique<Common::Terrains::AirportMap>());
 
 			case Common::MapName::hills:
-				return std::make_unique<HillsMap>(worldShading, surfaceShaderProgram,
-					proceduralMeshManager, textureManager,
-					std::make_unique<Common::Terrains::HillsMap>());
+				return std::make_unique<HillsMap>(worldShading, proceduralMeshManager,
+					textureManager, std::make_unique<Common::Terrains::HillsMap>());
 		}
 		assert(false);
 		return nullptr;

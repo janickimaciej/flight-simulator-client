@@ -1,7 +1,7 @@
 #include "graphics/lights/spotLight.hpp"
 
 #include "graphics/lights/light.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 
 #include <glm/glm.hpp>
 
@@ -13,10 +13,10 @@ namespace Graphics
 {
 	const std::string prefix = "spotLights";
 
-	SpotLight::SpotLight(const ShaderProgram& surfaceShaderProgram, const glm::vec3& color,
-		float attenuationQuadratic, float attenuationLinear, float attenuationConstant,
-		float cutoffInnerRad, float cutoffOuterRad) :
-		Light{getAvailableId(surfaceShaderProgram), prefix, surfaceShaderProgram, color},
+	SpotLight::SpotLight(const glm::vec3& color, float attenuationQuadratic,
+		float attenuationLinear, float attenuationConstant, float cutoffInnerRad,
+		float cutoffOuterRad) :
+		Light{getAvailableId(), prefix, color},
 		m_attenuationQuadratic{attenuationQuadratic},
 		m_attenuationLinear{attenuationLinear},
 		m_attenuationConstant{attenuationConstant},
@@ -25,8 +25,7 @@ namespace Graphics
 	{ }
 
 	SpotLight::SpotLight(const SpotLight& spotLight) :
-		Light{getAvailableId(spotLight.m_surfaceShaderProgram), prefix,
-			spotLight.m_surfaceShaderProgram, spotLight.m_color, spotLight.getState()},
+		Light{getAvailableId(), prefix, spotLight.m_color, spotLight.getState()},
 		m_attenuationQuadratic{spotLight.m_attenuationQuadratic},
 		m_attenuationLinear{spotLight.m_attenuationLinear},
 		m_attenuationConstant{spotLight.m_attenuationConstant},
@@ -35,7 +34,7 @@ namespace Graphics
 	{ }
 
 	SpotLight::SpotLight(SpotLight&& spotLight) noexcept :
-		Light{spotLight.m_id, prefix, spotLight.m_surfaceShaderProgram, spotLight.m_color,
+		Light{spotLight.m_id, prefix, spotLight.m_color,
 			spotLight.getState()},
 		m_attenuationQuadratic{spotLight.m_attenuationQuadratic},
 		m_attenuationLinear{spotLight.m_attenuationLinear},
@@ -48,18 +47,19 @@ namespace Graphics
 
 	void SpotLight::updateShaders(const glm::mat4& modelMatrix) const
 	{
-		m_surfaceShaderProgram.use();
-		m_surfaceShaderProgram.setUniform3f(m_prefix + "position", getGlobalPosition(modelMatrix));
-		m_surfaceShaderProgram.setUniform3f(m_prefix + "direction",
+		ShaderPrograms::surface->use();
+		ShaderPrograms::surface->setUniform(m_prefix + "position",
+			getGlobalPosition(modelMatrix));
+		ShaderPrograms::surface->setUniform(m_prefix + "direction",
 			getGlobalDirection(modelMatrix));
-		m_surfaceShaderProgram.setUniform3f(m_prefix + "color", m_color);
-		m_surfaceShaderProgram.setUniform1f(m_prefix + "attenuationQuadratic",
+		ShaderPrograms::surface->setUniform(m_prefix + "color", m_color);
+		ShaderPrograms::surface->setUniform(m_prefix + "attenuationQuadratic",
 			m_attenuationQuadratic);
-		m_surfaceShaderProgram.setUniform1f(m_prefix + "attenuationLinear", m_attenuationLinear);
-		m_surfaceShaderProgram.setUniform1f(m_prefix + "attenuationConstant",
+		ShaderPrograms::surface->setUniform(m_prefix + "attenuationLinear", m_attenuationLinear);
+		ShaderPrograms::surface->setUniform(m_prefix + "attenuationConstant",
 			m_attenuationConstant);
-		m_surfaceShaderProgram.setUniform1f(m_prefix + "cutoffInnerRad", m_cutoffInnerRad);
-		m_surfaceShaderProgram.setUniform1f(m_prefix + "cutoffOuterRad", m_cutoffOuterRad);
+		ShaderPrograms::surface->setUniform(m_prefix + "cutoffInnerRad", m_cutoffInnerRad);
+		ShaderPrograms::surface->setUniform(m_prefix + "cutoffOuterRad", m_cutoffOuterRad);
 	}
 
 	SpotLight::~SpotLight()
@@ -68,14 +68,14 @@ namespace Graphics
 
 		if (m_isActive[m_id] == 0)
 		{
-			m_surfaceShaderProgram.use();
-			m_surfaceShaderProgram.setUniform1b(m_prefix + "isActive", false);
+			ShaderPrograms::surface->use();
+			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
 		}
 	}
 
 	std::array<int, SpotLight::maxSpotLightCount> SpotLight::m_isActive{};
 
-	unsigned int SpotLight::getAvailableId(const ShaderProgram& surfaceShaderProgram)
+	unsigned int SpotLight::getAvailableId()
 	{
 		unsigned int newId{};
 		bool found = false;
@@ -91,8 +91,8 @@ namespace Graphics
 		}
 		assert(found);
 
-		surfaceShaderProgram.use();
-		surfaceShaderProgram.setUniform1b(prefix + "[" + std::to_string(newId) + "].isActive",
+		ShaderPrograms::surface->use();
+		ShaderPrograms::surface->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
 			true);
 
 		return newId;

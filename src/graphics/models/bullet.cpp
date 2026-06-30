@@ -1,13 +1,14 @@
 #include "graphics/models/bullet.hpp"
 
+#include "graphics/shaderPrograms.hpp"
+
 namespace Graphics
 {
 	const Material tracer{glm::vec3{1, 1, 1}, 1, 1, 1, false};
 
-	Bullet::Bullet(const ShaderProgram& lightShaderProgram,
-		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager) :
-		m_lightShaderProgram{lightShaderProgram},
-		m_tracer{lightShaderProgram, proceduralMeshManager.get(ProceduralMeshName::bullet), tracer}
+	Bullet::Bullet(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager) :
+		m_tracer{*ShaderPrograms::light, proceduralMeshManager.get(ProceduralMeshName::bullet),
+			tracer}
 	{ }
 
 	void Bullet::updateShaders()
@@ -15,7 +16,7 @@ namespace Graphics
 
 	void Bullet::render() const
 	{
-		m_lightShaderProgram.use();
+		ShaderPrograms::light->use();
 		renderLights();
 	}
 

@@ -6,7 +6,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 
 #include <glm/glm.hpp>
 
@@ -18,8 +18,7 @@ namespace Graphics
 {
 	const std::string modelName = "characters";
 
-	TextField::TextField(const ShaderProgram& hudShaderProgram,
-		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
+	TextField::TextField(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager, const std::string& text,
 		const glm::vec3& offset, float scaleRatio) :
 		m_textureManager{textureManager}
@@ -29,7 +28,7 @@ namespace Graphics
 		{
 			Submodel submodel
 			{
-					hudShaderProgram,
+					*ShaderPrograms::hud,
 					proceduralMeshManager.get(ProceduralMeshName::characterBillboard),
 					billboard,
 					textureManager.get(texturePath(modelName, std::string{text[i]}))

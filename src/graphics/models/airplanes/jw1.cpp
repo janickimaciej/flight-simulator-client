@@ -6,7 +6,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 #include "graphics/texture.hpp"
 
 #include <string>
@@ -41,48 +41,45 @@ namespace Graphics
 	static const Material defaultNozzleGlass{glm::vec3{0, 0, 0}, 1, 1, 1, false};
 	static const Material blackGlass{glm::vec3{0, 0, 0}, 0.75f, 1, 50, false};
 
-	JW1::JW1(const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-		AssetManager<std::string, const Mesh>& fileMeshManager,
+	JW1::JW1(AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
-		m_surfaceShaderProgram{surfaceShaderProgram},
-		m_lightShaderProgram{lightShaderProgram},
-		m_cone{surfaceShaderProgram, fileMeshManager.get(conePath), texturedMetal,
+		m_cone{*ShaderPrograms::surface, fileMeshManager.get(conePath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_gun{surfaceShaderProgram, fileMeshManager.get(gunPath), texturedMetal,
+		m_gun{*ShaderPrograms::surface, fileMeshManager.get(gunPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_cockpit{surfaceShaderProgram, fileMeshManager.get(cockpitPath), blackGlass},
-		m_fuselage{surfaceShaderProgram, fileMeshManager.get(fuselagePath), texturedMetal,
+		m_cockpit{*ShaderPrograms::surface, fileMeshManager.get(cockpitPath), blackGlass},
+		m_fuselage{*ShaderPrograms::surface, fileMeshManager.get(fuselagePath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_leftEngine{surfaceShaderProgram, fileMeshManager.get(rightEnginePath), texturedMetal,
+		m_leftEngine{*ShaderPrograms::surface, fileMeshManager.get(rightEnginePath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_rightEngine{surfaceShaderProgram, fileMeshManager.get(rightEnginePath), texturedMetal,
+		m_rightEngine{*ShaderPrograms::surface, fileMeshManager.get(rightEnginePath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_leftNozzle{surfaceShaderProgram, fileMeshManager.get(rightNozzlePath), darkMetal},
-		m_rightNozzle{surfaceShaderProgram, fileMeshManager.get(rightNozzlePath), darkMetal},
-		m_leftNozzleGlass{lightShaderProgram, fileMeshManager.get(rightNozzleGlassPath),
+		m_leftNozzle{*ShaderPrograms::surface, fileMeshManager.get(rightNozzlePath), darkMetal},
+		m_rightNozzle{*ShaderPrograms::surface, fileMeshManager.get(rightNozzlePath), darkMetal},
+		m_leftNozzleGlass{*ShaderPrograms::light, fileMeshManager.get(rightNozzleGlassPath),
 			defaultNozzleGlass, textureManager.get(nozzleGlassPath)},
-		m_rightNozzleGlass{lightShaderProgram, fileMeshManager.get(rightNozzleGlassPath),
+		m_rightNozzleGlass{*ShaderPrograms::light, fileMeshManager.get(rightNozzleGlassPath),
 			defaultNozzleGlass, textureManager.get(nozzleGlassPath)},
-		m_leftWing{surfaceShaderProgram, fileMeshManager.get(rightWingPath), texturedMetal,
+		m_leftWing{*ShaderPrograms::surface, fileMeshManager.get(rightWingPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_rightWing{surfaceShaderProgram, fileMeshManager.get(rightWingPath), texturedMetal,
+		m_rightWing{*ShaderPrograms::surface, fileMeshManager.get(rightWingPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_leftVStab{surfaceShaderProgram, fileMeshManager.get(rightVStabPath), texturedMetal,
+		m_leftVStab{*ShaderPrograms::surface, fileMeshManager.get(rightVStabPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_rightVStab{surfaceShaderProgram, fileMeshManager.get(rightVStabPath), texturedMetal,
+		m_rightVStab{*ShaderPrograms::surface, fileMeshManager.get(rightVStabPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_leftElevator{surfaceShaderProgram, fileMeshManager.get(rightElevatorPath), texturedMetal,
+		m_leftElevator{*ShaderPrograms::surface, fileMeshManager.get(rightElevatorPath),
+			texturedMetal, textureManager.get(camoPath)},
+		m_rightElevator{*ShaderPrograms::surface, fileMeshManager.get(rightElevatorPath),
+			texturedMetal, textureManager.get(camoPath)},
+		m_leftRudder{*ShaderPrograms::surface, fileMeshManager.get(rightRudderPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_rightElevator{surfaceShaderProgram, fileMeshManager.get(rightElevatorPath), texturedMetal,
+		m_rightRudder{*ShaderPrograms::surface, fileMeshManager.get(rightRudderPath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_leftRudder{surfaceShaderProgram, fileMeshManager.get(rightRudderPath), texturedMetal,
-			textureManager.get(camoPath)},
-		m_rightRudder{surfaceShaderProgram, fileMeshManager.get(rightRudderPath), texturedMetal,
-			textureManager.get(camoPath)},
-		m_leftAileron{surfaceShaderProgram, fileMeshManager.get(rightAileronPath), texturedMetal,
-			textureManager.get(camoPath)},
-		m_rightAileron{surfaceShaderProgram, fileMeshManager.get(rightAileronPath), texturedMetal,
-			textureManager.get(camoPath)}
+		m_leftAileron{*ShaderPrograms::surface, fileMeshManager.get(rightAileronPath),
+			texturedMetal, textureManager.get(camoPath)},
+		m_rightAileron{*ShaderPrograms::surface, fileMeshManager.get(rightAileronPath),
+			texturedMetal, textureManager.get(camoPath)}
 	{
 		m_leftEngine.mirrorX();
 		m_leftNozzle.mirrorX();
@@ -129,10 +126,10 @@ namespace Graphics
 
 	void JW1::render() const
 	{
-		m_surfaceShaderProgram.use();
+		ShaderPrograms::surface->use();
 		renderSurfaces();
 
-		m_lightShaderProgram.use();
+		ShaderPrograms::light->use();
 		renderLights();
 	}
 

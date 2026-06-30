@@ -9,7 +9,6 @@
 #include "graphics/models/airplanes/jw1.hpp"
 #include "graphics/models/airplanes/mustang.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
 
@@ -19,8 +18,7 @@
 
 namespace Graphics
 {
-	std::unique_ptr<Airplane> Airplane::createAirplane(const ShaderProgram& surfaceShaderProgram,
-		const ShaderProgram& lightShaderProgram,
+	std::unique_ptr<Airplane> Airplane::createAirplane(
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager,
 		Common::AirplaneType airplaneType)
@@ -28,12 +26,10 @@ namespace Graphics
 		switch (airplaneType)
 		{
 			case Common::AirplaneType::mustang:
-				return std::make_unique<Mustang>(surfaceShaderProgram, lightShaderProgram,
-					fileMeshManager, textureManager);
+				return std::make_unique<Mustang>(fileMeshManager, textureManager);
 
 			case Common::AirplaneType::jw1:
-				return std::make_unique<JW1>(surfaceShaderProgram, lightShaderProgram,
-					fileMeshManager, textureManager);
+				return std::make_unique<JW1>(fileMeshManager, textureManager);
 		}
 		return nullptr;
 	}

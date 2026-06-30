@@ -8,7 +8,6 @@
 #include "graphics/models/airport.hpp"
 #include "graphics/models/directionalLightModel.hpp"
 #include "graphics/models/zeppelin.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -19,8 +18,7 @@ namespace Graphics
 	class AirportMap : public Map
 	{
 	public:
-		AirportMap(WorldShading& worldShading, const ShaderProgram& surfaceShaderProgram,
-			const ShaderProgram& lightShaderProgram,
+		AirportMap(WorldShading& worldShading,
 			AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<std::string, const Texture>& textureManager,
 			std::unique_ptr<Common::Terrains::Map> terrain);

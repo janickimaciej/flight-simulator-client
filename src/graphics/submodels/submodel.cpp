@@ -94,12 +94,12 @@ namespace Graphics
 
 	void Submodel::updateShaders(const glm::mat4& modelSubmodelMatrix) const
 	{
-		m_shaderProgram.setUniformMatrix4f("modelSubmodelMatrix", modelSubmodelMatrix);
-		m_shaderProgram.setUniform3f("material.color", m_material.color);
-		m_shaderProgram.setUniform1f("material.diffuse", m_material.diffuse);
-		m_shaderProgram.setUniform1f("material.specular", m_material.specular);
-		m_shaderProgram.setUniform1f("material.shininess", m_material.shininess);
-		m_shaderProgram.setUniform1b("material.isMetal", m_material.isMetal);
-		m_shaderProgram.setUniform1b("isTextureEnabled", static_cast<bool>(m_texture));
+		m_shaderProgram.setUniform("modelSubmodelMatrix", modelSubmodelMatrix);
+		m_shaderProgram.setUniform("material.color", m_material.color);
+		m_shaderProgram.setUniform("material.diffuse", m_material.diffuse);
+		m_shaderProgram.setUniform("material.specular", m_material.specular);
+		m_shaderProgram.setUniform("material.shininess", m_material.shininess);
+		m_shaderProgram.setUniform("material.isMetal", m_material.isMetal);
+		m_shaderProgram.setUniform("isTextureEnabled", m_texture != nullptr);
 	}
 }

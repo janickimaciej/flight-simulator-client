@@ -5,7 +5,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 #include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
 
@@ -50,24 +50,20 @@ namespace Graphics
 	static const Material metal{glm::vec3{0.25f, 0.25f, 0.25f}, 0.75f, 0.25f, 10, true};
 	static const Material yellowLightGlass{glm::vec3{1, 1, 0.6f}, 1, 1, 1, false};
 
-	Airport::Airport(const ShaderProgram& surfaceShaderProgram,
-		const ShaderProgram& lightShaderProgram,
-		AssetManager<std::string, const Mesh>& fileMeshManager,
+	Airport::Airport(AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
-		m_surfaceShaderProgram{surfaceShaderProgram},
-		m_lightShaderProgram{lightShaderProgram},
-		m_ground{surfaceShaderProgram, fileMeshManager.get(groundPath), ground,
+		m_ground{*ShaderPrograms::surface, fileMeshManager.get(groundPath), ground,
 			textureManager.get(grassPath)},
-		m_runway{surfaceShaderProgram, fileMeshManager.get(runwayPath), ground,
+		m_runway{*ShaderPrograms::surface, fileMeshManager.get(runwayPath), ground,
 			textureManager.get(asphaltPath)},
-		m_apron{surfaceShaderProgram, fileMeshManager.get(apronPath), ground,
+		m_apron{*ShaderPrograms::surface, fileMeshManager.get(apronPath), ground,
 			textureManager.get(asphaltBrightPath)},
-		m_tower{surfaceShaderProgram, fileMeshManager.get(towerPath), concrete,
+		m_tower{*ShaderPrograms::surface, fileMeshManager.get(towerPath), concrete,
 			textureManager.get(concretePath)}
 	{
-		const Submodel hangarExteriorSubmodel{surfaceShaderProgram,
+		const Submodel hangarExteriorSubmodel{*ShaderPrograms::surface,
 			fileMeshManager.get(hangarExteriorPath), tentExterior, textureManager.get(tentPath)};
-		const Submodel hangarInteriorSubmodel{surfaceShaderProgram,
+		const Submodel hangarInteriorSubmodel{*ShaderPrograms::surface,
 			fileMeshManager.get(hangarInteriorPath), tentInterior, textureManager.get(tentPath)};
 		for (std::size_t i = 0; i < hangarCount; ++i)
 		{
@@ -79,16 +75,16 @@ namespace Graphics
 			m_hangarInteriors[i].translate(glm::vec3{0, 0, -hangarsGapZ * static_cast<int>(i)});
 		}
 
-		const Submodel lightBodySubmodel{surfaceShaderProgram,
+		const Submodel lightBodySubmodel{*ShaderPrograms::surface,
 			fileMeshManager.get(lightBodyPath), metal};
 		for (std::size_t i = 0; i < SpotLight::airportLightCount; ++i)
 		{
 			m_lightBodies.push_back(lightBodySubmodel);
-			m_lights.push_back(std::make_unique<SpotLight>(surfaceShaderProgram, lightsColor,
-				lightsAttenuationQuadratic, lightsAttenuationLinear, lightsAttenuationConstant,
+			m_lights.push_back(std::make_unique<SpotLight>(lightsColor, lightsAttenuationQuadratic,
+				lightsAttenuationLinear, lightsAttenuationConstant,
 				glm::radians(lightsCutoffInnerDeg), glm::radians(lightsCutoffOuterDeg)));
-			m_lightSubmodels.push_back(LightSubmodel{*m_lights[i], lightShaderProgram,
-				fileMeshManager.get(lightPath), yellowLightGlass});
+			m_lightSubmodels.push_back(LightSubmodel{*m_lights[i], fileMeshManager.get(lightPath),
+				yellowLightGlass});
 
 			static constexpr float firstLightPositionX = -49;
 			static constexpr float lightsGapX = 14;
@@ -119,10 +115,10 @@ namespace Graphics
 
 	void Airport::render() const
 	{
-		m_surfaceShaderProgram.use();
+		ShaderPrograms::surface->use();
 		renderSurfaces();
 
-		m_lightShaderProgram.use();
+		ShaderPrograms::light->use();
 		renderLights();
 	}
 

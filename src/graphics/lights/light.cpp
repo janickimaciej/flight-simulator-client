@@ -1,7 +1,5 @@
 #include "graphics/lights/light.hpp"
 
-#include "graphics/shaderProgram.hpp"
-
 #include <glm/glm.hpp>
 
 namespace Graphics
@@ -11,18 +9,15 @@ namespace Graphics
 		m_color = color;
 	}
 
-	Light::Light(unsigned int id, const std::string& prefix,
-		const ShaderProgram& surfaceShaderProgram, const glm::vec3& color) :
+	Light::Light(unsigned int id, const std::string& prefix, const glm::vec3& color) :
 		m_id{id},
 		m_prefix{prefix + "[" + std::to_string(id) + "]."},
-		m_surfaceShaderProgram{surfaceShaderProgram},
 		m_color{color}
 	{ }
 
-	Light::Light(unsigned int id, const std::string& prefix,
-		const ShaderProgram& surfaceShaderProgram, const glm::vec3& color,
+	Light::Light(unsigned int id, const std::string& prefix, const glm::vec3& color,
 		const Common::State& state) :
-		Light{id, prefix, surfaceShaderProgram, color}
+		Light{id, prefix, color}
 	{
 		setState(state);
 	}

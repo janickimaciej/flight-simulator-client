@@ -4,7 +4,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 #include "graphics/textField.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/time.hpp"
@@ -31,46 +31,43 @@ namespace Graphics
 	static constexpr glm::vec3 verticalSpeedPosition{0.32f, indicatorsY, 0};
 	static constexpr glm::vec3 airspeedPosition{0.78f, indicatorsY, 0};
 
-	HUD::HUD(const ShaderProgram& hudShaderProgram,
-		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
+	HUD::HUD(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
-		m_hudShaderProgram{hudShaderProgram},
-		m_fpsNumber{hudShaderProgram, proceduralMeshManager, textureManager, "___",
-			fpsPosition + glm::vec3{0, 0, 0}, smallFontSize},
-		m_fpsUnit{hudShaderProgram, proceduralMeshManager, textureManager, "FPS",
-			fpsPosition + glm::vec3{0.05f, 0, 0}, smallFontSize},
-		m_playerCountNumber{hudShaderProgram, proceduralMeshManager, textureManager, "__",
-			playerCountPosition + glm::vec3{0, 0, 0}, smallFontSize},
-		m_playerCountUnit{hudShaderProgram, proceduralMeshManager, textureManager, "PLAYERS",
-			playerCountPosition + glm::vec3{0.04f, 0, 0}, smallFontSize},
-		m_altitudeText{hudShaderProgram, proceduralMeshManager, textureManager, "ALTITUDE",
-			altitudePosition + glm::vec3{0.045f, topLineY, 0}, smallFontSize},
-		m_altitudeNumber{hudShaderProgram, proceduralMeshManager, textureManager, "______",
-			altitudePosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_altitudeUnit{hudShaderProgram, proceduralMeshManager, textureManager, "M",
-			altitudePosition + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_radarAltitudeText{hudShaderProgram, proceduralMeshManager, textureManager,
-			"RADAR_ALTITUDE", radarAltitudePosition + glm::vec3{0.007f, topLineY, 0},
+		m_fpsNumber{proceduralMeshManager, textureManager, "___", fpsPosition + glm::vec3{0, 0, 0},
 			smallFontSize},
-		m_radarAltitudeNumber{hudShaderProgram, proceduralMeshManager, textureManager, "______",
+		m_fpsUnit{proceduralMeshManager, textureManager, "FPS",
+			fpsPosition + glm::vec3{0.05f, 0, 0}, smallFontSize},
+		m_playerCountNumber{proceduralMeshManager, textureManager, "__",
+			playerCountPosition + glm::vec3{0, 0, 0}, smallFontSize},
+		m_playerCountUnit{proceduralMeshManager, textureManager, "PLAYERS",
+			playerCountPosition + glm::vec3{0.04f, 0, 0}, smallFontSize},
+		m_altitudeText{proceduralMeshManager, textureManager, "ALTITUDE",
+			altitudePosition + glm::vec3{0.045f, topLineY, 0}, smallFontSize},
+		m_altitudeNumber{proceduralMeshManager, textureManager, "______",
+			altitudePosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
+		m_altitudeUnit{proceduralMeshManager, textureManager, "M",
+			altitudePosition + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
+		m_radarAltitudeText{proceduralMeshManager, textureManager, "RADAR_ALTITUDE",
+			radarAltitudePosition + glm::vec3{0.007f, topLineY, 0}, smallFontSize},
+		m_radarAltitudeNumber{proceduralMeshManager, textureManager, "______",
 			radarAltitudePosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_radarAltitudeUnit{hudShaderProgram, proceduralMeshManager, textureManager, "M",
+		m_radarAltitudeUnit{proceduralMeshManager, textureManager, "M",
 			radarAltitudePosition + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_hpNumber{hudShaderProgram, proceduralMeshManager, textureManager, "___",
+		m_hpNumber{proceduralMeshManager, textureManager, "___",
 			hpPosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_hpUnit{hudShaderProgram, proceduralMeshManager, textureManager, "HP",
+		m_hpUnit{proceduralMeshManager, textureManager, "HP",
 			hpPosition + glm::vec3{0.1f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_verticalSpeedText{hudShaderProgram, proceduralMeshManager, textureManager,
-			"VERTICAL_SPEED", verticalSpeedPosition + glm::vec3{0.01f, topLineY, 0}, smallFontSize},
-		m_verticalSpeedNumber{hudShaderProgram, proceduralMeshManager, textureManager, "_____",
+		m_verticalSpeedText{proceduralMeshManager, textureManager, "VERTICAL_SPEED",
+			verticalSpeedPosition + glm::vec3{0.01f, topLineY, 0}, smallFontSize},
+		m_verticalSpeedNumber{proceduralMeshManager, textureManager, "_____",
 			verticalSpeedPosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_verticalSpeedUnit{hudShaderProgram, proceduralMeshManager, textureManager, "MPS",
+		m_verticalSpeedUnit{proceduralMeshManager, textureManager, "MPS",
 			verticalSpeedPosition + glm::vec3{0.15f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_airspeedText{hudShaderProgram, proceduralMeshManager, textureManager, "AIRSPEED",
+		m_airspeedText{proceduralMeshManager, textureManager, "AIRSPEED",
 			airspeedPosition + glm::vec3{0.03f, topLineY, 0}, smallFontSize},
-		m_airspeedNumber{hudShaderProgram, proceduralMeshManager, textureManager, "____",
+		m_airspeedNumber{proceduralMeshManager, textureManager, "____",
 			airspeedPosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_airspeedUnit{hudShaderProgram, proceduralMeshManager, textureManager, "KPH",
+		m_airspeedUnit{proceduralMeshManager, textureManager, "KPH",
 			airspeedPosition + glm::vec3{0.12f, bottomLineSmallFontY, 0}, smallFontSize}
 	{
 		for (char i = '0'; i <= '9'; ++i)
@@ -85,7 +82,7 @@ namespace Graphics
 
 	void HUD::render() const
 	{
-		m_hudShaderProgram.use();
+		ShaderPrograms::hud->use();
 		renderHUD();
 	}
 

@@ -2,7 +2,6 @@
 
 #include "graphics/cameras/perspectiveCamera.hpp"
 #include "graphics/models/model.hpp"
-#include "graphics/shaderProgram.hpp"
 
 #include <glm/glm.hpp>
 
@@ -11,9 +10,7 @@ namespace Graphics
 	class ModelCamera : public PerspectiveCamera
 	{
 	public:
-		ModelCamera(const Model& model, float fovRad, float nearPlane, float farPlane,
-			const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-			const ShaderProgram& hudShaderProgram);
+		ModelCamera(const Model& model, float fovRad, float nearPlane, float farPlane);
 		virtual ~ModelCamera() = default;
 
 	protected:

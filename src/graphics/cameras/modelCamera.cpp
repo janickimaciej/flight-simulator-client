@@ -2,17 +2,13 @@
 
 #include "graphics/cameras/perspectiveCamera.hpp"
 #include "graphics/models/model.hpp"
-#include "graphics/shaderProgram.hpp"
 
 #include <glm/glm.hpp>
 
 namespace Graphics
 {
-	ModelCamera::ModelCamera(const Model& model, float fovRad, float nearPlane, float farPlane,
-		const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-			const ShaderProgram& hudShaderProgram) :
-		PerspectiveCamera{fovRad, nearPlane, farPlane, surfaceShaderProgram, lightShaderProgram,
-			hudShaderProgram},
+	ModelCamera::ModelCamera(const Model& model, float fovRad, float nearPlane, float farPlane) :
+		PerspectiveCamera{fovRad, nearPlane, farPlane},
 		m_model{model}
 	{ }
 

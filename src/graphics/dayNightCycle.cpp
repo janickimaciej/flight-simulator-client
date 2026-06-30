@@ -1,6 +1,5 @@
 #include "graphics/dayNightCycle.hpp"
 
-#include "graphics/shaderProgram.hpp"
 #include "graphics/worldShading.hpp"
 #include "models/directionalLightModel.hpp"
 
@@ -32,14 +31,14 @@ namespace Graphics
 	void DayNightCycle::updateWorldShading()
 	{
 		static constexpr glm::vec3 nightBackgroundColor{0, 0, 0.1};
-		static constexpr glm::vec3 dayBackgroundColor{0.6, 0.6, 1};
+		static constexpr glm::vec3 dayBackgroundColor{0.6f, 0.6f, 1};
 		static constexpr float nightAmbient = 0.1f;
 		static constexpr float dayAmbient = 0.5f;
 		static constexpr float fogGradient = 2;
 		static constexpr float lowFogDensity = 0.0001f;
 		static constexpr float highFogDensity = 0.0005f;
-		static constexpr glm::vec3 moonLight{0.2, 0.2, 0.2};
-		static constexpr glm::vec3 sunLight{1, 1, 1};
+		static constexpr glm::vec3 moonLight{0.1f, 0.1f, 0.1f};
+		static constexpr glm::vec3 sunLight{1.2f, 1.2f, 1.2f};
 
 		float lightCoefficient = getLightCoefficient();
 		float fogCoefficient = getFogCoefficient();
@@ -51,16 +50,13 @@ namespace Graphics
 		m_worldShading.setFogGradient(fogGradient);
 		m_worldShading.setFogDensity(fogCoefficient * highFogDensity + (1 - fogCoefficient) *
 			lowFogDensity);
-		// TODO: fix
-		m_moon.setLightColor(lightCoefficient * sunLight + (1 - lightCoefficient) * moonLight);
-		// TODO: fix
-		m_sun.setLightColor(lightCoefficient * sunLight + (1 - lightCoefficient) * moonLight);
+		m_moon.setLightColor((1 - lightCoefficient) * moonLight);
+		m_sun.setLightColor(lightCoefficient * sunLight);
 	}
 
-	float DayNightCycle::getLightCoefficient()
+	float DayNightCycle::getLightCoefficient() const
 	{
-		return 0.9f; //tmp
-		/*if (m_timeOfDay <= (1 - 2*transitionLength)/4) //tmpc
+		if (m_timeOfDay <= (1 - 2 * transitionLength) / 4)
 		{
 			return 0;
 		}
@@ -79,13 +75,12 @@ namespace Graphics
 		else
 		{
 			return 0;
-		}*/ //tmpc
+		}
 	}
 
-	float DayNightCycle::getFogCoefficient()
+	float DayNightCycle::getFogCoefficient() const
 	{
-		return 0; //tmp
-		/*if (m_timeOfDay <= (1 - 2 * transitionLength) / 4) //tmpc
+		if (m_timeOfDay <= (1 - 2 * transitionLength) / 4)
 		{
 			return 0;
 		}
@@ -101,6 +96,6 @@ namespace Graphics
 		else
 		{
 			return 0;
-		}*/ //tmpc
+		}
 	}
 }

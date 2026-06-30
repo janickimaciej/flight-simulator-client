@@ -4,7 +4,6 @@
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -15,14 +14,14 @@ namespace Graphics
 	static constexpr glm::vec3 moonLight{0.2, 0.2, 0.2};
 	static constexpr glm::vec3 sunLight{1, 1, 1};
 
-	HillsMap::HillsMap(WorldShading& worldShading, const ShaderProgram& surfaceShaderProgram,
+	HillsMap::HillsMap(WorldShading& worldShading,
 		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager,
 		std::unique_ptr<Common::Terrains::Map> terrain) :
 		Map{std::move(terrain)},
-		m_hills{surfaceShaderProgram, proceduralMeshManager, textureManager},
-		m_moon{surfaceShaderProgram, moonLight},
-		m_sun{surfaceShaderProgram, sunLight},
+		m_hills{proceduralMeshManager, textureManager},
+		m_moon{moonLight},
+		m_sun{sunLight},
 		m_dayNightCycle{m_moon, m_sun, worldShading}
 	{
 		setModels();

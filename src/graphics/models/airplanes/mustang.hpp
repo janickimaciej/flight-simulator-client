@@ -5,7 +5,6 @@
 #include "graphics/lights/spotLight.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/submodels/lightSubmodel.hpp"
 #include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
@@ -17,8 +16,7 @@ namespace Graphics
 	class Mustang : public Airplane
 	{
 	public:
-		Mustang(const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-			AssetManager<std::string, const Mesh>& fileMeshManager,
+		Mustang(AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<std::string, const Texture>& textureManager);
 		virtual void updateShaders() override;
 		virtual void render() const override;
@@ -26,9 +24,6 @@ namespace Graphics
 		virtual void setHP(int hp) override;
 
 	private:
-		const ShaderProgram& m_surfaceShaderProgram;
-		const ShaderProgram& m_lightShaderProgram;
-
 		Submodel m_cap;
 		Submodel m_propeller;
 		Submodel m_body;

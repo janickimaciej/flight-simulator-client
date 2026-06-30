@@ -3,7 +3,6 @@
 #include "common/terrains/maps/map.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/dayNightCycle.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/directionalLightModel.hpp"
@@ -18,16 +17,15 @@ namespace Graphics
 	static constexpr glm::vec3 moonLight{0.2, 0.2, 0.2};
 	static constexpr glm::vec3 sunLight{1, 1, 1};
 
-	AirportMap::AirportMap(WorldShading& worldShading, const ShaderProgram& surfaceShaderProgram,
-		const ShaderProgram& lightShaderProgram,
+	AirportMap::AirportMap(WorldShading& worldShading,
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager,
 		std::unique_ptr<Common::Terrains::Map> terrain) :
 		Map{std::move(terrain)},
-		m_airport{surfaceShaderProgram, lightShaderProgram, fileMeshManager, textureManager},
-		m_zeppelin{surfaceShaderProgram, fileMeshManager},
-		m_moon{surfaceShaderProgram, moonLight},
-		m_sun{surfaceShaderProgram, sunLight},
+		m_airport{fileMeshManager, textureManager},
+		m_zeppelin{fileMeshManager},
+		m_moon{moonLight},
+		m_sun{sunLight},
 		m_dayNightCycle{m_moon, m_sun, worldShading}
 	{
 		setModels();

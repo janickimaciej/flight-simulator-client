@@ -13,7 +13,6 @@
 #include "graphics/maps/map.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
 
@@ -36,28 +35,26 @@ namespace Graphics
 	Scene::Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map) :
 		m_ownId{ownId},
 		m_ownAirplaneType{ownAirplaneType},
-		m_worldShading{m_surfaceShaderProgram, m_lightShaderProgram},
-		m_hud{m_hudShaderProgram, m_proceduralMeshManager, m_textureManager}
+		m_hud{m_proceduralMeshManager, m_textureManager}
 	{
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
 
-		m_airplanes.insert({ownId, Airplane::createAirplane(m_surfaceShaderProgram,
-			m_lightShaderProgram, m_fileMeshManager, m_textureManager, ownAirplaneType)});
+		m_airplanes.insert({ownId, Airplane::createAirplane(m_fileMeshManager, m_textureManager,
+			ownAirplaneType)});
 
 		m_worldCamera = std::make_unique<ModelCamera>(*m_airplanes.at(ownId),
-			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane,
-			m_surfaceShaderProgram, m_lightShaderProgram, m_hudShaderProgram);
+			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane);
 		static constexpr float cameraPitchDeg = -10;
 		m_worldCamera->rotatePitch(glm::radians(cameraPitchDeg));
 		m_worldCamera->translate(airplaneCameraPositions[Common::toSizeT(ownAirplaneType)]);
 
 		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraWidth, hudCameraNearPlane,
-			hudCameraFarPlane, m_surfaceShaderProgram, m_lightShaderProgram, m_hudShaderProgram);
+			hudCameraFarPlane);
 
-		m_map = Map::createMap(map, m_worldShading, m_surfaceShaderProgram, m_lightShaderProgram,
-			m_fileMeshManager, m_proceduralMeshManager, m_textureManager);
+		m_map = Map::createMap(map, m_worldShading, m_fileMeshManager, m_proceduralMeshManager,
+			m_textureManager);
 
 		m_hud.translate(glm::vec3{0, 0, -0.01f});
 	}
@@ -108,8 +105,6 @@ namespace Graphics
 			{
 				m_airplanes.insert({airplaneInfo.first, Airplane::createAirplane
 					(
-						m_surfaceShaderProgram,
-						m_lightShaderProgram,
 						m_fileMeshManager,
 						m_textureManager,
 						airplaneInfo.second.airplaneType
@@ -147,8 +142,7 @@ namespace Graphics
 
 		for (std::size_t i = m_bullets.size(); i < bulletInfos.size(); ++i)
 		{
-			m_bullets.push_back(std::make_unique<Bullet>(m_lightShaderProgram,
-				m_proceduralMeshManager));
+			m_bullets.push_back(std::make_unique<Bullet>(m_proceduralMeshManager));
 		}
 
 		for (std::size_t i = 0; i < bulletInfos.size(); ++i)

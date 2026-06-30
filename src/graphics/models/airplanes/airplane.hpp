@@ -5,7 +5,6 @@
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/texture.hpp"
 
 #include <memory>
@@ -16,8 +15,7 @@ namespace Graphics
 	class Airplane : public Model
 	{
 	public:
-		static std::unique_ptr<Airplane> createAirplane(const ShaderProgram& surfaceShaderProgram,
-			const ShaderProgram& lightShaderProgram,
+		static std::unique_ptr<Airplane> createAirplane(
 			AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<std::string, const Texture>& textureManager,
 			Common::AirplaneType airplaneType);

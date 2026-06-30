@@ -6,7 +6,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/time.hpp"
 
@@ -39,28 +39,22 @@ namespace Graphics
 	static const Material rubber{glm::vec3{0.1f, 0.1f, 0.1f}, 0.75f, 0, 1, false};
 	static const Material whiteLightGlass{glm::vec3{1, 1, 1}, 1, 1, 1, false};
 
-	Mustang::Mustang(const ShaderProgram& surfaceShaderProgram,
-		const ShaderProgram& lightShaderProgram,
-		AssetManager<std::string, const Mesh>& fileMeshManager,
+	Mustang::Mustang(AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
-		m_surfaceShaderProgram{surfaceShaderProgram},
-		m_lightShaderProgram{lightShaderProgram},
-		m_cap{surfaceShaderProgram, fileMeshManager.get(capPath), metal},
-		m_propeller{surfaceShaderProgram, fileMeshManager.get(propellerPath), metal},
-		m_body{surfaceShaderProgram, fileMeshManager.get(fuselagePath), texturedMetal,
+		m_cap{*ShaderPrograms::surface, fileMeshManager.get(capPath), metal},
+		m_propeller{*ShaderPrograms::surface, fileMeshManager.get(propellerPath), metal},
+		m_body{*ShaderPrograms::surface, fileMeshManager.get(fuselagePath), texturedMetal,
 			textureManager.get(camoPath)},
-		m_joins{surfaceShaderProgram, fileMeshManager.get(joinsPath), metal},
-		m_tires{surfaceShaderProgram, fileMeshManager.get(tiresPath), rubber},
-		m_leftLight{surfaceShaderProgram, lightsColor, lightsAttenuationQuadratic,
-			lightsAttenuationLinear, lightsAttenuationConstant, glm::radians(lightsCutoffInnerDeg),
+		m_joins{*ShaderPrograms::surface, fileMeshManager.get(joinsPath), metal},
+		m_tires{*ShaderPrograms::surface, fileMeshManager.get(tiresPath), rubber},
+		m_leftLight{lightsColor, lightsAttenuationQuadratic, lightsAttenuationLinear,
+			lightsAttenuationConstant, glm::radians(lightsCutoffInnerDeg),
 			glm::radians(lightsCutoffOuterDeg)},
-		m_leftLightSubmodel{m_leftLight, lightShaderProgram, fileMeshManager.get(lightPath),
-			whiteLightGlass},
-		m_rightLight{surfaceShaderProgram, lightsColor, lightsAttenuationQuadratic,
-			lightsAttenuationLinear, lightsAttenuationConstant, glm::radians(lightsCutoffInnerDeg),
+		m_leftLightSubmodel{m_leftLight, fileMeshManager.get(lightPath), whiteLightGlass},
+		m_rightLight{lightsColor, lightsAttenuationQuadratic, lightsAttenuationLinear,
+			lightsAttenuationConstant, glm::radians(lightsCutoffInnerDeg),
 			glm::radians(lightsCutoffOuterDeg)},
-		m_rightLightSubmodel{m_rightLight, lightShaderProgram, fileMeshManager.get(lightPath),
-			whiteLightGlass}
+		m_rightLightSubmodel{m_rightLight, fileMeshManager.get(lightPath), whiteLightGlass}
 	{
 		static constexpr float lightsPositionXAbs = 2.14f;
 		static constexpr float lightsPositionY = -0.474f;
@@ -87,10 +81,10 @@ namespace Graphics
 
 	void Mustang::render() const
 	{
-		m_surfaceShaderProgram.use();
+		ShaderPrograms::surface->use();
 		renderSurfaces();
 
-		m_lightShaderProgram.use();
+		ShaderPrograms::light->use();
 		renderLights();
 	}
 

@@ -3,7 +3,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 #include "graphics/submodels/submodel.hpp"
 
 #include <string>
@@ -16,10 +16,8 @@ namespace Graphics
 
 	const Material canvas{glm::vec3{0.9, 0.9, 0.9}, 0.75, 0.25, 10, false};
 
-	Zeppelin::Zeppelin(const ShaderProgram& surfaceShaderProgram,
-		AssetManager<std::string, const Mesh>& fileMeshManager) :
-		m_surfaceShaderProgram{surfaceShaderProgram},
-		m_body{surfaceShaderProgram, fileMeshManager.get(fuselagePath), canvas}
+	Zeppelin::Zeppelin(AssetManager<std::string, const Mesh>& fileMeshManager) :
+		m_body{*ShaderPrograms::surface, fileMeshManager.get(fuselagePath), canvas}
 	{
 		static constexpr float zeppelinScale = 57;
 		scale(zeppelinScale);
@@ -30,7 +28,7 @@ namespace Graphics
 
 	void Zeppelin::render() const
 	{
-		m_surfaceShaderProgram.use();
+		ShaderPrograms::surface->use();
 		renderSurfaces();
 	}
 

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "graphics/shaderProgram.hpp"
-
 #include <glm/glm.hpp>
 
 namespace Graphics
@@ -9,8 +7,6 @@ namespace Graphics
 	class WorldShading
 	{
 	public:
-		WorldShading(const ShaderProgram& surfaceShaderProgram,
-			const ShaderProgram& lightShaderProgram);
 		void updateShaders() const;
 
 		void setBackgroundColor(const glm::vec3& backgroundColor);
@@ -23,8 +19,5 @@ namespace Graphics
 		float m_ambient{};
 		float m_fogGradient{};
 		float m_fogDensity{};
-
-		const ShaderProgram& m_surfaceShaderProgram;
-		const ShaderProgram& m_lightShaderProgram;
 	};
 }

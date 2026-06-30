@@ -5,7 +5,6 @@
 #include "graphics/lights/pointLight.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
 
@@ -16,8 +15,7 @@ namespace Graphics
 	class JW1 : public Airplane
 	{
 	public:
-		JW1(const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-			AssetManager<std::string, const Mesh>& fileMeshManager,
+		JW1(AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<std::string, const Texture>& textureManager);
 		virtual void updateShaders() override;
 		virtual void render() const override;
@@ -25,9 +23,6 @@ namespace Graphics
 		virtual void setHP(int hp) override;
 
 	private:
-		const ShaderProgram& m_surfaceShaderProgram;
-		const ShaderProgram& m_lightShaderProgram;
-
 		Submodel m_cone;
 		Submodel m_gun;
 		Submodel m_cockpit;

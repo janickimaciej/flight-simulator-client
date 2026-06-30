@@ -42,7 +42,6 @@ namespace App
 		{
 			m_renderingBuffer->initialize(args.airplaneType, args.map);
 			mainLoop();
-			glfwTerminate();
 		}
 		networkThread.join();
 	}

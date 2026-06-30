@@ -4,7 +4,7 @@
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 #include "graphics/texture.hpp"
 
 namespace Graphics
@@ -15,12 +15,10 @@ namespace Graphics
 
 	const Material ground{glm::vec3{1, 1, 1}, 0.75, 0, 10, false};
 
-	Hills::Hills(const ShaderProgram& surfaceShaderProgram,
-		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
+	Hills::Hills(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
-		m_surfaceShaderProgram{surfaceShaderProgram},
-		m_ground{surfaceShaderProgram, proceduralMeshManager.get(ProceduralMeshName::hills), ground,
-			textureManager.get(grassPath)}
+		m_ground{*ShaderPrograms::surface, proceduralMeshManager.get(ProceduralMeshName::hills),
+			ground, textureManager.get(grassPath)}
 	{ }
 
 	void Hills::updateShaders()
@@ -28,7 +26,7 @@ namespace Graphics
 
 	void Hills::render() const
 	{
-		m_surfaceShaderProgram.use();
+		ShaderPrograms::surface->use();
 		renderSurfaces();
 	}
 

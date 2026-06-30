@@ -2,15 +2,13 @@
 
 #include "graphics/lights/directionalLight.hpp"
 #include "graphics/models/model.hpp"
-#include "graphics/shaderProgram.hpp"
 
 #include <glm/glm.hpp>
 
 namespace Graphics
 {
-	DirectionalLightModel::DirectionalLightModel(const ShaderProgram& surfaceShaderProgram,
-		const glm::vec3& lightColor) :
-		m_light{surfaceShaderProgram, lightColor}
+	DirectionalLightModel::DirectionalLightModel(const glm::vec3& lightColor) :
+		m_light{lightColor}
 	{ }
 
 	void DirectionalLightModel::setLightColor(const glm::vec3& color)

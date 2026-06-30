@@ -4,7 +4,6 @@
 #include "common/terrains/maps/map.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
 
@@ -23,7 +22,6 @@ namespace Graphics
 		virtual ~Map() = default;
 
 		static std::unique_ptr<Map> createMap(Common::MapName map, WorldShading& worldShading,
-			const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
 			AssetManager<std::string, const Mesh>& fileMeshManager,
 			AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 			AssetManager<std::string, const Texture>& textureManager);

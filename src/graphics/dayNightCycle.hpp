@@ -1,6 +1,5 @@
 #pragma once
 
-#include "graphics/shaderProgram.hpp"
 #include "graphics/worldShading.hpp"
 #include "models/directionalLightModel.hpp"
 
@@ -23,7 +22,7 @@ namespace Graphics
 		DirectionalLightModel& m_sun;
 		WorldShading& m_worldShading;
 
-		float getLightCoefficient();
-		float getFogCoefficient();
+		float getLightCoefficient() const;
+		float getFogCoefficient() const;
 	};
 }

@@ -6,7 +6,6 @@
 #include "graphics/models/model.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/textField.hpp"
 #include "graphics/texture.hpp"
 
@@ -21,16 +20,13 @@ namespace Graphics
 	class HUD : public Model
 	{
 	public:
-		HUD(const ShaderProgram& hudShaderProgram,
-			AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
+		HUD(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 			AssetManager<std::string, const Texture>& textureManager);
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		void update(const Airplane& ownAirplane, const Map& map, int playerCount);
 
 	private:
-		const ShaderProgram& m_hudShaderProgram;
-
 		TextField m_fpsNumber;
 		TextField m_fpsUnit;
 		TextField m_playerCountNumber;

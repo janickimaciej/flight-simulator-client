@@ -1,30 +1,24 @@
 #include "graphics/worldShading.hpp"
 
-#include "graphics/shaderProgram.hpp"
+#include "graphics/shaderPrograms.hpp"
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
 namespace Graphics
 {
-	WorldShading::WorldShading(const ShaderProgram& surfaceShaderProgram,
-		const ShaderProgram& lightShaderProgram) :
-		m_surfaceShaderProgram{surfaceShaderProgram},
-		m_lightShaderProgram{lightShaderProgram}
-	{ }
-
 	void WorldShading::updateShaders() const
 	{
-		m_surfaceShaderProgram.use();
-		m_surfaceShaderProgram.setUniform3f("worldShading.backgroundColor", m_backgroundColor);
-		m_surfaceShaderProgram.setUniform1f("worldShading.ambient", m_ambient);
-		m_surfaceShaderProgram.setUniform1f("worldShading.fogGradient", m_fogGradient);
-		m_surfaceShaderProgram.setUniform1f("worldShading.fogDensity", m_fogDensity);
+		ShaderPrograms::surface->use();
+		ShaderPrograms::surface->setUniform("worldShading.backgroundColor", m_backgroundColor);
+		ShaderPrograms::surface->setUniform("worldShading.ambient", m_ambient);
+		ShaderPrograms::surface->setUniform("worldShading.fogGradient", m_fogGradient);
+		ShaderPrograms::surface->setUniform("worldShading.fogDensity", m_fogDensity);
 
-		m_lightShaderProgram.use();
-		m_lightShaderProgram.setUniform3f("worldShading.backgroundColor", m_backgroundColor);
-		m_lightShaderProgram.setUniform1f("worldShading.fogGradient", m_fogGradient);
-		m_lightShaderProgram.setUniform1f("worldShading.fogDensity", m_fogDensity);
+		ShaderPrograms::light->use();
+		ShaderPrograms::light->setUniform("worldShading.backgroundColor", m_backgroundColor);
+		ShaderPrograms::light->setUniform("worldShading.fogGradient", m_fogGradient);
+		ShaderPrograms::light->setUniform("worldShading.fogDensity", m_fogDensity);
 
 		glClearColor(m_backgroundColor.r, m_backgroundColor.g, m_backgroundColor.b, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -2,10 +2,8 @@
 
 namespace Graphics
 {
-	OrthographicCamera::OrthographicCamera(float width, float nearPlane, float farPlane,
-		const ShaderProgram& surfaceShaderProgram, const ShaderProgram& lightShaderProgram,
-		const ShaderProgram& hudShaderProgram) :
-		Camera{nearPlane, farPlane, surfaceShaderProgram, lightShaderProgram, hudShaderProgram},
+	OrthographicCamera::OrthographicCamera(float width, float nearPlane, float farPlane) :
+		Camera{nearPlane, farPlane},
 		m_width{width}
 	{ }
 

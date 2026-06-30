@@ -14,7 +14,6 @@
 #include "graphics/models/bullet.hpp"
 #include "graphics/models/hud.hpp"
 #include "graphics/path.hpp"
-#include "graphics/shaderProgram.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
 
@@ -37,12 +36,6 @@ namespace Graphics
 		int m_ownId{};
 		Common::AirplaneType m_ownAirplaneType{};
 
-		const ShaderProgram m_surfaceShaderProgram{shaderPath("surfaceV"),
-			shaderPath("surfaceF")};
-		const ShaderProgram m_lightShaderProgram{shaderPath("lightV"),
-			shaderPath("lightF")};
-		const ShaderProgram m_hudShaderProgram{shaderPath("hudV"), shaderPath("hudF")};
-
 		AssetManager<std::string, const Mesh> m_fileMeshManager{};
 		AssetManager<ProceduralMeshName, const Mesh> m_proceduralMeshManager{};
 		AssetManager<std::string, const Texture> m_textureManager{};
@@ -55,7 +48,7 @@ namespace Graphics
 		std::unique_ptr<Camera> m_worldCamera{};
 		std::unique_ptr<Camera> m_hudCamera{};
 
-		WorldShading m_worldShading;
+		WorldShading m_worldShading{};
 
 		void addAndUpdateAirplanes(
 			const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);

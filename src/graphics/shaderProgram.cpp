@@ -4,8 +4,6 @@
 #include "graphics/lights/pointLight.hpp"
 #include "graphics/lights/spotLight.hpp"
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include <array>
@@ -13,21 +11,23 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <string>
-#include <string_view>
 
 namespace Graphics
 {
 	static constexpr std::size_t errorLogSize = 512;
 
 	ShaderProgram::ShaderProgram(const std::string& vertexShaderPath,
-		const std::string& fragmentShaderPath)
+		const std::string& fragmentShaderPath) :
+		ShaderProgram
+		{
+			{vertexShaderPath, fragmentShaderPath},
+			{GL_VERTEX_SHADER, GL_FRAGMENT_SHADER}
+		}
+	{ }
+
+	ShaderProgram::~ShaderProgram()
 	{
-		unsigned int vertexShader = createShader(GL_VERTEX_SHADER, vertexShaderPath);
-		unsigned int fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentShaderPath);
-		m_id = createShaderProgram(vertexShader, fragmentShader);
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
+		glDeleteProgram(m_id);
 	}
 
 	void ShaderProgram::use() const
@@ -35,46 +35,48 @@ namespace Graphics
 		glUseProgram(m_id);
 	}
 
-	void ShaderProgram::setUniform1b(const std::string& name, bool value) const
+	void ShaderProgram::setUniform(const std::string& name, bool value) const
 	{
 		glUniform1i(glGetUniformLocation(m_id, name.c_str()), static_cast<int>(value));
 	}
 
-	void ShaderProgram::setUniform1i(const std::string& name, int value) const
-	{
-		glUniform1i(glGetUniformLocation(m_id, name.c_str()), value);
-	}
-
-	void ShaderProgram::setUniform1f(const std::string& name, float value) const
+	void ShaderProgram::setUniform(const std::string& name, float value) const
 	{
 		glUniform1f(glGetUniformLocation(m_id, name.c_str()), value);
 	}
 
-	void ShaderProgram::setUniform3f(const std::string& name, const glm::vec3& value) const
+	void ShaderProgram::setUniform(const std::string& name, const glm::vec3& value) const
 	{
 		glUniform3fv(glGetUniformLocation(m_id, name.c_str()), 1, glm::value_ptr(value));
 	}
 
-	void ShaderProgram::setUniformMatrix4f(const std::string& name, const glm::mat4& value) const
+	void ShaderProgram::setUniform(const std::string& name, const glm::mat4& value) const
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_id, name.c_str()), 1, GL_FALSE,
 			glm::value_ptr(value));
 	}
 
-	ShaderProgram::~ShaderProgram()
+	ShaderProgram::ShaderProgram(const std::vector<std::string>& shaderPaths,
+		const std::vector<GLenum>& shaderTypes)
 	{
-		glDeleteProgram(m_id);
+		std::vector<unsigned int> shaders{};
+		for (int i = 0; i < shaderPaths.size(); ++i)
+		{
+			shaders.push_back(createShader(shaderPaths[i], shaderTypes[i]));
+		}
+		m_id = createShaderProgram(shaders);
+		deleteShaders(shaders);
 	}
 
-	unsigned int ShaderProgram::createShader(GLenum shaderType, const std::string& shaderPath) const
+	unsigned int ShaderProgram::createShader(const std::string& shaderPath, GLenum shaderType)
 	{
 		std::string shaderCode = "#version 420 core\n\n";
 		shaderCode += "#define MAX_DIRECTIONAL_LIGHT_COUNT " +
-			std::to_string(DirectionalLight::maxDirectionalLightCount) + "\n";
+			std::to_string(DirectionalLight::maxDirectionalLightCount) + '\n';
 		shaderCode += "#define MAX_POINT_LIGHT_COUNT " +
-			std::to_string(PointLight::maxPointLightCount) + "\n";
+			std::to_string(PointLight::maxPointLightCount) + '\n';
 		shaderCode += "#define MAX_SPOT_LIGHT_COUNT " +
-			std::to_string(SpotLight::maxSpotLightCount) + "\n";
+			std::to_string(SpotLight::maxSpotLightCount) + '\n';
 		shaderCode += readShaderFile(shaderPath);
 
 		unsigned int shader = glCreateShader(shaderType);
@@ -85,17 +87,18 @@ namespace Graphics
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 		if (!success)
 		{
-			printCompilationError(shaderType, shader);
+			printCompilationError(shader, shaderType);
 		}
 		return shader;
 	}
 
-	unsigned int ShaderProgram::createShaderProgram(unsigned int vertexShader,
-		unsigned int fragmentShader) const
+	unsigned int ShaderProgram::createShaderProgram(const std::vector<unsigned int>& shaders)
 	{
 		unsigned int shaderProgram = glCreateProgram();
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
+		for (unsigned int shader : shaders)
+		{
+			glAttachShader(shaderProgram, shader);
+		}
 		glLinkProgram(shaderProgram);
 		int success{};
 		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
@@ -106,14 +109,22 @@ namespace Graphics
 		return shaderProgram;
 	}
 
-	std::string ShaderProgram::readShaderFile(const std::string& shaderPath) const
+	void ShaderProgram::deleteShaders(const std::vector<unsigned int>& shaders)
 	{
-		std::ifstream file{};
-		file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		for (unsigned int shader : shaders)
+		{
+			glDeleteShader(shader);
+		}
+	}
+
+	std::string ShaderProgram::readShaderFile(const std::string& shaderPath)
+	{
 		std::string shaderCode{};
 
 		try
 		{
+			std::ifstream file{};
+			file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 			std::stringstream stream{};
 			file.open(shaderPath);
 			stream << file.rdbuf();
@@ -128,19 +139,28 @@ namespace Graphics
 		return shaderCode;
 	}
 
-	void ShaderProgram::printCompilationError(GLenum shaderType, unsigned int shaderId) const
+	void ShaderProgram::printCompilationError(unsigned int shader, GLenum shaderType)
 	{
 		std::array<char, errorLogSize> errorLog{};
-		glGetShaderInfoLog(shaderId, errorLogSize, nullptr, errorLog.data());
-		std::string shaderTypeName = (shaderType == GL_VERTEX_SHADER ? "vertex" : "fragment");
-		std::cerr << "Error compiling " + std::string(shaderTypeName) + " shader:\n" <<
-			errorLog.data() << '\n';
+		glGetShaderInfoLog(shader, errorLogSize, nullptr, errorLog.data());
+		std::string shaderTypeName{};
+		switch (shaderType)
+		{
+			case GL_VERTEX_SHADER:
+				shaderTypeName = "vertex";
+				break;
+
+			case GL_FRAGMENT_SHADER:
+				shaderTypeName = "fragment";
+				break;
+		}
+		std::cerr << "Error compiling " + shaderTypeName + " shader:\n" << errorLog.data() << '\n';
 	}
 
-	void ShaderProgram::printLinkingError(unsigned int programId) const
+	void ShaderProgram::printLinkingError(unsigned int shaderProgram)
 	{
 		std::array<char, errorLogSize> errorLog{};
-		glGetProgramInfoLog(programId, errorLogSize, nullptr, errorLog.data());
+		glGetProgramInfoLog(shaderProgram, errorLogSize, nullptr, errorLog.data());
 		std::cerr << "Error linking shader program:\n" << errorLog.data() << '\n';
 	}
 }
