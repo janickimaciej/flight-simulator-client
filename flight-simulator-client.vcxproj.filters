@@ -208,7 +208,7 @@
     <ClInclude Include="src\graphics\textField.hpp" />
     <ClInclude Include="src\graphics\models\hud.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />
-    <ClInclude Include="src\graphics\airplaneCameraPositions.hpp" />
+    <ClInclude Include="src\graphics\airplaneCameraPoss.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
     <ClInclude Include="core\physics\spawner.hpp" />
     <ClInclude Include="src\app\commandLineArgs.hpp" />

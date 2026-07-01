@@ -26,8 +26,8 @@ namespace Graphics
 
 		std::vector<Vertex> vertices{};
 
-		std::vector<glm::vec3> positions{};
-		std::vector<glm::vec2> texturePositions{};
+		std::vector<glm::vec3> poss{};
+		std::vector<glm::vec2> texturePoss{};
 		std::vector<glm::vec3> normalVectors{};
 
 		std::string line{};
@@ -35,11 +35,11 @@ namespace Graphics
 		{
 			if (line[0] == 'v' && line[1] == ' ')
 			{
-				positions.push_back(parsePosition(line));
+				poss.push_back(parsePos(line));
 			}
 			else if (line[0] == 'v' && line[1] == 't' && line[2] == ' ')
 			{
-				texturePositions.push_back(parseTexturePosition(line));
+				texturePoss.push_back(parseTexturePos(line));
 			}
 			else if (line[0] == 'v' && line[1] == 'n' && line[2] == ' ')
 			{
@@ -48,7 +48,7 @@ namespace Graphics
 			else if (line[0] == 'f' && line[1] == ' ')
 			{
 				std::array<Vertex, 3> triangle =
-					parseTriangle(line, positions, texturePositions, normalVectors);
+					parseTriangle(line, poss, texturePoss, normalVectors);
 				vertices.push_back(triangle[0]);
 				vertices.push_back(triangle[1]);
 				vertices.push_back(triangle[2]);
@@ -58,9 +58,9 @@ namespace Graphics
 		return vertices;
 	}
 
-	glm::vec3 ObjParser::parsePosition(const std::string_view line)
+	glm::vec3 ObjParser::parsePos(const std::string_view line)
 	{
-		glm::vec3 position{};
+		glm::vec3 pos{};
 
 		int component = 0;
 		std::string number = "";
@@ -68,7 +68,7 @@ namespace Graphics
 		{
 			if (*c == ' ')
 			{
-				position[component] = std::stof(number);
+				pos[component] = std::stof(number);
 				++component;
 				number = "";
 			}
@@ -77,14 +77,14 @@ namespace Graphics
 				number.push_back(*c);
 			}
 		}
-		position[component] = std::stof(number);
+		pos[component] = std::stof(number);
 
-		return position;
+		return pos;
 	}
 
-	glm::vec2 ObjParser::parseTexturePosition(const std::string_view line)
+	glm::vec2 ObjParser::parseTexturePos(const std::string_view line)
 	{
-		glm::vec2 texturePosition{};
+		glm::vec2 texturePos{};
 
 		int component = 0;
 		std::string number = "";
@@ -92,7 +92,7 @@ namespace Graphics
 		{
 			if (*c == ' ')
 			{
-				texturePosition[component] = std::stof(number);
+				texturePos[component] = std::stof(number);
 				++component;
 				number = "";
 			}
@@ -101,9 +101,9 @@ namespace Graphics
 				number.push_back(*c);
 			}
 		}
-		texturePosition[component] = std::stof(number);
+		texturePos[component] = std::stof(number);
 
-		return texturePosition;
+		return texturePos;
 	}
 
 	glm::vec3 ObjParser::parseNormalVector(const std::string_view line)
@@ -131,16 +131,16 @@ namespace Graphics
 	}
 
 	std::array<Vertex, 3> ObjParser::parseTriangle(const std::string_view line,
-		const std::vector<glm::vec3>& positions, const std::vector<glm::vec2>& texturePositions,
+		const std::vector<glm::vec3>& poss, const std::vector<glm::vec2>& texturePoss,
 		const std::vector<glm::vec3>& normalVectors)
 	{
 		std::array<Vertex, 3> triangle;
 
 		std::size_t vertexIndex = 0;
 		std::string number = "";
-		std::size_t positionIndex = 0;
+		std::size_t posIndex = 0;
 		std::size_t normalVectorIndex = 0;
-		std::size_t texturePositionIndex = 0;
+		std::size_t texturePosIndex = 0;
 		bool isFirstNumber = true;
 		for (auto c = line.begin() + 2; c != line.end(); ++c)
 		{
@@ -150,9 +150,9 @@ namespace Graphics
 				number = "";
 				if (vertexIndex < 3)
 				{
-					triangle[vertexIndex].position = positions[positionIndex - 1];
-					triangle[vertexIndex].texturePosition =
-						texturePositions[texturePositionIndex - 1];
+					triangle[vertexIndex].pos = poss[posIndex - 1];
+					triangle[vertexIndex].texturePos =
+						texturePoss[texturePosIndex - 1];
 					triangle[vertexIndex].normalVector = normalVectors[normalVectorIndex - 1];
 				}
 				++vertexIndex;
@@ -161,11 +161,11 @@ namespace Graphics
 			{
 				if (isFirstNumber)
 				{
-					positionIndex = static_cast<std::size_t>(std::stoi(number));
+					posIndex = static_cast<std::size_t>(std::stoi(number));
 				}
 				else
 				{
-					texturePositionIndex = static_cast<std::size_t>(std::stoi(number));
+					texturePosIndex = static_cast<std::size_t>(std::stoi(number));
 				}
 				number = "";
 				isFirstNumber = !isFirstNumber;
@@ -178,8 +178,8 @@ namespace Graphics
 		normalVectorIndex = static_cast<std::size_t>(std::stoi(number));
 		if (vertexIndex < 3)
 		{
-			triangle[vertexIndex].position = positions[positionIndex - 1];
-			triangle[vertexIndex].texturePosition = texturePositions[texturePositionIndex - 1];
+			triangle[vertexIndex].pos = poss[posIndex - 1];
+			triangle[vertexIndex].texturePos = texturePoss[texturePosIndex - 1];
 			triangle[vertexIndex].normalVector = normalVectors[normalVectorIndex - 1];
 		}
 

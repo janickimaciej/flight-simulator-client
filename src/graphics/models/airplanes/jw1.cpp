@@ -97,28 +97,28 @@ namespace Graphics
 		m_leftAileron.translate(glm::vec3{-4.107f, 0.535f, 14.57f});
 		m_rightAileron.translate(glm::vec3{4.107f, 0.535f, 14.57f});
 
-		static constexpr glm::vec3 nosePosition = -Common::airplaneCentersOfMass[
+		static constexpr glm::vec3 nosePos = -Common::airplaneCentersOfMass[
 			toSizeT(Common::AirplaneType::jw1)];
-		m_cone.translate(nosePosition);
-		m_gun.translate(nosePosition);
-		m_cockpit.translate(nosePosition);
-		m_fuselage.translate(nosePosition);
-		m_leftEngine.translate(nosePosition);
-		m_rightEngine.translate(nosePosition);
-		m_leftNozzle.translate(nosePosition);
-		m_rightNozzle.translate(nosePosition);
-		m_leftNozzleGlass.translate(nosePosition);
-		m_rightNozzleGlass.translate(nosePosition);
-		m_leftWing.translate(nosePosition);
-		m_rightWing.translate(nosePosition);
-		m_leftVStab.translate(nosePosition);
-		m_rightVStab.translate(nosePosition);
-		m_leftElevator.translate(nosePosition);
-		m_rightElevator.translate(nosePosition);
-		m_leftRudder.translate(nosePosition);
-		m_rightRudder.translate(nosePosition);
-		m_leftAileron.translate(nosePosition);
-		m_rightAileron.translate(nosePosition);
+		m_cone.translate(nosePos);
+		m_gun.translate(nosePos);
+		m_cockpit.translate(nosePos);
+		m_fuselage.translate(nosePos);
+		m_leftEngine.translate(nosePos);
+		m_rightEngine.translate(nosePos);
+		m_leftNozzle.translate(nosePos);
+		m_rightNozzle.translate(nosePos);
+		m_leftNozzleGlass.translate(nosePos);
+		m_rightNozzleGlass.translate(nosePos);
+		m_leftWing.translate(nosePos);
+		m_rightWing.translate(nosePos);
+		m_leftVStab.translate(nosePos);
+		m_rightVStab.translate(nosePos);
+		m_leftElevator.translate(nosePos);
+		m_rightElevator.translate(nosePos);
+		m_leftRudder.translate(nosePos);
+		m_rightRudder.translate(nosePos);
+		m_leftAileron.translate(nosePos);
+		m_rightAileron.translate(nosePos);
 	}
 
 	void JW1::updateShaders()

@@ -86,14 +86,14 @@ namespace Graphics
 			m_lightSubmodels.push_back(LightSubmodel{*m_lights[i], fileMeshManager.get(lightPath),
 				yellowLightGlass});
 
-			static constexpr float firstLightPositionX = -49;
+			static constexpr float firstLightPosX = -49;
 			static constexpr float lightsGapX = 14;
-			static constexpr float lightsPositionY = 7;
-			static constexpr float lightsPositionZ = 250;
-			glm::vec3 lightPosition{firstLightPositionX + lightsGapX * static_cast<int>(i),
-				lightsPositionY, lightsPositionZ};
-			m_lightBodies[i].translate(lightPosition);
-			m_lights[i]->translate(lightPosition);
+			static constexpr float lightsPosY = 7;
+			static constexpr float lightsPosZ = 250;
+			glm::vec3 lightPos{firstLightPosX + lightsGapX * static_cast<int>(i),
+				lightsPosY, lightsPosZ};
+			m_lightBodies[i].translate(lightPos);
+			m_lights[i]->translate(lightPos);
 
 			static constexpr float lightsRotationYawDeg = 180;
 			m_lightBodies[i].rotateYaw(glm::radians(lightsRotationYawDeg));

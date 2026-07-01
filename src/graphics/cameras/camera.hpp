@@ -21,7 +21,7 @@ namespace Graphics
 
 		Camera(float nearPlane, float farPlane);
 		virtual glm::mat4 getCameraMatrix() const;
-		glm::vec3 getCameraPosition() const;
+		glm::vec3 getCameraPos() const;
 		glm::mat4 getViewMatrix() const;
 	};
 }

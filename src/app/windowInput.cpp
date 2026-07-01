@@ -10,16 +10,16 @@ namespace App
 		m_windowPtr{windowPtr}
 	{ }
 
-	Physics::PlayerInput WindowInput::getCurrentInput()
+	Physics::PlayerInput WindowInput::getCurrInput()
 	{
 		switch (m_controllerType)
 		{
 			case ControllerType::keyboard:
-				updateCurrentInputKeyboard();
+				updateCurrInputKeyboard();
 				break;
 
 			case ControllerType::gamepad:
-				updateCurrentInputGamepad();
+				updateCurrInputGamepad();
 				break;
 		}
 
@@ -31,7 +31,7 @@ namespace App
 		m_controllerType = controllerType;
 	}
 
-	void WindowInput::updateCurrentInputKeyboard()
+	void WindowInput::updateCurrInputKeyboard()
 	{
 		int ctrlPitchNegative = isKeyPressed(GLFW_KEY_UP);
 		int ctrlPitchPositive = isKeyPressed(GLFW_KEY_DOWN);
@@ -94,7 +94,7 @@ namespace App
 		m_ownInput.trigger = isKeyPressed(GLFW_KEY_SPACE);
 	}
 
-	void WindowInput::updateCurrentInputGamepad()
+	void WindowInput::updateCurrInputGamepad()
 	{
 		GLFWgamepadstate gamepad{};
 		glfwGetGamepadState(GLFW_JOYSTICK_1, &gamepad);

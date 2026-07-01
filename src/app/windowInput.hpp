@@ -11,7 +11,7 @@ namespace App
 	{
 	public:
 		WindowInput(GLFWwindow* window);
-		Physics::PlayerInput getCurrentInput();
+		Physics::PlayerInput getCurrInput();
 		void setControllerType(ControllerType controllerType);
 
 	private:
@@ -19,8 +19,8 @@ namespace App
 		GLFWwindow* m_windowPtr;
 		ControllerType m_controllerType{};
 
-		void updateCurrentInputKeyboard();
-		void updateCurrentInputGamepad();
+		void updateCurrInputKeyboard();
+		void updateCurrInputGamepad();
 
 		bool isKeyPressed(int key);
 	};

@@ -30,7 +30,7 @@ namespace Graphics
 
 	void DayNightCycle::updateWorldShading()
 	{
-		static constexpr glm::vec3 nightBackgroundColor{0, 0, 0.1};
+		static constexpr glm::vec3 nightBackgroundColor{0, 0, 0.1f};
 		static constexpr glm::vec3 dayBackgroundColor{0.6f, 0.6f, 1};
 		static constexpr float nightAmbient = 0.1f;
 		static constexpr float dayAmbient = 0.5f;

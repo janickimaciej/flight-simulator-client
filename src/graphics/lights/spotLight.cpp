@@ -48,8 +48,8 @@ namespace Graphics
 	void SpotLight::updateShaders(const glm::mat4& modelMatrix) const
 	{
 		ShaderPrograms::surface->use();
-		ShaderPrograms::surface->setUniform(m_prefix + "position",
-			getGlobalPosition(modelMatrix));
+		ShaderPrograms::surface->setUniform(m_prefix + "pos",
+			getGlobalPos(modelMatrix));
 		ShaderPrograms::surface->setUniform(m_prefix + "direction",
 			getGlobalDirection(modelMatrix));
 		ShaderPrograms::surface->setUniform(m_prefix + "color", m_color);

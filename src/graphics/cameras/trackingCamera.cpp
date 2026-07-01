@@ -24,8 +24,8 @@ namespace Graphics
 	void TrackingCamera::aimAtModel()
 	{
 		Common::State state = getState();
-		glm::vec3 modelPosition = m_model.getPosition();
-		state.setOrientation(glm::normalize(state.position - modelPosition));
+		glm::vec3 modelPos = m_model.getPos();
+		state.setOrientation(glm::normalize(state.pos - modelPos));
 		setState(state);
 	}
 }

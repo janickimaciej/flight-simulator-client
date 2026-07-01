@@ -56,21 +56,21 @@ namespace Graphics
 			glm::radians(lightsCutoffOuterDeg)},
 		m_rightLightSubmodel{m_rightLight, fileMeshManager.get(lightPath), whiteLightGlass}
 	{
-		static constexpr float lightsPositionXAbs = 2.14f;
-		static constexpr float lightsPositionY = -0.474f;
-		static constexpr float lightsPositionZ = 2.938f;
-		m_leftLight.translate(glm::vec3{lightsPositionXAbs, lightsPositionY, lightsPositionZ});
-		m_rightLight.translate(glm::vec3{-lightsPositionXAbs, lightsPositionY, lightsPositionZ});
+		static constexpr float lightsPosXAbs = 2.14f;
+		static constexpr float lightsPosY = -0.474f;
+		static constexpr float lightsPosZ = 2.938f;
+		m_leftLight.translate(glm::vec3{lightsPosXAbs, lightsPosY, lightsPosZ});
+		m_rightLight.translate(glm::vec3{-lightsPosXAbs, lightsPosY, lightsPosZ});
 
-		static constexpr glm::vec3 nosePosition = -Common::airplaneCentersOfMass[
+		static constexpr glm::vec3 nosePos = -Common::airplaneCentersOfMass[
 			toSizeT(Common::AirplaneType::mustang)];
-		m_cap.translate(nosePosition);
-		m_propeller.translate(nosePosition);
-		m_body.translate(nosePosition);
-		m_joins.translate(nosePosition);
-		m_tires.translate(nosePosition);
-		m_leftLight.translate(nosePosition);
-		m_rightLight.translate(nosePosition);
+		m_cap.translate(nosePos);
+		m_propeller.translate(nosePos);
+		m_body.translate(nosePos);
+		m_joins.translate(nosePos);
+		m_tires.translate(nosePos);
+		m_leftLight.translate(nosePos);
+		m_rightLight.translate(nosePos);
 	}
 
 	void Mustang::updateShaders()

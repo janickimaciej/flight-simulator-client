@@ -41,6 +41,7 @@ namespace App
 		if (!m_exitSignal.shouldStop())
 		{
 			m_renderingBuffer->initialize(args.airplaneType, args.map);
+			Graphics::Time::initialize();
 			mainLoop();
 		}
 		networkThread.join();
@@ -48,7 +49,6 @@ namespace App
 
 	void RenderingThread::mainLoop()
 	{
-		Graphics::Time::initialize();
 		while (!m_exitSignal.shouldStop())
 		{
 			if (m_window.shouldClose())
@@ -67,7 +67,7 @@ namespace App
 
 	void RenderingThread::processInput()
 	{
-		Physics::PlayerInput ownInput = m_window.getCurrentInput();
+		Physics::PlayerInput ownInput = m_window.getCurrInput();
 		m_ownInput.setOwnInput(ownInput);
 	}
 }

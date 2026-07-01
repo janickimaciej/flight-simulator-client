@@ -50,10 +50,10 @@ namespace Graphics
 		glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
 			vertices.data(), GL_STATIC_DRAW);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-			reinterpret_cast<void*>(offsetof(Vertex, position)));
+			reinterpret_cast<void*>(offsetof(Vertex, pos)));
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-			reinterpret_cast<void*>(offsetof(Vertex, texturePosition)));
+			reinterpret_cast<void*>(offsetof(Vertex, texturePos)));
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 			reinterpret_cast<void*>(offsetof(Vertex, normalVector)));

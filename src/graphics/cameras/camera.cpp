@@ -15,15 +15,15 @@ namespace Graphics
 			updateProjectionMatrix();
 		}
 		glm::mat4 projectionViewMatrix = m_projectionMatrix * getViewMatrix();
-		glm::vec3 cameraPosition = getCameraPosition();
+		glm::vec3 cameraPos = getCameraPos();
 
 		ShaderPrograms::surface->use();
 		ShaderPrograms::surface->setUniform("projectionViewMatrix", projectionViewMatrix);
-		ShaderPrograms::surface->setUniform("cameraPosition", cameraPosition);
+		ShaderPrograms::surface->setUniform("cameraPos", cameraPos);
 
 		ShaderPrograms::light->use();
 		ShaderPrograms::light->setUniform("projectionViewMatrix", projectionViewMatrix);
-		ShaderPrograms::light->setUniform("cameraPosition", cameraPosition);
+		ShaderPrograms::light->setUniform("cameraPos", cameraPos);
 
 		ShaderPrograms::hud->use();
 		ShaderPrograms::hud->setUniform("projectionViewMatrix", projectionViewMatrix);
@@ -39,10 +39,10 @@ namespace Graphics
 		return getMatrix();
 	}
 
-	glm::vec3 Camera::getCameraPosition() const
+	glm::vec3 Camera::getCameraPos() const
 	{
-		glm::vec4 cameraPosition = getCameraMatrix() * glm::vec4{0, 0, 0, 1};
-		return glm::vec3{cameraPosition};
+		glm::vec4 cameraPos = getCameraMatrix() * glm::vec4{0, 0, 0, 1};
+		return glm::vec3{cameraPos};
 	}
 
 	glm::mat4 Camera::getViewMatrix() const

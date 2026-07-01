@@ -13,10 +13,10 @@ namespace Graphics
 
 	void Time::update()
 	{
-		std::chrono::time_point<std::chrono::system_clock> currentTime =
+		std::chrono::time_point<std::chrono::system_clock> currTime =
 			std::chrono::system_clock::now();
-		m_deltaTime = currentTime - m_time;
-		m_time = currentTime;
+		m_deltaTime = currTime - m_time;
+		m_time = currTime;
 	}
 
 	float Time::getDeltaTime()

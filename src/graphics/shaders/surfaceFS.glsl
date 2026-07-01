@@ -29,7 +29,7 @@ struct DirectionalLight
 struct PointLight
 {
 	bool isActive;
-	vec3 position;
+	vec3 pos;
 	vec3 color;
 	float attenuationQuadratic;
 	float attenuationLinear;
@@ -39,7 +39,7 @@ struct PointLight
 struct SpotLight
 {
 	bool isActive;
-	vec3 position;
+	vec3 pos;
 	vec3 direction;
 	vec3 color;
 	float attenuationQuadratic;
@@ -49,11 +49,11 @@ struct SpotLight
 	float cutoffOuterRad;
 };
 
-in vec4 position;
-in vec2 texturePosition;
+in vec4 pos;
+in vec2 texturePos;
 in vec4 normalVector;
 
-uniform vec3 cameraPosition;
+uniform vec3 cameraPos;
 uniform WorldShading worldShading;
 uniform Material material;
 uniform bool isTextureEnabled;
@@ -76,7 +76,7 @@ vec3 calcSpecularSpotLight(int i, vec3 viewVector);
 float calcDiffuseBrightness(vec3 lightVector);
 float calcSpecularBrightness(vec3 viewVector, vec3 lightVector);
 float calcAttenuation(float attenuationQuadratic, float attenuationLinear,
-	float attenuationConstant, vec3 position, vec3 lightPosition);
+	float attenuationConstant, vec3 pos, vec3 lightPos);
 float calcCutoffCoef(float cutoffInnerRad, float cutoffOuterRad, vec3 lightVector,
 	vec3 lightDirection);
 vec3 applyFog(vec3 color);
@@ -115,7 +115,7 @@ void main()
 	vec3 surfaceColor = material.color;
 	if (isTextureEnabled)
 	{
-		surfaceColor = surfaceColor * texture(textureSampler, texturePosition).xyz;
+		surfaceColor = surfaceColor * texture(textureSampler, texturePos).xyz;
 	}
 
 	vec3 color;
@@ -134,7 +134,7 @@ void main()
 
 vec3 calcViewVector()
 {
-	return normalize(cameraPosition - position.xyz);
+	return normalize(cameraPos - pos.xyz);
 }
 
 vec3 calcDiffuseDirectionalLight(int i)
@@ -157,31 +157,31 @@ vec3 calcSpecularDirectionalLight(int i, vec3 viewVector)
 
 vec3 calcDiffusePointLight(int i)
 {
-	vec3 lightVector = normalize(pointLights[i].position - position.xyz);
+	vec3 lightVector = normalize(pointLights[i].pos - pos.xyz);
 
 	float brightness = calcDiffuseBrightness(lightVector);
 	float attenuation = calcAttenuation(pointLights[i].attenuationQuadratic,
-		pointLights[i].attenuationLinear, pointLights[i].attenuationConstant, position.xyz,
-		pointLights[i].position);
+		pointLights[i].attenuationLinear, pointLights[i].attenuationConstant, pos.xyz,
+		pointLights[i].pos);
 
 	return attenuation * brightness * pointLights[i].color;
 }
 
 vec3 calcSpecularPointLight(int i, vec3 viewVector)
 {
-	vec3 lightVector = normalize(pointLights[i].position - position.xyz);
+	vec3 lightVector = normalize(pointLights[i].pos - pos.xyz);
 
 	float brightness = calcSpecularBrightness(viewVector, lightVector);
 	float attenuation = calcAttenuation(pointLights[i].attenuationQuadratic,
-		pointLights[i].attenuationLinear, pointLights[i].attenuationConstant, position.xyz,
-		pointLights[i].position);
+		pointLights[i].attenuationLinear, pointLights[i].attenuationConstant, pos.xyz,
+		pointLights[i].pos);
 
 	return attenuation * brightness * pointLights[i].color;
 }
 
 vec3 calcDiffuseSpotLight(int i)
 {
-	vec3 lightVector = normalize(spotLights[i].position - position.xyz);
+	vec3 lightVector = normalize(spotLights[i].pos - pos.xyz);
 
 	float cutoffCoef = calcCutoffCoef(spotLights[i].cutoffInnerRad, spotLights[i].cutoffOuterRad,
 		lightVector, spotLights[i].direction);
@@ -192,15 +192,15 @@ vec3 calcDiffuseSpotLight(int i)
 
 	float brightness = calcDiffuseBrightness(lightVector);
 	float attenuation = calcAttenuation(spotLights[i].attenuationQuadratic,
-		spotLights[i].attenuationLinear, spotLights[i].attenuationConstant, position.xyz,
-		spotLights[i].position);
+		spotLights[i].attenuationLinear, spotLights[i].attenuationConstant, pos.xyz,
+		spotLights[i].pos);
 
 	return attenuation * cutoffCoef * brightness * spotLights[i].color;
 }
 
 vec3 calcSpecularSpotLight(int i, vec3 viewVector)
 {
-	vec3 lightVector = normalize(spotLights[i].position - position.xyz);
+	vec3 lightVector = normalize(spotLights[i].pos - pos.xyz);
 
 	float cutoffCoef = calcCutoffCoef(spotLights[i].cutoffInnerRad, spotLights[i].cutoffOuterRad,
 		lightVector, spotLights[i].direction);
@@ -211,8 +211,8 @@ vec3 calcSpecularSpotLight(int i, vec3 viewVector)
 
 	float brightness = calcSpecularBrightness(viewVector, lightVector);
 	float attenuation = calcAttenuation(spotLights[i].attenuationQuadratic,
-		spotLights[i].attenuationLinear, spotLights[i].attenuationConstant, position.xyz,
-		spotLights[i].position);
+		spotLights[i].attenuationLinear, spotLights[i].attenuationConstant, pos.xyz,
+		spotLights[i].pos);
 
 	return attenuation * cutoffCoef * brightness * spotLights[i].color;
 }
@@ -244,11 +244,11 @@ float calcSpecularBrightness(vec3 viewVector, vec3 lightVector)
 }
 
 float calcAttenuation(float attenuationQuadratic, float attenuationLinear,
-	float attenuationConstant, vec3 position, vec3 lightPosition)
+	float attenuationConstant, vec3 pos, vec3 lightPos)
 {
-	float distance = length(position - lightPosition);
-	return 1 / (attenuationQuadratic * distance * distance +
-		attenuationLinear * distance + attenuationConstant);
+	float distance = length(pos - lightPos);
+	return 1 / (attenuationQuadratic * distance * distance + attenuationLinear * distance +
+		attenuationConstant);
 }
 
 float calcCutoffCoef(float cutoffInnerRad, float cutoffOuterRad, vec3 lightVector,
@@ -269,7 +269,7 @@ float calcCutoffCoef(float cutoffInnerRad, float cutoffOuterRad, vec3 lightVecto
 
 vec3 applyFog(vec3 color)
 {
-	float distance = length(position.xyz - cameraPosition);
+	float distance = length(pos.xyz - cameraPos);
 	float fogCoef = exp(-pow((worldShading.fogDensity * distance), worldShading.fogGradient));
 	return fogCoef * color + (1 - fogCoef) * worldShading.backgroundColor;
 }

@@ -60,7 +60,7 @@ namespace Graphics
 		const std::vector<GLenum>& shaderTypes)
 	{
 		std::vector<unsigned int> shaders{};
-		for (int i = 0; i < shaderPaths.size(); ++i)
+		for (std::size_t i = 0; i < shaderPaths.size(); ++i)
 		{
 			shaders.push_back(createShader(shaderPaths[i], shaderTypes[i]));
 		}

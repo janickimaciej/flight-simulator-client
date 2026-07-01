@@ -14,24 +14,24 @@ namespace Graphics
 		std::vector<Vertex> vertices{};
 
 		std::array<Vertex, 3> triangle1{};
-		triangle1[0].position = glm::vec3{0, 0, 0};
-		triangle1[0].texturePosition = glm::vec2{0, 0};
-		triangle1[1].position = glm::vec3{0, -height, 0};
-		triangle1[1].texturePosition = glm::vec2{0, 1};
-		triangle1[2].position = glm::vec3{width, -height, 0};
-		triangle1[2].texturePosition = glm::vec2{1, 1};
+		triangle1[0].pos = glm::vec3{0, 0, 0};
+		triangle1[0].texturePos = glm::vec2{0, 0};
+		triangle1[1].pos = glm::vec3{0, -height, 0};
+		triangle1[1].texturePos = glm::vec2{0, 1};
+		triangle1[2].pos = glm::vec3{width, -height, 0};
+		triangle1[2].texturePos = glm::vec2{1, 1};
 
 		vertices.push_back(triangle1[0]);
 		vertices.push_back(triangle1[1]);
 		vertices.push_back(triangle1[2]);
 
 		std::array<Vertex, 3> triangle2{};
-		triangle2[0].position = glm::vec3{0, 0, 0};
-		triangle2[0].texturePosition = glm::vec2{0, 0};
-		triangle2[1].position = glm::vec3{width, -height, 0};
-		triangle2[1].texturePosition = glm::vec2{1, 1};
-		triangle2[2].position = glm::vec3{width, 0, 0};
-		triangle2[2].texturePosition = glm::vec2{1, 0};
+		triangle2[0].pos = glm::vec3{0, 0, 0};
+		triangle2[0].texturePos = glm::vec2{0, 0};
+		triangle2[1].pos = glm::vec3{width, -height, 0};
+		triangle2[1].texturePos = glm::vec2{1, 1};
+		triangle2[2].pos = glm::vec3{width, 0, 0};
+		triangle2[2].texturePos = glm::vec2{1, 0};
 
 		vertices.push_back(triangle2[0]);
 		vertices.push_back(triangle2[1]);

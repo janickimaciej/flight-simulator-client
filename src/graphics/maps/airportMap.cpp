@@ -56,8 +56,8 @@ namespace Graphics
 	{
 		m_airport.scale(10);
 
-		static constexpr glm::vec3 zeppelinPosition{100, 150, -250};
-		m_zeppelin.translate(zeppelinPosition);
+		static constexpr glm::vec3 zeppelinPos{100, 150, -250};
+		m_zeppelin.translate(zeppelinPos);
 
 		static constexpr float moonRotationPitchDeg = -135;
 		m_moon.rotatePitch(glm::radians(moonRotationPitchDeg));

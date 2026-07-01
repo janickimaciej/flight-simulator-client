@@ -23,52 +23,52 @@ namespace Graphics
 	static constexpr float bottomLineLargeFontY = -0.035f;
 	static constexpr float bottomLineSmallFontY = -0.055f;
 	static constexpr float indicatorsY = -0.43f;
-	static constexpr glm::vec3 fpsPosition{-0.97f, 0.53f, 0};
-	static constexpr glm::vec3 playerCountPosition{0.84f, 0.53f, 0};
-	static constexpr glm::vec3 altitudePosition{-0.96f, indicatorsY, 0};
-	static constexpr glm::vec3 radarAltitudePosition{-0.51f, indicatorsY, 0};
-	static constexpr glm::vec3 hpPosition{-0.06f, indicatorsY, 0};
-	static constexpr glm::vec3 verticalSpeedPosition{0.32f, indicatorsY, 0};
-	static constexpr glm::vec3 airspeedPosition{0.78f, indicatorsY, 0};
+	static constexpr glm::vec3 fpsPos{-0.97f, 0.53f, 0};
+	static constexpr glm::vec3 playerCountPos{0.84f, 0.53f, 0};
+	static constexpr glm::vec3 altitudePos{-0.96f, indicatorsY, 0};
+	static constexpr glm::vec3 radarAltitudePos{-0.51f, indicatorsY, 0};
+	static constexpr glm::vec3 hpPos{-0.06f, indicatorsY, 0};
+	static constexpr glm::vec3 verticalSpeedPos{0.32f, indicatorsY, 0};
+	static constexpr glm::vec3 airspeedPos{0.78f, indicatorsY, 0};
 
 	HUD::HUD(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager) :
-		m_fpsNumber{proceduralMeshManager, textureManager, "___", fpsPosition + glm::vec3{0, 0, 0},
+		m_fpsNumber{proceduralMeshManager, textureManager, "___", fpsPos + glm::vec3{0, 0, 0},
 			smallFontSize},
 		m_fpsUnit{proceduralMeshManager, textureManager, "FPS",
-			fpsPosition + glm::vec3{0.05f, 0, 0}, smallFontSize},
+			fpsPos + glm::vec3{0.05f, 0, 0}, smallFontSize},
 		m_playerCountNumber{proceduralMeshManager, textureManager, "__",
-			playerCountPosition + glm::vec3{0, 0, 0}, smallFontSize},
+			playerCountPos + glm::vec3{0, 0, 0}, smallFontSize},
 		m_playerCountUnit{proceduralMeshManager, textureManager, "PLAYERS",
-			playerCountPosition + glm::vec3{0.04f, 0, 0}, smallFontSize},
+			playerCountPos + glm::vec3{0.04f, 0, 0}, smallFontSize},
 		m_altitudeText{proceduralMeshManager, textureManager, "ALTITUDE",
-			altitudePosition + glm::vec3{0.045f, topLineY, 0}, smallFontSize},
+			altitudePos + glm::vec3{0.045f, topLineY, 0}, smallFontSize},
 		m_altitudeNumber{proceduralMeshManager, textureManager, "______",
-			altitudePosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
+			altitudePos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
 		m_altitudeUnit{proceduralMeshManager, textureManager, "M",
-			altitudePosition + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
+			altitudePos + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
 		m_radarAltitudeText{proceduralMeshManager, textureManager, "RADAR_ALTITUDE",
-			radarAltitudePosition + glm::vec3{0.007f, topLineY, 0}, smallFontSize},
+			radarAltitudePos + glm::vec3{0.007f, topLineY, 0}, smallFontSize},
 		m_radarAltitudeNumber{proceduralMeshManager, textureManager, "______",
-			radarAltitudePosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
+			radarAltitudePos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
 		m_radarAltitudeUnit{proceduralMeshManager, textureManager, "M",
-			radarAltitudePosition + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
+			radarAltitudePos + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
 		m_hpNumber{proceduralMeshManager, textureManager, "___",
-			hpPosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
+			hpPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
 		m_hpUnit{proceduralMeshManager, textureManager, "HP",
-			hpPosition + glm::vec3{0.1f, bottomLineSmallFontY, 0}, smallFontSize},
+			hpPos + glm::vec3{0.1f, bottomLineSmallFontY, 0}, smallFontSize},
 		m_verticalSpeedText{proceduralMeshManager, textureManager, "VERTICAL_SPEED",
-			verticalSpeedPosition + glm::vec3{0.01f, topLineY, 0}, smallFontSize},
+			verticalSpeedPos + glm::vec3{0.01f, topLineY, 0}, smallFontSize},
 		m_verticalSpeedNumber{proceduralMeshManager, textureManager, "_____",
-			verticalSpeedPosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
+			verticalSpeedPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
 		m_verticalSpeedUnit{proceduralMeshManager, textureManager, "MPS",
-			verticalSpeedPosition + glm::vec3{0.15f, bottomLineSmallFontY, 0}, smallFontSize},
+			verticalSpeedPos + glm::vec3{0.15f, bottomLineSmallFontY, 0}, smallFontSize},
 		m_airspeedText{proceduralMeshManager, textureManager, "AIRSPEED",
-			airspeedPosition + glm::vec3{0.03f, topLineY, 0}, smallFontSize},
+			airspeedPos + glm::vec3{0.03f, topLineY, 0}, smallFontSize},
 		m_airspeedNumber{proceduralMeshManager, textureManager, "____",
-			airspeedPosition + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
+			airspeedPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
 		m_airspeedUnit{proceduralMeshManager, textureManager, "KPH",
-			airspeedPosition + glm::vec3{0.12f, bottomLineSmallFontY, 0}, smallFontSize}
+			airspeedPos + glm::vec3{0.12f, bottomLineSmallFontY, 0}, smallFontSize}
 	{
 		for (char i = '0'; i <= '9'; ++i)
 		{
@@ -97,9 +97,9 @@ namespace Graphics
 			refresh(m_fpsNumber, fps, 3, false);
 			refresh(m_playerCountNumber, playerCount, 2, false);
 			m_playerCountUnit.setCharacter(6, playerCount == 1 ? '_' : 'S');
-			refresh(m_altitudeNumber, static_cast<int>(state.position.y), 5, true);
-			refresh(m_radarAltitudeNumber, static_cast<int>(state.position.y -
-				map.getHeight(state.position.x, state.position.z)), 5, true);
+			refresh(m_altitudeNumber, static_cast<int>(state.pos.y), 5, true);
+			refresh(m_radarAltitudeNumber, static_cast<int>(state.pos.y -
+				map.getHeight(state.pos.x, state.pos.z)), 5, true);
 			refresh(m_hpNumber, ownAirplane.getHP(), 3, false);
 			refresh(m_verticalSpeedNumber, static_cast<int>((state.orientation * state.velocity).y),
 				4, true);

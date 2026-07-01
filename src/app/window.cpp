@@ -62,9 +62,9 @@ namespace App
 		return m_windowPtr;
 	}
 
-	Physics::PlayerInput Window::getCurrentInput()
+	Physics::PlayerInput Window::getCurrInput()
 	{
-		return m_input->getCurrentInput();
+		return m_input->getCurrInput();
 	}
 
 	void Window::setControllerType(ControllerType controllerType)

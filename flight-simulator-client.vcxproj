@@ -186,7 +186,7 @@
     <ClInclude Include="src\app\udp\udpCommunication.hpp" />
     <ClInclude Include="src\app\window.hpp" />
     <ClInclude Include="src\app\windowInput.hpp" />
-    <ClInclude Include="src\graphics\airplaneCameraPositions.hpp" />
+    <ClInclude Include="src\graphics\airplaneCameraPoss.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />
     <ClInclude Include="src\graphics\lights\pointLight.hpp" />

@@ -40,8 +40,7 @@ namespace Graphics
 	void PointLight::updateShaders(const glm::mat4& modelMatrix) const
 	{
 		ShaderPrograms::surface->use();
-		ShaderPrograms::surface->setUniform(m_prefix + "position",
-			getGlobalPosition(modelMatrix));
+		ShaderPrograms::surface->setUniform(m_prefix + "pos", getGlobalPos(modelMatrix));
 		ShaderPrograms::surface->setUniform(m_prefix + "color", m_color);
 		ShaderPrograms::surface->setUniform(m_prefix + "attenuationQuadratic",
 			m_attenuationQuadratic);

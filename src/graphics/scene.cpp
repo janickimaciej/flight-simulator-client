@@ -5,7 +5,7 @@
 #include "common/bulletInfo.hpp"
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
-#include "graphics/airplaneCameraPositions.hpp"
+#include "graphics/airplaneCameraPoss.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/cameras/camera.hpp"
 #include "graphics/cameras/modelCamera.hpp"
@@ -15,6 +15,8 @@
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
+
+#include <glad/glad.h>
 
 #include <cstddef>
 #include <memory>
@@ -48,7 +50,7 @@ namespace Graphics
 			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane);
 		static constexpr float cameraPitchDeg = -10;
 		m_worldCamera->rotatePitch(glm::radians(cameraPitchDeg));
-		m_worldCamera->translate(airplaneCameraPositions[Common::toSizeT(ownAirplaneType)]);
+		m_worldCamera->translate(airplaneCameraPoss[Common::toSizeT(ownAirplaneType)]);
 
 		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraWidth, hudCameraNearPlane,
 			hudCameraFarPlane);

@@ -24,7 +24,7 @@ namespace App
 		float aspectRatio() const;
 		GLFWwindow* getPtr();
 
-		Physics::PlayerInput getCurrentInput();
+		Physics::PlayerInput getCurrInput();
 		void setControllerType(ControllerType controllerType);
 
 	private:

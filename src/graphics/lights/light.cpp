@@ -22,9 +22,9 @@ namespace Graphics
 		setState(state);
 	}
 
-	glm::vec3 Light::getGlobalPosition(const glm::mat4& modelMatrix) const
+	glm::vec3 Light::getGlobalPos(const glm::mat4& modelMatrix) const
 	{
-		return glm::vec3{modelMatrix * glm::vec4{getState().position, 1}};
+		return glm::vec3{modelMatrix * glm::vec4{getState().pos, 1}};
 	}
 
 	glm::vec3 Light::getGlobalDirection(const glm::mat4& modelMatrix) const

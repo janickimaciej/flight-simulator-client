@@ -6,8 +6,8 @@ namespace Graphics
 {
 	struct Vertex
 	{
-		glm::vec3 position{};
-		glm::vec2 texturePosition{};
+		glm::vec3 pos{};
+		glm::vec2 texturePos{};
 		glm::vec3 normalVector{};
 	};
 }

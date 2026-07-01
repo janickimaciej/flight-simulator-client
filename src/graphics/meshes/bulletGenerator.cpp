@@ -32,13 +32,12 @@ namespace Graphics
 	}
 
 	void BulletGenerator::addDoubleSidedTriangle(std::vector<Vertex>& vertices,
-		const glm::vec3& vertex1Position, const glm::vec3& vertex2Position,
-		const glm::vec3& vertex3Position)
+		const glm::vec3& vertex1Pos, const glm::vec3& vertex2Pos, const glm::vec3& vertex3Pos)
 	{
 		std::array<Vertex, 3> triangle{};
-		triangle[0].position = vertex1Position;
-		triangle[1].position = vertex2Position;
-		triangle[2].position = vertex3Position;
+		triangle[0].pos = vertex1Pos;
+		triangle[1].pos = vertex2Pos;
+		triangle[2].pos = vertex3Pos;
 
 		vertices.push_back(triangle[0]);
 		vertices.push_back(triangle[1]);
