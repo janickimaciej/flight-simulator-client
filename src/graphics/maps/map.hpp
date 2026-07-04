@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common/mapName.hpp"
-#include "common/terrains/maps/map.hpp"
+#include "common/maps/map.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/texture.hpp"
@@ -27,8 +27,8 @@ namespace Graphics
 			AssetManager<std::string, const Texture>& textureManager);
 
 	protected:
-		const std::unique_ptr<Common::Terrains::Map> m_terrain{};
+		const std::unique_ptr<Common::Maps::Map> m_terrain{};
 
-		Map(std::unique_ptr<Common::Terrains::Map> terrain);
+		Map(std::unique_ptr<Common::Maps::Map> terrain);
 	};
 }

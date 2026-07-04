@@ -1,6 +1,6 @@
 #include "graphics/meshes/mapGenerator.hpp"
 
-#include "common/terrains/maps/map.hpp"
+#include "common/maps/map.hpp"
 #include "graphics/meshes/vertex.hpp"
 
 #include <glm/glm.hpp>
@@ -10,7 +10,7 @@
 
 namespace Graphics
 {
-	std::vector<Vertex> MapGenerator::generate(const Common::Terrains::Map& terrain)
+	std::vector<Vertex> MapGenerator::generate(const Common::Maps::Map& terrain)
 	{
 		float lengthX = terrain.getLengthX();
 		float lengthZ = terrain.getLengthZ();
@@ -79,13 +79,14 @@ namespace Graphics
 		return vertices;
 	}
 
-	glm::vec3 MapGenerator::calcPos(float x, float z, const Common::Terrains::Map& map)
+	glm::vec3 MapGenerator::calcPos(float x, float z, const Common::Maps::Map& map)
 	{
-		return glm::vec3{x, map.height(x, z), z};
+		return glm::vec3{x, map.terrain().height(x, z), z};
 	}
 
-	glm::vec3 MapGenerator::calcNormalVector(float x, float z, const Common::Terrains::Map& map)
+	glm::vec3 MapGenerator::calcNormalVector(float x, float z, const Common::Maps::Map& map)
 	{
-		return glm::normalize(glm::vec3{-map.heightDerivX(x, z), 1, -map.heightDerivZ(x, z)});
+		return glm::normalize(glm::vec3{-map.terrain().heightDerivX(x, z), 1,
+			-map.terrain().heightDerivZ(x, z)});
 	}
 }

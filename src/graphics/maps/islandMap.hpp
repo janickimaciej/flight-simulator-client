@@ -1,13 +1,13 @@
 #pragma once
 
-#include "common/terrains/maps/map.hpp"
+#include "common/maps/map.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/dayNightCycle.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/models/directionalLightModel.hpp"
-#include "graphics/models/hills.hpp"
+#include "graphics/models/island.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -15,20 +15,20 @@
 
 namespace Graphics
 {
-	class HillsMap : public Map
+	class IslandMap : public Map
 	{
 	public:
-		HillsMap(WorldShading& worldShading,
+		IslandMap(WorldShading& worldShading,
 			AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 			AssetManager<std::string, const Texture>& textureManager,
-			std::unique_ptr<Common::Terrains::Map> terrain);
+			std::unique_ptr<Common::Maps::Map> terrain);
 		virtual void update(int day, float timeOfDay) override;
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~HillsMap() = default;
+		virtual ~IslandMap() = default;
 
 	private:
-		Hills m_hills;
+		Island m_island;
 
 		DirectionalLightModel m_moon;
 		DirectionalLightModel m_sun;

@@ -1,6 +1,6 @@
 #include "graphics/meshes/meshGenerator.hpp"
 
-#include "common/terrains/maps/hillsMap.hpp"
+#include "common/maps/islandMap.hpp"
 #include "graphics/config.hpp"
 #include "graphics/meshes/billboardGenerator.hpp"
 #include "graphics/meshes/bulletGenerator.hpp"
@@ -27,8 +27,8 @@ namespace Graphics
 			case ProceduralMeshName::bullet:
 				return BulletGenerator::generate();
 
-			case ProceduralMeshName::hills:
-				return MapGenerator::generate(Common::Terrains::HillsMap{});
+			case ProceduralMeshName::island:
+				return MapGenerator::generate(Common::Maps::IslandMap{});
 		}
 		return std::vector<Vertex>{};
 	}

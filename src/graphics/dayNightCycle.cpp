@@ -40,8 +40,8 @@ namespace Graphics
 		static constexpr glm::vec3 moonLight{0.1f, 0.1f, 0.1f};
 		static constexpr glm::vec3 sunLight{1.2f, 1.2f, 1.2f};
 
-		float lightCoefficient = getLightCoefficient();
-		float fogCoefficient = getFogCoefficient();
+		float lightCoefficient = 1.0f;//getLightCoefficient();
+		float fogCoefficient = 0.0f;//getFogCoefficient();
 
 		m_worldShading.setBackgroundColor(lightCoefficient * dayBackgroundColor +
 			(1 - lightCoefficient) * nightBackgroundColor);

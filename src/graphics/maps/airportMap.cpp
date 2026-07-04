@@ -1,6 +1,6 @@
 #include "graphics/maps/airportMap.hpp"
 
-#include "common/terrains/maps/map.hpp"
+#include "common/maps/map.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/dayNightCycle.hpp"
 #include "graphics/maps/map.hpp"
@@ -20,7 +20,7 @@ namespace Graphics
 	AirportMap::AirportMap(WorldShading& worldShading,
 		AssetManager<std::string, const Mesh>& fileMeshManager,
 		AssetManager<std::string, const Texture>& textureManager,
-		std::unique_ptr<Common::Terrains::Map> terrain) :
+		std::unique_ptr<Common::Maps::Map> terrain) :
 		Map{std::move(terrain)},
 		m_airport{fileMeshManager, textureManager},
 		m_zeppelin{fileMeshManager},

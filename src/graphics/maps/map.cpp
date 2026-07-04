@@ -1,11 +1,11 @@
 #include "graphics/maps/map.hpp"
 
 #include "common/mapName.hpp"
-#include "common/terrains/maps/airportMap.hpp"
-#include "common/terrains/maps/hillsMap.hpp"
-#include "common/terrains/maps/map.hpp"
+#include "common/maps/airportMap.hpp"
+#include "common/maps/islandMap.hpp"
+#include "common/maps/map.hpp"
 #include "graphics/maps/airportMap.hpp"
-#include "graphics/maps/hillsMap.hpp"
+#include "graphics/maps/islandMap.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
 
 #include <memory>
@@ -22,11 +22,11 @@ namespace Graphics
 		{
 			case Common::MapName::airport:
 				return std::make_unique<AirportMap>(worldShading, fileMeshManager, textureManager,
-					std::make_unique<Common::Terrains::AirportMap>());
+					std::make_unique<Common::Maps::AirportMap>());
 
-			case Common::MapName::hills:
-				return std::make_unique<HillsMap>(worldShading, proceduralMeshManager,
-					textureManager, std::make_unique<Common::Terrains::HillsMap>());
+			case Common::MapName::island:
+				return std::make_unique<IslandMap>(worldShading, proceduralMeshManager,
+					textureManager, std::make_unique<Common::Maps::IslandMap>());
 		}
 		assert(false);
 		return nullptr;
@@ -34,10 +34,10 @@ namespace Graphics
 
 	float Map::getHeight(float x, float z) const
 	{
-		return m_terrain->height(x, z);
+		return m_terrain->terrain().height(x, z);
 	}
 
-	Map::Map(std::unique_ptr<Common::Terrains::Map> terrain) :
+	Map::Map(std::unique_ptr<Common::Maps::Map> terrain) :
 		m_terrain{std::move(terrain)}
 	{ }
 }

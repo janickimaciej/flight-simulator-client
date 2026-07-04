@@ -1,6 +1,6 @@
-#include "graphics/maps/hillsMap.hpp"
+#include "graphics/maps/islandMap.hpp"
 
-#include "common/terrains/maps/map.hpp"
+#include "common/maps/map.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
@@ -14,12 +14,12 @@ namespace Graphics
 	static constexpr glm::vec3 moonLight{0.2, 0.2, 0.2};
 	static constexpr glm::vec3 sunLight{1, 1, 1};
 
-	HillsMap::HillsMap(WorldShading& worldShading,
+	IslandMap::IslandMap(WorldShading& worldShading,
 		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 		AssetManager<std::string, const Texture>& textureManager,
-		std::unique_ptr<Common::Terrains::Map> terrain) :
+		std::unique_ptr<Common::Maps::Map> terrain) :
 		Map{std::move(terrain)},
-		m_hills{proceduralMeshManager, textureManager},
+		m_island{proceduralMeshManager, textureManager},
 		m_moon{moonLight},
 		m_sun{sunLight},
 		m_dayNightCycle{m_moon, m_sun, worldShading}
@@ -27,26 +27,26 @@ namespace Graphics
 		setModels();
 	}
 
-	void HillsMap::update(int day, float timeOfDay)
+	void IslandMap::update(int day, float timeOfDay)
 	{
 		m_dayNightCycle.setDay(day);
 		m_dayNightCycle.setTimeOfDay(timeOfDay);
 		m_dayNightCycle.updateWorldShading();
 	}
 
-	void HillsMap::updateShaders()
+	void IslandMap::updateShaders()
 	{
-		m_hills.updateShaders();
+		m_island.updateShaders();
 		m_moon.updateShaders();
 		m_sun.updateShaders();
 	}
 
-	void HillsMap::render() const
+	void IslandMap::render() const
 	{
-		m_hills.render();
+		m_island.render();
 	}
 
-	void HillsMap::setModels()
+	void IslandMap::setModels()
 	{
 		static constexpr float moonRotationPitchDeg = -15;
 		static constexpr float moonRotationYawDeg = 75;

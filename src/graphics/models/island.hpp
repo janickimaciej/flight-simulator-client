@@ -11,14 +11,14 @@
 
 namespace Graphics
 {
-	class Hills : public Model
+	class Island : public Model
 	{
 	public:
-		Hills(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
+		Island(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
 			AssetManager<std::string, const Texture>& textureManager);
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~Hills() = default;
+		virtual ~Island() = default;
 
 	private:
 		Submodel m_ground;

@@ -10,7 +10,7 @@
 #include "common/airplaneType.hpp"
 #include "common/config.hpp"
 #include "common/mapName.hpp"
-#include "common/terrains/maps/maps.hpp"
+#include "common/maps/maps.hpp"
 #include "graphics/renderingBuffer.hpp"
 #include "physics/airplaneDefinitions.hpp"
 #include "physics/notification.hpp"
@@ -36,7 +36,7 @@ namespace App
 		OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 		const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal},
-		m_spawner{*Common::Terrains::maps[toSizeT(map)]}
+		m_spawner{*Common::Maps::maps[toSizeT(map)]}
 	{
 		if (gameMode == GameMode::multiplayer)
 		{
