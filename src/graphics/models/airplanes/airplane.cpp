@@ -2,7 +2,6 @@
 
 #include "common/airplaneCtrl.hpp"
 #include "common/airplaneType.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/lights/spotLight.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
@@ -18,18 +17,15 @@
 
 namespace Graphics
 {
-	std::unique_ptr<Airplane> Airplane::createAirplane(
-		AssetManager<std::string, const Mesh>& fileMeshManager,
-		AssetManager<std::string, const Texture>& textureManager,
-		Common::AirplaneType airplaneType)
+	std::unique_ptr<Airplane> Airplane::createAirplane(Common::AirplaneType airplaneType)
 	{
 		switch (airplaneType)
 		{
 			case Common::AirplaneType::mustang:
-				return std::make_unique<Mustang>(fileMeshManager, textureManager);
+				return std::make_unique<Mustang>();
 
 			case Common::AirplaneType::jw1:
-				return std::make_unique<JW1>(fileMeshManager, textureManager);
+				return std::make_unique<JW1>();
 		}
 		return nullptr;
 	}

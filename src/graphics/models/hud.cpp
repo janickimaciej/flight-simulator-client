@@ -31,45 +31,46 @@ namespace Graphics
 	static constexpr glm::vec3 verticalSpeedPos{0.32f, indicatorsY, 0};
 	static constexpr glm::vec3 airspeedPos{0.78f, indicatorsY, 0};
 
-	HUD::HUD(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-		AssetManager<std::string, const Texture>& textureManager) :
-		m_fpsNumber{proceduralMeshManager, textureManager, "___", fpsPos + glm::vec3{0, 0, 0},
-			smallFontSize},
-		m_fpsUnit{proceduralMeshManager, textureManager, "FPS",
-			fpsPos + glm::vec3{0.05f, 0, 0}, smallFontSize},
-		m_playerCountNumber{proceduralMeshManager, textureManager, "__",
-			playerCountPos + glm::vec3{0, 0, 0}, smallFontSize},
-		m_playerCountUnit{proceduralMeshManager, textureManager, "PLAYERS",
-			playerCountPos + glm::vec3{0.04f, 0, 0}, smallFontSize},
-		m_altitudeText{proceduralMeshManager, textureManager, "ALTITUDE",
-			altitudePos + glm::vec3{0.045f, topLineY, 0}, smallFontSize},
-		m_altitudeNumber{proceduralMeshManager, textureManager, "______",
-			altitudePos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_altitudeUnit{proceduralMeshManager, textureManager, "M",
-			altitudePos + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_radarAltitudeText{proceduralMeshManager, textureManager, "RADAR_ALTITUDE",
-			radarAltitudePos + glm::vec3{0.007f, topLineY, 0}, smallFontSize},
-		m_radarAltitudeNumber{proceduralMeshManager, textureManager, "______",
-			radarAltitudePos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_radarAltitudeUnit{proceduralMeshManager, textureManager, "M",
-			radarAltitudePos + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_hpNumber{proceduralMeshManager, textureManager, "___",
-			hpPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_hpUnit{proceduralMeshManager, textureManager, "HP",
-			hpPos + glm::vec3{0.1f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_verticalSpeedText{proceduralMeshManager, textureManager, "VERTICAL_SPEED",
-			verticalSpeedPos + glm::vec3{0.01f, topLineY, 0}, smallFontSize},
-		m_verticalSpeedNumber{proceduralMeshManager, textureManager, "_____",
-			verticalSpeedPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_verticalSpeedUnit{proceduralMeshManager, textureManager, "MPS",
-			verticalSpeedPos + glm::vec3{0.15f, bottomLineSmallFontY, 0}, smallFontSize},
-		m_airspeedText{proceduralMeshManager, textureManager, "AIRSPEED",
-			airspeedPos + glm::vec3{0.03f, topLineY, 0}, smallFontSize},
-		m_airspeedNumber{proceduralMeshManager, textureManager, "____",
-			airspeedPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize},
-		m_airspeedUnit{proceduralMeshManager, textureManager, "KPH",
-			airspeedPos + glm::vec3{0.12f, bottomLineSmallFontY, 0}, smallFontSize}
+	HUD::HUD()
 	{
+		m_fpsNumber = std::make_unique<TextField>("___", fpsPos + glm::vec3{0, 0, 0},
+			smallFontSize);
+		m_fpsUnit = std::make_unique<TextField>("FPS", fpsPos + glm::vec3{0.05f, 0, 0},
+			smallFontSize);
+		m_playerCountNumber = std::make_unique<TextField>("__", playerCountPos + glm::vec3{0, 0, 0},
+			smallFontSize);
+		m_playerCountUnit = std::make_unique<TextField>("PLAYERS",
+			playerCountPos + glm::vec3{0.04f, 0, 0}, smallFontSize);
+		m_altitudeText = std::make_unique<TextField>("ALTITUDE",
+			altitudePos + glm::vec3{0.045f, topLineY, 0}, smallFontSize);
+		m_altitudeNumber = std::make_unique<TextField>("______",
+			altitudePos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize);
+		m_altitudeUnit = std::make_unique<TextField>("M",
+			altitudePos + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize);
+		m_radarAltitudeText = std::make_unique<TextField>("RADAR_ALTITUDE",
+			radarAltitudePos + glm::vec3{0.007f, topLineY, 0}, smallFontSize);
+		m_radarAltitudeNumber = std::make_unique<TextField>("______",
+			radarAltitudePos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize);
+		m_radarAltitudeUnit = std::make_unique<TextField>("M",
+			radarAltitudePos + glm::vec3{0.17f, bottomLineSmallFontY, 0}, smallFontSize);
+		m_hpNumber = std::make_unique<TextField>("___",
+			hpPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize);
+		m_hpUnit = std::make_unique<TextField>("HP",
+			hpPos + glm::vec3{0.1f, bottomLineSmallFontY, 0}, smallFontSize);
+		m_verticalSpeedText = std::make_unique<TextField>("VERTICAL_SPEED",
+			verticalSpeedPos + glm::vec3{0.01f, topLineY, 0}, smallFontSize);
+		m_verticalSpeedNumber = std::make_unique<TextField>("_____",
+			verticalSpeedPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize);
+		m_verticalSpeedUnit = std::make_unique<TextField>("MPS",
+			verticalSpeedPos + glm::vec3{0.15f, bottomLineSmallFontY, 0}, smallFontSize);
+		m_airspeedText = std::make_unique<TextField>("AIRSPEED",
+			airspeedPos + glm::vec3{0.03f, topLineY, 0}, smallFontSize);
+		m_airspeedNumber = std::make_unique<TextField>("____",
+			airspeedPos + glm::vec3{0, bottomLineLargeFontY, 0}, largeFontSize);
+		m_airspeedUnit = std::make_unique<TextField>("KPH",
+			airspeedPos + glm::vec3{0.12f, bottomLineSmallFontY, 0}, smallFontSize);
+
+		auto& textureManager = AssetManager<std::string, const Texture>::instance();
 		for (char i = '0'; i <= '9'; ++i)
 		{
 			m_textureLocks.push_back(textureManager.get(texturePath("characters", std::string{i})));
@@ -94,16 +95,16 @@ namespace Graphics
 		{
 			Common::State state = ownAirplane.getState();
 			int fps = Time::getFPS();
-			refresh(m_fpsNumber, fps, 3, false);
-			refresh(m_playerCountNumber, playerCount, 2, false);
-			m_playerCountUnit.setCharacter(6, playerCount == 1 ? '_' : 'S');
-			refresh(m_altitudeNumber, static_cast<int>(state.pos.y), 5, true);
-			refresh(m_radarAltitudeNumber, static_cast<int>(state.pos.y -
+			refresh(*m_fpsNumber, fps, 3, false);
+			refresh(*m_playerCountNumber, playerCount, 2, false);
+			m_playerCountUnit->setCharacter(6, playerCount == 1 ? '_' : 'S');
+			refresh(*m_altitudeNumber, static_cast<int>(state.pos.y), 5, true);
+			refresh(*m_radarAltitudeNumber, static_cast<int>(state.pos.y -
 				map.getHeight(state.pos.x, state.pos.z)), 5, true);
-			refresh(m_hpNumber, ownAirplane.getHP(), 3, false);
-			refresh(m_verticalSpeedNumber, static_cast<int>((state.orientation * state.velocity).y),
+			refresh(*m_hpNumber, ownAirplane.getHP(), 3, false);
+			refresh(*m_verticalSpeedNumber, static_cast<int>((state.orientation * state.velocity).y),
 				4, true);
-			refresh(m_airspeedNumber, static_cast<int>(3.6f * glm::length(state.velocity)), 4,
+			refresh(*m_airspeedNumber, static_cast<int>(3.6f * glm::length(state.velocity)), 4,
 				false);
 			m_lastUpdateTime = 0;
 		}
@@ -113,30 +114,30 @@ namespace Graphics
 	{
 		glm::mat4 modelMatrix = getMatrix();
 
-		m_fpsNumber.render(modelMatrix);
-		m_fpsUnit.render(modelMatrix);
+		m_fpsNumber->render(modelMatrix);
+		m_fpsUnit->render(modelMatrix);
 
-		m_playerCountNumber.render(modelMatrix);
-		m_playerCountUnit.render(modelMatrix);
+		m_playerCountNumber->render(modelMatrix);
+		m_playerCountUnit->render(modelMatrix);
 
-		m_altitudeText.render(modelMatrix);
-		m_altitudeNumber.render(modelMatrix);
-		m_altitudeUnit.render(modelMatrix);
+		m_altitudeText->render(modelMatrix);
+		m_altitudeNumber->render(modelMatrix);
+		m_altitudeUnit->render(modelMatrix);
 
-		m_radarAltitudeText.render(modelMatrix);
-		m_radarAltitudeNumber.render(modelMatrix);
-		m_radarAltitudeUnit.render(modelMatrix);
+		m_radarAltitudeText->render(modelMatrix);
+		m_radarAltitudeNumber->render(modelMatrix);
+		m_radarAltitudeUnit->render(modelMatrix);
 
-		m_hpNumber.render(modelMatrix);
-		m_hpUnit.render(modelMatrix);
+		m_hpNumber->render(modelMatrix);
+		m_hpUnit->render(modelMatrix);
 
-		m_verticalSpeedText.render(modelMatrix);
-		m_verticalSpeedNumber.render(modelMatrix);
-		m_verticalSpeedUnit.render(modelMatrix);
+		m_verticalSpeedText->render(modelMatrix);
+		m_verticalSpeedNumber->render(modelMatrix);
+		m_verticalSpeedUnit->render(modelMatrix);
 
-		m_airspeedText.render(modelMatrix);
-		m_airspeedNumber.render(modelMatrix);
-		m_airspeedUnit.render(modelMatrix);
+		m_airspeedText->render(modelMatrix);
+		m_airspeedNumber->render(modelMatrix);
+		m_airspeedUnit->render(modelMatrix);
 	}
 
 	void HUD::refresh(TextField& textField, int value, int numberOfDigits, bool isSigned)

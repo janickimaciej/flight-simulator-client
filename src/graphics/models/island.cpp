@@ -15,11 +15,15 @@ namespace Graphics
 
 	const Material ground{glm::vec3{1, 1, 1}, 0.75, 0, 10, false};
 
-	Island::Island(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-		AssetManager<std::string, const Texture>& textureManager) :
-		m_ground{*ShaderPrograms::surface, proceduralMeshManager.get(ProceduralMeshName::island),
-			ground, textureManager.get(grassPath)}
-	{ }
+	Island::Island()
+	{
+		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
+		auto& textureManager = AssetManager<std::string, const Texture>::instance();
+
+		m_ground = std::make_unique<Submodel>(*ShaderPrograms::surface,
+			proceduralMeshManager.get(ProceduralMeshName::island), ground,
+			textureManager.get(grassPath));
+	}
 
 	void Island::updateShaders()
 	{ }
@@ -32,6 +36,6 @@ namespace Graphics
 
 	void Island::renderSurfaces() const
 	{
-		m_ground.render(getMatrix());
+		m_ground->render(getMatrix());
 	}
 }

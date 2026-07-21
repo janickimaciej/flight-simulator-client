@@ -1,7 +1,6 @@
 #include "graphics/maps/islandMap.hpp"
 
 #include "common/maps/map.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/worldShading.hpp"
@@ -15,11 +14,9 @@ namespace Graphics
 	static constexpr glm::vec3 sunLight{1, 1, 1};
 
 	IslandMap::IslandMap(WorldShading& worldShading,
-		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-		AssetManager<std::string, const Texture>& textureManager,
 		std::unique_ptr<Common::Maps::Map> terrain) :
 		Map{std::move(terrain)},
-		m_island{proceduralMeshManager, textureManager},
+		m_island{},
 		m_moon{moonLight},
 		m_sun{sunLight},
 		m_dayNightCycle{m_moon, m_sun, worldShading}

@@ -2,7 +2,6 @@
 
 #include "common/transformable.hpp"
 #include "common/state.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/texture.hpp"
 

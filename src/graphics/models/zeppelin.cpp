@@ -1,5 +1,6 @@
 #include "graphics/models/zeppelin.hpp"
 
+#include "graphics/AssetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/path.hpp"
@@ -16,9 +17,13 @@ namespace Graphics
 
 	const Material canvas{glm::vec3{0.9, 0.9, 0.9}, 0.75, 0.25, 10, false};
 
-	Zeppelin::Zeppelin(AssetManager<std::string, const Mesh>& fileMeshManager) :
-		m_body{*ShaderPrograms::surface, fileMeshManager.get(fuselagePath), canvas}
+	Zeppelin::Zeppelin()
 	{
+		auto& fileMeshManager = AssetManager<std::string, const Mesh>::instance();
+
+		m_body = std::make_unique<Submodel>(*ShaderPrograms::surface,
+			fileMeshManager.get(fuselagePath), canvas);
+
 		static constexpr float zeppelinScale = 57;
 		scale(zeppelinScale);
 	}
@@ -34,6 +39,6 @@ namespace Graphics
 
 	void Zeppelin::renderSurfaces() const
 	{
-		m_body.render(getMatrix());
+		m_body->render(getMatrix());
 	}
 }

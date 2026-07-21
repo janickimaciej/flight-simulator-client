@@ -10,14 +10,22 @@ namespace Graphics
 	class AssetManager
 	{
 	public:
-		AssetManager() = default;
-		AssetManager(const AssetManager&) = delete;
-		AssetManager& operator=(const AssetManager&) = delete;
+		static AssetManager& instance();
 		std::shared_ptr<Asset> get(const Key& key);
 
 	private:
+		AssetManager() = default;
+		~AssetManager() = default;
+
 		std::unordered_map<Key, std::weak_ptr<Asset>> m_pool{};
 	};
+
+	template <typename Key, typename Asset>
+	AssetManager<Key, Asset>& AssetManager<Key, Asset>::instance()
+	{
+		static AssetManager manager;
+		return manager;
+	}
 
 	template <typename Key, typename Asset>
 	std::shared_ptr<Asset> AssetManager<Key, Asset>::get(const Key& key)

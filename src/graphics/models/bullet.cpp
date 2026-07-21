@@ -1,15 +1,19 @@
 #include "graphics/models/bullet.hpp"
 
+#include "graphics/assetManager.hpp"
 #include "graphics/shaderPrograms.hpp"
 
 namespace Graphics
 {
 	const Material tracer{glm::vec3{1, 1, 1}, 1, 1, 1, false};
 
-	Bullet::Bullet(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager) :
-		m_tracer{*ShaderPrograms::light, proceduralMeshManager.get(ProceduralMeshName::bullet),
-			tracer}
-	{ }
+	Bullet::Bullet()
+	{
+		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
+
+		m_tracer = std::make_unique<Submodel>(*ShaderPrograms::light,
+			proceduralMeshManager.get(ProceduralMeshName::bullet), tracer);
+	}
 
 	void Bullet::updateShaders()
 	{ }
@@ -22,6 +26,6 @@ namespace Graphics
 
 	void Bullet::renderLights() const
 	{
-		m_tracer.render(getMatrix());
+		m_tracer->render(getMatrix());
 	}
 }

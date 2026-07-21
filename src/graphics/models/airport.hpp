@@ -1,6 +1,5 @@
 #pragma once
 
-#include "graphics/assetManager.hpp"
 #include "graphics/lights/pointLight.hpp"
 #include "graphics/lights/spotLight.hpp"
 #include "graphics/meshes/mesh.hpp"
@@ -18,17 +17,16 @@ namespace Graphics
 	class Airport : public Model
 	{
 	public:
-		Airport(AssetManager<std::string, const Mesh>& fileMeshManager,
-			AssetManager<std::string, const Texture>& textureManager);
+		Airport();
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		virtual ~Airport() = default;
 
 	private:
-		Submodel m_ground;
-		Submodel m_runway;
-		Submodel m_apron;
-		Submodel m_tower;
+		std::unique_ptr<Submodel> m_ground{};
+		std::unique_ptr<Submodel> m_runway{};
+		std::unique_ptr<Submodel> m_apron{};
+		std::unique_ptr<Submodel> m_tower{};
 		std::vector<Submodel> m_hangarExteriors{};
 		std::vector<Submodel> m_hangarInteriors{};
 		std::vector<Submodel> m_lightBodies{};

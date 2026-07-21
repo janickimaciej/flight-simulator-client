@@ -13,20 +13,17 @@
 
 namespace Graphics
 {
-	std::unique_ptr<Map> Map::createMap(Common::MapName map, WorldShading& worldShading,
-		AssetManager<std::string, const Mesh>& fileMeshManager,
-		AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-		AssetManager<std::string, const Texture>& textureManager)
+	std::unique_ptr<Map> Map::createMap(Common::MapName map, WorldShading& worldShading)
 	{
 		switch (map)
 		{
 			case Common::MapName::airport:
-				return std::make_unique<AirportMap>(worldShading, fileMeshManager, textureManager,
+				return std::make_unique<AirportMap>(worldShading,
 					std::make_unique<Common::Maps::AirportMap>());
 
 			case Common::MapName::island:
-				return std::make_unique<IslandMap>(worldShading, proceduralMeshManager,
-					textureManager, std::make_unique<Common::Maps::IslandMap>());
+				return std::make_unique<IslandMap>(worldShading,
+					std::make_unique<Common::Maps::IslandMap>());
 		}
 		assert(false);
 		return nullptr;

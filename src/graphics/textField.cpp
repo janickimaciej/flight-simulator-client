@@ -18,11 +18,11 @@ namespace Graphics
 {
 	const std::string modelName = "characters";
 
-	TextField::TextField(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-		AssetManager<std::string, const Texture>& textureManager, const std::string& text,
-		const glm::vec3& offset, float scaleRatio) :
-		m_textureManager{textureManager}
+	TextField::TextField(const std::string& text, const glm::vec3& offset, float scaleRatio)
 	{
+		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
+		auto& textureManager = AssetManager<std::string, const Texture>::instance();
+
 		const Material billboard{glm::vec3{1, 1, 1}, 1, 1, 1, false};
 		for (std::size_t i = 0; i < text.size(); ++i)
 		{
@@ -46,7 +46,8 @@ namespace Graphics
 		{
 			return;
 		}
-		m_textSubmodels[index].setTexture(m_textureManager.get(texturePath(modelName,
+		auto& textureManager = AssetManager<std::string, const Texture>::instance();
+		m_textSubmodels[index].setTexture(textureManager.get(texturePath(modelName,
 			std::string{character})));
 	}
 

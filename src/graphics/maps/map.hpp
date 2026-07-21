@@ -2,7 +2,6 @@
 
 #include "common/mapName.hpp"
 #include "common/maps/map.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
@@ -21,10 +20,7 @@ namespace Graphics
 		float getHeight(float x, float z) const;
 		virtual ~Map() = default;
 
-		static std::unique_ptr<Map> createMap(Common::MapName map, WorldShading& worldShading,
-			AssetManager<std::string, const Mesh>& fileMeshManager,
-			AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-			AssetManager<std::string, const Texture>& textureManager);
+		static std::unique_ptr<Map> createMap(Common::MapName map, WorldShading& worldShading);
 
 	protected:
 		const std::unique_ptr<Common::Maps::Map> m_terrain{};

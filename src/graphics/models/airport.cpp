@@ -50,17 +50,20 @@ namespace Graphics
 	static const Material metal{glm::vec3{0.25f, 0.25f, 0.25f}, 0.75f, 0.25f, 10, true};
 	static const Material yellowLightGlass{glm::vec3{1, 1, 0.6f}, 1, 1, 1, false};
 
-	Airport::Airport(AssetManager<std::string, const Mesh>& fileMeshManager,
-		AssetManager<std::string, const Texture>& textureManager) :
-		m_ground{*ShaderPrograms::surface, fileMeshManager.get(groundPath), ground,
-			textureManager.get(grassPath)},
-		m_runway{*ShaderPrograms::surface, fileMeshManager.get(runwayPath), ground,
-			textureManager.get(asphaltPath)},
-		m_apron{*ShaderPrograms::surface, fileMeshManager.get(apronPath), ground,
-			textureManager.get(asphaltBrightPath)},
-		m_tower{*ShaderPrograms::surface, fileMeshManager.get(towerPath), concrete,
-			textureManager.get(concretePath)}
+	Airport::Airport()
 	{
+		auto& fileMeshManager = AssetManager<std::string, const Mesh>::instance();
+		auto& textureManager = AssetManager<std::string, const Texture>::instance();
+
+		m_ground = std::make_unique<Submodel>(*ShaderPrograms::surface,
+			fileMeshManager.get(groundPath), ground, textureManager.get(grassPath));
+		m_runway = std::make_unique<Submodel>(*ShaderPrograms::surface,
+			fileMeshManager.get(runwayPath), ground, textureManager.get(asphaltPath));
+		m_apron = std::make_unique<Submodel>(*ShaderPrograms::surface,
+			fileMeshManager.get(apronPath), ground, textureManager.get(asphaltBrightPath));
+		m_tower = std::make_unique<Submodel>(*ShaderPrograms::surface,
+			fileMeshManager.get(towerPath), concrete, textureManager.get(concretePath));
+
 		const Submodel hangarExteriorSubmodel{*ShaderPrograms::surface,
 			fileMeshManager.get(hangarExteriorPath), tentExterior, textureManager.get(tentPath)};
 		const Submodel hangarInteriorSubmodel{*ShaderPrograms::surface,
@@ -124,10 +127,10 @@ namespace Graphics
 
 	void Airport::renderSurfaces() const
 	{
-		m_ground.render(getMatrix());
-		m_runway.render(getMatrix());
-		m_apron.render(getMatrix());
-		m_tower.render(getMatrix());
+		m_ground->render(getMatrix());
+		m_runway->render(getMatrix());
+		m_apron->render(getMatrix());
+		m_tower->render(getMatrix());
 		for (const Submodel& hangarExterior : m_hangarExteriors)
 		{
 			hangarExterior.render(getMatrix());

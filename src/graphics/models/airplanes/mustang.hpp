@@ -1,7 +1,6 @@
 #pragma once
 
 #include "common/airplaneCtrl.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/lights/spotLight.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
@@ -9,6 +8,7 @@
 #include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
 
+#include <memory>
 #include <string>
 
 namespace Graphics
@@ -16,23 +16,22 @@ namespace Graphics
 	class Mustang : public Airplane
 	{
 	public:
-		Mustang(AssetManager<std::string, const Mesh>& fileMeshManager,
-			AssetManager<std::string, const Texture>& textureManager);
+		Mustang();
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		virtual void setCtrl(const Common::AirplaneCtrl& airplaneCtrl) override;
 		virtual void setHP(int hp) override;
 
 	private:
-		Submodel m_cap;
-		Submodel m_propeller;
-		Submodel m_body;
-		Submodel m_joins;
-		Submodel m_tires;
-		SpotLight m_leftLight;
-		LightSubmodel m_leftLightSubmodel;
-		SpotLight m_rightLight;
-		LightSubmodel m_rightLightSubmodel;
+		std::unique_ptr<Submodel> m_cap{};
+		std::unique_ptr<Submodel> m_propeller{};
+		std::unique_ptr<Submodel> m_body{};
+		std::unique_ptr<Submodel> m_joins{};
+		std::unique_ptr<Submodel> m_tires{};
+		std::unique_ptr<SpotLight> m_leftLight{};
+		std::unique_ptr<LightSubmodel> m_leftLightSubmodel{};
+		std::unique_ptr<SpotLight> m_rightLight{};
+		std::unique_ptr<LightSubmodel> m_rightLightSubmodel{};
 
 		bool m_isDestroyed = false;
 		float m_propellerAngVelocityDeg{};

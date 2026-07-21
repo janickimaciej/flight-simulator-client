@@ -1,6 +1,5 @@
 #pragma once
 
-#include "graphics/assetManager.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/models/model.hpp"
@@ -20,31 +19,30 @@ namespace Graphics
 	class HUD : public Model
 	{
 	public:
-		HUD(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager,
-			AssetManager<std::string, const Texture>& textureManager);
+		HUD();
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		void update(const Airplane& ownAirplane, const Map& map, int playerCount);
 
 	private:
-		TextField m_fpsNumber;
-		TextField m_fpsUnit;
-		TextField m_playerCountNumber;
-		TextField m_playerCountUnit;
-		TextField m_airspeedText;
-		TextField m_airspeedNumber;
-		TextField m_airspeedUnit;
-		TextField m_verticalSpeedText;
-		TextField m_verticalSpeedNumber;
-		TextField m_verticalSpeedUnit;
-		TextField m_altitudeText;
-		TextField m_altitudeNumber;
-		TextField m_altitudeUnit;
-		TextField m_radarAltitudeText;
-		TextField m_radarAltitudeNumber;
-		TextField m_radarAltitudeUnit;
-		TextField m_hpNumber;
-		TextField m_hpUnit;
+		std::unique_ptr<TextField> m_fpsNumber{};
+		std::unique_ptr<TextField> m_fpsUnit{};
+		std::unique_ptr<TextField> m_playerCountNumber{};
+		std::unique_ptr<TextField> m_playerCountUnit{};
+		std::unique_ptr<TextField> m_airspeedText{};
+		std::unique_ptr<TextField> m_airspeedNumber{};
+		std::unique_ptr<TextField> m_airspeedUnit{};
+		std::unique_ptr<TextField> m_verticalSpeedText{};
+		std::unique_ptr<TextField> m_verticalSpeedNumber{};
+		std::unique_ptr<TextField> m_verticalSpeedUnit{};
+		std::unique_ptr<TextField> m_altitudeText{};
+		std::unique_ptr<TextField> m_altitudeNumber{};
+		std::unique_ptr<TextField> m_altitudeUnit{};
+		std::unique_ptr<TextField> m_radarAltitudeText{};
+		std::unique_ptr<TextField> m_radarAltitudeNumber{};
+		std::unique_ptr<TextField> m_radarAltitudeUnit{};
+		std::unique_ptr<TextField> m_hpNumber{};
+		std::unique_ptr<TextField> m_hpUnit{};
 
 		std::vector<std::shared_ptr<const Texture>> m_textureLocks{};
 

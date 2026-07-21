@@ -2,7 +2,6 @@
 
 #include "common/airplaneCtrl.hpp"
 #include "common/airplaneType.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/texture.hpp"
@@ -15,10 +14,7 @@ namespace Graphics
 	class Airplane : public Model
 	{
 	public:
-		static std::unique_ptr<Airplane> createAirplane(
-			AssetManager<std::string, const Mesh>& fileMeshManager,
-			AssetManager<std::string, const Texture>& textureManager,
-			Common::AirplaneType airplaneType);
+		static std::unique_ptr<Airplane> createAirplane(Common::AirplaneType airplaneType);
 		virtual void setCtrl(const Common::AirplaneCtrl& airplaneCtrl) = 0;
 		virtual int getHP() const;
 		virtual void setHP(int hp);

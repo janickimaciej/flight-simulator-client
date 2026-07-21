@@ -6,7 +6,6 @@
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
 #include "graphics/airplaneCameraPoss.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/cameras/camera.hpp"
 #include "graphics/cameras/modelCamera.hpp"
 #include "graphics/cameras/orthographicCamera.hpp"
@@ -37,14 +36,13 @@ namespace Graphics
 	Scene::Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map) :
 		m_ownId{ownId},
 		m_ownAirplaneType{ownAirplaneType},
-		m_hud{m_proceduralMeshManager, m_textureManager}
+		m_hud{}
 	{
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
 
-		m_airplanes.insert({ownId, Airplane::createAirplane(m_fileMeshManager, m_textureManager,
-			ownAirplaneType)});
+		m_airplanes.insert({ownId, Airplane::createAirplane(ownAirplaneType)});
 
 		m_worldCamera = std::make_unique<ModelCamera>(*m_airplanes.at(ownId),
 			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane);
@@ -55,8 +53,7 @@ namespace Graphics
 		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraWidth, hudCameraNearPlane,
 			hudCameraFarPlane);
 
-		m_map = Map::createMap(map, m_worldShading, m_fileMeshManager, m_proceduralMeshManager,
-			m_textureManager);
+		m_map = Map::createMap(map, m_worldShading);
 
 		m_hud.translate(glm::vec3{0, 0, -0.01f});
 	}
@@ -105,12 +102,8 @@ namespace Graphics
 		{
 			if (!m_airplanes.contains(airplaneInfo.first))
 			{
-				m_airplanes.insert({airplaneInfo.first, Airplane::createAirplane
-					(
-						m_fileMeshManager,
-						m_textureManager,
-						airplaneInfo.second.airplaneType
-					)});
+				m_airplanes.insert({airplaneInfo.first,
+					Airplane::createAirplane(airplaneInfo.second.airplaneType)});
 			}
 			m_airplanes.at(airplaneInfo.first)->setState(airplaneInfo.second.state);
 			m_airplanes.at(airplaneInfo.first)->setCtrl(airplaneInfo.second.airplaneCtrl);
@@ -144,7 +137,7 @@ namespace Graphics
 
 		for (std::size_t i = m_bullets.size(); i < bulletInfos.size(); ++i)
 		{
-			m_bullets.push_back(std::make_unique<Bullet>(m_proceduralMeshManager));
+			m_bullets.push_back(std::make_unique<Bullet>());
 		}
 
 		for (std::size_t i = 0; i < bulletInfos.size(); ++i)

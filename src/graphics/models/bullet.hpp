@@ -2,22 +2,23 @@
 
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/submodels/submodel.hpp"
+
+#include <memory>
 
 namespace Graphics
 {
 	class Bullet : public Model
 	{
 	public:
-		Bullet(AssetManager<ProceduralMeshName, const Mesh>& proceduralMeshManager);
+		Bullet();
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		virtual ~Bullet() = default;
 
 	private:
-		Submodel m_tracer;
+		std::unique_ptr<Submodel> m_tracer{};
 
 		void renderLights() const;
 	};

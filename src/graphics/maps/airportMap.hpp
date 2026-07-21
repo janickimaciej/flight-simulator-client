@@ -1,7 +1,6 @@
 #pragma once
 
 #include "common/maps/map.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/dayNightCycle.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/meshes/mesh.hpp"
@@ -19,8 +18,6 @@ namespace Graphics
 	{
 	public:
 		AirportMap(WorldShading& worldShading,
-			AssetManager<std::string, const Mesh>& fileMeshManager,
-			AssetManager<std::string, const Texture>& textureManager,
 			std::unique_ptr<Common::Maps::Map> terrain);
 		virtual void update(int day, float timeOfDay) override;
 		virtual void updateShaders() override;

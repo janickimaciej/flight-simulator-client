@@ -5,7 +5,6 @@
 #include "common/bulletInfo.hpp"
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
-#include "graphics/assetManager.hpp"
 #include "graphics/cameras/camera.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/meshes/mesh.hpp"
@@ -35,10 +34,6 @@ namespace Graphics
 	private:
 		int m_ownId{};
 		Common::AirplaneType m_ownAirplaneType{};
-
-		AssetManager<std::string, const Mesh> m_fileMeshManager{};
-		AssetManager<ProceduralMeshName, const Mesh> m_proceduralMeshManager{};
-		AssetManager<std::string, const Texture> m_textureManager{};
 
 		std::unique_ptr<Map> m_map{};
 		std::unordered_map<int, std::unique_ptr<Airplane>> m_airplanes{};
