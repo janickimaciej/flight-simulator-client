@@ -31,7 +31,8 @@ namespace Graphics
 					*ShaderPrograms::hud,
 					proceduralMeshManager.get(ProceduralMeshName::characterBillboard),
 					billboard,
-					textureManager.get(texturePath(modelName, std::string{text[i]}))
+					textureManager.get(Texture::getId(texturePath(modelName, std::string{text[i]}),
+						Texture::Wrapping::clampToEdge, Texture::Wrapping::clampToEdge))
 			};
 			submodel.translate(offset);
 			submodel.translate(glm::vec3{static_cast<int>(i) * scaleRatio * characterWidth, 0, 0});
@@ -47,8 +48,9 @@ namespace Graphics
 			return;
 		}
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
-		m_textSubmodels[index].setTexture(textureManager.get(texturePath(modelName,
-			std::string{character})));
+		m_textSubmodels[index].setTexture(textureManager.get(
+			Texture::getId(texturePath(modelName, std::string{character}),
+			Texture::Wrapping::clampToEdge, Texture::Wrapping::clampToEdge)));
 	}
 
 	void TextField::render(const glm::mat4& modelMatrix) const

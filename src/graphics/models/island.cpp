@@ -22,7 +22,7 @@ namespace Graphics
 
 		m_ground = std::make_unique<Submodel>(*ShaderPrograms::surface,
 			proceduralMeshManager.get(ProceduralMeshName::island), ground,
-			textureManager.get(grassPath));
+			textureManager.get(Texture::getId(grassPath)));
 	}
 
 	void Island::updateShaders()

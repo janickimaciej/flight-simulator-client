@@ -47,47 +47,60 @@ namespace Graphics
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
 
 		m_cone = std::make_unique<Submodel>(*ShaderPrograms::surface, fileMeshManager.get(conePath),
-			texturedMetal, textureManager.get(camoPath));
+			texturedMetal, textureManager.get(Texture::getId(camoPath)));
 		m_gun = std::make_unique<Submodel>(*ShaderPrograms::surface, fileMeshManager.get(gunPath),
-			texturedMetal, textureManager.get(camoPath));
+			texturedMetal, textureManager.get(Texture::getId(camoPath)));
 		m_cockpit = std::make_unique<Submodel>(*ShaderPrograms::surface,
 			fileMeshManager.get(cockpitPath), blackGlass);
 		m_fuselage = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(fuselagePath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(fuselagePath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_leftEngine = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightEnginePath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightEnginePath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_rightEngine = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightEnginePath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightEnginePath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_leftNozzle = std::make_unique<Submodel>(*ShaderPrograms::surface,
 			fileMeshManager.get(rightNozzlePath), darkMetal);
 		m_rightNozzle = std::make_unique<Submodel>(*ShaderPrograms::surface,
 			fileMeshManager.get(rightNozzlePath), darkMetal);
 		m_leftNozzleGlass = std::make_unique<Submodel>(*ShaderPrograms::light,
 			fileMeshManager.get(rightNozzleGlassPath), defaultNozzleGlass,
-			textureManager.get(nozzleGlassPath));
+			textureManager.get(Texture::getId(nozzleGlassPath)));
 		m_rightNozzleGlass = std::make_unique<Submodel>(*ShaderPrograms::light,
 			fileMeshManager.get(rightNozzleGlassPath), defaultNozzleGlass,
-			textureManager.get(nozzleGlassPath));
+			textureManager.get(Texture::getId(nozzleGlassPath)));
 		m_leftWing = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightWingPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightWingPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_rightWing = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightWingPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightWingPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_leftVStab = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightVStabPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightVStabPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_rightVStab = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightVStabPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightVStabPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_leftElevator = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightElevatorPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightElevatorPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_rightElevator = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightElevatorPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightElevatorPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_leftRudder = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightRudderPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightRudderPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_rightRudder = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightRudderPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightRudderPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_leftAileron = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightAileronPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightAileronPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_rightAileron = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(rightAileronPath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(rightAileronPath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 
 		m_leftEngine->mirrorX();
 		m_leftNozzle->mirrorX();

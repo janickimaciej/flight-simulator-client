@@ -56,18 +56,23 @@ namespace Graphics
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
 
 		m_ground = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(groundPath), ground, textureManager.get(grassPath));
+			fileMeshManager.get(groundPath), ground, textureManager.get(Texture::getId(grassPath)));
 		m_runway = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(runwayPath), ground, textureManager.get(asphaltPath));
+			fileMeshManager.get(runwayPath), ground,
+			textureManager.get(Texture::getId(asphaltPath)));
 		m_apron = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(apronPath), ground, textureManager.get(asphaltBrightPath));
+			fileMeshManager.get(apronPath), ground,
+			textureManager.get(Texture::getId(asphaltBrightPath)));
 		m_tower = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(towerPath), concrete, textureManager.get(concretePath));
+			fileMeshManager.get(towerPath), concrete,
+			textureManager.get(Texture::getId(concretePath)));
 
 		const Submodel hangarExteriorSubmodel{*ShaderPrograms::surface,
-			fileMeshManager.get(hangarExteriorPath), tentExterior, textureManager.get(tentPath)};
+			fileMeshManager.get(hangarExteriorPath), tentExterior,
+			textureManager.get(Texture::getId(tentPath))};
 		const Submodel hangarInteriorSubmodel{*ShaderPrograms::surface,
-			fileMeshManager.get(hangarInteriorPath), tentInterior, textureManager.get(tentPath)};
+			fileMeshManager.get(hangarInteriorPath), tentInterior,
+			textureManager.get(Texture::getId(tentPath))};
 		for (std::size_t i = 0; i < hangarCount; ++i)
 		{
 			m_hangarExteriors.push_back(hangarExteriorSubmodel);

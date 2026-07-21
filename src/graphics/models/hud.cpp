@@ -73,9 +73,13 @@ namespace Graphics
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
 		for (char i = '0'; i <= '9'; ++i)
 		{
-			m_textureLocks.push_back(textureManager.get(texturePath("characters", std::string{i})));
+			m_textureLocks.push_back(textureManager.get(
+				Texture::getId(texturePath("characters", std::string{i}),
+				Texture::Wrapping::clampToEdge, Texture::Wrapping::clampToEdge)));
 		}
-		m_textureLocks.push_back(textureManager.get(texturePath("characters", "-")));
+		m_textureLocks.push_back(textureManager.get(
+			Texture::getId(texturePath("characters", "-"), Texture::Wrapping::clampToEdge,
+			Texture::Wrapping::clampToEdge)));
 	}
 
 	void HUD::updateShaders()

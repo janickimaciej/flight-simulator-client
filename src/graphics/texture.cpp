@@ -1,15 +1,59 @@
 #include "graphics/texture.hpp"
 
-#include <glad/glad.h>
 #include <stb_image.h>
 
 #include <iostream>
 
 namespace Graphics
 {
-	Texture::Texture(const std::string& path)
+	namespace
 	{
-		create();
+		char getWrappingId(Texture::Wrapping wrapping)
+		{
+			switch (wrapping)
+			{
+				case Texture::Wrapping::repeat:
+					return 'R';
+
+				case Texture::Wrapping::mirroredRepeat:
+					return 'M';
+
+				case Texture::Wrapping::clampToEdge:
+					return 'E';
+
+				case Texture::Wrapping::clampToBorder:
+					return 'B';
+			}
+			return {};
+		}
+
+		GLint parseWrappingId(char id)
+		{
+			switch (id)
+			{
+				case 'R':
+					return GL_REPEAT;
+
+				case 'M':
+					return GL_MIRRORED_REPEAT;
+
+				case 'E':
+					return GL_CLAMP_TO_EDGE;
+
+				case 'B':
+					return GL_CLAMP_TO_BORDER;
+			}
+			return {};
+		}
+	}
+
+	Texture::Texture(const std::string& id)
+	{
+		GLint wrappingS = parseWrappingId(id[0]);
+		GLint wrappingT = parseWrappingId(id[1]);
+		std::string path = id.substr(2);
+
+		create(wrappingS, wrappingT);
 		load(path);
 	}
 
@@ -23,13 +67,21 @@ namespace Graphics
 		glDeleteTextures(1, &m_id);
 	}
 
-	void Texture::create()
+	std::string Texture::getId(const std::string& path, Wrapping wrappingS, Wrapping wrappingT)
+	{
+		char wrappingSId = getWrappingId(wrappingS);
+		char wrappingTId = getWrappingId(wrappingT);
+
+		return std::string{wrappingSId} + wrappingTId + path;
+	}
+
+	void Texture::create(GLint wrappingS, GLint wrappingT)
 	{
 		glGenTextures(1, &m_id);
 		glBindTexture(GL_TEXTURE_2D, m_id);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrappingS);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrappingT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}

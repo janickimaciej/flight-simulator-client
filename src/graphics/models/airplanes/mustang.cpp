@@ -49,7 +49,8 @@ namespace Graphics
 		m_propeller = std::make_unique<Submodel>(*ShaderPrograms::surface,
 			fileMeshManager.get(propellerPath), metal);
 		m_body = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			fileMeshManager.get(fuselagePath), texturedMetal, textureManager.get(camoPath));
+			fileMeshManager.get(fuselagePath), texturedMetal,
+			textureManager.get(Texture::getId(camoPath)));
 		m_joins = std::make_unique<Submodel>(*ShaderPrograms::surface,
 			fileMeshManager.get(joinsPath), metal);
 		m_tires = std::make_unique<Submodel>(*ShaderPrograms::surface,
