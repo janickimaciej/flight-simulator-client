@@ -57,14 +57,14 @@ namespace Graphics
 		load(path);
 	}
 
-	void Texture::use() const
-	{
-		glBindTexture(GL_TEXTURE_2D, m_id);
-	}
-
 	Texture::~Texture()
 	{
 		glDeleteTextures(1, &m_id);
+	}
+
+	void Texture::use() const
+	{
+		glBindTexture(GL_TEXTURE_2D, m_id);
 	}
 
 	std::string Texture::getId(const std::string& path, Wrapping wrappingS, Wrapping wrappingT)

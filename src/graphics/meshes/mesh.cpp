@@ -26,17 +26,17 @@ namespace Graphics
 		createBuffers(vertices);
 	}
 
+	Mesh::~Mesh()
+	{
+		glDeleteVertexArrays(1, &m_VAO);
+		glDeleteBuffers(1, &m_VBO);
+	}
+
 	void Mesh::render() const
 	{
 		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(m_vertexCount));
 		glBindVertexArray(0);
-	}
-
-	Mesh::~Mesh()
-	{
-		glDeleteVertexArrays(1, &m_VAO);
-		glDeleteBuffers(1, &m_VBO);
 	}
 
 	void Mesh::createBuffers(const std::vector<Vertex>& vertices)

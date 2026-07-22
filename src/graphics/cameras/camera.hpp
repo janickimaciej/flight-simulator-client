@@ -9,9 +9,10 @@ namespace Graphics
 	class Camera : public Common::Transformable
 	{
 	public:
+		virtual ~Camera() = default;
+
 		virtual void updateProjectionMatrix() = 0;
 		virtual void use(float aspectRatio);
-		virtual ~Camera() = default;
 
 	protected:
 		glm::mat4 m_projectionMatrix{};

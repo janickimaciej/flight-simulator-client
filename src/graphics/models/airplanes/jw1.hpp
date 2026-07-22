@@ -16,6 +16,7 @@ namespace Graphics
 	{
 	public:
 		JW1();
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		virtual void setCtrl(const Common::AirplaneCtrl& airplaneCtrl) override;

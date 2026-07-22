@@ -37,6 +37,17 @@ namespace Graphics
 		++m_isActive[m_id];
 	}
 
+	PointLight::~PointLight()
+	{
+		--m_isActive[m_id];
+
+		if (m_isActive[m_id] == 0)
+		{
+			ShaderPrograms::surface->use();
+			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
+		}
+	}
+
 	void PointLight::updateShaders(const glm::mat4& modelMatrix) const
 	{
 		ShaderPrograms::surface->use();
@@ -47,17 +58,6 @@ namespace Graphics
 		ShaderPrograms::surface->setUniform(m_prefix + "attenuationLinear", m_attenuationLinear);
 		ShaderPrograms::surface->setUniform(m_prefix + "attenuationConstant",
 			m_attenuationConstant);
-	}
-
-	PointLight::~PointLight()
-	{
-		--m_isActive[m_id];
-
-		if (m_isActive[m_id] == 0)
-		{
-			ShaderPrograms::surface->use();
-			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
-		}
 	}
 
 	std::array<int, PointLight::maxPointLightCount> PointLight::m_isActive{};

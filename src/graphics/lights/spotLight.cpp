@@ -45,6 +45,17 @@ namespace Graphics
 		++m_isActive[m_id];
 	}
 
+	SpotLight::~SpotLight()
+	{
+		--m_isActive[m_id];
+
+		if (m_isActive[m_id] == 0)
+		{
+			ShaderPrograms::surface->use();
+			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
+		}
+	}
+
 	void SpotLight::updateShaders(const glm::mat4& modelMatrix) const
 	{
 		ShaderPrograms::surface->use();
@@ -60,17 +71,6 @@ namespace Graphics
 			m_attenuationConstant);
 		ShaderPrograms::surface->setUniform(m_prefix + "cutoffInnerRad", m_cutoffInnerRad);
 		ShaderPrograms::surface->setUniform(m_prefix + "cutoffOuterRad", m_cutoffOuterRad);
-	}
-
-	SpotLight::~SpotLight()
-	{
-		--m_isActive[m_id];
-
-		if (m_isActive[m_id] == 0)
-		{
-			ShaderPrograms::surface->use();
-			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
-		}
 	}
 
 	std::array<int, SpotLight::maxSpotLightCount> SpotLight::m_isActive{};

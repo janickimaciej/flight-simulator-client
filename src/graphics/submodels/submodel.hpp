@@ -19,6 +19,8 @@ namespace Graphics
 			const Material& material, const std::shared_ptr<const Texture>& texture = nullptr);
 		Submodel(const Submodel& submodel);
 		Submodel(Submodel&& submodel) noexcept;
+		virtual ~Submodel() = default;
+
 		void render(const glm::mat4& modelMatrix) const;
 		void scale(float scaleRatio);
 		void mirrorX();
@@ -27,7 +29,6 @@ namespace Graphics
 		virtual glm::mat4 getSubmodelMatrix() const;
 		void setMaterial(const Material& material);
 		void setTexture(const std::shared_ptr<const Texture>& texture);
-		virtual ~Submodel() = default;
 
 	private:
 		const ShaderProgram& m_shaderProgram;

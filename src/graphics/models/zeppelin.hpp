@@ -13,9 +13,10 @@ namespace Graphics
 	{
 	public:
 		Zeppelin();
+		virtual ~Zeppelin() = default;
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~Zeppelin() = default;
 
 	private:
 		std::unique_ptr<Submodel> m_body{};

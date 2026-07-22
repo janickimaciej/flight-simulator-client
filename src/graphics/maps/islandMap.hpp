@@ -19,10 +19,11 @@ namespace Graphics
 	public:
 		IslandMap(WorldShading& worldShading,
 			std::unique_ptr<Common::Maps::Map> terrain);
+		virtual ~IslandMap() = default;
+
 		virtual void update(int day, float timeOfDay) override;
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~IslandMap() = default;
 
 	private:
 		Island m_island;

@@ -17,6 +17,7 @@ namespace Graphics
 	{
 	public:
 		Mustang();
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		virtual void setCtrl(const Common::AirplaneCtrl& airplaneCtrl) override;

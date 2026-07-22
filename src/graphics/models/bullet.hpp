@@ -13,9 +13,10 @@ namespace Graphics
 	{
 	public:
 		Bullet();
+		virtual ~Bullet() = default;
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~Bullet() = default;
 
 	private:
 		std::unique_ptr<Submodel> m_tracer{};

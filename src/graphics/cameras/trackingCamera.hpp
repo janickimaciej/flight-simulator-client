@@ -9,8 +9,9 @@ namespace Graphics
 	{
 	public:
 		TrackingCamera(float fovRad, float nearPlane, float farPlane, const Model& model);
-		virtual void use(float aspectRatio) override;
 		virtual ~TrackingCamera() = default;
+
+		virtual void use(float aspectRatio) override;
 
 	protected:
 		const Model& m_model;

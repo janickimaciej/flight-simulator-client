@@ -14,8 +14,9 @@ namespace Graphics
 	public:
 		Mesh(const std::string& path);
 		Mesh(ProceduralMeshName name);
-		void render() const;
 		~Mesh();
+
+		void render() const;
 
 	private:
 		std::size_t m_vertexCount{};

@@ -16,6 +16,7 @@ namespace Graphics
 	{
 	public:
 		TextField(const std::string& text, const glm::vec3& offset, float scaleRatio);
+
 		void setCharacter(std::size_t index, char character);
 		void render(const glm::mat4& modelMatrix) const;
 

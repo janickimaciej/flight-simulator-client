@@ -8,8 +8,9 @@ namespace Graphics
 	{
 	public:
 		PerspectiveCamera(float fovRad, float nearPlane, float farPlane);
-		virtual void updateProjectionMatrix() override;
 		virtual ~PerspectiveCamera() = default;
+
+		virtual void updateProjectionMatrix() override;
 
 	private:
 		float m_fovRad{};

@@ -21,8 +21,9 @@ namespace Graphics
 			float attenuationConstant, float cutoffInnerRad, float cutoffOuterRad);
 		SpotLight(const SpotLight& spotLight);
 		SpotLight(SpotLight&& spotLight) noexcept;
-		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
 		virtual ~SpotLight();
+
+		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
 
 	protected:
 		float m_attenuationQuadratic{};

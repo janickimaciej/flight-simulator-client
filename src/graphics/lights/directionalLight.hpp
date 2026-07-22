@@ -17,8 +17,9 @@ namespace Graphics
 		DirectionalLight(const glm::vec3& color);
 		DirectionalLight(const DirectionalLight& directionalLight);
 		DirectionalLight(DirectionalLight&& directionalLight) noexcept;
-		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
 		virtual ~DirectionalLight();
+
+		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
 
 	private:
 		static std::array<int, maxDirectionalLightCount> m_isActive;

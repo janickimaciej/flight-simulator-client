@@ -20,6 +20,7 @@ namespace Graphics
 	{
 	public:
 		HUD();
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
 		void update(const Airplane& ownAirplane, const Map& map, int playerCount);

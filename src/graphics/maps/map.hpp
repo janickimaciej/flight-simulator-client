@@ -14,11 +14,12 @@ namespace Graphics
 	class Map
 	{
 	public:
+		virtual ~Map() = default;
+
 		virtual void update(int day, float timeOfDay) = 0;
 		virtual void updateShaders() = 0;
 		virtual void render() const = 0;
 		float getHeight(float x, float z) const;
-		virtual ~Map() = default;
 
 		static std::unique_ptr<Map> createMap(Common::MapName map, WorldShading& worldShading);
 

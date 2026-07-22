@@ -28,6 +28,7 @@ namespace App
 			int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort,
 			OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 			const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore);
+
 		void join();
 
 	private:

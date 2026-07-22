@@ -15,13 +15,14 @@ namespace Graphics
 	{
 	public:
 		RenderingBuffer(int ownId);
+
 		void initialize(Common::AirplaneType ownAirplaneType, Common::MapName map);
 		void updateBuffer(const Common::SceneInfo& sceneInfo);
 		void updateAndRenderScene(float aspectRatio);
 
 	private:
-		static const int bufferSize = 3;
-		std::array<Common::SceneInfo, bufferSize> m_buffer{};
+		static const int m_bufferSize = 3;
+		std::array<Common::SceneInfo, m_bufferSize> m_buffer{};
 		int m_ownId{};
 		std::unique_ptr<Scene> m_scene{};
 

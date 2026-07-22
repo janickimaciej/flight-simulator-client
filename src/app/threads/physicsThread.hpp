@@ -25,6 +25,7 @@ namespace App
 			Physics::Notification& notification, Graphics::RenderingBuffer& renderingBuffer,
 			OwnInput& ownInput, UDPCommunication* udpCommunication,
 			const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore);
+
 		void join();
 
 	private:

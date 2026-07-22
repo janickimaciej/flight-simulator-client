@@ -27,14 +27,6 @@ namespace Graphics
 		++m_isActive[m_id];
 	}
 
-	void DirectionalLight::updateShaders(const glm::mat4& modelMatrix) const
-	{
-		ShaderPrograms::surface->use();
-		ShaderPrograms::surface->setUniform(m_prefix + "direction",
-			getGlobalDirection(modelMatrix));
-		ShaderPrograms::surface->setUniform(m_prefix + "color", m_color);
-	}
-
 	DirectionalLight::~DirectionalLight()
 	{
 		--m_isActive[m_id];
@@ -44,6 +36,14 @@ namespace Graphics
 			ShaderPrograms::surface->use();
 			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
 		}
+	}
+
+	void DirectionalLight::updateShaders(const glm::mat4& modelMatrix) const
+	{
+		ShaderPrograms::surface->use();
+		ShaderPrograms::surface->setUniform(m_prefix + "direction",
+			getGlobalDirection(modelMatrix));
+		ShaderPrograms::surface->setUniform(m_prefix + "color", m_color);
 	}
 
 	std::array<int, DirectionalLight::maxDirectionalLightCount> DirectionalLight::m_isActive{};

@@ -11,6 +11,7 @@ namespace App
 	{
 	public:
 		WindowInput(GLFWwindow* window);
+
 		Physics::PlayerInput getCurrInput();
 		void setControllerType(ControllerType controllerType);
 

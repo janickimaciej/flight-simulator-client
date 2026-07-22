@@ -19,10 +19,11 @@ namespace Graphics
 	public:
 		AirportMap(WorldShading& worldShading,
 			std::unique_ptr<Common::Maps::Map> terrain);
+		virtual ~AirportMap() = default;
+
 		virtual void update(int day, float timeOfDay) override;
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~AirportMap() = default;
 
 	private:
 		Airport m_airport;

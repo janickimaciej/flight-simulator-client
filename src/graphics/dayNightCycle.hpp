@@ -10,8 +10,8 @@ namespace Graphics
 	public:
 		DayNightCycle(DirectionalLightModel& moon, DirectionalLightModel& sun,
 			WorldShading& worldShading);
-		void updateWorldShading();
 
+		void updateWorldShading();
 		void setDay(int day);
 		void setTimeOfDay(float timeOfDay);
 

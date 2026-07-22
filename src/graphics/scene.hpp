@@ -27,6 +27,7 @@ namespace Graphics
 	{
 	public:
 		Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map);
+
 		void update(const Common::SceneInfo& sceneInfo);
 		void updateShaders();
 		void render(float aspectRatio) const;

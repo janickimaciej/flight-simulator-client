@@ -12,9 +12,10 @@ namespace Graphics
 	class Light : public Common::Transformable
 	{
 	public:
+		virtual ~Light() = default;
+
 		virtual void updateShaders(const glm::mat4& modelMatrix) const = 0;
 		void setColor(const glm::vec3& color);
-		virtual ~Light() = default;
 
 	protected:
 		unsigned int m_id{};

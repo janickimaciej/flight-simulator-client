@@ -8,8 +8,9 @@ namespace Graphics
 	{
 	public:
 		OrthographicCamera(float width, float nearPlane, float farPlane);
-		virtual void updateProjectionMatrix() override;
 		virtual ~OrthographicCamera() = default;
+
+		virtual void updateProjectionMatrix() override;
 
 	private:
 		float m_width{};

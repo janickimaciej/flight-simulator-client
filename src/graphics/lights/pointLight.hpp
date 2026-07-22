@@ -19,8 +19,9 @@ namespace Graphics
 			float attenuationConstant);
 		PointLight(const PointLight& pointLight);
 		PointLight(PointLight&& pointLight) noexcept;
-		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
 		virtual ~PointLight();
+
+		virtual void updateShaders(const glm::mat4& modelMatrix) const override;
 
 	protected:
 		float m_attenuationQuadratic{};

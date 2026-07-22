@@ -16,8 +16,9 @@ namespace Graphics
 		LightSubmodel(const Light& light, const std::shared_ptr<const Mesh>& mesh,
 			const Material& material, const std::shared_ptr<const Texture>& texture = nullptr);
 		LightSubmodel(const Light& light, const LightSubmodel& lightSubmodel);
-		virtual glm::mat4 getSubmodelMatrix() const override;
 		virtual ~LightSubmodel() = default;
+
+		virtual glm::mat4 getSubmodelMatrix() const override;
 
 	private:
 		const Light& m_light;

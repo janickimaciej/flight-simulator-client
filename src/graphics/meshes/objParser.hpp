@@ -15,8 +15,9 @@ namespace Graphics
 	{
 	public:
 		ObjParser() = delete;
-		static std::vector<Vertex> parse(const std::string& path);
 		~ObjParser() = delete;
+
+		static std::vector<Vertex> parse(const std::string& path);
 
 	private:
 		static glm::vec3 parsePos(const std::string_view line);

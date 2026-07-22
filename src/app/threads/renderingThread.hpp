@@ -17,6 +17,7 @@ namespace App
 	{
 	public:
 		RenderingThread(ExitSignal& exitSignal);
+
 		void start(const CommandLineArgs& args);
 
 	private:

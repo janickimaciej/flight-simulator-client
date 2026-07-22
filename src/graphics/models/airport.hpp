@@ -18,9 +18,10 @@ namespace Graphics
 	{
 	public:
 		Airport();
+		virtual ~Airport() = default;
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~Airport() = default;
 
 	private:
 		std::unique_ptr<Submodel> m_ground{};

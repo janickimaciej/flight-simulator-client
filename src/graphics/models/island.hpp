@@ -15,9 +15,10 @@ namespace Graphics
 	{
 	public:
 		Island();
+		virtual ~Island() = default;
+
 		virtual void updateShaders() override;
 		virtual void render() const override;
-		virtual ~Island() = default;
 
 	private:
 		std::unique_ptr<Submodel> m_ground{};
