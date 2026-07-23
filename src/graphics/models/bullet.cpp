@@ -1,6 +1,7 @@
 #include "graphics/models/bullet.hpp"
 
 #include "graphics/assetManager.hpp"
+#include "graphics/meshes/mesh.hpp"
 #include "graphics/shaderPrograms.hpp"
 
 namespace Graphics

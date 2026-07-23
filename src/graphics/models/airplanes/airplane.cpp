@@ -1,19 +1,7 @@
 #include "graphics/models/airplanes/airplane.hpp"
 
-#include "common/airplaneCtrl.hpp"
-#include "common/airplaneType.hpp"
-#include "graphics/lights/spotLight.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/models/model.hpp"
 #include "graphics/models/airplanes/jw1.hpp"
 #include "graphics/models/airplanes/mustang.hpp"
-#include "graphics/path.hpp"
-#include "graphics/submodels/submodel.hpp"
-#include "graphics/texture.hpp"
-
-#include <glm/glm.hpp>
-
-#include <string>
 
 namespace Graphics
 {

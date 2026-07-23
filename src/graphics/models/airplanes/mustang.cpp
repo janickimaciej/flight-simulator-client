@@ -1,10 +1,8 @@
 #include "graphics/models/airplanes/mustang.hpp"
 
 #include "common/airplaneCentersOfMass.hpp"
-#include "common/airplaneCtrl.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
-#include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
 #include "graphics/texture.hpp"

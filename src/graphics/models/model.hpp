@@ -1,9 +1,6 @@
 #pragma once
 
 #include "common/transformable.hpp"
-#include "common/state.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/texture.hpp"
 
 #include <glm/glm.hpp>
 

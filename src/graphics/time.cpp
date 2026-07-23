@@ -2,8 +2,6 @@
 
 #include <glfw/glfw3.h>
 
-#include <chrono>
-
 namespace Graphics
 {
 	void Time::initialize()

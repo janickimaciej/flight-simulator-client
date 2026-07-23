@@ -3,16 +3,8 @@
 #include "graphics/assetManager.hpp"
 #include "graphics/config.hpp"
 #include "graphics/material.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
-
-#include <glm/glm.hpp>
-
-#include <cstddef>
-#include <string>
-#include <vector>
 
 namespace Graphics
 {

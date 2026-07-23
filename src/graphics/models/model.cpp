@@ -1,10 +1,5 @@
 #include "graphics/models/model.hpp"
 
-#include "common/transformable.hpp"
-#include "common/state.hpp"
-
-#include <glm/glm.hpp>
-
 namespace Graphics
 {
 	glm::mat4 Model::getModelMatrix() const

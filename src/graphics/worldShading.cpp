@@ -3,7 +3,6 @@
 #include "graphics/shaderPrograms.hpp"
 
 #include <glad/glad.h>
-#include <glm/glm.hpp>
 
 namespace Graphics
 {

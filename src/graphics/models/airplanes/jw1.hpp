@@ -1,14 +1,10 @@
 #pragma once
 
 #include "common/airplaneCtrl.hpp"
-#include "graphics/lights/pointLight.hpp"
-#include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/submodels/submodel.hpp"
-#include "graphics/texture.hpp"
 
 #include <memory>
-#include <string>
 
 namespace Graphics
 {
@@ -16,6 +12,7 @@ namespace Graphics
 	{
 	public:
 		JW1();
+		virtual ~JW1() = default;
 
 		virtual void updateShaders() override;
 		virtual void render() const override;

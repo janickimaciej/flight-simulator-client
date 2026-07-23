@@ -1,11 +1,6 @@
 #include "graphics/cameras/trackingCamera.hpp"
 
-#include "graphics/cameras/perspectiveCamera.hpp"
-#include "graphics/models/model.hpp"
-
-#include <glm/ext/quaternion_trigonometric.hpp>
 #include <glm/glm.hpp>
-#include <glm/gtc/quaternion.hpp>
 
 namespace Graphics
 {

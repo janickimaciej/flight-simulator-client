@@ -1,9 +1,6 @@
 #include "graphics/cameras/camera.hpp"
 
-#include "common/transformable.hpp"
 #include "graphics/shaderPrograms.hpp"
-
-#include <glm/glm.hpp>
 
 namespace Graphics
 {

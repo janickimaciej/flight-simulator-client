@@ -2,14 +2,11 @@
 
 #include "common/airplaneCtrl.hpp"
 #include "graphics/lights/spotLight.hpp"
-#include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/submodels/lightSubmodel.hpp"
 #include "graphics/submodels/submodel.hpp"
-#include "graphics/texture.hpp"
 
 #include <memory>
-#include <string>
 
 namespace Graphics
 {
@@ -17,6 +14,7 @@ namespace Graphics
 	{
 	public:
 		Mustang();
+		virtual ~Mustang() = default;
 
 		virtual void updateShaders() override;
 		virtual void render() const override;

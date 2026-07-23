@@ -1,7 +1,6 @@
 #include "graphics/models/airplanes/jw1.hpp"
 
 #include "common/airplaneCentersOfMass.hpp"
-#include "common/airplaneCtrl.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/models/airplanes/airplane.hpp"

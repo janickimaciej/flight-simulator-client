@@ -1,15 +1,6 @@
 #include "graphics/submodels/submodel.hpp"
 
-#include "common/transformable.hpp"
-#include "graphics/material.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/shaderProgram.hpp"
-#include "graphics/texture.hpp"
-
 #include <glad/glad.h>
-#include <glm/glm.hpp>
-
-#include <memory>
 
 namespace Graphics
 {

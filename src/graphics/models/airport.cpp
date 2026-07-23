@@ -1,20 +1,15 @@
 #include "graphics/models/airport.hpp"
 
 #include "graphics/assetManager.hpp"
-#include "graphics/lights/spotLight.hpp"
 #include "graphics/meshes/mesh.hpp"
-#include "graphics/models/model.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
-#include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
 
 #include <glm/glm.hpp>
 
 #include <cstddef>
-#include <memory>
 #include <string>
-#include <vector>
 
 namespace Graphics
 {

@@ -1,13 +1,8 @@
 #include "graphics/models/zeppelin.hpp"
 
-#include "graphics/AssetManager.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/models/model.hpp"
+#include "graphics/assetManager.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
-#include "graphics/submodels/submodel.hpp"
-
-#include <string>
 
 namespace Graphics
 {

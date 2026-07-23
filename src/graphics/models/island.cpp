@@ -1,11 +1,8 @@
 #include "graphics/models/island.hpp"
 
 #include "graphics/assetManager.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/models/model.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
-#include "graphics/texture.hpp"
 
 namespace Graphics
 {

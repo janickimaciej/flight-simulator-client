@@ -1,13 +1,6 @@
 #include "graphics/submodels/lightSubmodel.hpp"
 
-#include "graphics/lights/light.hpp"
-#include "graphics/material.hpp"
-#include "graphics/meshes/mesh.hpp"
 #include "graphics/shaderPrograms.hpp"
-#include "graphics/submodels/submodel.hpp"
-#include "graphics/texture.hpp"
-
-#include <memory>
 
 namespace Graphics
 {

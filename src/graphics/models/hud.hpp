@@ -20,6 +20,7 @@ namespace Graphics
 	{
 	public:
 		HUD();
+		virtual ~HUD() = default;
 
 		virtual void updateShaders() override;
 		virtual void render() const override;

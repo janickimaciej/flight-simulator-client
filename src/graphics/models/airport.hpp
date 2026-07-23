@@ -1,15 +1,11 @@
 #pragma once
 
-#include "graphics/lights/pointLight.hpp"
 #include "graphics/lights/spotLight.hpp"
-#include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/submodels/lightSubmodel.hpp"
 #include "graphics/submodels/submodel.hpp"
-#include "graphics/texture.hpp"
 
 #include <memory>
-#include <string>
 #include <vector>
 
 namespace Graphics

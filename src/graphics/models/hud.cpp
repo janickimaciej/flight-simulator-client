@@ -1,19 +1,11 @@
 #include "graphics/models/hud.hpp"
 
 #include "graphics/assetManager.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
-#include "graphics/textField.hpp"
-#include "graphics/texture.hpp"
 #include "graphics/time.hpp"
 
-#include <glm/glm.hpp>
-
 #include <cstddef>
-#include <string>
-#include <vector>
 
 namespace Graphics
 {

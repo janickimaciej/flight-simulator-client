@@ -1,8 +1,5 @@
 #include "graphics/dayNightCycle.hpp"
 
-#include "graphics/worldShading.hpp"
-#include "models/directionalLightModel.hpp"
-
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 

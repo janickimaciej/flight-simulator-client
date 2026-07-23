@@ -2,12 +2,9 @@
 
 #include "common/airplaneCtrl.hpp"
 #include "common/airplaneType.hpp"
-#include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
-#include "graphics/texture.hpp"
 
 #include <memory>
-#include <string>
 
 namespace Graphics
 {

@@ -1,7 +1,5 @@
 #include "graphics/cameras/perspectiveCamera.hpp"
 
-#include "graphics/cameras/camera.hpp"
-
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Graphics

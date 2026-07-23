@@ -1,7 +1,5 @@
 #pragma once
 
-#include "graphics/assetManager.hpp"
-#include "graphics/meshes/mesh.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/submodels/submodel.hpp"
 

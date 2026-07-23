@@ -1,27 +1,13 @@
 #include "graphics/scene.hpp"
 
-#include "common/airplaneInfo.hpp"
-#include "common/airplaneType.hpp"
-#include "common/bulletInfo.hpp"
-#include "common/mapName.hpp"
-#include "common/sceneInfo.hpp"
 #include "graphics/airplaneCameraPoss.hpp"
-#include "graphics/cameras/camera.hpp"
 #include "graphics/cameras/modelCamera.hpp"
 #include "graphics/cameras/orthographicCamera.hpp"
-#include "graphics/maps/map.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/models/airplanes/airplane.hpp"
-#include "graphics/texture.hpp"
-#include "graphics/worldShading.hpp"
 
 #include <glad/glad.h>
 
 #include <cstddef>
-#include <memory>
-#include <unordered_map>
 #include <utility>
-#include <vector>
 
 namespace Graphics
 {

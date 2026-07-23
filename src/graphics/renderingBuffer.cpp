@@ -1,12 +1,5 @@
 #include "graphics/renderingBuffer.hpp"
 
-#include "common/mapName.hpp"
-#include "common/sceneInfo.hpp"
-#include "graphics/scene.hpp"
-
-#include <array>
-#include <mutex>
-
 namespace Graphics
 {
 	RenderingBuffer::RenderingBuffer(int ownId) :
