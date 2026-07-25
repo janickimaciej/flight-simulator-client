@@ -1,5 +1,7 @@
 #include "graphics/cameras/orthographicCamera.hpp"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 namespace Graphics
 {
 	OrthographicCamera::OrthographicCamera(float width, float nearPlane, float farPlane) :

@@ -1,15 +1,11 @@
 #include "graphics/maps/map.hpp"
 
-#include "common/mapName.hpp"
 #include "common/maps/airportMap.hpp"
 #include "common/maps/islandMap.hpp"
-#include "common/maps/map.hpp"
 #include "graphics/maps/airportMap.hpp"
 #include "graphics/maps/islandMap.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 
-#include <memory>
-#include <string>
+#include <utility>
 
 namespace Graphics
 {
@@ -25,7 +21,6 @@ namespace Graphics
 				return std::make_unique<IslandMap>(worldShading,
 					std::make_unique<Common::Maps::IslandMap>());
 		}
-		assert(false);
 		return nullptr;
 	}
 

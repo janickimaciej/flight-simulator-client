@@ -1,7 +1,9 @@
 #include "graphics/models/airplanes/mustang.hpp"
 
 #include "common/airplaneCentersOfMass.hpp"
+#include "common/airplaneType.hpp"
 #include "graphics/assetManager.hpp"
+#include "graphics/material.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
@@ -71,7 +73,7 @@ namespace Graphics
 		m_rightLight->translate(glm::vec3{-lightsPosXAbs, lightsPosY, lightsPosZ});
 
 		static constexpr glm::vec3 nosePos = -Common::airplaneCentersOfMass[
-			toSizeT(Common::AirplaneType::mustang)];
+			Common::toSizeT(Common::AirplaneType::mustang)];
 		m_cap->translate(nosePos);
 		m_propeller->translate(nosePos);
 		m_body->translate(nosePos);

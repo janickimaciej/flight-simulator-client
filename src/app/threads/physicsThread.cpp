@@ -1,20 +1,9 @@
 #include "app/threads/physicsThread.hpp"
 
-#include "app/exitSignal.hpp"
-#include "app/gameMode.hpp"
-#include "app/ownInput.hpp"
-#include "app/udp/udpCommunication.hpp"
 #include "common/sceneInfo.hpp"
-#include "graphics/renderingBuffer.hpp"
-#include "physics/notification.hpp"
 #include "physics/playerInput.hpp"
-#include "physics/simulationBuffer.hpp"
-#include "physics/simulationClock.hpp"
-#include "physics/timestep.hpp"
 
-#include <memory>
-#include <semaphore>
-#include <thread>
+#include <utility>
 
 namespace App
 {

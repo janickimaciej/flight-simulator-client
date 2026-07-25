@@ -1,13 +1,10 @@
 #pragma once
 
 #include "app/commandLineArgs.hpp"
-#include "app/controllerType.hpp"
 #include "app/exitSignal.hpp"
 #include "app/ownInput.hpp"
 #include "app/window.hpp"
 #include "graphics/renderingBuffer.hpp"
-
-#include <glfw/glfw3.h>
 
 #include <memory>
 

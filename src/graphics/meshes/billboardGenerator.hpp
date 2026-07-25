@@ -2,8 +2,6 @@
 
 #include "graphics/meshes/vertex.hpp"
 
-#include <glm/glm.hpp>
-
 #include <vector>
 
 namespace Graphics

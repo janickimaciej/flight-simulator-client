@@ -1,9 +1,5 @@
 #include "app/windowInput.hpp"
 
-#include "physics/playerInput.hpp"
-
-#include <glfw/glfw3.h>
-
 namespace App
 {
 	WindowInput::WindowInput(GLFWwindow* windowPtr) :

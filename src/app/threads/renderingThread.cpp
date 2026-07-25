@@ -1,18 +1,11 @@
 #include "app/threads/renderingThread.hpp"
 
-#include "app/controllerType.hpp"
 #include "app/exitCode.hpp"
-#include "app/exitSignal.hpp"
 #include "app/threads/networkThread.hpp"
 #include "graphics/time.hpp"
 #include "physics/playerInput.hpp"
 
-#include <glad/glad.h>
-#include <glfw/glfw3.h>
-
-#include <memory>
 #include <semaphore>
-#include <string>
 
 namespace App
 {

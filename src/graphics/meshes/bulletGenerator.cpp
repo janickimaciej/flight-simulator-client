@@ -1,12 +1,8 @@
 #include "graphics/meshes/bulletGenerator.hpp"
 
 #include "common/config.hpp"
-#include "graphics/meshes/vertex.hpp"
-
-#include <glm/glm.hpp>
 
 #include <array>
-#include <vector>
 
 namespace Graphics
 {

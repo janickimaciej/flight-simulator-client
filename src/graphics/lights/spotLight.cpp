@@ -1,12 +1,8 @@
 #include "graphics/lights/spotLight.hpp"
 
-#include "graphics/lights/light.hpp"
 #include "graphics/shaderPrograms.hpp"
 
-#include <glm/glm.hpp>
-
-#include <array>
-#include <cstddef>
+#include <iostream>
 #include <string>
 
 namespace Graphics
@@ -89,7 +85,7 @@ namespace Graphics
 				break;
 			}
 		}
-		assert(found);
+		if (!found) std::cerr << "No ID available" << '\n';
 
 		ShaderPrograms::surface->use();
 		ShaderPrograms::surface->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/submodels/submodel.hpp"
 
 #include <glm/glm.hpp>

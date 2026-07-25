@@ -2,12 +2,9 @@
 
 #include "common/mapName.hpp"
 #include "common/maps/map.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
-#include <string>
 
 namespace Graphics
 {

@@ -1,15 +1,8 @@
 #include "graphics/maps/airportMap.hpp"
 
-#include "common/maps/map.hpp"
-#include "graphics/dayNightCycle.hpp"
-#include "graphics/maps/map.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/models/directionalLightModel.hpp"
-#include "graphics/models/zeppelin.hpp"
-#include "graphics/worldShading.hpp"
+#include <glm/glm.hpp>
 
-#include <memory>
-#include <string>
+#include <utility>
 
 namespace Graphics
 {

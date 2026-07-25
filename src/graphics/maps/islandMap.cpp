@@ -1,12 +1,8 @@
 #include "graphics/maps/islandMap.hpp"
 
-#include "common/maps/map.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
-#include "graphics/worldShading.hpp"
+#include <glm/glm.hpp>
 
-#include <memory>
-#include <string>
+#include <utility>
 
 namespace Graphics
 {

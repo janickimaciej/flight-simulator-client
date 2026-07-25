@@ -3,15 +3,10 @@
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/models/model.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/textField.hpp"
 #include "graphics/texture.hpp"
 
-#include <glm/glm.hpp>
-
 #include <memory>
-#include <string>
 #include <vector>
 
 namespace Graphics

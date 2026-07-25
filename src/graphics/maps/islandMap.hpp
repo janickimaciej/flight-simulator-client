@@ -3,14 +3,11 @@
 #include "common/maps/map.hpp"
 #include "graphics/dayNightCycle.hpp"
 #include "graphics/maps/map.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/models/directionalLightModel.hpp"
 #include "graphics/models/island.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
-#include <string>
 
 namespace Graphics
 {

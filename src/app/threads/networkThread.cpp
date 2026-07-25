@@ -1,31 +1,13 @@
 #include "app/threads/networkThread.hpp"
 
 #include "app/exitCode.hpp"
-#include "app/exitSignal.hpp"
-#include "app/gameMode.hpp"
-#include "app/ownInput.hpp"
 #include "app/threads/physicsThread.hpp"
-#include "app/udp/udpCommunication.hpp"
 #include "app/udp/udpFrameType.hpp"
-#include "common/airplaneType.hpp"
 #include "common/config.hpp"
-#include "common/mapName.hpp"
 #include "common/maps/maps.hpp"
-#include "graphics/renderingBuffer.hpp"
 #include "physics/airplaneDefinitions.hpp"
-#include "physics/notification.hpp"
-#include "physics/playerInfo.hpp"
-#include "physics/playerInput.hpp"
-#include "physics/simulationBuffer.hpp"
-#include "physics/simulationClock.hpp"
-#include "physics/timestamp.hpp"
 
-#include <atomic>
-#include <memory>
-#include <semaphore>
-#include <string>
-#include <thread>
-#include <unordered_map>
+#include <utility>
 
 namespace App
 {

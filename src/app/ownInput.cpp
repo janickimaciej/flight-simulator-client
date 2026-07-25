@@ -1,7 +1,5 @@
 #include "app/ownInput.hpp"
 
-#include "physics/playerInput.hpp"
-
 namespace App
 {
 	void OwnInput::setOwnInput(const Physics::PlayerInput& ownInput)

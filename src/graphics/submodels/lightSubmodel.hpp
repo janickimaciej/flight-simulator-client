@@ -6,6 +6,8 @@
 #include "graphics/submodels/submodel.hpp"
 #include "graphics/texture.hpp"
 
+#include <glm/glm.hpp>
+
 #include <memory>
 
 namespace Graphics

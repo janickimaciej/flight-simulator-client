@@ -2,13 +2,8 @@
 
 #include "graphics/meshes/meshGenerator.hpp"
 #include "graphics/meshes/objParser.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
-#include "graphics/meshes/vertex.hpp"
 
 #include <glad/glad.h>
-
-#include <string>
-#include <vector>
 
 namespace Graphics
 {

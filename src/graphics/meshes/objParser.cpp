@@ -1,16 +1,8 @@
 #include "graphics/meshes/objParser.hpp"
 
-#include "graphics/meshes/vertex.hpp"
-
-#include <glm/glm.hpp>
-
-#include <array>
 #include <cstddef>
 #include <fstream>
 #include <iostream>
-#include <string>
-#include <string_view>
-#include <vector>
 
 namespace Graphics
 {
@@ -20,7 +12,6 @@ namespace Graphics
 		if (!file)
 		{
 			std::cerr << "File does not exist:\n" << path << '\n';
-			assert(false);
 			return std::vector<Vertex>{};
 		}
 

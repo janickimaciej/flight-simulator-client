@@ -1,7 +1,5 @@
 #include "graphics/time.hpp"
 
-#include <glfw/glfw3.h>
-
 namespace Graphics
 {
 	void Time::initialize()

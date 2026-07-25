@@ -1,11 +1,15 @@
 #include "graphics/models/hud.hpp"
 
+#include "common/state.hpp"
 #include "graphics/assetManager.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"
 #include "graphics/time.hpp"
 
+#include <glm/glm.hpp>
+
 #include <cstddef>
+#include <string>
 
 namespace Graphics
 {
@@ -98,8 +102,8 @@ namespace Graphics
 			refresh(*m_radarAltitudeNumber, static_cast<int>(state.pos.y -
 				map.getHeight(state.pos.x, state.pos.z)), 5, true);
 			refresh(*m_hpNumber, ownAirplane.getHP(), 3, false);
-			refresh(*m_verticalSpeedNumber, static_cast<int>((state.orientation * state.velocity).y),
-				4, true);
+			refresh(*m_verticalSpeedNumber,
+				static_cast<int>((state.orientation * state.velocity).y), 4, true);
 			refresh(*m_airspeedNumber, static_cast<int>(3.6f * glm::length(state.velocity)), 4,
 				false);
 			m_lastUpdateTime = 0;

@@ -1,6 +1,7 @@
 #include "graphics/models/airport.hpp"
 
 #include "graphics/assetManager.hpp"
+#include "graphics/material.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/path.hpp"
 #include "graphics/shaderPrograms.hpp"

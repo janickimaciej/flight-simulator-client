@@ -1,7 +1,5 @@
 #include "graphics/lights/light.hpp"
 
-#include <glm/glm.hpp>
-
 namespace Graphics
 {
 	void Light::setColor(const glm::vec3& color)

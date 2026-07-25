@@ -5,6 +5,7 @@
 #include "graphics/cameras/orthographicCamera.hpp"
 
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 #include <cstddef>
 #include <utility>

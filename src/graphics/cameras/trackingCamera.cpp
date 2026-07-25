@@ -1,5 +1,8 @@
 #include "graphics/cameras/trackingCamera.hpp"
 
+#include "common/state.hpp"
+#include "graphics/cameras/camera.hpp"
+
 #include <glm/glm.hpp>
 
 namespace Graphics

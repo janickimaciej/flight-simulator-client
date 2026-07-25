@@ -5,13 +5,6 @@
 #include "graphics/meshes/billboardGenerator.hpp"
 #include "graphics/meshes/bulletGenerator.hpp"
 #include "graphics/meshes/mapGenerator.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
-#include "graphics/meshes/vertex.hpp"
-
-#include <array>
-#include <cmath>
-#include <functional>
-#include <vector>
 
 namespace Graphics
 {

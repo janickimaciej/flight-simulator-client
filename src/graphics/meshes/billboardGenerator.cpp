@@ -1,11 +1,8 @@
 #include "graphics/meshes/billboardGenerator.hpp"
 
-#include "graphics/meshes/vertex.hpp"
-
 #include <glm/glm.hpp>
 
 #include <array>
-#include <vector>
 
 namespace Graphics
 {

@@ -3,6 +3,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
+#include <cmath>
+
 namespace Graphics
 {
 	static constexpr float pi = glm::pi<float>();
@@ -59,7 +61,7 @@ namespace Graphics
 		}
 		else if (m_timeOfDay <= (1 + 2 * transitionLength) / 4)
 		{
-			return (glm::sin((m_timeOfDay - 0.25f) / transitionLength * pi) + 1) / 2;
+			return (std::sin((m_timeOfDay - 0.25f) / transitionLength * pi) + 1) / 2;
 		}
 		else if (m_timeOfDay <= (3 - 2 * transitionLength) / 4)
 		{
@@ -67,7 +69,7 @@ namespace Graphics
 		}
 		else if (m_timeOfDay <= (3 + 2 * transitionLength) / 4)
 		{
-			return (-glm::sin((m_timeOfDay - 0.75f) / transitionLength * pi) + 1) / 2;
+			return (-std::sin((m_timeOfDay - 0.75f) / transitionLength * pi) + 1) / 2;
 		}
 		else
 		{
@@ -83,11 +85,11 @@ namespace Graphics
 		}
 		else if (m_timeOfDay <= (1 + 2 * transitionLength) / 4)
 		{
-			return (glm::sin((m_timeOfDay - 0.25f) / transitionLength * pi) + 1) / 2;
+			return (std::sin((m_timeOfDay - 0.25f) / transitionLength * pi) + 1) / 2;
 		}
 		else if (m_timeOfDay <= (1 + 6 * transitionLength) / 4)
 		{
-			return (-glm::sin((m_timeOfDay - (0.25f + transitionLength)) / transitionLength * pi)
+			return (-std::sin((m_timeOfDay - (0.25f + transitionLength)) / transitionLength * pi)
 				+ 1) / 2;
 		}
 		else

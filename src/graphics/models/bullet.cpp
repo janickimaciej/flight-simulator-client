@@ -1,8 +1,12 @@
 #include "graphics/models/bullet.hpp"
 
 #include "graphics/assetManager.hpp"
+#include "graphics/material.hpp"
 #include "graphics/meshes/mesh.hpp"
+#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/shaderPrograms.hpp"
+
+#include <glm/glm.hpp>
 
 namespace Graphics
 {

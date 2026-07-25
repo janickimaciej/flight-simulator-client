@@ -1,13 +1,9 @@
 #pragma once
 
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/models/model.hpp"
 #include "graphics/submodels/submodel.hpp"
-#include "graphics/texture.hpp"
 
 #include <memory>
-#include <string>
 
 namespace Graphics
 {

@@ -7,17 +7,12 @@
 #include "common/sceneInfo.hpp"
 #include "graphics/cameras/camera.hpp"
 #include "graphics/maps/map.hpp"
-#include "graphics/meshes/mesh.hpp"
-#include "graphics/meshes/proceduralMeshName.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/models/bullet.hpp"
 #include "graphics/models/hud.hpp"
-#include "graphics/path.hpp"
-#include "graphics/texture.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
-#include <string>
 #include <unordered_map>
 #include <vector>
 

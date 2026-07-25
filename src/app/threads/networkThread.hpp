@@ -8,14 +8,19 @@
 #include "common/mapName.hpp"
 #include "graphics/renderingBuffer.hpp"
 #include "physics/notification.hpp"
+#include "physics/playerInfo.hpp"
+#include "physics/playerInput.hpp"
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
 #include "physics/spawner.hpp"
+#include "physics/timestamp.hpp"
+#include "physics/timestep.hpp"
 
 #include <memory>
 #include <semaphore>
 #include <string>
 #include <thread>
+#include <unordered_map>
 
 namespace App
 {
