@@ -15,7 +15,7 @@ namespace Graphics
 		static std::vector<Vertex> generate(const Common::Maps::Map& map);
 
 	private:
-		static glm::vec3 calcPos(float x, float z, const Common::Maps::Map& map);
-		static glm::vec3 calcNormalVector(float x, float z, const Common::Maps::Map& map);
+		static glm::vec3 calcPos(int xIndex, int zIndex, const Common::Maps::Map& map);
+		static glm::vec3 calcNormalVector(int xIndex, int zIndex, const Common::Maps::Map& map);
 	};
 }

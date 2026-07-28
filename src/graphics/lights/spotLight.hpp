@@ -13,9 +13,7 @@ namespace Graphics
 	class SpotLight : public Light
 	{
 	public:
-		static constexpr std::size_t airportLightCount = 8;
-		static constexpr std::size_t maxSpotLightCount = airportLightCount +
-			2 * Common::maxPlayerCount;
+		static constexpr std::size_t maxSpotLightCount = 2 * Common::maxPlayerCount;
 
 		SpotLight(const glm::vec3& color, float attenuationQuadratic, float attenuationLinear,
 			float attenuationConstant, float cutoffInnerRad, float cutoffOuterRad);

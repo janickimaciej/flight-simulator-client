@@ -1,8 +1,6 @@
 #include "graphics/maps/map.hpp"
 
-#include "common/maps/airportMap.hpp"
 #include "common/maps/islandMap.hpp"
-#include "graphics/maps/airportMap.hpp"
 #include "graphics/maps/islandMap.hpp"
 
 #include <utility>
@@ -13,10 +11,6 @@ namespace Graphics
 	{
 		switch (map)
 		{
-			case Common::MapName::airport:
-				return std::make_unique<AirportMap>(worldShading,
-					std::make_unique<Common::Maps::AirportMap>());
-
 			case Common::MapName::island:
 				return std::make_unique<IslandMap>(worldShading,
 					std::make_unique<Common::Maps::IslandMap>());

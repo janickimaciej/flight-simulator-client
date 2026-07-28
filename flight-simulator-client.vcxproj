@@ -26,7 +26,6 @@
     <ClCompile Include="core\common\mapName.cpp" />
     <ClCompile Include="core\common\terrains\constant.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
-    <ClCompile Include="core\common\maps\airportMap.cpp" />
     <ClCompile Include="core\common\maps\islandMap.cpp" />
     <ClCompile Include="core\common\state.cpp" />
     <ClCompile Include="core\common\maps\map.cpp" />
@@ -88,10 +87,8 @@
     <ClCompile Include="src\graphics\models\hud.cpp" />
     <ClCompile Include="src\graphics\shaderPrograms.cpp" />
     <ClCompile Include="src\graphics\submodels\lightSubmodel.cpp" />
-    <ClCompile Include="src\graphics\maps\airportMap.cpp" />
     <ClCompile Include="src\graphics\maps\map.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\airplane.cpp" />
-    <ClCompile Include="src\graphics\models\airport.cpp" />
     <ClCompile Include="src\graphics\models\directionalLightModel.cpp" />
     <ClCompile Include="src\graphics\models\model.cpp" />
     <ClCompile Include="src\graphics\models\zeppelin.cpp" />
@@ -129,7 +126,6 @@
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
     <ClInclude Include="core\common\sceneInfo.hpp" />
-    <ClInclude Include="core\common\maps\airportMap.hpp" />
     <ClInclude Include="core\common\maps\islandMap.hpp" />
     <ClInclude Include="core\common\maps\map.hpp" />
     <ClInclude Include="core\common\maps\maps.hpp" />
@@ -215,10 +211,8 @@
     <ClInclude Include="src\graphics\textField.hpp" />
     <ClInclude Include="src\graphics\time.hpp" />
     <ClInclude Include="src\graphics\assetManager.hpp" />
-    <ClInclude Include="src\graphics\maps\airportMap.hpp" />
     <ClInclude Include="src\graphics\maps\map.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\airplane.hpp" />
-    <ClInclude Include="src\graphics\models\airport.hpp" />
     <ClInclude Include="src\graphics\models\directionalLightModel.hpp" />
     <ClInclude Include="src\graphics\models\model.hpp" />
     <ClInclude Include="src\graphics\models\zeppelin.hpp" />

@@ -20,13 +20,11 @@
     <ClCompile Include="dep\glad.c" />
     <ClCompile Include="src\graphics\texture.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\airplane.cpp" />
-    <ClCompile Include="src\graphics\models\airport.cpp" />
     <ClCompile Include="src\graphics\models\directionalLightModel.cpp" />
     <ClCompile Include="src\graphics\models\model.cpp" />
     <ClCompile Include="src\graphics\models\zeppelin.cpp" />
     <ClCompile Include="src\graphics\scene.cpp" />
     <ClCompile Include="src\graphics\maps\map.cpp" />
-    <ClCompile Include="src\graphics\maps\airportMap.cpp" />
     <ClCompile Include="src\graphics\time.cpp" />
     <ClCompile Include="src\graphics\renderingBuffer.cpp" />
     <ClCompile Include="src\app\windowInput.cpp" />
@@ -70,7 +68,6 @@
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
     <ClCompile Include="src\graphics\meshes\mapGenerator.cpp" />
     <ClCompile Include="core\common\maps\map.cpp" />
-    <ClCompile Include="core\common\maps\airportMap.cpp" />
     <ClCompile Include="core\physics\modelDynamics\bulletDynamics.cpp" />
     <ClCompile Include="core\physics\models\bullet.cpp" />
     <ClCompile Include="src\graphics\models\bullet.cpp" />
@@ -115,13 +112,11 @@
     <ClInclude Include="src\graphics\texture.hpp" />
     <ClInclude Include="src\graphics\assetManager.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\airplane.hpp" />
-    <ClInclude Include="src\graphics\models\airport.hpp" />
     <ClInclude Include="src\graphics\models\directionalLightModel.hpp" />
     <ClInclude Include="src\graphics\models\model.hpp" />
     <ClInclude Include="src\graphics\models\zeppelin.hpp" />
     <ClInclude Include="src\graphics\scene.hpp" />
     <ClInclude Include="src\graphics\maps\map.hpp" />
-    <ClInclude Include="src\graphics\maps\airportMap.hpp" />
     <ClInclude Include="src\graphics\renderingBuffer.hpp" />
     <ClInclude Include="src\graphics\time.hpp" />
     <ClInclude Include="src\app\windowInput.hpp" />
@@ -186,7 +181,6 @@
     <ClInclude Include="src\graphics\meshes\mapGenerator.hpp" />
     <ClInclude Include="core\common\terrains\terrain.hpp" />
     <ClInclude Include="core\common\maps\islandMap.hpp" />
-    <ClInclude Include="core\common\maps\airportMap.hpp" />
     <ClInclude Include="core\common\terrains\hill.hpp" />
     <ClInclude Include="core\common\terrains\waveX.hpp" />
     <ClInclude Include="core\common\terrains\waveZ.hpp" />
