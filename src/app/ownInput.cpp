@@ -4,20 +4,16 @@ namespace App
 {
 	void OwnInput::setOwnInput(const Physics::PlayerInput& ownInput)
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		m_ownInput = ownInput;
-
-		m_mutex.unlock();
 	}
 
 	Physics::PlayerInput OwnInput::getOwnInput() const
 	{
-		m_mutex.lock();
+		std::scoped_lock lock{m_mutex};
 
 		Physics::PlayerInput ownInput = m_ownInput;
-
-		m_mutex.unlock();
 
 		return ownInput;
 	}

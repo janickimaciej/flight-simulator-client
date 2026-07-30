@@ -13,30 +13,32 @@ namespace Graphics
 
 	void RenderingBuffer::updateBuffer(const Common::SceneInfo& sceneInfo)
 	{
-		m_mutex.lock();
+		unsigned int index{};
+		{
+			std::scoped_lock lock{m_mutex};
 
-		unsigned int index = (m_lastUpdated + 1) % 3 == m_beingRendered ?
-			(m_beingRendered + 1) % 3 : (m_lastUpdated + 1) % 3;
-
-		m_mutex.unlock();
+			index = (m_lastUpdated + 1) % 3 == m_beingRendered ?
+				(m_beingRendered + 1) % 3 : (m_lastUpdated + 1) % 3;
+		}
 
 		m_buffer[index] = sceneInfo;
 
-		m_mutex.lock();
+		{
+			std::scoped_lock lock{m_mutex};
 
-		m_lastUpdated = index;
-
-		m_mutex.unlock();
+			m_lastUpdated = index;
+		}
 	}
 
 	void RenderingBuffer::updateAndRenderScene(float aspectRatio)
 	{
-		m_mutex.lock();
+		unsigned int index{};
+		{
+			std::scoped_lock lock{m_mutex};
 
-		unsigned int index = m_lastUpdated;
-		m_beingRendered = index;
-
-		m_mutex.unlock();
+			index = m_lastUpdated;
+			m_beingRendered = index;
+		}
 
 		m_scene->update(m_buffer[index]);
 		m_scene->updateShaders();
