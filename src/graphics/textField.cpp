@@ -13,12 +13,16 @@ namespace Graphics
 {
 	const std::string modelName = "characters";
 
-	TextField::TextField(const std::string& text, const glm::vec3& offset, float scaleRatio)
+	TextField::TextField(const std::string& text, const glm::vec3& pos, float scaleRatio)
 	{
 		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
 
 		const Material billboard{glm::vec3{1, 1, 1}, 1, 1, 1, false};
+		glm::vec2 scaledCharacterSize = scaleRatio * characterSize;
+		float textWidthHalf = text.size() * scaledCharacterSize.x / 2.0f;
+		glm::vec3 firstCharacterPos = pos +
+			glm::vec3{-textWidthHalf + scaledCharacterSize.x / 2.0f, 0, 0};
 		for (std::size_t i = 0; i < text.size(); ++i)
 		{
 			Submodel submodel
@@ -29,9 +33,12 @@ namespace Graphics
 					textureManager.get(Texture::getId(texturePath(modelName, std::string{text[i]}),
 						Texture::Wrapping::clampToEdge, Texture::Wrapping::clampToEdge))
 			};
-			submodel.translate(offset);
-			submodel.translate(glm::vec3{static_cast<int>(i) * scaleRatio * characterWidth, 0, 0});
+
 			submodel.scale(scaleRatio);
+			glm::vec3 characterPos = firstCharacterPos +
+				glm::vec3{static_cast<int>(i) * scaledCharacterSize.x, 0, 0};
+			submodel.translate(characterPos);
+
 			m_textSubmodels.push_back(submodel);
 		}
 	}

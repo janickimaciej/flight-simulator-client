@@ -2,6 +2,8 @@
 
 #include "graphics/meshes/vertex.hpp"
 
+#include <glm/glm.hpp>
+
 #include <vector>
 
 namespace Graphics
@@ -9,6 +11,6 @@ namespace Graphics
 	class BillboardGenerator
 	{
 	public:
-		static std::vector<Vertex> generate(float width, float height);
+		static std::vector<Vertex> generate(const glm::vec2& size);
 	};
 }

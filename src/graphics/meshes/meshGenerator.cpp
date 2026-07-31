@@ -13,9 +13,7 @@ namespace Graphics
 		switch (name)
 		{
 			case ProceduralMeshName::characterBillboard:
-			{
-				return BillboardGenerator::generate(characterWidth, characterHeight);
-			}
+				return BillboardGenerator::generate(characterSize);
 
 			case ProceduralMeshName::bullet:
 				return BulletGenerator::generate();

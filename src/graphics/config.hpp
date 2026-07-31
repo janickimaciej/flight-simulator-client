@@ -1,7 +1,8 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 namespace Graphics
 {
-	inline constexpr float characterWidth = 42;
-	inline constexpr float characterHeight = 82;
+	inline constexpr glm::vec2 characterSize{42, 82};
 }
