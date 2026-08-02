@@ -2,8 +2,7 @@
 
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
-#include "graphics/models/model.hpp"
-#include "graphics/textField.hpp"
+#include "graphics/models/textField.hpp"
 #include "graphics/texture.hpp"
 
 #include <memory>
@@ -11,15 +10,15 @@
 
 namespace Graphics
 {
-	class HUD : public Model
+	class HUD
 	{
 	public:
 		HUD();
 		virtual ~HUD() = default;
 
-		virtual void updateShaders() override;
-		virtual void render() const override;
 		void update(const Airplane& ownAirplane, const Map& map, int playerCount);
+		void updateLayout(float aspectRatio);
+		void render() const;
 
 	private:
 		std::unique_ptr<TextField> m_fpsNumber{};
@@ -44,8 +43,8 @@ namespace Graphics
 		std::vector<std::shared_ptr<const Texture>> m_textureLocks{};
 
 		float m_lastUpdateTime = 1;
+		float m_prevAspectRatio{};
 
-		void renderHUD() const;
 		void refresh(TextField& textField, int value, int numberOfDigits, bool isSigned);
 	};
 }

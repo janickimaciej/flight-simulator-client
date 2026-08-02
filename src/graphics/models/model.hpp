@@ -15,6 +15,6 @@ namespace Graphics
 		virtual void render() const = 0;
 		glm::mat4 getModelMatrix() const;
 		glm::vec3 getPos() const;
-		virtual void scale(float scaleRatio) override; // locally
+		virtual void setScale(float scaleRatio) override; // locally
 	};
 }

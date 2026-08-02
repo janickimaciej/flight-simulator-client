@@ -22,7 +22,6 @@ namespace Graphics
 		virtual ~Submodel() = default;
 
 		void render(const glm::mat4& modelMatrix) const;
-		void scale(float scaleRatio);
 		void mirrorX();
 		void mirrorY();
 		void mirrorZ();

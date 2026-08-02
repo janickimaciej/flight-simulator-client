@@ -12,8 +12,8 @@ namespace Graphics
 		return getState().pos;
 	}
 
-	void Model::scale(float scaleRatio)
+	void Model::setScale(float scaleRatio)
 	{
-		Transformable::scale(scaleRatio);
+		Transformable::setScale(scaleRatio);
 	}
 }

@@ -26,7 +26,7 @@ namespace Graphics
 			fileMeshManager.get(fuselagePath), canvas);
 
 		static constexpr float zeppelinScale = 57;
-		scale(zeppelinScale);
+		setScale(zeppelinScale);
 	}
 
 	void Zeppelin::updateShaders()

@@ -48,11 +48,6 @@ namespace Graphics
 		m_mesh->render();
 	}
 
-	void Submodel::scale(float scaleRatio)
-	{
-		Transformable::scale(scaleRatio);
-	}
-
 	void Submodel::mirrorX()
 	{
 		Transformable::mirrorX();

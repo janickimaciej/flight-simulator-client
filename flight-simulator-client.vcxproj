@@ -84,7 +84,7 @@
     <ClCompile Include="src\graphics\models\bullet.cpp" />
     <ClCompile Include="src\graphics\models\island.cpp" />
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
-    <ClCompile Include="src\graphics\models\hud.cpp" />
+    <ClCompile Include="src\graphics\hud.cpp" />
     <ClCompile Include="src\graphics\shaderPrograms.cpp" />
     <ClCompile Include="src\graphics\submodels\lightSubmodel.cpp" />
     <ClCompile Include="src\graphics\maps\map.cpp" />
@@ -95,7 +95,7 @@
     <ClCompile Include="src\graphics\path.cpp" />
     <ClCompile Include="src\graphics\renderingBuffer.cpp" />
     <ClCompile Include="src\graphics\scene.cpp" />
-    <ClCompile Include="src\graphics\textField.cpp" />
+    <ClCompile Include="src\graphics\models\textField.cpp" />
     <ClCompile Include="src\graphics\time.cpp" />
     <ClCompile Include="src\graphics\worldShading.cpp" />
     <ClCompile Include="src\graphics\lights\directionalLight.cpp" />
@@ -201,14 +201,14 @@
     <ClInclude Include="src\graphics\models\airplanes\jw1.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\mustang.hpp" />
     <ClInclude Include="src\graphics\models\bullet.hpp" />
-    <ClInclude Include="src\graphics\models\hud.hpp" />
+    <ClInclude Include="src\graphics\hud.hpp" />
     <ClInclude Include="src\graphics\models\island.hpp" />
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\proceduralMeshName.hpp" />
     <ClInclude Include="src\graphics\shaderPrograms.hpp" />
     <ClInclude Include="src\graphics\submodels\lightSubmodel.hpp" />
     <ClInclude Include="src\graphics\renderingBuffer.hpp" />
-    <ClInclude Include="src\graphics\textField.hpp" />
+    <ClInclude Include="src\graphics\models\textField.hpp" />
     <ClInclude Include="src\graphics\time.hpp" />
     <ClInclude Include="src\graphics\assetManager.hpp" />
     <ClInclude Include="src\graphics\maps\map.hpp" />

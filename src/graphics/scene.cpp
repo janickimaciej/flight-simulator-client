@@ -28,6 +28,8 @@ namespace Graphics
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		m_airplanes.insert({ownId, Airplane::createAirplane(ownAirplaneType)});
 
@@ -35,14 +37,12 @@ namespace Graphics
 			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane);
 		static constexpr float cameraPitchDeg = -10;
 		m_worldCamera->rotatePitch(glm::radians(cameraPitchDeg));
-		m_worldCamera->translate(airplaneCameraPoss[Common::toSizeT(ownAirplaneType)]);
+		m_worldCamera->setPos(airplaneCameraPoss[Common::toSizeT(ownAirplaneType)]);
 
 		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraWidth, hudCameraNearPlane,
 			hudCameraFarPlane);
 
 		m_map = Map::createMap(map, m_worldShading);
-
-		m_hud.translate(glm::vec3{0, 0, -0.01f});
 	}
 
 	void Scene::update(const Common::SceneInfo& sceneInfo)
@@ -62,10 +62,9 @@ namespace Graphics
 			airplane.second->updateShaders();
 		}
 		m_worldShading.updateShaders();
-		m_hud.updateShaders();
 	}
 
-	void Scene::render(float aspectRatio) const
+	void Scene::render(float aspectRatio)
 	{
 		m_worldCamera->use(aspectRatio);
 		m_map->render();
@@ -79,6 +78,7 @@ namespace Graphics
 		}
 
 		m_hudCamera->use(aspectRatio);
+		m_hud.updateLayout(aspectRatio);
 		m_hud.render();
 	}
 

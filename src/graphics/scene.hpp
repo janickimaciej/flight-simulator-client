@@ -6,10 +6,10 @@
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
 #include "graphics/cameras/camera.hpp"
+#include "graphics/hud.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/models/bullet.hpp"
-#include "graphics/models/hud.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -25,7 +25,7 @@ namespace Graphics
 
 		void update(const Common::SceneInfo& sceneInfo);
 		void updateShaders();
-		void render(float aspectRatio) const;
+		void render(float aspectRatio);
 
 	private:
 		int m_ownId{};

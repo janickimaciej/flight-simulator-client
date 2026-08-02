@@ -113,35 +113,28 @@ namespace Graphics
 		m_leftRudder->mirrorX();
 		m_leftAileron->mirrorX();
 
-		m_leftElevator->translate(glm::vec3{0, 0, 16.6f});
-		m_rightElevator->translate(glm::vec3{0, 0, 16.6f});
-		m_leftRudder->translate(glm::vec3{-1.375f, 0.533f, 18.92f});
-		m_rightRudder->translate(glm::vec3{1.375f, 0.533f, 18.92f});
-		m_leftAileron->translate(glm::vec3{-4.107f, 0.535f, 14.57f});
-		m_rightAileron->translate(glm::vec3{4.107f, 0.535f, 14.57f});
-
 		static constexpr glm::vec3 nosePos = -Common::airplaneCentersOfMass[
 			Common::toSizeT(Common::AirplaneType::jw1)];
-		m_cone->translate(nosePos);
-		m_gun->translate(nosePos);
-		m_cockpit->translate(nosePos);
-		m_fuselage->translate(nosePos);
-		m_leftEngine->translate(nosePos);
-		m_rightEngine->translate(nosePos);
-		m_leftNozzle->translate(nosePos);
-		m_rightNozzle->translate(nosePos);
-		m_leftNozzleGlass->translate(nosePos);
-		m_rightNozzleGlass->translate(nosePos);
-		m_leftWing->translate(nosePos);
-		m_rightWing->translate(nosePos);
-		m_leftVStab->translate(nosePos);
-		m_rightVStab->translate(nosePos);
-		m_leftElevator->translate(nosePos);
-		m_rightElevator->translate(nosePos);
-		m_leftRudder->translate(nosePos);
-		m_rightRudder->translate(nosePos);
-		m_leftAileron->translate(nosePos);
-		m_rightAileron->translate(nosePos);
+		m_cone->setPos(nosePos);
+		m_gun->setPos(nosePos);
+		m_cockpit->setPos(nosePos);
+		m_fuselage->setPos(nosePos);
+		m_leftEngine->setPos(nosePos);
+		m_rightEngine->setPos(nosePos);
+		m_leftNozzle->setPos(nosePos);
+		m_rightNozzle->setPos(nosePos);
+		m_leftNozzleGlass->setPos(nosePos);
+		m_rightNozzleGlass->setPos(nosePos);
+		m_leftWing->setPos(nosePos);
+		m_rightWing->setPos(nosePos);
+		m_leftVStab->setPos(nosePos);
+		m_rightVStab->setPos(nosePos);
+		m_leftElevator->setPos(nosePos + glm::vec3{0, 0, 16.6f});
+		m_rightElevator->setPos(nosePos + glm::vec3{0, 0, 16.6f});
+		m_leftRudder->setPos(nosePos + glm::vec3{-1.375f, 0.533f, 18.92f});
+		m_rightRudder->setPos(nosePos + glm::vec3{1.375f, 0.533f, 18.92f});
+		m_leftAileron->setPos(nosePos + glm::vec3{-4.107f, 0.535f, 14.57f});
+		m_rightAileron->setPos(nosePos + glm::vec3{4.107f, 0.535f, 14.57f});
 	}
 
 	void JW1::updateShaders()

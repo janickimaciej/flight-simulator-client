@@ -78,8 +78,8 @@
     <ClCompile Include="core\common\mapName.cpp" />
     <ClCompile Include="core\common\terrains\valueNoise.cpp" />
     <ClCompile Include="src\graphics\meshes\billboardGenerator.cpp" />
-    <ClCompile Include="src\graphics\textField.cpp" />
-    <ClCompile Include="src\graphics\models\hud.cpp" />
+    <ClCompile Include="src\graphics\models\textField.cpp" />
+    <ClCompile Include="src\graphics\hud.cpp" />
     <ClCompile Include="src\graphics\cameras\orthographicCamera.cpp" />
     <ClCompile Include="core\physics\spawner.cpp" />
     <ClCompile Include="src\app\commandLineArgs.cpp" />
@@ -202,8 +202,8 @@
     <ClInclude Include="core\common\valueNoise.hpp" />
     <ClInclude Include="core\common\terrains\valueNoise.hpp" />
     <ClInclude Include="src\graphics\meshes\billboardGenerator.hpp" />
-    <ClInclude Include="src\graphics\textField.hpp" />
-    <ClInclude Include="src\graphics\models\hud.hpp" />
+    <ClInclude Include="src\graphics\models\textField.hpp" />
+    <ClInclude Include="src\graphics\hud.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />
     <ClInclude Include="src\graphics\airplaneCameraPoss.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
