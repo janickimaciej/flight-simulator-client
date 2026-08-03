@@ -24,7 +24,6 @@ namespace App
 		glfwSwapInterval(1);
 
 		glfwSetFramebufferSizeCallback(m_windowPtr, callbackWrapper<&Window::resizeCallback>);
-		m_input = std::make_unique<WindowInput>(m_windowPtr);
 
 		gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
 
@@ -64,12 +63,12 @@ namespace App
 
 	Physics::PlayerInput Window::getCurrInput()
 	{
-		return m_input->getCurrInput();
+		return m_controller->getCurrInput();
 	}
 
-	void Window::setControllerType(ControllerType controllerType)
+	void Window::setControllerType(ControllerType type)
 	{
-		m_input->setControllerType(controllerType);
+		m_controller = Controller::getController(type, m_windowPtr);
 	}
 
 	void Window::resizeCallback(int width, int height)

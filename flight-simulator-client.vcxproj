@@ -60,6 +60,9 @@
     <ClCompile Include="dep\stb_image.cpp" />
     <ClCompile Include="src\app\commandLineArg.cpp" />
     <ClCompile Include="src\app\commandLineArgs.cpp" />
+    <ClCompile Include="src\app\controllers\controller.cpp" />
+    <ClCompile Include="src\app\controllers\gamepad.cpp" />
+    <ClCompile Include="src\app\controllers\keyboard.cpp" />
     <ClCompile Include="src\app\exitCode.cpp" />
     <ClCompile Include="src\app\threads\networkThread.cpp" />
     <ClCompile Include="src\app\ownInput.cpp" />
@@ -67,7 +70,6 @@
     <ClCompile Include="src\app\threads\renderingThread.cpp" />
     <ClCompile Include="src\app\udp\udpCommunication.cpp" />
     <ClCompile Include="src\app\window.cpp" />
-    <ClCompile Include="src\app\windowInput.cpp" />
     <ClCompile Include="src\graphics\cameras\camera.cpp" />
     <ClCompile Include="src\graphics\cameras\modelCamera.cpp" />
     <ClCompile Include="src\graphics\cameras\orthographicCamera.cpp" />
@@ -180,7 +182,10 @@
     <ClInclude Include="dep\stb_image.h" />
     <ClInclude Include="src\app\commandLineArg.hpp" />
     <ClInclude Include="src\app\commandLineArgs.hpp" />
-    <ClInclude Include="src\app\controllerType.hpp" />
+    <ClInclude Include="src\app\controllers\controller.hpp" />
+    <ClInclude Include="src\app\controllers\controllerType.hpp" />
+    <ClInclude Include="src\app\controllers\gamepad.hpp" />
+    <ClInclude Include="src\app\controllers\keyboard.hpp" />
     <ClInclude Include="src\app\exitCode.hpp" />
     <ClInclude Include="src\app\gameMode.hpp" />
     <ClInclude Include="src\app\threads\networkThread.hpp" />
@@ -189,7 +194,6 @@
     <ClInclude Include="src\app\threads\renderingThread.hpp" />
     <ClInclude Include="src\app\udp\udpCommunication.hpp" />
     <ClInclude Include="src\app\window.hpp" />
-    <ClInclude Include="src\app\windowInput.hpp" />
     <ClInclude Include="src\graphics\airplaneCameraPoss.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />

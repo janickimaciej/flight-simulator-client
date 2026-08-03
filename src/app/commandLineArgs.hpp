@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app/controllerType.hpp"
+#include "app/controllers/controllerType.hpp"
 #include "app/gameMode.hpp"
 #include "common/airplaneType.hpp"
 #include "common/mapName.hpp"

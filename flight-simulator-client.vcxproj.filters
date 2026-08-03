@@ -27,7 +27,6 @@
     <ClCompile Include="src\graphics\maps\map.cpp" />
     <ClCompile Include="src\graphics\time.cpp" />
     <ClCompile Include="src\graphics\renderingBuffer.cpp" />
-    <ClCompile Include="src\app\windowInput.cpp" />
     <ClCompile Include="src\app\ownInput.cpp" />
     <ClCompile Include="src\app\threads\networkThread.cpp" />
     <ClCompile Include="src\app\threads\physicsThread.cpp" />
@@ -90,6 +89,9 @@
     <ClCompile Include="core\common\terrains\plateau.cpp" />
     <ClCompile Include="core\common\terrains\constant.cpp" />
     <ClCompile Include="core\common\terrains\operators.cpp" />
+    <ClCompile Include="src\app\controllers\controller.cpp" />
+    <ClCompile Include="src\app\controllers\keyboard.cpp" />
+    <ClCompile Include="src\app\controllers\gamepad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />
@@ -119,8 +121,7 @@
     <ClInclude Include="src\graphics\maps\map.hpp" />
     <ClInclude Include="src\graphics\renderingBuffer.hpp" />
     <ClInclude Include="src\graphics\time.hpp" />
-    <ClInclude Include="src\app\windowInput.hpp" />
-    <ClInclude Include="src\app\controllerType.hpp" />
+    <ClInclude Include="src\app\controllers\controllerType.hpp" />
     <ClInclude Include="src\app\ownInput.hpp" />
     <ClInclude Include="src\app\threads\renderingThread.hpp" />
     <ClInclude Include="src\app\threads\physicsThread.hpp" />
@@ -216,6 +217,9 @@
     <ClInclude Include="core\common\terrains\plateau.hpp" />
     <ClInclude Include="core\common\terrains\constant.hpp" />
     <ClInclude Include="core\common\terrains\operators.hpp" />
+    <ClInclude Include="src\app\controllers\controller.hpp" />
+    <ClInclude Include="src\app\controllers\keyboard.hpp" />
+    <ClInclude Include="src\app\controllers\gamepad.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\graphics\shaders\lightFS.glsl" />

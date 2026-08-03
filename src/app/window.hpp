@@ -1,7 +1,7 @@
 #pragma once
 
-#include "app/controllerType.hpp"
-#include "app/windowInput.hpp"
+#include "app/controllers/controller.hpp"
+#include "app/controllers/controllerType.hpp"
 #include "physics/playerInput.hpp"
 
 #include <glfw/glfw3.h>
@@ -25,14 +25,14 @@ namespace App
 		GLFWwindow* getPtr();
 
 		Physics::PlayerInput getCurrInput();
-		void setControllerType(ControllerType controllerType);
+		void setControllerType(ControllerType type);
 
 	private:
 		static constexpr glm::ivec2 m_initialSize{1900, 1000};
 
 		GLFWwindow* m_windowPtr{};
 		glm::ivec2 m_viewportSize{m_initialSize};
-		std::unique_ptr<WindowInput> m_input{};
+		std::unique_ptr<Controller> m_controller{};
 
 		void resizeCallback(int width, int height);
 
