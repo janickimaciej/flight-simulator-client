@@ -7,12 +7,12 @@ namespace Graphics
 	class OrthographicCamera : public Camera
 	{
 	public:
-		OrthographicCamera(float width, float nearPlane, float farPlane);
+		OrthographicCamera(float nearPlane, float farPlane, float viewHeight);
 		virtual ~OrthographicCamera() = default;
 
-		virtual void updateProjectionMatrix() override;
-
 	private:
-		float m_width{};
+		float m_viewHeight{};
+
+		virtual void updateProjectionMatrix() override;
 	};
 }

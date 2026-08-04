@@ -7,9 +7,9 @@
 
 namespace Graphics
 {
-	TrackingCamera::TrackingCamera(float fovRad, float nearPlane, float farPlane,
+	TrackingCamera::TrackingCamera(float nearPlane, float farPlane, float fovYRad,
 		const Model& model) :
-		PerspectiveCamera{fovRad, nearPlane, farPlane},
+		PerspectiveCamera{nearPlane, farPlane, fovYRad},
 		m_model{model}
 	{ }
 

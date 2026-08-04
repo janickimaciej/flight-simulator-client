@@ -2,12 +2,12 @@
 
 namespace Graphics
 {
-	ModelCamera::ModelCamera(const Model& model, float fovRad, float nearPlane, float farPlane) :
-		PerspectiveCamera{fovRad, nearPlane, farPlane},
+	ModelCamera::ModelCamera(float nearPlane, float farPlane, float fovYRad, const Model& model) :
+		PerspectiveCamera{nearPlane, farPlane, fovYRad},
 		m_model{model}
 	{ }
 
-	glm::mat4 ModelCamera::getCameraMatrix() const
+	glm::mat4 ModelCamera::getViewMatrixInverse() const
 	{
 		return m_model.getModelMatrix() * getMatrix();
 	}

@@ -10,12 +10,12 @@ namespace Graphics
 	class ModelCamera : public PerspectiveCamera
 	{
 	public:
-		ModelCamera(const Model& model, float fovRad, float nearPlane, float farPlane);
+		ModelCamera(float nearPlane, float farPlane, float fovYRad, const Model& model);
 		virtual ~ModelCamera() = default;
 
-	protected:
+	private:
 		const Model& m_model;
 
-		virtual glm::mat4 getCameraMatrix() const override;
+		virtual glm::mat4 getViewMatrixInverse() const override;
 	};
 }

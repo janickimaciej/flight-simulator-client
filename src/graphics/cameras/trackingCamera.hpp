@@ -8,7 +8,7 @@ namespace Graphics
 	class TrackingCamera : public PerspectiveCamera
 	{
 	public:
-		TrackingCamera(float fovRad, float nearPlane, float farPlane, const Model& model);
+		TrackingCamera(float nearPlane, float farPlane, float fovYRad, const Model& model);
 		virtual ~TrackingCamera() = default;
 
 		virtual void use(float aspectRatio) override;

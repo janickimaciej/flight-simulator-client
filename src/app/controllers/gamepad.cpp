@@ -16,7 +16,7 @@ namespace App
 
 		GLFWgamepadstate gamepad{};
 		glfwGetGamepadState(GLFW_JOYSTICK_1, &gamepad);
-		
+
 		static constexpr float pitchThreshold = 0.2f;
 		float axis1 = gamepad.axes[1];
 		if (axis1 > -pitchThreshold && axis1 < pitchThreshold) axis1 = 0;
@@ -28,7 +28,7 @@ namespace App
 		float axis5 = gamepad.axes[5];
 		if (axis5 < -1 + yawThreshold) axis5 = -1;
 		input.yaw = (axis5 - axis4) / 2;
-		
+
 		static constexpr float rollThreshold = 0.1f;
 		float axis0 = gamepad.axes[0];
 		if (axis0 > -rollThreshold && axis0 < rollThreshold) axis0 = 0;

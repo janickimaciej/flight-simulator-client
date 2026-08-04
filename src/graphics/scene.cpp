@@ -12,14 +12,6 @@
 
 namespace Graphics
 {
-	static constexpr float worldCameraFOVDeg = 60;
-	static constexpr float worldCameraNearPlane = 4;
-	static constexpr float worldCameraFarPlane = 20000;
-
-	static constexpr float hudCameraWidth = 2;
-	static constexpr float hudCameraNearPlane = 0;
-	static constexpr float hudCameraFarPlane = 1;
-
 	Scene::Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map) :
 		m_ownId{ownId},
 		m_ownAirplaneType{ownAirplaneType},
@@ -33,14 +25,20 @@ namespace Graphics
 
 		m_airplanes.insert({ownId, Airplane::createAirplane(ownAirplaneType)});
 
-		m_worldCamera = std::make_unique<ModelCamera>(*m_airplanes.at(ownId),
-			glm::radians(worldCameraFOVDeg), worldCameraNearPlane, worldCameraFarPlane);
+		static constexpr float worldCameraNearPlane = 4;
+		static constexpr float worldCameraFarPlane = 20000;
+		static constexpr float worldCameraFOVYDeg = 60;
+		m_worldCamera = std::make_unique<ModelCamera>(worldCameraNearPlane, worldCameraFarPlane,
+			glm::radians(worldCameraFOVYDeg), *m_airplanes.at(ownId));
 		static constexpr float cameraPitchDeg = -10;
 		m_worldCamera->rotatePitch(glm::radians(cameraPitchDeg));
 		m_worldCamera->setPos(airplaneCameraPoss[Common::toSizeT(ownAirplaneType)]);
 
-		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraWidth, hudCameraNearPlane,
-			hudCameraFarPlane);
+		static constexpr float hudCameraNearPlane = 0;
+		static constexpr float hudCameraFarPlane = 1;
+		static constexpr float hudCameraViewHeight = 2;
+		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraNearPlane, hudCameraFarPlane,
+			hudCameraViewHeight);
 
 		m_map = Map::createMap(map, m_worldShading);
 	}

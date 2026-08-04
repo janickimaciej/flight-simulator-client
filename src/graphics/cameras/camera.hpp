@@ -11,18 +11,20 @@ namespace Graphics
 	public:
 		virtual ~Camera() = default;
 
-		virtual void updateProjectionMatrix() = 0;
 		virtual void use(float aspectRatio);
 
 	protected:
-		glm::mat4 m_projectionMatrix{};
-		float m_aspectRatio{};
 		const float m_nearPlane{};
 		const float m_farPlane{};
+		float m_aspectRatio{};
+		glm::mat4 m_projectionMatrix{};
 
 		Camera(float nearPlane, float farPlane);
-		virtual glm::mat4 getCameraMatrix() const;
-		glm::vec3 getCameraPos() const;
-		glm::mat4 getViewMatrix() const;
+
+	private:
+		virtual glm::mat4 getViewMatrixInverse() const;
+		virtual void updateProjectionMatrix() = 0;
+		glm::vec3 getWorldPos() const;
+		void updateShaders() const;
 	};
 }

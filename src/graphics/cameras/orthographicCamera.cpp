@@ -4,15 +4,15 @@
 
 namespace Graphics
 {
-	OrthographicCamera::OrthographicCamera(float width, float nearPlane, float farPlane) :
+	OrthographicCamera::OrthographicCamera(float nearPlane, float farPlane, float viewHeight) :
 		Camera{nearPlane, farPlane},
-		m_width{width}
+		m_viewHeight{viewHeight}
 	{ }
 
 	void OrthographicCamera::updateProjectionMatrix()
 	{
-		float height = m_width / m_aspectRatio;
-		m_projectionMatrix = glm::ortho(-m_width / 2, m_width / 2, -height / 2, height / 2,
-			m_nearPlane, m_farPlane);
+		float viewWidth = m_aspectRatio * m_viewHeight;
+		m_projectionMatrix = glm::ortho(-viewWidth / 2, viewWidth / 2, -m_viewHeight / 2,
+			m_viewHeight / 2, m_nearPlane, m_farPlane);
 	}
 }

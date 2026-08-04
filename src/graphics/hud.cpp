@@ -83,10 +83,10 @@ namespace Graphics
 		if (aspectRatio == m_prevAspectRatio) return;
 		m_prevAspectRatio = aspectRatio;
 
-		float rightBorder = 1.0f;
-		float topBorder = rightBorder / aspectRatio;
-		float leftBorder = -rightBorder;
+		float topBorder = 1.0f;
+		float rightBorder = aspectRatio * topBorder;
 		float bottomBorder = -topBorder;
+		float leftBorder = -rightBorder;
 
 		float smallerDimension = std::min(rightBorder - leftBorder, topBorder - bottomBorder);
 

@@ -11,19 +11,7 @@ namespace Graphics
 			m_aspectRatio = aspectRatio;
 			updateProjectionMatrix();
 		}
-		glm::mat4 projectionViewMatrix = m_projectionMatrix * getViewMatrix();
-		glm::vec3 cameraPos = getCameraPos();
-
-		ShaderPrograms::surface->use();
-		ShaderPrograms::surface->setUniform("projectionViewMatrix", projectionViewMatrix);
-		ShaderPrograms::surface->setUniform("cameraPos", cameraPos);
-
-		ShaderPrograms::light->use();
-		ShaderPrograms::light->setUniform("projectionViewMatrix", projectionViewMatrix);
-		ShaderPrograms::light->setUniform("cameraPos", cameraPos);
-
-		ShaderPrograms::hud->use();
-		ShaderPrograms::hud->setUniform("projectionViewMatrix", projectionViewMatrix);
+		updateShaders();
 	}
 
 	Camera::Camera(float nearPlane, float farPlane) :
@@ -31,19 +19,31 @@ namespace Graphics
 		m_farPlane{farPlane}
 	{ }
 
-	glm::mat4 Camera::getCameraMatrix() const
+	glm::mat4 Camera::getViewMatrixInverse() const
 	{
 		return getMatrix();
 	}
 
-	glm::vec3 Camera::getCameraPos() const
+	glm::vec3 Camera::getWorldPos() const
 	{
-		glm::vec4 cameraPos = getCameraMatrix() * glm::vec4{0, 0, 0, 1};
-		return glm::vec3{cameraPos};
+		glm::vec4 worldPos = getViewMatrixInverse() * glm::vec4{0, 0, 0, 1};
+		return glm::vec3{worldPos};
 	}
 
-	glm::mat4 Camera::getViewMatrix() const
+	void Camera::updateShaders() const
 	{
-		return glm::inverse(getCameraMatrix());
+		glm::mat4 projectionViewMatrix = m_projectionMatrix * glm::inverse(getViewMatrixInverse());
+		glm::vec3 worldPos = getWorldPos();
+
+		ShaderPrograms::surface->use();
+		ShaderPrograms::surface->setUniform("projectionViewMatrix", projectionViewMatrix);
+		ShaderPrograms::surface->setUniform("cameraPos", worldPos);
+
+		ShaderPrograms::light->use();
+		ShaderPrograms::light->setUniform("projectionViewMatrix", projectionViewMatrix);
+		ShaderPrograms::light->setUniform("cameraPos", worldPos);
+
+		ShaderPrograms::hud->use();
+		ShaderPrograms::hud->setUniform("projectionViewMatrix", projectionViewMatrix);
 	}
 }
