@@ -1,6 +1,7 @@
 #pragma once
 
-#include "common/maps/map.hpp"
+#include "common/terrains/maps.hpp"
+#include "common/terrains/terrain.hpp"
 #include "graphics/dayNightCycle.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/models/directionalLightModel.hpp"
@@ -14,16 +15,19 @@ namespace Graphics
 	class IslandMap : public Map
 	{
 	public:
-		IslandMap(WorldShading& worldShading,
-			std::unique_ptr<Common::Maps::Map> terrain);
+		IslandMap(WorldShading& worldShading);
 		virtual ~IslandMap() = default;
 
 		virtual void update(int day, float timeOfDay) override;
 		virtual void updateShaders() override;
 		virtual void render() const override;
+		virtual float getHeight(float x, float z) const override;
 
 	private:
-		Island m_island;
+		std::unique_ptr<Common::Terrains::Terrain> m_sea = Common::Terrains::Maps::sea();
+		std::unique_ptr<Common::Terrains::Terrain> m_land = Common::Terrains::Maps::island();
+
+		Island m_island{};
 
 		DirectionalLightModel m_moon;
 		DirectionalLightModel m_sun;

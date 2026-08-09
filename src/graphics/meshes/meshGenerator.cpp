@@ -1,6 +1,6 @@
 #include "graphics/meshes/meshGenerator.hpp"
 
-#include "common/maps/islandMap.hpp"
+#include "common/terrains/maps.hpp"
 #include "graphics/config.hpp"
 #include "graphics/meshes/billboardGenerator.hpp"
 #include "graphics/meshes/bulletGenerator.hpp"
@@ -19,7 +19,11 @@ namespace Graphics
 				return BulletGenerator::generate();
 
 			case ProceduralMeshName::island:
-				return MapGenerator::generate(Common::Maps::IslandMap{});
+				glm::vec2 size{40000, 40000};
+				glm::vec2 spacing{50, 50};
+				std::unique_ptr<Common::Terrains::Terrain> terrain =
+					Common::Terrains::Maps::island();
+				return MapGenerator::generate(*terrain, size, spacing);
 		}
 		return std::vector<Vertex>{};
 	}

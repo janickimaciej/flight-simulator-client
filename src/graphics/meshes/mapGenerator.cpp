@@ -5,14 +5,11 @@
 
 namespace Graphics
 {
-	std::vector<Vertex> MapGenerator::generate(const Common::Maps::Map& terrain)
+	std::vector<Vertex> MapGenerator::generate(const Common::Terrains::Terrain& terrain,
+		const glm::vec2& size, const glm::vec2& spacing)
 	{
-		float lengthX = terrain.getLengthX();
-		float lengthZ = terrain.getLengthZ();
-		float spacingX = terrain.getSpacingX();
-		float spacingZ = terrain.getSpacingZ();
-		int cellCountX = static_cast<int>(std::round(lengthX / spacingX));
-		int cellCountZ = static_cast<int>(std::round(lengthZ / spacingZ));
+		int cellCountX = static_cast<int>(std::round(size.x / spacing.x));
+		int cellCountZ = static_cast<int>(std::round(size.y / spacing.y));
 
 		std::vector<Vertex> vertices{};
 
@@ -30,17 +27,17 @@ namespace Graphics
 				std::array<Vertex, 3> triangle1{};
 				std::array<Vertex, 3> triangle2{};
 
-				triangle1[0].pos = calcPos(i, j, terrain);
+				triangle1[0].pos = calcPos(i, j, terrain, size, spacing);
 				triangle1[0].texturePos = glm::vec2{lowXTexturePos, lowZTexturePos};
-				triangle1[0].normalVector = calcNormalVector(i, j, terrain);
+				triangle1[0].normalVector = calcNormalVector(i, j, terrain, size, spacing);
 
-				triangle1[1].pos = calcPos(i + 1, j + 1, terrain);
+				triangle1[1].pos = calcPos(i + 1, j + 1, terrain, size, spacing);
 				triangle1[1].texturePos = glm::vec2{highXTexturePos, highZTexturePos};
-				triangle1[1].normalVector = calcNormalVector(i + 1, j + 1, terrain);
+				triangle1[1].normalVector = calcNormalVector(i + 1, j + 1, terrain, size, spacing);
 
-				triangle1[2].pos = calcPos(i + 1, j, terrain);
+				triangle1[2].pos = calcPos(i + 1, j, terrain, size, spacing);
 				triangle1[2].texturePos = glm::vec2{highXTexturePos, lowZTexturePos};
-				triangle1[2].normalVector = calcNormalVector(i + 1, j, terrain);
+				triangle1[2].normalVector = calcNormalVector(i + 1, j, terrain, size, spacing);
 
 				if (triangle1[0].pos.y >= 0 || triangle1[1].pos.y >= 0 || triangle1[2].pos.y >= 0)
 				{
@@ -49,17 +46,17 @@ namespace Graphics
 					vertices.push_back(triangle1[2]);
 				}
 
-				triangle2[0].pos = calcPos(i, j, terrain);
+				triangle2[0].pos = calcPos(i, j, terrain, size, spacing);
 				triangle2[0].texturePos = glm::vec2{lowXTexturePos, lowZTexturePos};
-				triangle2[0].normalVector = calcNormalVector(i, j, terrain);
+				triangle2[0].normalVector = calcNormalVector(i, j, terrain, size, spacing);
 
-				triangle2[1].pos = calcPos(i, j + 1, terrain);
+				triangle2[1].pos = calcPos(i, j + 1, terrain, size, spacing);
 				triangle2[1].texturePos = glm::vec2{lowXTexturePos, highZTexturePos};
-				triangle2[1].normalVector = calcNormalVector(i, j + 1, terrain);
+				triangle2[1].normalVector = calcNormalVector(i, j + 1, terrain, size, spacing);
 
-				triangle2[2].pos = calcPos(i + 1, j + 1, terrain);
+				triangle2[2].pos = calcPos(i + 1, j + 1, terrain, size, spacing);
 				triangle2[2].texturePos = glm::vec2{highXTexturePos, highZTexturePos};
-				triangle2[2].normalVector = calcNormalVector(i + 1, j + 1, terrain);
+				triangle2[2].normalVector = calcNormalVector(i + 1, j + 1, terrain, size, spacing);
 
 				if (triangle2[0].pos.y >= 0 || triangle2[1].pos.y >= 0 || triangle2[2].pos.y >= 0)
 				{
@@ -73,18 +70,20 @@ namespace Graphics
 		return vertices;
 	}
 
-	glm::vec3 MapGenerator::calcPos(int xIndex, int zIndex, const Common::Maps::Map& map)
+	glm::vec3 MapGenerator::calcPos(int xIndex, int zIndex,
+		const Common::Terrains::Terrain& terrain, const glm::vec2& size, const glm::vec2& spacing)
 	{
-		float x = -map.getLengthX() / 2.0f + xIndex * map.getSpacingX();
-		float z = -map.getLengthZ() / 2.0f + zIndex * map.getSpacingZ();
-		return glm::vec3{x, map.terrain().height(x, z), z};
+		float x = -size.x / 2.0f + xIndex * spacing.x;
+		float z = -size.y / 2.0f + zIndex * spacing.y;
+		return glm::vec3{x, terrain.height(x, z), z};
 	}
 
-	glm::vec3 MapGenerator::calcNormalVector(int xIndex, int zIndex, const Common::Maps::Map& map)
+	glm::vec3 MapGenerator::calcNormalVector(int xIndex, int zIndex,
+		const Common::Terrains::Terrain& terrain, const glm::vec2& size, const glm::vec2& spacing)
 	{
-		float x = -map.getLengthX() / 2.0f + xIndex * map.getSpacingX();
-		float z = -map.getLengthZ() / 2.0f + zIndex * map.getSpacingZ();
-		return glm::normalize(glm::vec3{-map.terrain().heightDerivX(x, z), 1,
-			-map.terrain().heightDerivZ(x, z)});
+		float x = -size.x / 2.0f + xIndex * spacing.x;
+		float z = -size.y / 2.0f + zIndex * spacing.y;
+		return glm::normalize(glm::vec3{-terrain.heightDerivX(x, z), 1,
+			-terrain.heightDerivZ(x, z)});
 	}
 }

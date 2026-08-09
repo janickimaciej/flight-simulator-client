@@ -43,7 +43,7 @@ namespace App
 		Physics::SimulationClock m_simulationClock{};
 		std::unique_ptr<Physics::SimulationBuffer> m_simulationBuffer{};
 		int m_ownId{};
-		Physics::Spawner m_spawner;
+		Physics::Spawner m_spawner{};
 
 		Physics::Notification m_notification{m_simulationClock};
 		Physics::Timestep m_frameCutoff{};

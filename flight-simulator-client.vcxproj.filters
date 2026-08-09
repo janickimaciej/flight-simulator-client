@@ -61,12 +61,10 @@
     <ClCompile Include="src\graphics\maps\islandMap.cpp" />
     <ClCompile Include="src\graphics\models\island.cpp" />
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
-    <ClCompile Include="core\common\maps\islandMap.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
     <ClCompile Include="src\graphics\meshes\mapGenerator.cpp" />
-    <ClCompile Include="core\common\maps\map.cpp" />
     <ClCompile Include="core\physics\modelDynamics\bulletDynamics.cpp" />
     <ClCompile Include="core\physics\models\bullet.cpp" />
     <ClCompile Include="src\graphics\models\bullet.cpp" />
@@ -74,7 +72,6 @@
     <ClCompile Include="core\app\exitSignal.cpp" />
     <ClCompile Include="core\physics\collisions\collisionTest.cpp" />
     <ClCompile Include="core\physics\simulationBufferElement.cpp" />
-    <ClCompile Include="core\common\mapName.cpp" />
     <ClCompile Include="core\common\terrains\valueNoise.cpp" />
     <ClCompile Include="src\graphics\meshes\billboardGenerator.cpp" />
     <ClCompile Include="src\graphics\models\textField.cpp" />
@@ -92,6 +89,9 @@
     <ClCompile Include="src\app\controllers\controller.cpp" />
     <ClCompile Include="src\app\controllers\keyboard.cpp" />
     <ClCompile Include="src\app\controllers\gamepad.cpp" />
+    <ClCompile Include="core\common\terrains\maps.cpp" />
+    <ClCompile Include="core\physics\collisions\maps\islandMap.cpp" />
+    <ClCompile Include="core\physics\collisions\maps\map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />
@@ -181,11 +181,9 @@
     <ClInclude Include="src\graphics\models\island.hpp" />
     <ClInclude Include="src\graphics\meshes\mapGenerator.hpp" />
     <ClInclude Include="core\common\terrains\terrain.hpp" />
-    <ClInclude Include="core\common\maps\islandMap.hpp" />
     <ClInclude Include="core\common\terrains\hill.hpp" />
     <ClInclude Include="core\common\terrains\waveX.hpp" />
     <ClInclude Include="core\common\terrains\waveZ.hpp" />
-    <ClInclude Include="core\common\maps\map.hpp" />
     <ClInclude Include="core\physics\modelDynamics\bulletDynamics.hpp" />
     <ClInclude Include="core\physics\models\bullet.hpp" />
     <ClInclude Include="core\common\sceneInfo.hpp" />
@@ -199,7 +197,6 @@
     <ClInclude Include="core\physics\collisions\airplane.hpp" />
     <ClInclude Include="core\physics\collisions\ellipsoid.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
-    <ClInclude Include="core\common\maps\maps.hpp" />
     <ClInclude Include="core\common\valueNoise.hpp" />
     <ClInclude Include="core\common\terrains\valueNoise.hpp" />
     <ClInclude Include="src\graphics\meshes\billboardGenerator.hpp" />
@@ -220,6 +217,9 @@
     <ClInclude Include="src\app\controllers\controller.hpp" />
     <ClInclude Include="src\app\controllers\keyboard.hpp" />
     <ClInclude Include="src\app\controllers\gamepad.hpp" />
+    <ClInclude Include="core\common\terrains\maps.hpp" />
+    <ClInclude Include="core\physics\collisions\maps\islandMap.hpp" />
+    <ClInclude Include="core\physics\collisions\maps\map.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\graphics\shaders\lightFS.glsl" />

@@ -40,7 +40,7 @@ namespace Graphics
 		m_hudCamera = std::make_unique<OrthographicCamera>(hudCameraNearPlane, hudCameraFarPlane,
 			hudCameraViewHeight);
 
-		m_map = Map::createMap(map, m_worldShading);
+		m_map = Map::create(map, m_worldShading);
 	}
 
 	void Scene::update(const Common::SceneInfo& sceneInfo)

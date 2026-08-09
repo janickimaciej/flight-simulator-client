@@ -4,7 +4,6 @@
 #include "app/threads/physicsThread.hpp"
 #include "app/udp/udpFrameType.hpp"
 #include "common/config.hpp"
-#include "common/maps/maps.hpp"
 #include "physics/airplaneDefinitions.hpp"
 
 #include <utility>
@@ -17,8 +16,7 @@ namespace App
 		int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort,
 		OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 		const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore) :
-		m_exitSignal{exitSignal},
-		m_spawner{*Common::Maps::maps[toSizeT(map)]}
+		m_exitSignal{exitSignal}
 	{
 		if (gameMode == GameMode::multiplayer)
 		{

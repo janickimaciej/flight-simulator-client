@@ -1,7 +1,6 @@
 #pragma once
 
 #include "common/mapName.hpp"
-#include "common/maps/map.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -16,13 +15,8 @@ namespace Graphics
 		virtual void update(int day, float timeOfDay) = 0;
 		virtual void updateShaders() = 0;
 		virtual void render() const = 0;
-		float getHeight(float x, float z) const;
+		virtual float getHeight(float x, float z) const = 0;
 
-		static std::unique_ptr<Map> createMap(Common::MapName map, WorldShading& worldShading);
-
-	protected:
-		const std::unique_ptr<Common::Maps::Map> m_terrain{};
-
-		Map(std::unique_ptr<Common::Maps::Map> terrain);
+		static std::unique_ptr<Map> create(Common::MapName map, WorldShading& worldShading);
 	};
 }

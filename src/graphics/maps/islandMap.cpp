@@ -1,7 +1,10 @@
 #include "graphics/maps/islandMap.hpp"
 
+#include "common/terrains/maps.hpp"
+
 #include <glm/glm.hpp>
 
+#include <algorithm>
 #include <utility>
 
 namespace Graphics
@@ -9,10 +12,7 @@ namespace Graphics
 	static constexpr glm::vec3 moonLight{0.2, 0.2, 0.2};
 	static constexpr glm::vec3 sunLight{1, 1, 1};
 
-	IslandMap::IslandMap(WorldShading& worldShading,
-		std::unique_ptr<Common::Maps::Map> terrain) :
-		Map{std::move(terrain)},
-		m_island{},
+	IslandMap::IslandMap(WorldShading& worldShading) :
 		m_moon{moonLight},
 		m_sun{sunLight},
 		m_dayNightCycle{m_moon, m_sun, worldShading}
@@ -37,6 +37,11 @@ namespace Graphics
 	void IslandMap::render() const
 	{
 		m_island.render();
+	}
+
+	float IslandMap::getHeight(float x, float z) const
+	{
+		return std::max(m_sea->height(x, z), m_land->height(x, z));
 	}
 
 	void IslandMap::setModels()
