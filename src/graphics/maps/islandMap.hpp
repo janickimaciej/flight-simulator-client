@@ -19,9 +19,9 @@ namespace Graphics
 		IslandMap(WorldShading& worldShading);
 		virtual ~IslandMap() = default;
 
-		virtual void update(int day, float timeOfDay) override;
+		virtual void update(const glm::vec3& cameraPos, int day, float timeOfDay) override;
 		virtual void updateShaders() override;
-		virtual void renderSea() const override;
+		virtual void renderWater() const override;
 		virtual void renderLand() const override;
 		virtual float getHeight(float x, float z) const override;
 

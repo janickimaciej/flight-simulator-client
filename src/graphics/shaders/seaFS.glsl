@@ -53,12 +53,13 @@ in vec4 normalVector;
 uniform vec3 cameraPos;
 uniform WorldShading worldShading;
 uniform Material material;
-uniform sampler2D colorSampler;
 uniform sampler2D depthSampler;
 uniform DirectionalLight directionalLights[MAX_DIRECTIONAL_LIGHT_COUNT];
 uniform PointLight pointLights[MAX_POINT_LIGHT_COUNT];
 uniform SpotLight spotLights[MAX_SPOT_LIGHT_COUNT];
 uniform ivec2 viewportSize;
+uniform float nearPlane;
+uniform float farPlane;
 
 out vec4 outColor;
 
@@ -78,6 +79,8 @@ float calcAttenuation(float attenuationQuadratic, float attenuationLinear,
 float calcCutoffCoef(float cutoffInnerRad, float cutoffOuterRad, vec3 lightVector,
 	vec3 lightDirection);
 vec3 applyFog(vec3 color);
+
+float depthToZ(float depth);
 
 void main()
 {
@@ -124,10 +127,15 @@ void main()
 	}
 
 	color = applyFog(color);
+
 	vec2 fragPos = vec2(gl_FragCoord.x / viewportSize.x, gl_FragCoord.y / viewportSize.y);
-	vec3 textureColor = texture(colorSampler, fragPos).rgb;
-	float alpha = -texture(depthSampler, fragPos).r;
-	outColor = vec4(mix(textureColor, color, alpha), 1);
+	float landDepth = texture(depthSampler, fragPos).r;
+	float landZ = depthToZ(landDepth);
+	float waterDepth = gl_FragCoord.z;
+	float waterZ = depthToZ(waterDepth);
+	float depth = cameraPos.y * (landZ - waterZ) / (waterZ);
+	float alpha = 0.02 * depth;
+	outColor = vec4(color, alpha);
 }
 
 vec3 calcViewVector()
@@ -270,4 +278,10 @@ vec3 applyFog(vec3 color)
 	float distance = length(pos.xyz - cameraPos);
 	float fogCoef = exp(-pow((worldShading.fogDensity * distance), worldShading.fogGradient));
 	return fogCoef * color + (1 - fogCoef) * worldShading.backgroundColor;
+}
+
+float depthToZ(float depth)
+{
+	return -2 * farPlane * nearPlane /
+		((2 * depth - 1) * (farPlane - nearPlane) - farPlane - nearPlane);
 }

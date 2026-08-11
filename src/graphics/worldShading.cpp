@@ -24,14 +24,16 @@ namespace Graphics
 		ShaderPrograms::light->setUniform("worldShading.backgroundColor", m_backgroundColor);
 		ShaderPrograms::light->setUniform("worldShading.fogGradient", m_fogGradient);
 		ShaderPrograms::light->setUniform("worldShading.fogDensity", m_fogDensity);
-
-		glClearColor(m_backgroundColor.r, m_backgroundColor.g, m_backgroundColor.b, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void WorldShading::setBackgroundColor(const glm::vec3& backgroundColor)
 	{
 		m_backgroundColor = backgroundColor;
+	}
+
+	void WorldShading::useBackgroundColor() const
+	{
+		glClearColor(m_backgroundColor.r, m_backgroundColor.g, m_backgroundColor.b, 1.0f);
 	}
 
 	void WorldShading::setAmbient(float ambient)

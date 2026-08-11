@@ -21,7 +21,7 @@ namespace Graphics
 
 	Framebuffer::~Framebuffer()
 	{
-		glDeleteRenderbuffers(1, &m_depthBuffer);
+		glDeleteTextures(1, &m_depthBuffer);
 		glDeleteTextures(1, &m_colorBuffer);
 		glDeleteFramebuffers(1, &m_FBO);
 	}
@@ -67,8 +67,8 @@ namespace Graphics
 	{
 		glGenTextures(1, &m_colorBuffer);
 		resizeColorBuffer();
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -78,8 +78,8 @@ namespace Graphics
 	{
 		glGenTextures(1, &m_depthBuffer);
 		resizeDepthBuffer();
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -96,6 +96,6 @@ namespace Graphics
 	{
 		glBindTexture(GL_TEXTURE_2D, m_depthBuffer);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_size.x, m_size.y, 0,
-			GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, nullptr);
+			GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 	}
 }

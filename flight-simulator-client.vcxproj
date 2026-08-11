@@ -90,6 +90,7 @@
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
     <ClCompile Include="src\graphics\hud.cpp" />
     <ClCompile Include="src\graphics\models\sea.cpp" />
+    <ClCompile Include="src\graphics\screenQuad.cpp" />
     <ClCompile Include="src\graphics\shaderPrograms.cpp" />
     <ClCompile Include="src\graphics\submodels\lightSubmodel.cpp" />
     <ClCompile Include="src\graphics\maps\map.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="src\graphics\models\island.hpp" />
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\proceduralMeshName.hpp" />
+    <ClInclude Include="src\graphics\screenQuad.hpp" />
     <ClInclude Include="src\graphics\models\sea.hpp" />
     <ClInclude Include="src\graphics\shaderPrograms.hpp" />
     <ClInclude Include="src\graphics\submodels\lightSubmodel.hpp" />
@@ -250,6 +252,8 @@
     <None Include=".gitmodules" />
     <None Include="src\graphics\shaders\lightFS.glsl" />
     <None Include="src\graphics\shaders\lightVS.glsl" />
+    <None Include="src\graphics\shaders\quadFS.glsl" />
+    <None Include="src\graphics\shaders\quadVS.glsl" />
     <None Include="src\graphics\shaders\surfaceFS.glsl" />
     <None Include="src\graphics\shaders\surfaceVS.glsl" />
     <None Include="src\graphics\shaders\hudFS.glsl" />

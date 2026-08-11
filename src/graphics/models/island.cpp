@@ -18,7 +18,7 @@ namespace Graphics
 	{
 		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
-		
+
 		static const Material material{glm::vec3{1, 1, 1}, 0.75f, 0, 10, false};
 		static const std::string modelName = "island";
 		static const std::string grassPath = texturePath(modelName, "grass");

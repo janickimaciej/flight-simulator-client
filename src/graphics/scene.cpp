@@ -3,6 +3,7 @@
 #include "graphics/airplaneCameraPoss.hpp"
 #include "graphics/cameras/modelCamera.hpp"
 #include "graphics/cameras/orthographicCamera.hpp"
+#include "graphics/config.hpp"
 #include "graphics/shaderPrograms.hpp"
 
 #include <glad/glad.h>
@@ -20,7 +21,6 @@ namespace Graphics
 		m_hud{},
 		m_framebuffer{viewportSize}
 	{
-		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
 		glEnable(GL_BLEND);
@@ -28,9 +28,6 @@ namespace Graphics
 
 		m_airplanes.insert({ownId, Airplane::createAirplane(ownAirplaneType)});
 
-		static constexpr float worldCameraNearPlane = 4;
-		static constexpr float worldCameraFarPlane = 20000;
-		static constexpr float worldCameraFOVYDeg = 60;
 		m_worldCamera = std::make_unique<ModelCamera>(worldCameraNearPlane, worldCameraFarPlane,
 			glm::radians(worldCameraFOVYDeg), *m_airplanes.at(ownId));
 		static constexpr float cameraPitchDeg = -10;
@@ -48,7 +45,7 @@ namespace Graphics
 
 	void Scene::update(const Common::SceneInfo& sceneInfo)
 	{
-		m_map->update(sceneInfo.day, sceneInfo.timeOfDay);
+		m_map->update(m_airplanes[m_ownId]->getPos(), sceneInfo.day, sceneInfo.timeOfDay);
 		addAndUpdateAirplanes(sceneInfo.airplaneInfos);
 		removeAirplanes(sceneInfo.airplaneInfos);
 		updateBullets(sceneInfo.bulletInfos);
@@ -71,10 +68,13 @@ namespace Graphics
 	void Scene::render(const glm::ivec2& viewportSize)
 	{
 		float aspectRatio = static_cast<float>(viewportSize.x) / viewportSize.y;
+		m_framebuffer.setSize(viewportSize);
+
 		m_worldCamera->use(aspectRatio);
 
-		m_framebuffer.setSize(viewportSize);
 		m_framebuffer.bind();
+		clearFramebuffer();
+		glEnable(GL_DEPTH_TEST);
 		m_map->renderLand();
 		for (const std::pair<const int, std::unique_ptr<Airplane>>& airplane : m_airplanes)
 		{
@@ -84,21 +84,32 @@ namespace Graphics
 		{
 			bullet->render();
 		}
+
 		m_framebuffer.unbind();
+		clearFramebuffer();
 
-		glActiveTexture(GL_TEXTURE0);
+		glDisable(GL_DEPTH_TEST);
 		m_framebuffer.bindColorTexture();
-		glActiveTexture(GL_TEXTURE1);
-		m_framebuffer.bindDepthTexture();
-		glActiveTexture(GL_TEXTURE0);
+		m_screenQuad.render();
 
+		glEnable(GL_DEPTH_TEST);
 		ShaderPrograms::sea->use();
 		ShaderPrograms::sea->setUniform("viewportSize", viewportSize);
-		m_map->renderSea();
+		ShaderPrograms::sea->setUniform("nearPlane", worldCameraNearPlane);
+		ShaderPrograms::sea->setUniform("farPlane", worldCameraFarPlane);
+		m_framebuffer.bindDepthTexture();
+		m_map->renderWater();
 
+		glDisable(GL_DEPTH_TEST);
 		m_hudCamera->use(aspectRatio);
 		m_hud.updateLayout(aspectRatio);
 		m_hud.render();
+	}
+
+	void Scene::clearFramebuffer() const
+	{
+		m_worldShading.useBackgroundColor();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void Scene::addAndUpdateAirplanes(

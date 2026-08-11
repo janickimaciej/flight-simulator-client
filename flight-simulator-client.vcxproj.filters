@@ -95,6 +95,7 @@
     <ClCompile Include="src\graphics\models\sea.cpp" />
     <ClCompile Include="src\graphics\meshes\seaGenerator.cpp" />
     <ClCompile Include="src\graphics\framebuffer.cpp" />
+    <ClCompile Include="src\graphics\screenQuad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="src\graphics\models\sea.hpp" />
     <ClInclude Include="src\graphics\meshes\seaGenerator.hpp" />
     <ClInclude Include="src\graphics\framebuffer.hpp" />
+    <ClInclude Include="src\graphics\screenQuad.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\graphics\shaders\lightFS.glsl" />
@@ -238,5 +240,7 @@
     <None Include="src\graphics\shaders\hudVS.glsl" />
     <None Include="src\graphics\shaders\seaFS.glsl" />
     <None Include="src\graphics\shaders\seaVS.glsl" />
+    <None Include="src\graphics\shaders\quadFS.glsl" />
+    <None Include="src\graphics\shaders\quadVS.glsl" />
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@ namespace Graphics::ShaderPrograms
 	std::unique_ptr<const ShaderProgram> sea{};
 	std::unique_ptr<const ShaderProgram> light{};
 	std::unique_ptr<const ShaderProgram> hud{};
+	std::unique_ptr<const ShaderProgram> quad{};
 
 	void init()
 	{
@@ -17,6 +18,7 @@ namespace Graphics::ShaderPrograms
 		sea = std::make_unique<const ShaderProgram>(path("seaVS"), path("seaFS"));
 		light = std::make_unique<const ShaderProgram>(path("lightVS"), path("lightFS"));
 		hud = std::make_unique<const ShaderProgram>(path("hudVS"), path("hudFS"));
+		quad = std::make_unique<const ShaderProgram>(path("quadVS"), path("quadFS"));
 	}
 
 	std::string path(const std::string& shaderName)

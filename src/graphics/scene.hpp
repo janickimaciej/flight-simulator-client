@@ -11,6 +11,7 @@
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/models/bullet.hpp"
+#include "graphics/screenQuad.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -39,11 +40,13 @@ namespace Graphics
 		HUD m_hud;
 
 		Framebuffer m_framebuffer;
+		ScreenQuad m_screenQuad{};
 		std::unique_ptr<Camera> m_worldCamera{};
 		std::unique_ptr<Camera> m_hudCamera{};
 
 		WorldShading m_worldShading{};
 
+		void clearFramebuffer() const;
 		void addAndUpdateAirplanes(
 			const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);
 		void removeAirplanes(const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);

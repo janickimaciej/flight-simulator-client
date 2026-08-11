@@ -13,14 +13,11 @@ namespace Graphics
 	{
 		switch (name)
 		{
-			case ProceduralMeshName::characterBillboard:
-				return BillboardGenerator::generate(characterSize);
-
 			case ProceduralMeshName::bullet:
 				return BulletGenerator::generate();
 
-			case ProceduralMeshName::sea:
-				return SeaGenerator::generate();
+			case ProceduralMeshName::characterBillboard:
+				return BillboardGenerator::generate(characterSize, true);
 
 			case ProceduralMeshName::island:
 			{
@@ -30,6 +27,12 @@ namespace Graphics
 					Common::Terrains::Maps::island();
 				return TerrainGenerator::generate(*terrain, size, spacing);
 			}
+
+			case ProceduralMeshName::screenQuad:
+				return BillboardGenerator::generate({2, 2}, false);
+
+			case ProceduralMeshName::sea:
+				return SeaGenerator::generate();
 		}
 		return std::vector<Vertex>{};
 	}

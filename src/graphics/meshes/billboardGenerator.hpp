@@ -11,6 +11,6 @@ namespace Graphics
 	class BillboardGenerator
 	{
 	public:
-		static std::vector<Vertex> generate(const glm::vec2& size);
+		static std::vector<Vertex> generate(const glm::vec2& size, bool inverted);
 	};
 }

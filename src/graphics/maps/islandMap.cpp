@@ -20,8 +20,9 @@ namespace Graphics
 		setModels();
 	}
 
-	void IslandMap::update(int day, float timeOfDay)
+	void IslandMap::update(const glm::vec3& cameraPos, int day, float timeOfDay)
 	{
+		m_sea.setPos({cameraPos.x, 0, cameraPos.z});
 		m_dayNightCycle.setDay(day);
 		m_dayNightCycle.setTimeOfDay(timeOfDay);
 		m_dayNightCycle.updateWorldShading();
@@ -34,7 +35,7 @@ namespace Graphics
 		m_sun.updateShaders();
 	}
 
-	void IslandMap::renderSea() const
+	void IslandMap::renderWater() const
 	{
 		m_sea.render();
 	}

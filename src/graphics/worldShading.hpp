@@ -10,6 +10,7 @@ namespace Graphics
 		void updateShaders() const;
 
 		void setBackgroundColor(const glm::vec3& backgroundColor);
+		void useBackgroundColor() const;
 		void setAmbient(float ambient);
 		void setFogGradient(float fogGradient);
 		void setFogDensity(float fogDensity);

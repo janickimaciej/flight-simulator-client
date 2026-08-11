@@ -4,9 +4,10 @@ namespace Graphics
 {
 	enum class ProceduralMeshName
 	{
-		characterBillboard,
 		bullet,
-		sea,
-		island
+		characterBillboard,
+		island,
+		screenQuad,
+		sea
 	};
 }
