@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common/transformable.hpp"
+#include "common/frame.hpp"
 #include "graphics/material.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/shaderProgram.hpp"

@@ -39,7 +39,7 @@
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
     <ClCompile Include="core\common\state.cpp" />
-    <ClCompile Include="core\common\transformable.cpp" />
+    <ClCompile Include="core\common\frame.cpp" />
     <ClCompile Include="core\physics\airplaneParams\airplaneParams.cpp" />
     <ClCompile Include="core\physics\modelDynamics\airplaneDynamics.cpp" />
     <ClCompile Include="core\physics\modelDynamics\rigidBodyDynamics.cpp" />
@@ -146,7 +146,7 @@
     <ClInclude Include="core\common\airplaneInfo.hpp" />
     <ClInclude Include="core\common\airplaneType.hpp" />
     <ClInclude Include="core\common\state.hpp" />
-    <ClInclude Include="core\common\transformable.hpp" />
+    <ClInclude Include="core\common\frame.hpp" />
     <ClInclude Include="core\physics\airplaneParams\airplaneParams.hpp" />
     <ClInclude Include="core\physics\airplaneParams\fuselageParams.hpp" />
     <ClInclude Include="core\physics\airplaneParams\inertiaParams.hpp" />
