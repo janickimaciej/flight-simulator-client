@@ -6,6 +6,7 @@ namespace Graphics
 	{
 		characterBillboard,
 		bullet,
+		sea,
 		island
 	};
 }

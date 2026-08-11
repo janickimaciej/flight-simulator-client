@@ -9,7 +9,7 @@
 
 namespace Graphics
 {
-	class Light : public Common::Transformable
+	class Light : public Common::Frame
 	{
 	public:
 		virtual ~Light() = default;

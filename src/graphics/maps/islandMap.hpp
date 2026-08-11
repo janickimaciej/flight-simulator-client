@@ -6,6 +6,7 @@
 #include "graphics/maps/map.hpp"
 #include "graphics/models/directionalLightModel.hpp"
 #include "graphics/models/island.hpp"
+#include "graphics/models/sea.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -20,13 +21,16 @@ namespace Graphics
 
 		virtual void update(int day, float timeOfDay) override;
 		virtual void updateShaders() override;
-		virtual void render() const override;
+		virtual void renderSea() const override;
+		virtual void renderLand() const override;
 		virtual float getHeight(float x, float z) const override;
 
 	private:
-		std::unique_ptr<Common::Terrains::Terrain> m_sea = Common::Terrains::Maps::sea();
-		std::unique_ptr<Common::Terrains::Terrain> m_land = Common::Terrains::Maps::island();
+		std::unique_ptr<Common::Terrains::Terrain> m_seaTerrain = Common::Terrains::Maps::sea();
+		std::unique_ptr<Common::Terrains::Terrain> m_islandTerrain =
+			Common::Terrains::Maps::island();
 
+		Sea m_sea{};
 		Island m_island{};
 
 		DirectionalLightModel m_moon;

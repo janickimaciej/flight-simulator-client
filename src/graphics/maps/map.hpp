@@ -14,7 +14,8 @@ namespace Graphics
 
 		virtual void update(int day, float timeOfDay) = 0;
 		virtual void updateShaders() = 0;
-		virtual void render() const = 0;
+		virtual void renderSea() const = 0;
+		virtual void renderLand() const = 0;
 		virtual float getHeight(float x, float z) const = 0;
 
 		static std::unique_ptr<Map> create(Common::MapName map, WorldShading& worldShading);

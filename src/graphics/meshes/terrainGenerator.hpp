@@ -9,7 +9,7 @@
 
 namespace Graphics
 {
-	class MapGenerator
+	class TerrainGenerator
 	{
 	public:
 		static std::vector<Vertex> generate(const Common::Terrains::Terrain& terrain,

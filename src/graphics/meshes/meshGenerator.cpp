@@ -4,7 +4,8 @@
 #include "graphics/config.hpp"
 #include "graphics/meshes/billboardGenerator.hpp"
 #include "graphics/meshes/bulletGenerator.hpp"
-#include "graphics/meshes/mapGenerator.hpp"
+#include "graphics/meshes/seaGenerator.hpp"
+#include "graphics/meshes/terrainGenerator.hpp"
 
 namespace Graphics
 {
@@ -18,12 +19,17 @@ namespace Graphics
 			case ProceduralMeshName::bullet:
 				return BulletGenerator::generate();
 
+			case ProceduralMeshName::sea:
+				return SeaGenerator::generate();
+
 			case ProceduralMeshName::island:
+			{
 				glm::vec2 size{40000, 40000};
 				glm::vec2 spacing{50, 50};
 				std::unique_ptr<Common::Terrains::Terrain> terrain =
 					Common::Terrains::Maps::island();
-				return MapGenerator::generate(*terrain, size, spacing);
+				return TerrainGenerator::generate(*terrain, size, spacing);
+			}
 		}
 		return std::vector<Vertex>{};
 	}

@@ -39,6 +39,10 @@ namespace Graphics
 		ShaderPrograms::surface->setUniform("projectionViewMatrix", projectionViewMatrix);
 		ShaderPrograms::surface->setUniform("cameraPos", worldPos);
 
+		ShaderPrograms::sea->use();
+		ShaderPrograms::sea->setUniform("projectionViewMatrix", projectionViewMatrix);
+		ShaderPrograms::sea->setUniform("cameraPos", worldPos);
+
 		ShaderPrograms::light->use();
 		ShaderPrograms::light->setUniform("projectionViewMatrix", projectionViewMatrix);
 		ShaderPrograms::light->setUniform("cameraPos", worldPos);

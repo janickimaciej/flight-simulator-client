@@ -6,6 +6,7 @@
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
 #include "graphics/cameras/camera.hpp"
+#include "graphics/framebuffer.hpp"
 #include "graphics/hud.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
@@ -21,11 +22,12 @@ namespace Graphics
 	class Scene
 	{
 	public:
-		Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map);
+		Scene(const glm::ivec2& viewportSize, int ownId, Common::AirplaneType ownAirplaneType,
+			Common::MapName map);
 
 		void update(const Common::SceneInfo& sceneInfo);
 		void updateShaders();
-		void render(float aspectRatio);
+		void render(const glm::ivec2& viewportSize);
 
 	private:
 		int m_ownId{};
@@ -36,6 +38,7 @@ namespace Graphics
 		std::vector<std::unique_ptr<Bullet>> m_bullets{};
 		HUD m_hud;
 
+		Framebuffer m_framebuffer;
 		std::unique_ptr<Camera> m_worldCamera{};
 		std::unique_ptr<Camera> m_hudCamera{};
 

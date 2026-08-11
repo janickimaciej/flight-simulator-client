@@ -51,9 +51,9 @@ namespace App
 		glfwPollEvents();
 	}
 
-	float Window::aspectRatio() const
+	glm::ivec2 Window::getViewportSize() const
 	{
-		return static_cast<float>(m_viewportSize.x) / m_viewportSize.y;
+		return m_viewportSize;
 	}
 
 	GLFWwindow* Window::getPtr()

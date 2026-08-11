@@ -49,6 +49,9 @@ namespace Graphics
 		{
 			ShaderPrograms::surface->use();
 			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
+
+			ShaderPrograms::sea->use();
+			ShaderPrograms::sea->setUniform(m_prefix + "isActive", false);
 		}
 	}
 
@@ -67,6 +70,20 @@ namespace Graphics
 			m_attenuationConstant);
 		ShaderPrograms::surface->setUniform(m_prefix + "cutoffInnerRad", m_cutoffInnerRad);
 		ShaderPrograms::surface->setUniform(m_prefix + "cutoffOuterRad", m_cutoffOuterRad);
+
+		ShaderPrograms::sea->use();
+		ShaderPrograms::sea->setUniform(m_prefix + "pos",
+			getGlobalPos(modelMatrix));
+		ShaderPrograms::sea->setUniform(m_prefix + "direction",
+			getGlobalDirection(modelMatrix));
+		ShaderPrograms::sea->setUniform(m_prefix + "color", m_color);
+		ShaderPrograms::sea->setUniform(m_prefix + "attenuationQuadratic",
+			m_attenuationQuadratic);
+		ShaderPrograms::sea->setUniform(m_prefix + "attenuationLinear", m_attenuationLinear);
+		ShaderPrograms::sea->setUniform(m_prefix + "attenuationConstant",
+			m_attenuationConstant);
+		ShaderPrograms::sea->setUniform(m_prefix + "cutoffInnerRad", m_cutoffInnerRad);
+		ShaderPrograms::sea->setUniform(m_prefix + "cutoffOuterRad", m_cutoffOuterRad);
 	}
 
 	std::array<int, SpotLight::maxSpotLightCount> SpotLight::m_isActive{};
@@ -89,6 +106,10 @@ namespace Graphics
 
 		ShaderPrograms::surface->use();
 		ShaderPrograms::surface->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
+			true);
+
+		ShaderPrograms::sea->use();
+		ShaderPrograms::sea->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
 			true);
 
 		return newId;

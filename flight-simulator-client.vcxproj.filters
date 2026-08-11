@@ -64,7 +64,7 @@
     <ClCompile Include="core\common\terrains\hill.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
-    <ClCompile Include="src\graphics\meshes\mapGenerator.cpp" />
+    <ClCompile Include="src\graphics\meshes\terrainGenerator.cpp" />
     <ClCompile Include="core\physics\modelDynamics\bulletDynamics.cpp" />
     <ClCompile Include="core\physics\models\bullet.cpp" />
     <ClCompile Include="src\graphics\models\bullet.cpp" />
@@ -92,6 +92,9 @@
     <ClCompile Include="core\common\terrains\maps.cpp" />
     <ClCompile Include="core\physics\collisions\maps\islandMap.cpp" />
     <ClCompile Include="core\physics\collisions\maps\map.cpp" />
+    <ClCompile Include="src\graphics\models\sea.cpp" />
+    <ClCompile Include="src\graphics\meshes\seaGenerator.cpp" />
+    <ClCompile Include="src\graphics\framebuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />
@@ -179,7 +182,7 @@
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\maps\islandMap.hpp" />
     <ClInclude Include="src\graphics\models\island.hpp" />
-    <ClInclude Include="src\graphics\meshes\mapGenerator.hpp" />
+    <ClInclude Include="src\graphics\meshes\terrainGenerator.hpp" />
     <ClInclude Include="core\common\terrains\terrain.hpp" />
     <ClInclude Include="core\common\terrains\hill.hpp" />
     <ClInclude Include="core\common\terrains\waveX.hpp" />
@@ -220,6 +223,9 @@
     <ClInclude Include="core\common\terrains\maps.hpp" />
     <ClInclude Include="core\physics\collisions\maps\islandMap.hpp" />
     <ClInclude Include="core\physics\collisions\maps\map.hpp" />
+    <ClInclude Include="src\graphics\models\sea.hpp" />
+    <ClInclude Include="src\graphics\meshes\seaGenerator.hpp" />
+    <ClInclude Include="src\graphics\framebuffer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\graphics\shaders\lightFS.glsl" />
@@ -230,5 +236,7 @@
     <None Include=".gitmodules" />
     <None Include="src\graphics\shaders\hudFS.glsl" />
     <None Include="src\graphics\shaders\hudVS.glsl" />
+    <None Include="src\graphics\shaders\seaFS.glsl" />
+    <None Include="src\graphics\shaders\seaVS.glsl" />
   </ItemGroup>
 </Project>

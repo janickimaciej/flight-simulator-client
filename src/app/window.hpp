@@ -21,7 +21,7 @@ namespace App
 		void swapBuffers() const;
 		void pollEvents() const;
 
-		float aspectRatio() const;
+		glm::ivec2 getViewportSize() const;
 		GLFWwindow* getPtr();
 
 		Physics::PlayerInput getCurrInput();

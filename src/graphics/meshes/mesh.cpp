@@ -14,7 +14,8 @@ namespace Graphics
 		createBuffers(vertices);
 	}
 
-	Mesh::Mesh(ProceduralMeshName name)
+	Mesh::Mesh(ProceduralMeshName name, bool dynamic) :
+		m_dynamic{dynamic}
 	{
 		std::vector<Vertex> vertices = MeshGenerator::generate(name);
 		m_vertexCount = vertices.size();
@@ -25,6 +26,14 @@ namespace Graphics
 	{
 		glDeleteVertexArrays(1, &m_VAO);
 		glDeleteBuffers(1, &m_VBO);
+	}
+
+	void Mesh::update(const std::vector<Vertex>& vertices)
+	{
+		m_vertexCount = vertices.size();
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
+			vertices.data(), m_dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
 	}
 
 	void Mesh::render() const
@@ -42,8 +51,6 @@ namespace Graphics
 		glBindVertexArray(m_VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-		glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
-			vertices.data(), GL_STATIC_DRAW);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 			reinterpret_cast<void*>(offsetof(Vertex, pos)));
 		glEnableVertexAttribArray(0);
@@ -55,5 +62,7 @@ namespace Graphics
 		glEnableVertexAttribArray(2);
 
 		glBindVertexArray(0);
+
+		update(vertices);
 	}
 }

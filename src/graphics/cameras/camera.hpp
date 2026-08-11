@@ -6,7 +6,7 @@
 
 namespace Graphics
 {
-	class Camera : public Common::Transformable
+	class Camera : public Common::Frame
 	{
 	public:
 		virtual ~Camera() = default;

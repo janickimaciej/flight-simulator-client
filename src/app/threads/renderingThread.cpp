@@ -33,7 +33,7 @@ namespace App
 		semaphore->acquire();
 		if (!m_exitSignal.shouldStop())
 		{
-			m_renderingBuffer->initialize(args.airplaneType, args.map);
+			m_renderingBuffer->initialize(m_window.getViewportSize(), args.airplaneType, args.map);
 			Graphics::Time::initialize();
 			mainLoop();
 		}
@@ -52,7 +52,7 @@ namespace App
 			Graphics::Time::update();
 
 			processInput();
-			m_renderingBuffer->updateAndRenderScene(m_window.aspectRatio());
+			m_renderingBuffer->updateAndRenderScene(m_window.getViewportSize());
 			m_window.swapBuffers();
 			m_window.pollEvents();
 		}

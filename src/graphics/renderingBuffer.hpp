@@ -16,9 +16,10 @@ namespace Graphics
 	public:
 		RenderingBuffer(int ownId);
 
-		void initialize(Common::AirplaneType ownAirplaneType, Common::MapName map);
+		void initialize(const glm::ivec2& viewportSize, Common::AirplaneType ownAirplaneType,
+			Common::MapName map);
 		void updateBuffer(const Common::SceneInfo& sceneInfo);
-		void updateAndRenderScene(float aspectRatio);
+		void updateAndRenderScene(const glm::ivec2& viewportSize);
 
 	private:
 		static const int m_bufferSize = 3;

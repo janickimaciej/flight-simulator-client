@@ -14,6 +14,6 @@ namespace Graphics
 
 	void Model::setScale(float scaleRatio)
 	{
-		Transformable::setScale(scaleRatio);
+		Frame::setScale(scaleRatio);
 	}
 }

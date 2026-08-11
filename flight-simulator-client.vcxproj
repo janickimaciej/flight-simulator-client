@@ -76,17 +76,20 @@
     <ClCompile Include="src\graphics\cameras\perspectiveCamera.cpp" />
     <ClCompile Include="src\graphics\cameras\trackingCamera.cpp" />
     <ClCompile Include="src\graphics\dayNightCycle.cpp" />
+    <ClCompile Include="src\graphics\framebuffer.cpp" />
     <ClCompile Include="src\graphics\lights\pointLight.cpp" />
     <ClCompile Include="src\graphics\maps\islandMap.cpp" />
     <ClCompile Include="src\graphics\meshes\billboardGenerator.cpp" />
     <ClCompile Include="src\graphics\meshes\bulletGenerator.cpp" />
-    <ClCompile Include="src\graphics\meshes\mapGenerator.cpp" />
+    <ClCompile Include="src\graphics\meshes\seaGenerator.cpp" />
+    <ClCompile Include="src\graphics\meshes\terrainGenerator.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\jw1.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\mustang.cpp" />
     <ClCompile Include="src\graphics\models\bullet.cpp" />
     <ClCompile Include="src\graphics\models\island.cpp" />
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
     <ClCompile Include="src\graphics\hud.cpp" />
+    <ClCompile Include="src\graphics\models\sea.cpp" />
     <ClCompile Include="src\graphics\shaderPrograms.cpp" />
     <ClCompile Include="src\graphics\submodels\lightSubmodel.cpp" />
     <ClCompile Include="src\graphics\maps\map.cpp" />
@@ -197,11 +200,13 @@
     <ClInclude Include="src\graphics\airplaneCameraPoss.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />
+    <ClInclude Include="src\graphics\framebuffer.hpp" />
     <ClInclude Include="src\graphics\lights\pointLight.hpp" />
     <ClInclude Include="src\graphics\maps\islandMap.hpp" />
     <ClInclude Include="src\graphics\meshes\billboardGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\bulletGenerator.hpp" />
-    <ClInclude Include="src\graphics\meshes\mapGenerator.hpp" />
+    <ClInclude Include="src\graphics\meshes\seaGenerator.hpp" />
+    <ClInclude Include="src\graphics\meshes\terrainGenerator.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\jw1.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\mustang.hpp" />
     <ClInclude Include="src\graphics\models\bullet.hpp" />
@@ -209,6 +214,7 @@
     <ClInclude Include="src\graphics\models\island.hpp" />
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\proceduralMeshName.hpp" />
+    <ClInclude Include="src\graphics\models\sea.hpp" />
     <ClInclude Include="src\graphics\shaderPrograms.hpp" />
     <ClInclude Include="src\graphics\submodels\lightSubmodel.hpp" />
     <ClInclude Include="src\graphics\renderingBuffer.hpp" />
@@ -248,6 +254,8 @@
     <None Include="src\graphics\shaders\surfaceVS.glsl" />
     <None Include="src\graphics\shaders\hudFS.glsl" />
     <None Include="src\graphics\shaders\hudVS.glsl" />
+    <None Include="src\graphics\shaders\seaFS.glsl" />
+    <None Include="src\graphics\shaders\seaVS.glsl" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Include="res\**\*.obj" />

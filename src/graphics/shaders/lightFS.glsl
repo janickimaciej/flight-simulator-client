@@ -1,5 +1,3 @@
-// ... – vector in global coordinate system
-
 struct WorldShading
 {
 	vec3 backgroundColor;

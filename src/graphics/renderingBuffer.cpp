@@ -6,9 +6,10 @@ namespace Graphics
 		m_ownId{ownId}
 	{ }
 
-	void RenderingBuffer::initialize(Common::AirplaneType ownAirplaneType, Common::MapName map)
+	void RenderingBuffer::initialize(const glm::ivec2& viewportSize,
+		Common::AirplaneType ownAirplaneType, Common::MapName map)
 	{
-		m_scene = std::make_unique<Scene>(m_ownId, ownAirplaneType, map);
+		m_scene = std::make_unique<Scene>(viewportSize, m_ownId, ownAirplaneType, map);
 	}
 
 	void RenderingBuffer::updateBuffer(const Common::SceneInfo& sceneInfo)
@@ -30,7 +31,7 @@ namespace Graphics
 		}
 	}
 
-	void RenderingBuffer::updateAndRenderScene(float aspectRatio)
+	void RenderingBuffer::updateAndRenderScene(const glm::ivec2& viewportSize)
 	{
 		unsigned int index{};
 		{
@@ -42,6 +43,6 @@ namespace Graphics
 
 		m_scene->update(m_buffer[index]);
 		m_scene->updateShaders();
-		m_scene->render(aspectRatio);
+		m_scene->render(viewportSize);
 	}
 }

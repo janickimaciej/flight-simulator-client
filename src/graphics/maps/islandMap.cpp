@@ -34,14 +34,19 @@ namespace Graphics
 		m_sun.updateShaders();
 	}
 
-	void IslandMap::render() const
+	void IslandMap::renderSea() const
+	{
+		m_sea.render();
+	}
+
+	void IslandMap::renderLand() const
 	{
 		m_island.render();
 	}
 
 	float IslandMap::getHeight(float x, float z) const
 	{
-		return std::max(m_sea->height(x, z), m_land->height(x, z));
+		return std::max(m_seaTerrain->height(x, z), m_islandTerrain->height(x, z));
 	}
 
 	void IslandMap::setModels()

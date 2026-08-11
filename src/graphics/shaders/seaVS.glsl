@@ -6,13 +6,11 @@ uniform mat4 modelSubmodelMatrix;
 uniform mat4 projectionViewMatrix;
 
 out vec4 pos;
-out vec2 texturePos;
 out vec4 normalVector;
 
 void main()
 {
 	pos = modelSubmodelMatrix * vec4(inPosMesh, 1);
-	texturePos = inTexturePos;
 	normalVector = normalize(modelSubmodelMatrix * vec4(inNormalVectorMesh, 0));
 	gl_Position = projectionViewMatrix * pos;
 }

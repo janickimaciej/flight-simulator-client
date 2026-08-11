@@ -13,7 +13,7 @@ namespace Graphics
 	{ }
 
 	Submodel::Submodel(const Submodel& submodel) :
-		Transformable{submodel},
+		Frame{submodel},
 		m_shaderProgram{submodel.m_shaderProgram},
 		m_mesh{submodel.m_mesh},
 		m_material{submodel.m_material},
@@ -21,7 +21,7 @@ namespace Graphics
 	{ }
 
 	Submodel::Submodel(Submodel&& submodel) noexcept :
-		Transformable{submodel},
+		Frame{submodel},
 		m_shaderProgram{submodel.m_shaderProgram},
 		m_mesh{submodel.m_mesh},
 		m_material{submodel.m_material},
@@ -50,17 +50,17 @@ namespace Graphics
 
 	void Submodel::mirrorX()
 	{
-		Transformable::mirrorX();
+		Frame::mirrorX();
 	}
 
 	void Submodel::mirrorY()
 	{
-		Transformable::mirrorY();
+		Frame::mirrorY();
 	}
 
 	void Submodel::mirrorZ()
 	{
-		Transformable::mirrorZ();
+		Frame::mirrorZ();
 	}
 
 	glm::mat4 Submodel::getSubmodelMatrix() const

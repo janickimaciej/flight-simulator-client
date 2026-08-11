@@ -45,6 +45,11 @@ namespace Graphics
 		glUniform1f(glGetUniformLocation(m_id, name.c_str()), value);
 	}
 
+	void ShaderProgram::setUniform(const std::string& name, const glm::ivec2& value) const
+	{
+		glUniform2iv(glGetUniformLocation(m_id, name.c_str()), 1, glm::value_ptr(value));
+	}
+
 	void ShaderProgram::setUniform(const std::string& name, const glm::vec3& value) const
 	{
 		glUniform3fv(glGetUniformLocation(m_id, name.c_str()), 1, glm::value_ptr(value));

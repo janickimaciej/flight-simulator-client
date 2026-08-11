@@ -12,7 +12,7 @@
 
 namespace Graphics
 {
-	class Submodel : public Common::Transformable
+	class Submodel : public Common::Frame
 	{
 	public:
 		Submodel(const ShaderProgram& shaderProgram, const std::shared_ptr<const Mesh>& mesh,

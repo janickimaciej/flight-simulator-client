@@ -3,6 +3,7 @@
 #include "graphics/airplaneCameraPoss.hpp"
 #include "graphics/cameras/modelCamera.hpp"
 #include "graphics/cameras/orthographicCamera.hpp"
+#include "graphics/shaderPrograms.hpp"
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -12,10 +13,12 @@
 
 namespace Graphics
 {
-	Scene::Scene(int ownId, Common::AirplaneType ownAirplaneType, Common::MapName map) :
+	Scene::Scene(const glm::ivec2& viewportSize, int ownId, Common::AirplaneType ownAirplaneType,
+		Common::MapName map) :
 		m_ownId{ownId},
 		m_ownAirplaneType{ownAirplaneType},
-		m_hud{}
+		m_hud{},
+		m_framebuffer{viewportSize}
 	{
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
@@ -59,13 +62,20 @@ namespace Graphics
 		{
 			airplane.second->updateShaders();
 		}
+		m_framebuffer.bind();
+		m_worldShading.updateShaders();
+		m_framebuffer.unbind();
 		m_worldShading.updateShaders();
 	}
 
-	void Scene::render(float aspectRatio)
+	void Scene::render(const glm::ivec2& viewportSize)
 	{
+		float aspectRatio = static_cast<float>(viewportSize.x) / viewportSize.y;
 		m_worldCamera->use(aspectRatio);
-		m_map->render();
+
+		m_framebuffer.setSize(viewportSize);
+		m_framebuffer.bind();
+		m_map->renderLand();
 		for (const std::pair<const int, std::unique_ptr<Airplane>>& airplane : m_airplanes)
 		{
 			airplane.second->render();
@@ -74,6 +84,17 @@ namespace Graphics
 		{
 			bullet->render();
 		}
+		m_framebuffer.unbind();
+
+		glActiveTexture(GL_TEXTURE0);
+		m_framebuffer.bindColorTexture();
+		glActiveTexture(GL_TEXTURE1);
+		m_framebuffer.bindDepthTexture();
+		glActiveTexture(GL_TEXTURE0);
+
+		ShaderPrograms::sea->use();
+		ShaderPrograms::sea->setUniform("viewportSize", viewportSize);
+		m_map->renderSea();
 
 		m_hudCamera->use(aspectRatio);
 		m_hud.updateLayout(aspectRatio);

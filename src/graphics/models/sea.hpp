@@ -7,11 +7,11 @@
 
 namespace Graphics
 {
-	class Island : public Model
+	class Sea : public Model
 	{
 	public:
-		Island();
-		virtual ~Island() = default;
+		Sea();
+		virtual ~Sea() = default;
 
 		virtual void updateShaders() override;
 		virtual void render() const override;

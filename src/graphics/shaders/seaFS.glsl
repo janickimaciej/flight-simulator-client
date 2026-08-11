@@ -48,17 +48,17 @@ struct SpotLight
 };
 
 in vec4 pos;
-in vec2 texturePos;
 in vec4 normalVector;
 
 uniform vec3 cameraPos;
 uniform WorldShading worldShading;
 uniform Material material;
-uniform bool isTextureEnabled;
-uniform sampler2D textureSampler;
+uniform sampler2D colorSampler;
+uniform sampler2D depthSampler;
 uniform DirectionalLight directionalLights[MAX_DIRECTIONAL_LIGHT_COUNT];
 uniform PointLight pointLights[MAX_POINT_LIGHT_COUNT];
 uniform SpotLight spotLights[MAX_SPOT_LIGHT_COUNT];
+uniform ivec2 viewportSize;
 
 out vec4 outColor;
 
@@ -111,10 +111,6 @@ void main()
 	}
 
 	vec3 surfaceColor = material.color;
-	if (isTextureEnabled)
-	{
-		surfaceColor = surfaceColor * texture(textureSampler, texturePos).xyz;
-	}
 
 	vec3 color;
 	if (material.isMetal)
@@ -128,7 +124,10 @@ void main()
 	}
 
 	color = applyFog(color);
-	outColor = vec4(color, 1);
+	vec2 fragPos = vec2(gl_FragCoord.x / viewportSize.x, gl_FragCoord.y / viewportSize.y);
+	vec3 textureColor = texture(colorSampler, fragPos).rgb;
+	float alpha = -texture(depthSampler, fragPos).r;
+	outColor = vec4(mix(textureColor, color, alpha), 1);
 }
 
 vec3 calcViewVector()

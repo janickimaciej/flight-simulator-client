@@ -1,5 +1,3 @@
-// ... – vector in global coordinate system
-
 in vec2 texturePos;
 
 uniform sampler2D textureSampler;
