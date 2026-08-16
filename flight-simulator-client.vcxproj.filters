@@ -73,7 +73,7 @@
     <ClCompile Include="core\physics\collisions\collisionTest.cpp" />
     <ClCompile Include="core\physics\simulationBufferElement.cpp" />
     <ClCompile Include="core\common\terrains\valueNoise.cpp" />
-    <ClCompile Include="src\graphics\meshes\billboardGenerator.cpp" />
+    <ClCompile Include="src\graphics\meshes\quadGenerator.cpp" />
     <ClCompile Include="src\graphics\models\textField.cpp" />
     <ClCompile Include="src\graphics\hud.cpp" />
     <ClCompile Include="src\graphics\cameras\orthographicCamera.cpp" />
@@ -93,7 +93,6 @@
     <ClCompile Include="core\physics\collisions\maps\islandMap.cpp" />
     <ClCompile Include="core\physics\collisions\maps\map.cpp" />
     <ClCompile Include="src\graphics\models\sea.cpp" />
-    <ClCompile Include="src\graphics\meshes\seaGenerator.cpp" />
     <ClCompile Include="src\graphics\framebuffer.cpp" />
     <ClCompile Include="src\graphics\screenQuad.cpp" />
   </ItemGroup>
@@ -203,7 +202,7 @@
     <ClInclude Include="core\common\mapName.hpp" />
     <ClInclude Include="core\common\valueNoise.hpp" />
     <ClInclude Include="core\common\terrains\valueNoise.hpp" />
-    <ClInclude Include="src\graphics\meshes\billboardGenerator.hpp" />
+    <ClInclude Include="src\graphics\meshes\quadGenerator.hpp" />
     <ClInclude Include="src\graphics\models\textField.hpp" />
     <ClInclude Include="src\graphics\hud.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />
@@ -225,7 +224,6 @@
     <ClInclude Include="core\physics\collisions\maps\islandMap.hpp" />
     <ClInclude Include="core\physics\collisions\maps\map.hpp" />
     <ClInclude Include="src\graphics\models\sea.hpp" />
-    <ClInclude Include="src\graphics\meshes\seaGenerator.hpp" />
     <ClInclude Include="src\graphics\framebuffer.hpp" />
     <ClInclude Include="src\graphics\screenQuad.hpp" />
   </ItemGroup>
@@ -238,8 +236,8 @@
     <None Include=".gitmodules" />
     <None Include="src\graphics\shaders\hudFS.glsl" />
     <None Include="src\graphics\shaders\hudVS.glsl" />
-    <None Include="src\graphics\shaders\seaFS.glsl" />
-    <None Include="src\graphics\shaders\seaVS.glsl" />
+    <None Include="src\graphics\shaders\waterFS.glsl" />
+    <None Include="src\graphics\shaders\waterVS.glsl" />
     <None Include="src\graphics\shaders\quadFS.glsl" />
     <None Include="src\graphics\shaders\quadVS.glsl" />
   </ItemGroup>

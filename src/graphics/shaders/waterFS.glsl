@@ -60,6 +60,7 @@ uniform SpotLight spotLights[MAX_SPOT_LIGHT_COUNT];
 uniform ivec2 viewportSize;
 uniform float nearPlane;
 uniform float farPlane;
+uniform float waterLevel;
 
 out vec4 outColor;
 
@@ -80,7 +81,7 @@ float calcCutoffCoef(float cutoffInnerRad, float cutoffOuterRad, vec3 lightVecto
 	vec3 lightDirection);
 vec3 applyFog(vec3 color);
 
-float depthToZ(float depth);
+float depthToClipZ(float depth);
 
 void main()
 {
@@ -130,10 +131,10 @@ void main()
 
 	vec2 fragPos = vec2(gl_FragCoord.x / viewportSize.x, gl_FragCoord.y / viewportSize.y);
 	float landDepth = texture(depthSampler, fragPos).r;
-	float landZ = depthToZ(landDepth);
+	float landClipZ = depthToClipZ(landDepth);
 	float waterDepth = gl_FragCoord.z;
-	float waterZ = depthToZ(waterDepth);
-	float depth = cameraPos.y * (landZ - waterZ) / (waterZ);
+	float waterClipZ = depthToClipZ(waterDepth);
+	float depth = (cameraPos.y - waterLevel) * (landClipZ - waterClipZ) / waterClipZ;
 	float alpha = 0.02 * depth;
 	outColor = vec4(color, alpha);
 }
@@ -280,7 +281,7 @@ vec3 applyFog(vec3 color)
 	return fogCoef * color + (1 - fogCoef) * worldShading.backgroundColor;
 }
 
-float depthToZ(float depth)
+float depthToClipZ(float depth)
 {
 	return -2 * farPlane * nearPlane /
 		((2 * depth - 1) * (farPlane - nearPlane) - farPlane - nearPlane);

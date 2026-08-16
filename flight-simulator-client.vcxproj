@@ -79,9 +79,8 @@
     <ClCompile Include="src\graphics\framebuffer.cpp" />
     <ClCompile Include="src\graphics\lights\pointLight.cpp" />
     <ClCompile Include="src\graphics\maps\islandMap.cpp" />
-    <ClCompile Include="src\graphics\meshes\billboardGenerator.cpp" />
+    <ClCompile Include="src\graphics\meshes\quadGenerator.cpp" />
     <ClCompile Include="src\graphics\meshes\bulletGenerator.cpp" />
-    <ClCompile Include="src\graphics\meshes\seaGenerator.cpp" />
     <ClCompile Include="src\graphics\meshes\terrainGenerator.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\jw1.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\mustang.cpp" />
@@ -204,9 +203,8 @@
     <ClInclude Include="src\graphics\framebuffer.hpp" />
     <ClInclude Include="src\graphics\lights\pointLight.hpp" />
     <ClInclude Include="src\graphics\maps\islandMap.hpp" />
-    <ClInclude Include="src\graphics\meshes\billboardGenerator.hpp" />
+    <ClInclude Include="src\graphics\meshes\quadGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\bulletGenerator.hpp" />
-    <ClInclude Include="src\graphics\meshes\seaGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\terrainGenerator.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\jw1.hpp" />
     <ClInclude Include="src\graphics\models\airplanes\mustang.hpp" />
@@ -258,8 +256,8 @@
     <None Include="src\graphics\shaders\surfaceVS.glsl" />
     <None Include="src\graphics\shaders\hudFS.glsl" />
     <None Include="src\graphics\shaders\hudVS.glsl" />
-    <None Include="src\graphics\shaders\seaFS.glsl" />
-    <None Include="src\graphics\shaders\seaVS.glsl" />
+    <None Include="src\graphics\shaders\waterFS.glsl" />
+    <None Include="src\graphics\shaders\waterVS.glsl" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Include="res\**\*.obj" />

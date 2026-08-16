@@ -2,9 +2,8 @@
 
 #include "common/terrains/maps.hpp"
 #include "graphics/config.hpp"
-#include "graphics/meshes/billboardGenerator.hpp"
 #include "graphics/meshes/bulletGenerator.hpp"
-#include "graphics/meshes/seaGenerator.hpp"
+#include "graphics/meshes/quadGenerator.hpp"
 #include "graphics/meshes/terrainGenerator.hpp"
 
 namespace Graphics
@@ -17,7 +16,7 @@ namespace Graphics
 				return BulletGenerator::generate();
 
 			case ProceduralMeshName::characterBillboard:
-				return BillboardGenerator::generate(characterSize, true);
+				return QuadGenerator::generate(characterSize, true);
 
 			case ProceduralMeshName::island:
 			{
@@ -29,10 +28,11 @@ namespace Graphics
 			}
 
 			case ProceduralMeshName::screenQuad:
-				return BillboardGenerator::generate({2, 2}, false);
+				return QuadGenerator::generate({2, 2}, false);
 
 			case ProceduralMeshName::sea:
-				return SeaGenerator::generate();
+				return QuadGenerator::generate({2 * worldCameraFarPlane, 2 * worldCameraFarPlane},
+					false);
 		}
 		return std::vector<Vertex>{};
 	}

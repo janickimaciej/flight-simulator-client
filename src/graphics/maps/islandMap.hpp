@@ -37,7 +37,5 @@ namespace Graphics
 		DirectionalLightModel m_sun;
 
 		DayNightCycle m_dayNightCycle;
-
-		void setModels();
 	};
 }

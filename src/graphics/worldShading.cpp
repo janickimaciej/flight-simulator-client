@@ -14,11 +14,11 @@ namespace Graphics
 		ShaderPrograms::surface->setUniform("worldShading.fogGradient", m_fogGradient);
 		ShaderPrograms::surface->setUniform("worldShading.fogDensity", m_fogDensity);
 
-		ShaderPrograms::sea->use();
-		ShaderPrograms::sea->setUniform("worldShading.backgroundColor", m_backgroundColor);
-		ShaderPrograms::sea->setUniform("worldShading.ambient", m_ambient);
-		ShaderPrograms::sea->setUniform("worldShading.fogGradient", m_fogGradient);
-		ShaderPrograms::sea->setUniform("worldShading.fogDensity", m_fogDensity);
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform("worldShading.backgroundColor", m_backgroundColor);
+		ShaderPrograms::water->setUniform("worldShading.ambient", m_ambient);
+		ShaderPrograms::water->setUniform("worldShading.fogGradient", m_fogGradient);
+		ShaderPrograms::water->setUniform("worldShading.fogDensity", m_fogDensity);
 
 		ShaderPrograms::light->use();
 		ShaderPrograms::light->setUniform("worldShading.backgroundColor", m_backgroundColor);

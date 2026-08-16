@@ -93,10 +93,10 @@ namespace Graphics
 		m_screenQuad.render();
 
 		glEnable(GL_DEPTH_TEST);
-		ShaderPrograms::sea->use();
-		ShaderPrograms::sea->setUniform("viewportSize", viewportSize);
-		ShaderPrograms::sea->setUniform("nearPlane", worldCameraNearPlane);
-		ShaderPrograms::sea->setUniform("farPlane", worldCameraFarPlane);
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform("viewportSize", viewportSize);
+		ShaderPrograms::water->setUniform("nearPlane", worldCameraNearPlane);
+		ShaderPrograms::water->setUniform("farPlane", worldCameraFarPlane);
 		m_framebuffer.bindDepthTexture();
 		m_map->renderWater();
 

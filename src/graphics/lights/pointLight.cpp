@@ -42,8 +42,8 @@ namespace Graphics
 			ShaderPrograms::surface->use();
 			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
 
-			ShaderPrograms::sea->use();
-			ShaderPrograms::sea->setUniform(m_prefix + "isActive", false);
+			ShaderPrograms::water->use();
+			ShaderPrograms::water->setUniform(m_prefix + "isActive", false);
 		}
 	}
 
@@ -58,13 +58,13 @@ namespace Graphics
 		ShaderPrograms::surface->setUniform(m_prefix + "attenuationConstant",
 			m_attenuationConstant);
 
-		ShaderPrograms::sea->use();
-		ShaderPrograms::sea->setUniform(m_prefix + "pos", getGlobalPos(modelMatrix));
-		ShaderPrograms::sea->setUniform(m_prefix + "color", m_color);
-		ShaderPrograms::sea->setUniform(m_prefix + "attenuationQuadratic",
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform(m_prefix + "pos", getGlobalPos(modelMatrix));
+		ShaderPrograms::water->setUniform(m_prefix + "color", m_color);
+		ShaderPrograms::water->setUniform(m_prefix + "attenuationQuadratic",
 			m_attenuationQuadratic);
-		ShaderPrograms::sea->setUniform(m_prefix + "attenuationLinear", m_attenuationLinear);
-		ShaderPrograms::sea->setUniform(m_prefix + "attenuationConstant",
+		ShaderPrograms::water->setUniform(m_prefix + "attenuationLinear", m_attenuationLinear);
+		ShaderPrograms::water->setUniform(m_prefix + "attenuationConstant",
 			m_attenuationConstant);
 	}
 
@@ -90,8 +90,8 @@ namespace Graphics
 		ShaderPrograms::surface->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
 			true);
 
-		ShaderPrograms::sea->use();
-		ShaderPrograms::sea->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
 			true);
 
 		return newId;

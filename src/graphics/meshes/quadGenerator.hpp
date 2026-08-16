@@ -8,7 +8,7 @@
 
 namespace Graphics
 {
-	class BillboardGenerator
+	class QuadGenerator
 	{
 	public:
 		static std::vector<Vertex> generate(const glm::vec2& size, bool inverted);

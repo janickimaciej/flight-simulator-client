@@ -32,8 +32,8 @@ namespace Graphics
 			ShaderPrograms::surface->use();
 			ShaderPrograms::surface->setUniform(m_prefix + "isActive", false);
 
-			ShaderPrograms::sea->use();
-			ShaderPrograms::sea->setUniform(m_prefix + "isActive", false);
+			ShaderPrograms::water->use();
+			ShaderPrograms::water->setUniform(m_prefix + "isActive", false);
 		}
 	}
 
@@ -44,10 +44,10 @@ namespace Graphics
 			getGlobalDirection(modelMatrix));
 		ShaderPrograms::surface->setUniform(m_prefix + "color", m_color);
 
-		ShaderPrograms::sea->use();
-		ShaderPrograms::sea->setUniform(m_prefix + "direction",
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform(m_prefix + "direction",
 			getGlobalDirection(modelMatrix));
-		ShaderPrograms::sea->setUniform(m_prefix + "color", m_color);
+		ShaderPrograms::water->setUniform(m_prefix + "color", m_color);
 	}
 
 	std::array<int, DirectionalLight::maxDirectionalLightCount> DirectionalLight::m_isActive{};
@@ -72,8 +72,8 @@ namespace Graphics
 		ShaderPrograms::surface->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
 			true);
 
-		ShaderPrograms::sea->use();
-		ShaderPrograms::sea->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform(prefix + "[" + std::to_string(newId) + "].isActive",
 			true);
 
 		return newId;
