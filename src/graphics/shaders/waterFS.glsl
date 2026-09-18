@@ -61,6 +61,7 @@ uniform ivec2 viewportSize;
 uniform float nearPlane;
 uniform float farPlane;
 uniform float waterLevel;
+uniform float waterTransparencyDepth;
 
 out vec4 outColor;
 
@@ -135,7 +136,7 @@ void main()
 	float waterDepth = gl_FragCoord.z;
 	float waterClipZ = depthToClipZ(waterDepth);
 	float depth = (cameraPos.y - waterLevel) * (landClipZ - waterClipZ) / waterClipZ;
-	float alpha = 0.02 * depth;
+	float alpha = depth / waterTransparencyDepth;
 	outColor = vec4(color, alpha);
 }
 

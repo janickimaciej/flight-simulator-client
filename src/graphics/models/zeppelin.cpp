@@ -16,7 +16,7 @@ namespace Graphics
 
 	const std::string fuselagePath = meshPath(modelName, "body");
 
-	const Material canvas{glm::vec3{0.9, 0.9, 0.9}, 0.75, 0.25, 10, false};
+	const Material canvas{glm::vec3{0.9f, 0.9f, 0.9f}, 0.75f, 0.25f, 10, false};
 
 	Zeppelin::Zeppelin()
 	{

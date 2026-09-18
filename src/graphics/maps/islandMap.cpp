@@ -1,6 +1,8 @@
 #include "graphics/maps/islandMap.hpp"
 
 #include "common/terrains/maps.hpp"
+#include "graphics/config.hpp"
+#include "graphics/shaderPrograms.hpp"
 
 #include <glm/glm.hpp>
 
@@ -9,7 +11,7 @@
 
 namespace Graphics
 {
-	static constexpr glm::vec3 moonLight{0.2, 0.2, 0.2};
+	static constexpr glm::vec3 moonLight{0.2f, 0.2f, 0.2f};
 	static constexpr glm::vec3 sunLight{1, 1, 1};
 
 	IslandMap::IslandMap(WorldShading& worldShading) :
@@ -38,19 +40,29 @@ namespace Graphics
 
 	void IslandMap::updateShaders()
 	{
-		m_island.updateShaders();
+		m_islandShore.updateShaders();
+		m_islandLand.updateShaders();
 		m_moon.updateShaders();
 		m_sun.updateShaders();
 	}
 
-	void IslandMap::renderWater() const
+	void IslandMap::renderWater(const glm::ivec2& viewportSize) const
 	{
+		ShaderPrograms::water->use();
+		ShaderPrograms::water->setUniform("viewportSize", viewportSize);
+		ShaderPrograms::water->setUniform("nearPlane", worldCameraNearPlane);
+		ShaderPrograms::water->setUniform("farPlane", worldCameraFarPlane);
 		m_sea.render();
+	}
+
+	void IslandMap::renderShore() const
+	{
+		m_islandShore.render();
 	}
 
 	void IslandMap::renderLand() const
 	{
-		m_island.render();
+		m_islandLand.render();
 	}
 
 	float IslandMap::getHeight(float x, float z) const

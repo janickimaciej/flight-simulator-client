@@ -2,8 +2,6 @@
 
 #include "graphics/shaderPrograms.hpp"
 
-#include <glad/glad.h>
-
 namespace Graphics
 {
 	void WorldShading::updateShaders() const
@@ -26,14 +24,14 @@ namespace Graphics
 		ShaderPrograms::light->setUniform("worldShading.fogDensity", m_fogDensity);
 	}
 
+	glm::vec3 WorldShading::getBackgroundColor() const
+	{
+		return m_backgroundColor;
+	}
+
 	void WorldShading::setBackgroundColor(const glm::vec3& backgroundColor)
 	{
 		m_backgroundColor = backgroundColor;
-	}
-
-	void WorldShading::useBackgroundColor() const
-	{
-		glClearColor(m_backgroundColor.r, m_backgroundColor.g, m_backgroundColor.b, 1.0f);
 	}
 
 	void WorldShading::setAmbient(float ambient)

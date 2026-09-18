@@ -1,5 +1,6 @@
 #include "graphics/meshes/meshGenerator.hpp"
 
+#include "common/config.hpp"
 #include "common/terrains/maps.hpp"
 #include "graphics/config.hpp"
 #include "graphics/meshes/bulletGenerator.hpp"
@@ -18,21 +19,31 @@ namespace Graphics
 			case ProceduralMeshName::characterBillboard:
 				return QuadGenerator::generate(characterSize, true);
 
-			case ProceduralMeshName::island:
-			{
-				glm::vec2 size{40000, 40000};
-				glm::vec2 spacing{50, 50};
-				std::unique_ptr<Common::Terrains::Terrain> terrain =
-					Common::Terrains::Maps::island();
-				return TerrainGenerator::generate(*terrain, size, spacing);
-			}
-
 			case ProceduralMeshName::screenQuad:
 				return QuadGenerator::generate({2, 2}, false);
 
 			case ProceduralMeshName::sea:
 				return QuadGenerator::generate({2 * worldCameraFarPlane, 2 * worldCameraFarPlane},
 					false);
+
+			case ProceduralMeshName::islandShore:
+			{
+				glm::vec2 size{40000, 40000};
+				glm::vec2 spacing{50, 50};
+				std::unique_ptr<Common::Terrains::Terrain> terrain =
+					Common::Terrains::Maps::island();
+				return TerrainGenerator::generateShore(*terrain, size, spacing, Common::waterLevel,
+					waterTransparencyDepth);
+			}
+
+			case ProceduralMeshName::islandLand:
+			{
+				glm::vec2 size{40000, 40000};
+				glm::vec2 spacing{50, 50};
+				std::unique_ptr<Common::Terrains::Terrain> terrain =
+					Common::Terrains::Maps::island();
+				return TerrainGenerator::generateLand(*terrain, size, spacing, Common::waterLevel);
+			}
 		}
 		return std::vector<Vertex>{};
 	}

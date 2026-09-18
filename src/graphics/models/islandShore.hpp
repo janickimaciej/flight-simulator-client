@@ -7,11 +7,11 @@
 
 namespace Graphics
 {
-	class Island : public Model
+	class IslandShore : public Model
 	{
 	public:
-		Island();
-		virtual ~Island() = default;
+		IslandShore();
+		virtual ~IslandShore() = default;
 
 		virtual void updateShaders() override;
 		virtual void render() const override;

@@ -24,33 +24,33 @@ namespace Graphics
 
 	Mesh::~Mesh()
 	{
-		glDeleteVertexArrays(1, &m_VAO);
-		glDeleteBuffers(1, &m_VBO);
+		glDeleteVertexArrays(1, &m_vao);
+		glDeleteBuffers(1, &m_vbo);
 	}
 
 	void Mesh::update(const std::vector<Vertex>& vertices)
 	{
 		m_vertexCount = vertices.size();
-		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(Vertex)),
 			vertices.data(), m_dynamic ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW);
 	}
 
 	void Mesh::render() const
 	{
-		glBindVertexArray(m_VAO);
+		glBindVertexArray(m_vao);
 		glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(m_vertexCount));
 		glBindVertexArray(0);
 	}
 
 	void Mesh::createBuffers(const std::vector<Vertex>& vertices)
 	{
-		glGenBuffers(1, &m_VBO);
-		glGenVertexArrays(1, &m_VAO);
+		glGenBuffers(1, &m_vbo);
+		glGenVertexArrays(1, &m_vao);
 
-		glBindVertexArray(m_VAO);
+		glBindVertexArray(m_vao);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 			reinterpret_cast<void*>(offsetof(Vertex, pos)));
 		glEnableVertexAttribArray(0);

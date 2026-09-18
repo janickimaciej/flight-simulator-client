@@ -59,7 +59,7 @@
     <ClCompile Include="src\graphics\models\airplanes\mustang.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\jw1.cpp" />
     <ClCompile Include="src\graphics\maps\islandMap.cpp" />
-    <ClCompile Include="src\graphics\models\island.cpp" />
+    <ClCompile Include="src\graphics\models\islandLand.cpp" />
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
     <ClCompile Include="core\common\terrains\hill.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
@@ -93,8 +93,11 @@
     <ClCompile Include="core\physics\collisions\maps\islandMap.cpp" />
     <ClCompile Include="core\physics\collisions\maps\map.cpp" />
     <ClCompile Include="src\graphics\models\sea.cpp" />
-    <ClCompile Include="src\graphics\framebuffer.cpp" />
+    <ClCompile Include="src\graphics\framebuffers\customFramebuffer.cpp" />
     <ClCompile Include="src\graphics\screenQuad.cpp" />
+    <ClCompile Include="src\graphics\framebuffers\framebuffer.cpp" />
+    <ClCompile Include="src\graphics\framebuffers\defaultFramebuffer.cpp" />
+    <ClCompile Include="src\graphics\models\islandShore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />
@@ -181,7 +184,7 @@
     <ClInclude Include="src\graphics\meshes\proceduralMeshName.hpp" />
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\maps\islandMap.hpp" />
-    <ClInclude Include="src\graphics\models\island.hpp" />
+    <ClInclude Include="src\graphics\models\islandLand.hpp" />
     <ClInclude Include="src\graphics\meshes\terrainGenerator.hpp" />
     <ClInclude Include="core\common\terrains\terrain.hpp" />
     <ClInclude Include="core\common\terrains\hill.hpp" />
@@ -206,7 +209,6 @@
     <ClInclude Include="src\graphics\models\textField.hpp" />
     <ClInclude Include="src\graphics\hud.hpp" />
     <ClInclude Include="src\graphics\config.hpp" />
-    <ClInclude Include="src\graphics\airplaneCameraPoss.hpp" />
     <ClInclude Include="src\graphics\cameras\orthographicCamera.hpp" />
     <ClInclude Include="core\physics\spawner.hpp" />
     <ClInclude Include="src\app\commandLineArgs.hpp" />
@@ -224,8 +226,11 @@
     <ClInclude Include="core\physics\collisions\maps\islandMap.hpp" />
     <ClInclude Include="core\physics\collisions\maps\map.hpp" />
     <ClInclude Include="src\graphics\models\sea.hpp" />
-    <ClInclude Include="src\graphics\framebuffer.hpp" />
+    <ClInclude Include="src\graphics\framebuffers\customFramebuffer.hpp" />
     <ClInclude Include="src\graphics\screenQuad.hpp" />
+    <ClInclude Include="src\graphics\framebuffers\framebuffer.hpp" />
+    <ClInclude Include="src\graphics\framebuffers\defaultFramebuffer.hpp" />
+    <ClInclude Include="src\graphics\models\islandShore.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\graphics\shaders\lightFS.glsl" />

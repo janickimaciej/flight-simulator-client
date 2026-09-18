@@ -6,8 +6,9 @@ namespace Graphics
 	{
 		bullet,
 		characterBillboard,
-		island,
 		screenQuad,
-		sea
+		sea,
+		islandShore,
+		islandLand
 	};
 }

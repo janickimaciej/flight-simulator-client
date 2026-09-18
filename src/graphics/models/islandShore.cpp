@@ -1,4 +1,4 @@
-#include "graphics/models/island.hpp"
+#include "graphics/models/islandShore.hpp"
 
 #include "graphics/assetManager.hpp"
 #include "graphics/material.hpp"
@@ -14,7 +14,7 @@
 
 namespace Graphics
 {
-	Island::Island()
+	IslandShore::IslandShore()
 	{
 		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
 		auto& textureManager = AssetManager<std::string, const Texture>::instance();
@@ -23,14 +23,14 @@ namespace Graphics
 		static const std::string modelName = "island";
 		static const std::string grassPath = texturePath(modelName, "grass");
 		m_surface = std::make_unique<Submodel>(*ShaderPrograms::surface,
-			proceduralMeshManager.get(ProceduralMeshName::island), material,
+			proceduralMeshManager.get(ProceduralMeshName::islandShore), material,
 			textureManager.get(Texture::getId(grassPath)));
 	}
 
-	void Island::updateShaders()
+	void IslandShore::updateShaders()
 	{ }
 
-	void Island::render() const
+	void IslandShore::render() const
 	{
 		ShaderPrograms::surface->use();
 		m_surface->render(getMatrix());

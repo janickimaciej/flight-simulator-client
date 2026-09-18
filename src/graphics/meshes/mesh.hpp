@@ -22,8 +22,8 @@ namespace Graphics
 	private:
 		bool m_dynamic{};
 		std::size_t m_vertexCount{};
-		unsigned int m_VBO{};
-		unsigned int m_VAO{};
+		unsigned int m_vbo{};
+		unsigned int m_vao{};
 
 		void createBuffers(const std::vector<Vertex>& vertices);
 	};

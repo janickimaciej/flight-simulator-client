@@ -1,6 +1,8 @@
 #include "graphics/models/sea.hpp"
 
+#include "common/config.hpp"
 #include "graphics/assetManager.hpp"
+#include "graphics/config.hpp"
 #include "graphics/material.hpp"
 #include "graphics/meshes/mesh.hpp"
 #include "graphics/shaderPrograms.hpp"
@@ -23,7 +25,8 @@ namespace Graphics
 	void Sea::render() const
 	{
 		ShaderPrograms::water->use();
-		ShaderPrograms::water->setUniform("waterLevel", 0.0f);
+		ShaderPrograms::water->setUniform("waterLevel", Common::waterLevel);
+		ShaderPrograms::water->setUniform("waterTransparencyDepth", waterTransparencyDepth);
 		m_surface->render(getMatrix());
 	}
 }

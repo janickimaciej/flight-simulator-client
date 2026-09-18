@@ -6,12 +6,12 @@
 #include "common/mapName.hpp"
 #include "common/sceneInfo.hpp"
 #include "graphics/cameras/camera.hpp"
-#include "graphics/framebuffer.hpp"
+#include "graphics/framebuffers/customFramebuffer.hpp"
+#include "graphics/framebuffers/defaultFramebuffer.hpp"
 #include "graphics/hud.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/models/airplanes/airplane.hpp"
 #include "graphics/models/bullet.hpp"
-#include "graphics/screenQuad.hpp"
 #include "graphics/worldShading.hpp"
 
 #include <memory>
@@ -39,14 +39,13 @@ namespace Graphics
 		std::vector<std::unique_ptr<Bullet>> m_bullets{};
 		HUD m_hud;
 
-		Framebuffer m_framebuffer;
-		ScreenQuad m_screenQuad{};
+		DefaultFramebuffer m_defaultFramebuffer;
+		CustomFramebuffer m_waterDepthFramebuffer;
 		std::unique_ptr<Camera> m_worldCamera{};
 		std::unique_ptr<Camera> m_hudCamera{};
 
 		WorldShading m_worldShading{};
 
-		void clearFramebuffer() const;
 		void addAndUpdateAirplanes(
 			const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);
 		void removeAirplanes(const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);

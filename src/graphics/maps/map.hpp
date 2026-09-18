@@ -16,7 +16,8 @@ namespace Graphics
 
 		virtual void update(const glm::vec3& cameraPos, int day, float timeOfDay) = 0;
 		virtual void updateShaders() = 0;
-		virtual void renderWater() const = 0;
+		virtual void renderWater(const glm::ivec2& viewportSize) const = 0;
+		virtual void renderShore() const = 0;
 		virtual void renderLand() const = 0;
 		virtual float getHeight(float x, float z) const = 0;
 
