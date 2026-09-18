@@ -40,29 +40,29 @@ namespace Graphics
 
 	void IslandMap::updateShaders()
 	{
-		m_islandShore.updateShaders();
-		m_islandLand.updateShaders();
+		m_island.updateShaders();
 		m_moon.updateShaders();
 		m_sun.updateShaders();
 	}
 
-	void IslandMap::renderWater(const glm::ivec2& viewportSize) const
+	void IslandMap::renderWater() const
+	{
+		ShaderPrograms::surface->use();
+		m_sea.render();
+	}
+
+	void IslandMap::blendWater(const glm::ivec2& viewportSize) const
 	{
 		ShaderPrograms::water->use();
 		ShaderPrograms::water->setUniform("viewportSize", viewportSize);
 		ShaderPrograms::water->setUniform("nearPlane", worldCameraNearPlane);
 		ShaderPrograms::water->setUniform("farPlane", worldCameraFarPlane);
-		m_sea.render();
-	}
-
-	void IslandMap::renderShore() const
-	{
-		m_islandShore.render();
+		m_sea.blend();
 	}
 
 	void IslandMap::renderLand() const
 	{
-		m_islandLand.render();
+		m_island.render();
 	}
 
 	float IslandMap::getHeight(float x, float z) const

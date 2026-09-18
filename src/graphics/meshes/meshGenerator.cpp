@@ -26,23 +26,14 @@ namespace Graphics
 				return QuadGenerator::generate({2 * worldCameraFarPlane, 2 * worldCameraFarPlane},
 					false);
 
-			case ProceduralMeshName::islandShore:
+			case ProceduralMeshName::island:
 			{
 				glm::vec2 size{40000, 40000};
 				glm::vec2 spacing{50, 50};
 				std::unique_ptr<Common::Terrains::Terrain> terrain =
 					Common::Terrains::Maps::island();
-				return TerrainGenerator::generateShore(*terrain, size, spacing, Common::waterLevel,
+				return TerrainGenerator::generate(*terrain, size, spacing, Common::waterLevel,
 					waterTransparencyDepth);
-			}
-
-			case ProceduralMeshName::islandLand:
-			{
-				glm::vec2 size{40000, 40000};
-				glm::vec2 spacing{50, 50};
-				std::unique_ptr<Common::Terrains::Terrain> terrain =
-					Common::Terrains::Maps::island();
-				return TerrainGenerator::generateLand(*terrain, size, spacing, Common::waterLevel);
 			}
 		}
 		return std::vector<Vertex>{};

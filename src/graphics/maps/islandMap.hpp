@@ -5,8 +5,7 @@
 #include "graphics/dayNightCycle.hpp"
 #include "graphics/maps/map.hpp"
 #include "graphics/models/directionalLightModel.hpp"
-#include "graphics/models/islandLand.hpp"
-#include "graphics/models/islandShore.hpp"
+#include "graphics/models/island.hpp"
 #include "graphics/models/sea.hpp"
 #include "graphics/worldShading.hpp"
 
@@ -22,8 +21,8 @@ namespace Graphics
 
 		virtual void update(const glm::vec3& cameraPos, int day, float timeOfDay) override;
 		virtual void updateShaders() override;
-		virtual void renderWater(const glm::ivec2& viewportSize) const override;
-		virtual void renderShore() const override;
+		virtual void renderWater() const override;
+		virtual void blendWater(const glm::ivec2& viewportSize) const override;
 		virtual void renderLand() const override;
 		virtual float getHeight(float x, float z) const override;
 
@@ -33,8 +32,7 @@ namespace Graphics
 			Common::Terrains::Maps::island();
 
 		Sea m_sea{};
-		IslandShore m_islandShore{};
-		IslandLand m_islandLand{};
+		Island m_island{};
 
 		DirectionalLightModel m_moon;
 		DirectionalLightModel m_sun;

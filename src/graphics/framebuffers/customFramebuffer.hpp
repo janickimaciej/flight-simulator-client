@@ -18,8 +18,8 @@ namespace Graphics
 		CustomFramebuffer& colorTexture();
 		CustomFramebuffer& depthTexture();
 
-		void bindColorTexture() const;
-		void bindDepthTexture() const;
+		void bindColorTexture(unsigned int unit = 0) const;
+		void bindDepthTexture(unsigned int unit = 0) const;
 
 	private:
 		bool m_multisample{};

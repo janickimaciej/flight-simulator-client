@@ -40,6 +40,11 @@ namespace Graphics
 		glUniform1i(glGetUniformLocation(m_id, name.c_str()), static_cast<int>(value));
 	}
 
+	void ShaderProgram::setUniform(const std::string& name, int value) const
+	{
+		glUniform1i(glGetUniformLocation(m_id, name.c_str()), value);
+	}
+
 	void ShaderProgram::setUniform(const std::string& name, float value) const
 	{
 		glUniform1f(glGetUniformLocation(m_id, name.c_str()), value);

@@ -37,15 +37,17 @@ namespace Graphics
 		return *this;
 	}
 
-	void CustomFramebuffer::bindColorTexture() const
+	void CustomFramebuffer::bindColorTexture(unsigned int unit) const
 	{
 		if (!m_colorBuffer.has_value()) return;
+		glActiveTexture(GL_TEXTURE0 + unit);
 		glBindTexture(GL_TEXTURE_2D, *m_colorBuffer);
 	}
 
-	void CustomFramebuffer::bindDepthTexture() const
+	void CustomFramebuffer::bindDepthTexture(unsigned int unit) const
 	{
 		if (!m_depthBuffer.has_value()) return;
+		glActiveTexture(GL_TEXTURE0 + unit);
 		glBindTexture(GL_TEXTURE_2D, *m_depthBuffer);
 	}
 

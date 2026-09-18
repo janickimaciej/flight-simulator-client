@@ -19,6 +19,10 @@ namespace Graphics::ShaderPrograms
 		quad = std::make_unique<const ShaderProgram>(path("quadVS"), path("quadFS"));
 		surface = std::make_unique<const ShaderProgram>(path("surfaceVS"), path("surfaceFS"));
 		water = std::make_unique<const ShaderProgram>(path("waterVS"), path("waterFS"));
+
+		water->use();
+		water->setUniform("colorSampler", 0);
+		water->setUniform("depthSampler", 1);
 	}
 
 	std::string path(const std::string& shaderName)

@@ -14,9 +14,12 @@ namespace Graphics
 		auto& proceduralMeshManager = AssetManager<ProceduralMeshName, const Mesh>::instance();
 
 		static const Material material{glm::vec3{0.54f, 0.54f, 0.9f}, 0.5f, 0.25f, 20, false};
-		m_surface = std::make_unique<Submodel>(*ShaderPrograms::water,
-			proceduralMeshManager.get(ProceduralMeshName::sea), material);
+		std::shared_ptr<const Mesh> waterSurface =
+			proceduralMeshManager.get(ProceduralMeshName::sea);
+		m_surface = std::make_unique<Submodel>(*ShaderPrograms::surface, waterSurface, material);
+		m_blendSurface = std::make_unique<Submodel>(*ShaderPrograms::water, waterSurface, material);
 		m_surface->rotatePitch(glm::radians(-90.0f));
+		m_blendSurface->rotatePitch(glm::radians(-90.0f));
 	}
 
 	void Sea::updateShaders()
@@ -24,9 +27,15 @@ namespace Graphics
 
 	void Sea::render() const
 	{
+		ShaderPrograms::surface->use();
+		m_surface->render(getMatrix());
+	}
+
+	void Sea::blend() const
+	{
 		ShaderPrograms::water->use();
 		ShaderPrograms::water->setUniform("waterLevel", Common::waterLevel);
 		ShaderPrograms::water->setUniform("waterTransparencyDepth", waterTransparencyDepth);
-		m_surface->render(getMatrix());
+		m_blendSurface->render(getMatrix());
 	}
 }

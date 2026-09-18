@@ -2,10 +2,11 @@
 
 #include <array>
 #include <cmath>
+#include <cstddef>
 
 namespace Graphics
 {
-	std::vector<Vertex> TerrainGenerator::generateShore(const Common::Terrains::Terrain& terrain,
+	std::vector<Vertex> TerrainGenerator::generate(const Common::Terrains::Terrain& terrain,
 		const glm::vec2& size, const glm::vec2& spacing, float waterLevel,
 		float waterTransparencyDepth)
 	{
@@ -13,32 +14,14 @@ namespace Graphics
 			[waterLevel, waterTransparencyDepth] (const std::array<Vertex, 3>& triangle)
 			{
 				float minTransparencyLevel = waterLevel - waterTransparencyDepth;
-				for (int i = 0; i < 3; ++i)
+				for (std::size_t i = 0; i < 3; ++i)
 				{
-					if (triangle[i].pos.y >= minTransparencyLevel && triangle[i].pos.y < waterLevel)
+					if (triangle[i].pos.y >= minTransparencyLevel)
 					{
 						return true;
 					}
 				}
 				return false;
-			};
-		return generate(terrain, size, spacing, triangleAcceptance);
-	}
-
-	std::vector<Vertex> TerrainGenerator::generateLand(const Common::Terrains::Terrain& terrain,
-		const glm::vec2& size, const glm::vec2& spacing, float waterLevel)
-	{
-		auto triangleAcceptance =
-			[waterLevel] (const std::array<Vertex, 3>& triangle)
-			{
-				for (int i = 0; i < 3; ++i)
-				{
-					if (triangle[i].pos.y < waterLevel)
-					{
-						return false;
-					}
-				}
-				return true;
 			};
 		return generate(terrain, size, spacing, triangleAcceptance);
 	}

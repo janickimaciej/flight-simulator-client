@@ -8,7 +8,6 @@ namespace Graphics
 		characterBillboard,
 		screenQuad,
 		sea,
-		islandShore,
-		islandLand
+		island
 	};
 }

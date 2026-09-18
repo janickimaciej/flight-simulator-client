@@ -20,7 +20,7 @@ namespace Graphics
 		Texture(const std::string& id);
 		~Texture();
 
-		void use() const;
+		void bind(unsigned int unit = 0) const;
 
 		static std::string getId(const std::string& path, Wrapping wrappingS = Wrapping::repeat,
 			Wrapping wrappingT = Wrapping::repeat);

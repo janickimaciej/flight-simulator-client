@@ -15,8 +15,10 @@ namespace Graphics
 
 		virtual void updateShaders() override;
 		virtual void render() const override;
+		void blend() const;
 
 	private:
 		std::unique_ptr<Submodel> m_surface{};
+		std::unique_ptr<Submodel> m_blendSurface{};
 	};
 }

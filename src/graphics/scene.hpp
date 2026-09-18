@@ -40,7 +40,7 @@ namespace Graphics
 		HUD m_hud;
 
 		DefaultFramebuffer m_defaultFramebuffer;
-		CustomFramebuffer m_waterDepthFramebuffer;
+		CustomFramebuffer m_waterFramebuffer;
 		std::unique_ptr<Camera> m_worldCamera{};
 		std::unique_ptr<Camera> m_hudCamera{};
 

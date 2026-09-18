@@ -33,7 +33,7 @@ namespace Graphics
 		updateShaders(modelMatrix * getSubmodelMatrix());
 		if (m_texture)
 		{
-			m_texture->use();
+			m_texture->bind();
 		}
 
 		if (isWindingOrderClockwise())

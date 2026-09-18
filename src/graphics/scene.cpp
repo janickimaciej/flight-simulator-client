@@ -18,9 +18,9 @@ namespace Graphics
 		m_ownAirplaneType{ownAirplaneType},
 		m_hud{},
 		m_defaultFramebuffer{viewportSize},
-		m_waterDepthFramebuffer{viewportSize}
+		m_waterFramebuffer{viewportSize}
 	{
-		m_waterDepthFramebuffer.colorTexture().depthTexture();
+		m_waterFramebuffer.colorTexture().depthTexture();
 
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_MULTISAMPLE);
@@ -66,22 +66,26 @@ namespace Graphics
 	void Scene::render(const glm::ivec2& viewportSize)
 	{
 		m_defaultFramebuffer.setSize(viewportSize);
-		m_waterDepthFramebuffer.setSize(viewportSize);
+		m_waterFramebuffer.setSize(viewportSize);
 		float aspectRatio = static_cast<float>(viewportSize.x) / viewportSize.y;
 		m_worldCamera->use(aspectRatio);
 
 		m_defaultFramebuffer.bind();
 		m_defaultFramebuffer.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT,
 			m_worldShading.getBackgroundColor());
-		glEnable(GL_DEPTH_TEST);
-		m_map->renderShore();
-
-		Framebuffer::blit(GL_DEPTH_BUFFER_BIT, m_defaultFramebuffer, m_waterDepthFramebuffer);
+		glDisable(GL_DEPTH_TEST);
+		m_map->renderWater();
+		Framebuffer::blit(GL_COLOR_BUFFER_BIT, m_defaultFramebuffer, m_waterFramebuffer);
 
 		m_defaultFramebuffer.bind();
-		m_waterDepthFramebuffer.bindDepthTexture();
-		m_map->renderWater(viewportSize);
+		glEnable(GL_DEPTH_TEST);
 		m_map->renderLand();
+		Framebuffer::blit(GL_DEPTH_BUFFER_BIT, m_defaultFramebuffer, m_waterFramebuffer);
+
+		m_defaultFramebuffer.bind();
+		m_waterFramebuffer.bindColorTexture(0);
+		m_waterFramebuffer.bindDepthTexture(1);
+		m_map->blendWater(viewportSize);
 		for (const std::pair<const int, std::unique_ptr<Airplane>>& airplane : m_airplanes)
 		{
 			airplane.second->render();

@@ -87,10 +87,9 @@
     <ClCompile Include="src\graphics\models\airplanes\jw1.cpp" />
     <ClCompile Include="src\graphics\models\airplanes\mustang.cpp" />
     <ClCompile Include="src\graphics\models\bullet.cpp" />
-    <ClCompile Include="src\graphics\models\islandLand.cpp" />
     <ClCompile Include="src\graphics\meshes\meshGenerator.cpp" />
     <ClCompile Include="src\graphics\hud.cpp" />
-    <ClCompile Include="src\graphics\models\islandShore.cpp" />
+    <ClCompile Include="src\graphics\models\island.cpp" />
     <ClCompile Include="src\graphics\models\sea.cpp" />
     <ClCompile Include="src\graphics\screenQuad.cpp" />
     <ClCompile Include="src\graphics\shaderPrograms.cpp" />
@@ -214,10 +213,9 @@
     <ClInclude Include="src\graphics\models\airplanes\mustang.hpp" />
     <ClInclude Include="src\graphics\models\bullet.hpp" />
     <ClInclude Include="src\graphics\hud.hpp" />
-    <ClInclude Include="src\graphics\models\islandLand.hpp" />
     <ClInclude Include="src\graphics\meshes\meshGenerator.hpp" />
     <ClInclude Include="src\graphics\meshes\proceduralMeshName.hpp" />
-    <ClInclude Include="src\graphics\models\islandShore.hpp" />
+    <ClInclude Include="src\graphics\models\island.hpp" />
     <ClInclude Include="src\graphics\screenQuad.hpp" />
     <ClInclude Include="src\graphics\models\sea.hpp" />
     <ClInclude Include="src\graphics\shaderPrograms.hpp" />

@@ -13,11 +13,9 @@ namespace Graphics
 	class TerrainGenerator
 	{
 	public:
-		static std::vector<Vertex> generateShore(const Common::Terrains::Terrain& terrain,
+		static std::vector<Vertex> generate(const Common::Terrains::Terrain& terrain,
 			const glm::vec2& size, const glm::vec2& spacing, float waterLevel,
 			float waterTransparencyDepth);
-		static std::vector<Vertex> generateLand(const Common::Terrains::Terrain& terrain,
-			const glm::vec2& size, const glm::vec2& spacing, float waterLevel);
 
 	private:
 		static std::vector<Vertex> generate(const Common::Terrains::Terrain& terrain,
