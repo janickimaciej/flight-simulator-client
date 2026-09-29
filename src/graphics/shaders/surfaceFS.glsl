@@ -49,7 +49,7 @@ struct SpotLight
 
 in vec4 pos;
 in vec2 texturePos;
-in vec4 normalVector;
+in vec3 normalVector;
 
 uniform vec3 cameraPos;
 uniform WorldShading worldShading;
@@ -64,15 +64,15 @@ out vec4 outColor;
 
 vec3 calcViewVector();
 
-vec3 calcDiffuseDirectionalLight(int i);
-vec3 calcSpecularDirectionalLight(int i, vec3 viewVector);
-vec3 calcDiffusePointLight(int i);
-vec3 calcSpecularPointLight(int i, vec3 viewVector);
-vec3 calcDiffuseSpotLight(int i);
-vec3 calcSpecularSpotLight(int i, vec3 viewVector);
+vec3 calcDiffuseDirectionalLight(int i, vec3 unitNormalVector);
+vec3 calcSpecularDirectionalLight(int i, vec3 unitNormalVector, vec3 viewVector);
+vec3 calcDiffusePointLight(int i, vec3 unitNormalVector);
+vec3 calcSpecularPointLight(int i, vec3 unitNormalVector, vec3 viewVector);
+vec3 calcDiffuseSpotLight(int i, vec3 unitNormalVector);
+vec3 calcSpecularSpotLight(int i, vec3 unitNormalVector, vec3 viewVector);
 
-float calcDiffuseBrightness(vec3 lightVector);
-float calcSpecularBrightness(vec3 viewVector, vec3 lightVector);
+float calcDiffuseBrightness(vec3 unitNormalVector, vec3 lightVector);
+float calcSpecularBrightness(vec3 unitNormalVector, vec3 viewVector, vec3 lightVector);
 float calcAttenuation(float attenuationQuadratic, float attenuationLinear,
 	float attenuationConstant, vec3 pos, vec3 lightPos);
 float calcCutoffCoef(float cutoffInnerRad, float cutoffOuterRad, vec3 lightVector,
@@ -81,6 +81,8 @@ vec3 applyFog(vec3 color);
 
 void main()
 {
+	vec3 unitNormalVector = normalize(normalVector);
+
 	vec3 ambient = vec3(worldShading.ambient, worldShading.ambient, worldShading.ambient);
 	vec3 diffuse = vec3(0, 0, 0);
 	vec3 specular = vec3(0, 0, 0);
@@ -89,24 +91,24 @@ void main()
 	{
 		if (directionalLights[i].isActive)
 		{
-			diffuse += calcDiffuseDirectionalLight(i);
-			specular += calcSpecularDirectionalLight(i, viewVector);
+			diffuse += calcDiffuseDirectionalLight(i, unitNormalVector);
+			specular += calcSpecularDirectionalLight(i, unitNormalVector, viewVector);
 		}
 	}
 	for (int i = 0; i < MAX_POINT_LIGHT_COUNT; ++i)
 	{
 		if (pointLights[i].isActive)
 		{
-			diffuse += calcDiffusePointLight(i);
-			specular += calcSpecularPointLight(i, viewVector);
+			diffuse += calcDiffusePointLight(i, unitNormalVector);
+			specular += calcSpecularPointLight(i, unitNormalVector, viewVector);
 		}
 	}
 	for (int i = 0; i < MAX_SPOT_LIGHT_COUNT; ++i)
 	{
 		if (spotLights[i].isActive)
 		{
-			diffuse += calcDiffuseSpotLight(i);
-			specular += calcSpecularSpotLight(i, viewVector);
+			diffuse += calcDiffuseSpotLight(i, unitNormalVector);
+			specular += calcSpecularSpotLight(i, unitNormalVector, viewVector);
 		}
 	}
 
@@ -136,29 +138,29 @@ vec3 calcViewVector()
 	return normalize(cameraPos - pos.xyz);
 }
 
-vec3 calcDiffuseDirectionalLight(int i)
+vec3 calcDiffuseDirectionalLight(int i, vec3 unitNormalVector)
 {
 	vec3 lightVector = directionalLights[i].direction;
 
-	float brightness = calcDiffuseBrightness(lightVector);
+	float brightness = calcDiffuseBrightness(unitNormalVector, lightVector);
 
 	return brightness * directionalLights[i].color;
 }
 
-vec3 calcSpecularDirectionalLight(int i, vec3 viewVector)
+vec3 calcSpecularDirectionalLight(int i, vec3 unitNormalVector, vec3 viewVector)
 {
 	vec3 lightVector = directionalLights[i].direction;
 
-	float brightness = calcSpecularBrightness(viewVector, lightVector);
+	float brightness = calcSpecularBrightness(unitNormalVector, viewVector, lightVector);
 
 	return brightness * directionalLights[i].color;
 }
 
-vec3 calcDiffusePointLight(int i)
+vec3 calcDiffusePointLight(int i, vec3 unitNormalVector)
 {
 	vec3 lightVector = normalize(pointLights[i].pos - pos.xyz);
 
-	float brightness = calcDiffuseBrightness(lightVector);
+	float brightness = calcDiffuseBrightness(unitNormalVector, lightVector);
 	float attenuation = calcAttenuation(pointLights[i].attenuationQuadratic,
 		pointLights[i].attenuationLinear, pointLights[i].attenuationConstant, pos.xyz,
 		pointLights[i].pos);
@@ -166,11 +168,11 @@ vec3 calcDiffusePointLight(int i)
 	return attenuation * brightness * pointLights[i].color;
 }
 
-vec3 calcSpecularPointLight(int i, vec3 viewVector)
+vec3 calcSpecularPointLight(int i, vec3 unitNormalVector, vec3 viewVector)
 {
 	vec3 lightVector = normalize(pointLights[i].pos - pos.xyz);
 
-	float brightness = calcSpecularBrightness(viewVector, lightVector);
+	float brightness = calcSpecularBrightness(unitNormalVector, viewVector, lightVector);
 	float attenuation = calcAttenuation(pointLights[i].attenuationQuadratic,
 		pointLights[i].attenuationLinear, pointLights[i].attenuationConstant, pos.xyz,
 		pointLights[i].pos);
@@ -178,7 +180,7 @@ vec3 calcSpecularPointLight(int i, vec3 viewVector)
 	return attenuation * brightness * pointLights[i].color;
 }
 
-vec3 calcDiffuseSpotLight(int i)
+vec3 calcDiffuseSpotLight(int i, vec3 unitNormalVector)
 {
 	vec3 lightVector = normalize(spotLights[i].pos - pos.xyz);
 
@@ -189,7 +191,7 @@ vec3 calcDiffuseSpotLight(int i)
 		return vec3(0, 0, 0);
 	}
 
-	float brightness = calcDiffuseBrightness(lightVector);
+	float brightness = calcDiffuseBrightness(unitNormalVector, lightVector);
 	float attenuation = calcAttenuation(spotLights[i].attenuationQuadratic,
 		spotLights[i].attenuationLinear, spotLights[i].attenuationConstant, pos.xyz,
 		spotLights[i].pos);
@@ -197,7 +199,7 @@ vec3 calcDiffuseSpotLight(int i)
 	return attenuation * cutoffCoef * brightness * spotLights[i].color;
 }
 
-vec3 calcSpecularSpotLight(int i, vec3 viewVector)
+vec3 calcSpecularSpotLight(int i, vec3 unitNormalVector, vec3 viewVector)
 {
 	vec3 lightVector = normalize(spotLights[i].pos - pos.xyz);
 
@@ -208,7 +210,7 @@ vec3 calcSpecularSpotLight(int i, vec3 viewVector)
 		return vec3(0, 0, 0);
 	}
 
-	float brightness = calcSpecularBrightness(viewVector, lightVector);
+	float brightness = calcSpecularBrightness(unitNormalVector, viewVector, lightVector);
 	float attenuation = calcAttenuation(spotLights[i].attenuationQuadratic,
 		spotLights[i].attenuationLinear, spotLights[i].attenuationConstant, pos.xyz,
 		spotLights[i].pos);
@@ -216,9 +218,9 @@ vec3 calcSpecularSpotLight(int i, vec3 viewVector)
 	return attenuation * cutoffCoef * brightness * spotLights[i].color;
 }
 
-float calcDiffuseBrightness(vec3 lightVector)
+float calcDiffuseBrightness(vec3 unitNormalVector, vec3 lightVector)
 {
-	float cosNormalLight = dot(normalVector.xyz, lightVector);
+	float cosNormalLight = dot(unitNormalVector, lightVector);
 
 	if (cosNormalLight < 0)
 	{
@@ -228,10 +230,10 @@ float calcDiffuseBrightness(vec3 lightVector)
 	return material.diffuse * cosNormalLight;
 }
 
-float calcSpecularBrightness(vec3 viewVector, vec3 lightVector)
+float calcSpecularBrightness(vec3 unitNormalVector, vec3 viewVector, vec3 lightVector)
 {
-	float cosNormalLight = dot(normalVector.xyz, lightVector);
-	vec3 reflectionVector = normalize(2 * cosNormalLight * normalVector.xyz - lightVector);
+	float cosNormalLight = dot(unitNormalVector, lightVector);
+	vec3 reflectionVector = normalize(2 * cosNormalLight * unitNormalVector - lightVector);
 	float cosViewReflection = dot(viewVector, reflectionVector);
 
 	if (cosViewReflection < 0)

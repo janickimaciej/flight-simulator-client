@@ -7,12 +7,12 @@ uniform mat4 projectionViewMatrix;
 
 out vec4 pos;
 out vec2 texturePos;
-out vec4 normalVector;
+out vec3 normalVector;
 
 void main()
 {
 	pos = modelSubmodelMatrix * vec4(inPosMesh, 1);
 	texturePos = inTexturePos;
-	normalVector = normalize(modelSubmodelMatrix * vec4(inNormalVectorMesh, 0));
+	normalVector = normalize(modelSubmodelMatrix * vec4(inNormalVectorMesh, 0)).xyz;
 	gl_Position = projectionViewMatrix * pos;
 }
