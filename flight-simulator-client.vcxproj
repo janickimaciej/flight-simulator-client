@@ -31,7 +31,7 @@
     <ClCompile Include="core\common\terrains\plateau.cpp" />
     <ClCompile Include="core\common\terrains\product.cpp" />
     <ClCompile Include="core\common\terrains\sum.cpp" />
-    <ClCompile Include="core\common\terrains\valueNoise.cpp" />
+    <ClCompile Include="core\common\terrains\noise.cpp" />
     <ClCompile Include="core\common\terrains\waveX.cpp" />
     <ClCompile Include="core\common\terrains\waveZ.cpp" />
     <ClCompile Include="core\common\frame.cpp" />
@@ -132,6 +132,8 @@
     <ClInclude Include="core\common\bulletInfo.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\mapName.hpp" />
+    <ClInclude Include="core\common\noises\noise.hpp" />
+    <ClInclude Include="core\common\noises\perlinNoise.hpp" />
     <ClInclude Include="core\common\sceneInfo.hpp" />
     <ClInclude Include="core\common\terrains\constant.hpp" />
     <ClInclude Include="core\common\terrains\maps.hpp" />
@@ -142,11 +144,11 @@
     <ClInclude Include="core\common\state.hpp" />
     <ClInclude Include="core\common\terrains\product.hpp" />
     <ClInclude Include="core\common\terrains\sum.hpp" />
-    <ClInclude Include="core\common\terrains\valueNoise.hpp" />
+    <ClInclude Include="core\common\terrains\noise.hpp" />
     <ClInclude Include="core\common\terrains\waveX.hpp" />
     <ClInclude Include="core\common\terrains\waveZ.hpp" />
     <ClInclude Include="core\common\frame.hpp" />
-    <ClInclude Include="core\common\valueNoise.hpp" />
+    <ClInclude Include="core\common\noises\valueNoise.hpp" />
     <ClInclude Include="core\physics\airplaneDefinition.hpp" />
     <ClInclude Include="core\physics\airplaneDefinitions.hpp" />
     <ClInclude Include="core\physics\airplaneParams\airplaneParams.hpp" />

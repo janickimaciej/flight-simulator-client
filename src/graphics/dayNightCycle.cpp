@@ -33,9 +33,9 @@ namespace Graphics
 		static constexpr glm::vec3 dayBackgroundColor{0.6f, 0.6f, 1};
 		static constexpr float nightAmbient = 0.1f;
 		static constexpr float dayAmbient = 0.5f;
-		static constexpr float fogGradient = 2;
-		static constexpr float lowFogDensity = 0.0001f;
-		static constexpr float highFogDensity = 0.0005f;
+		static constexpr float fogGradient = 5;
+		static constexpr float lowFogDensity = 0.00005f;
+		static constexpr float highFogDensity = 0.0002f;
 		static constexpr glm::vec3 moonLight{0.1f, 0.1f, 0.1f};
 		static constexpr glm::vec3 sunLight{1.2f, 1.2f, 1.2f};
 

@@ -42,5 +42,5 @@ vec3 applyFog(vec3 color)
 {
 	float distance = length(pos.xyz - cameraPos);
 	float fogCoef = exp(-pow((worldShading.fogDensity * distance), worldShading.fogGradient));
-	return fogCoef * color + (1 - fogCoef) * worldShading.backgroundColor;
+	return mix(worldShading.backgroundColor, color, fogCoef);
 }
