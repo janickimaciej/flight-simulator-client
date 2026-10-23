@@ -10,7 +10,7 @@ namespace Graphics
 	public:
 		Framebuffer(const glm::ivec2& size);
 		virtual ~Framebuffer() = default;
-		
+
 		void setSize(const glm::ivec2& size);
 		void bind() const;
 		void bind(const glm::ivec2& viewportOffset, const glm::ivec2& viewportSize) const;

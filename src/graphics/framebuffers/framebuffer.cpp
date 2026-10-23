@@ -5,7 +5,7 @@ namespace Graphics
 	Framebuffer::Framebuffer(const glm::ivec2& size) :
 		m_size{size}
 	{ }
-		
+
 	void Framebuffer::setSize(const glm::ivec2& size)
 	{
 		if (size == m_size) return;

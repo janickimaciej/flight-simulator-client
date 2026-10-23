@@ -8,7 +8,7 @@ namespace Graphics
 	{
 	public:
 		void updateShaders() const;
-		
+
 		glm::vec3 getBackgroundColor() const;
 		void setBackgroundColor(const glm::vec3& backgroundColor);
 		void setAmbient(float ambient);

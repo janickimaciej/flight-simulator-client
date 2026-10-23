@@ -87,15 +87,6 @@ namespace Graphics
 		m_rightLight->updateShaders(getMatrix());
 	}
 
-	void Mustang::render() const
-	{
-		ShaderPrograms::surface->use();
-		renderSurfaces();
-
-		ShaderPrograms::light->use();
-		renderLights();
-	}
-
 	void Mustang::setCtrl(const Common::AirplaneCtrl& airplaneCtrl)
 	{
 		static constexpr float maxPropellerAngVelocityDeg = 2 * 360;
@@ -131,18 +122,18 @@ namespace Graphics
 		Airplane::setHP(hp);
 	}
 
-	void Mustang::renderSurfaces() const
+	void Mustang::renderSurfaces(const glm::mat4& modelMatrix) const
 	{
-		m_cap->render(getMatrix());
-		m_propeller->render(getMatrix());
-		m_body->render(getMatrix());
-		m_joins->render(getMatrix());
-		m_tires->render(getMatrix());
+		m_cap->render(modelMatrix);
+		m_propeller->render(modelMatrix);
+		m_body->render(modelMatrix);
+		m_joins->render(modelMatrix);
+		m_tires->render(modelMatrix);
 	}
 
-	void Mustang::renderLights() const
+	void Mustang::renderLights(const glm::mat4& modelMatrix) const
 	{
-		m_leftLightSubmodel->render(getMatrix());
-		m_rightLightSubmodel->render(getMatrix());
+		m_leftLightSubmodel->render(modelMatrix);
+		m_rightLightSubmodel->render(modelMatrix);
 	}
 }

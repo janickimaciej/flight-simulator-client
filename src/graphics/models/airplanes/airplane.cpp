@@ -2,6 +2,7 @@
 
 #include "graphics/models/airplanes/jw1.hpp"
 #include "graphics/models/airplanes/mustang.hpp"
+#include "graphics/shaderPrograms.hpp"
 
 namespace Graphics
 {
@@ -16,6 +17,28 @@ namespace Graphics
 				return std::make_unique<JW1>();
 		}
 		return nullptr;
+	}
+
+	void Airplane::render() const
+	{
+		glm::mat4 modelMatrix = getMatrix();
+
+		ShaderPrograms::surface->use();
+		renderSurfaces(modelMatrix);
+
+		ShaderPrograms::light->use();
+		renderLights(modelMatrix);
+	}
+
+	void Airplane::renderLocally() const
+	{
+		glm::mat4 modelMatrix{1};
+
+		ShaderPrograms::surface->use();
+		renderSurfaces(modelMatrix);
+
+		ShaderPrograms::light->use();
+		renderLights(modelMatrix);
 	}
 
 	int Airplane::getHP() const

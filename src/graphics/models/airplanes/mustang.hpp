@@ -17,7 +17,6 @@ namespace Graphics
 		virtual ~Mustang() = default;
 
 		virtual void updateShaders() override;
-		virtual void render() const override;
 		virtual void setCtrl(const Common::AirplaneCtrl& airplaneCtrl) override;
 		virtual void setHP(int hp) override;
 
@@ -35,7 +34,7 @@ namespace Graphics
 		bool m_isDestroyed = false;
 		float m_propellerAngVelocityDeg{};
 
-		void renderSurfaces() const;
-		void renderLights() const;
+		virtual void renderSurfaces(const glm::mat4& modelMatrix) const override;
+		virtual void renderLights(const glm::mat4& modelMatrix) const override;
 	};
 }

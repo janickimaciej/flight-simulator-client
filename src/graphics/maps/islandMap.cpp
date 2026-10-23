@@ -55,8 +55,8 @@ namespace Graphics
 	{
 		ShaderPrograms::water->use();
 		ShaderPrograms::water->setUniform("viewportSize", viewportSize);
-		ShaderPrograms::water->setUniform("nearPlane", worldCameraNearPlane);
-		ShaderPrograms::water->setUniform("farPlane", worldCameraFarPlane);
+		ShaderPrograms::water->setUniform("nearPlane", cameraNearPlane);
+		ShaderPrograms::water->setUniform("farPlane", cameraFarPlane);
 		m_sea.blend();
 	}
 

@@ -23,7 +23,7 @@ namespace Graphics
 				return QuadGenerator::generate({2, 2}, false);
 
 			case ProceduralMeshName::sea:
-				return QuadGenerator::generate({2 * worldCameraFarPlane, 2 * worldCameraFarPlane},
+				return QuadGenerator::generate({2 * cameraFarPlane, 2 * cameraFarPlane},
 					false);
 
 			case ProceduralMeshName::island:

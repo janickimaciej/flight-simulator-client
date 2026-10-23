@@ -57,7 +57,7 @@ namespace Graphics
 					vertices.push_back(triangle1[1]);
 					vertices.push_back(triangle1[2]);
 				}
-				
+
 				std::array<Vertex, 3> triangle2{};
 				triangle2[0] = getVertex(i, j, terrain, size, spacing, lowTexturePos);
 				triangle2[1] = getVertex(i, j + 1, terrain, size, spacing,

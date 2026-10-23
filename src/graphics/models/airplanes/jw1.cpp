@@ -140,15 +140,6 @@ namespace Graphics
 	void JW1::updateShaders()
 	{ }
 
-	void JW1::render() const
-	{
-		ShaderPrograms::surface->use();
-		renderSurfaces();
-
-		ShaderPrograms::light->use();
-		renderLights();
-	}
-
 	void JW1::setCtrl(const Common::AirplaneCtrl& airplaneCtrl)
 	{
 		m_leftElevator->resetRotation();
@@ -225,31 +216,31 @@ namespace Graphics
 		Airplane::setHP(hp);
 	}
 
-	void JW1::renderSurfaces() const
+	void JW1::renderSurfaces(const glm::mat4& modelMatrix) const
 	{
-		m_cone->render(getMatrix());
-		m_gun->render(getMatrix());
-		m_cockpit->render(getMatrix());
-		m_fuselage->render(getMatrix());
-		m_leftEngine->render(getMatrix());
-		m_rightEngine->render(getMatrix());
-		m_leftNozzle->render(getMatrix());
-		m_rightNozzle->render(getMatrix());
-		m_leftWing->render(getMatrix());
-		m_rightWing->render(getMatrix());
-		m_leftVStab->render(getMatrix());
-		m_rightVStab->render(getMatrix());
-		m_leftElevator->render(getMatrix());
-		m_rightElevator->render(getMatrix());
-		m_leftRudder->render(getMatrix());
-		m_rightRudder->render(getMatrix());
-		m_leftAileron->render(getMatrix());
-		m_rightAileron->render(getMatrix());
+		m_cone->render(modelMatrix);
+		m_gun->render(modelMatrix);
+		m_cockpit->render(modelMatrix);
+		m_fuselage->render(modelMatrix);
+		m_leftEngine->render(modelMatrix);
+		m_rightEngine->render(modelMatrix);
+		m_leftNozzle->render(modelMatrix);
+		m_rightNozzle->render(modelMatrix);
+		m_leftWing->render(modelMatrix);
+		m_rightWing->render(modelMatrix);
+		m_leftVStab->render(modelMatrix);
+		m_rightVStab->render(modelMatrix);
+		m_leftElevator->render(modelMatrix);
+		m_rightElevator->render(modelMatrix);
+		m_leftRudder->render(modelMatrix);
+		m_rightRudder->render(modelMatrix);
+		m_leftAileron->render(modelMatrix);
+		m_rightAileron->render(modelMatrix);
 	}
 
-	void JW1::renderLights() const
+	void JW1::renderLights(const glm::mat4& modelMatrix) const
 	{
-		m_leftNozzleGlass->render(getMatrix());
-		m_rightNozzleGlass->render(getMatrix());
+		m_leftNozzleGlass->render(modelMatrix);
+		m_rightNozzleGlass->render(modelMatrix);
 	}
 }

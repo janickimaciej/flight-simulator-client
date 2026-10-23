@@ -42,6 +42,7 @@ namespace Graphics
 		DefaultFramebuffer m_defaultFramebuffer;
 		CustomFramebuffer m_waterFramebuffer;
 		std::unique_ptr<Camera> m_worldCamera{};
+		std::unique_ptr<Camera> m_ownAirplaneCamera{};
 		std::unique_ptr<Camera> m_hudCamera{};
 
 		WorldShading m_worldShading{};

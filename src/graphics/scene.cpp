@@ -2,6 +2,7 @@
 
 #include "graphics/cameras/modelCamera.hpp"
 #include "graphics/cameras/orthographicCamera.hpp"
+#include "graphics/cameras/perspectiveCamera.hpp"
 #include "graphics/config.hpp"
 
 #include <glad/glad.h>
@@ -29,11 +30,19 @@ namespace Graphics
 
 		m_airplanes.insert({ownId, Airplane::createAirplane(ownAirplaneType)});
 
-		m_worldCamera = std::make_unique<ModelCamera>(worldCameraNearPlane, worldCameraFarPlane,
-			glm::radians(worldCameraFOVYDeg), *m_airplanes.at(ownId));
+		static constexpr float cameraFOVYDeg = 60;
 		static constexpr float cameraPitchDeg = -10;
+		static constexpr glm::vec3 cameraPos{0, 10, 25};
+
+		m_worldCamera = std::make_unique<ModelCamera>(cameraNearPlane, cameraFarPlane,
+			glm::radians(cameraFOVYDeg), *m_airplanes.at(ownId));
 		m_worldCamera->rotatePitch(glm::radians(cameraPitchDeg));
-		m_worldCamera->setPos({0, 10, 25});
+		m_worldCamera->setPos(cameraPos);
+
+		m_ownAirplaneCamera = std::make_unique<PerspectiveCamera>(cameraNearPlane, cameraFarPlane,
+			glm::radians(cameraFOVYDeg));
+		m_ownAirplaneCamera->rotatePitch(glm::radians(cameraPitchDeg));
+		m_ownAirplaneCamera->setPos(cameraPos);
 
 		static constexpr float hudCameraNearPlane = 0;
 		static constexpr float hudCameraFarPlane = 1;
@@ -88,12 +97,16 @@ namespace Graphics
 		m_map->blendWater(viewportSize);
 		for (const std::pair<const int, std::unique_ptr<Airplane>>& airplane : m_airplanes)
 		{
+			if (airplane.first == m_ownId) continue;
 			airplane.second->render();
 		}
 		for (const std::unique_ptr<Bullet>& bullet : m_bullets)
 		{
 			bullet->render();
 		}
+
+		m_ownAirplaneCamera->use(aspectRatio);
+		m_airplanes.at(m_ownId)->renderLocally();
 
 		glDisable(GL_DEPTH_TEST);
 		m_hudCamera->use(aspectRatio);
