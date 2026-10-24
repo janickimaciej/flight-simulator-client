@@ -34,7 +34,6 @@
     <ClCompile Include="src\app\udp\udpCommunication.cpp" />
     <ClCompile Include="src\graphics\path.cpp" />
     <ClCompile Include="src\app\commandLineArg.cpp" />
-    <ClCompile Include="src\app\exitCode.cpp" />
     <ClCompile Include="core\app\udp\udpFrameType.cpp" />
     <ClCompile Include="core\app\udp\udpSerializer.cpp" />
     <ClCompile Include="core\common\airplaneType.cpp" />
@@ -97,6 +96,7 @@
     <ClCompile Include="src\graphics\framebuffers\framebuffer.cpp" />
     <ClCompile Include="src\graphics\framebuffers\defaultFramebuffer.cpp" />
     <ClCompile Include="src\graphics\models\island.cpp" />
+    <ClCompile Include="src\app\exitCode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\cameras\camera.hpp" />

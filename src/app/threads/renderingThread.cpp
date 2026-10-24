@@ -25,13 +25,10 @@ namespace App
 		);
 
 		m_window.setControllerType(args.controllerType);
-		NetworkThread networkThread{m_exitSignal, args.gameMode, args.airplaneType,
-			args.map, args.serverIPAddress, args.serverNetworkThreadPort,
-			args.serverPhysicsThreadPort, args.clientNetworkThreadPort,
-			args.clientPhysicsThreadPort, m_ownInput, m_renderingBuffer, semaphore};
+		NetworkThread networkThread{m_exitSignal, args, m_ownInput, m_renderingBuffer, semaphore};
 
 		semaphore->acquire();
-		if (!m_exitSignal.shouldStop())
+		if (!m_exitSignal.exiting())
 		{
 			m_renderingBuffer->initialize(m_window.getViewportSize(), args.airplaneType, args.map);
 			Graphics::Time::initialize();
@@ -42,7 +39,7 @@ namespace App
 
 	void RenderingThread::mainLoop()
 	{
-		while (!m_exitSignal.shouldStop())
+		while (!m_exitSignal.exiting())
 		{
 			if (m_window.shouldClose())
 			{

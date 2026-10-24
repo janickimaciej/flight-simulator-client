@@ -10,25 +10,21 @@
 
 namespace App
 {
-	NetworkThread::NetworkThread(ExitSignal& exitSignal, GameMode gameMode,
-		Common::AirplaneType airplaneType, Common::MapName map,
-		const std::string& serverIPAddress, int serverNetworkThreadPort,
-		int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort,
+	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args,
 		OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 		const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal}
 	{
-		if (gameMode == GameMode::multiplayer)
+		if (args.gameMode == GameMode::multiplayer)
 		{
-			m_udpCommunication = std::make_unique<UDPCommunication>(serverIPAddress,
-				serverNetworkThreadPort, serverPhysicsThreadPort, clientNetworkThreadPort,
-				clientPhysicsThreadPort);
+			m_udpCommunication = std::make_unique<UDPCommunication>(args.serverIPAddress,
+				args.serverNetworkThreadPort, args.serverPhysicsThreadPort,
+				args.clientNetworkThreadPort, args.clientPhysicsThreadPort);
 		}
 		m_thread = std::thread(
-			[this, gameMode, airplaneType, map, &ownInput, &renderingBuffer,
-				renderingThreadSemaphore]
+			[this, args, &ownInput, &renderingBuffer, renderingThreadSemaphore]
 			{
-				this->start(gameMode, airplaneType, map, ownInput, renderingBuffer,
+				this->start(args.gameMode, args.airplaneType, args.map, ownInput, renderingBuffer,
 					std::move(renderingThreadSemaphore));
 			});
 	}
@@ -143,7 +139,7 @@ namespace App
 
 	void NetworkThread::mainLoopMultiplayer()
 	{
-		while (!m_exitSignal.shouldStop())
+		while (!m_exitSignal.exiting())
 		{
 			Physics::Timestamp sendTimestamp{};
 			Physics::Timestamp receiveTimestamp{};

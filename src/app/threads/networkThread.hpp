@@ -1,5 +1,6 @@
 #pragma once
 
+#include "app/commandLineArgs.hpp"
 #include "app/exitSignal.hpp"
 #include "app/gameMode.hpp"
 #include "app/ownInput.hpp"
@@ -27,11 +28,8 @@ namespace App
 	class NetworkThread
 	{
 	public:
-		NetworkThread(ExitSignal& exitSignal, GameMode gameMode,
-			Common::AirplaneType airplaneType, Common::MapName map,
-			const std::string& serverIPAddress, int serverNetworkThreadPort,
-			int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort,
-			OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args, OwnInput& ownInput,
+			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 			const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore);
 
 		void join();
