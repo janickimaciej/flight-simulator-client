@@ -42,7 +42,7 @@ namespace Graphics
 
 		std::vector<std::shared_ptr<const Texture>> m_textureLocks{};
 
-		float m_lastUpdateTime = 1;
+		float m_timeSinceLastUpdate = 1;
 		float m_prevAspectRatio{};
 
 		void refresh(TextField& textField, int value, int numberOfDigits, bool isSigned);

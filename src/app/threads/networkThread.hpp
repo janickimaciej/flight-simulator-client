@@ -14,8 +14,8 @@
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
 #include "physics/spawner.hpp"
+#include "physics/simulationStep.hpp"
 #include "physics/timestamp.hpp"
-#include "physics/timestep.hpp"
 
 #include <memory>
 #include <semaphore>
@@ -30,7 +30,7 @@ namespace App
 	public:
 		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args, OwnInput& ownInput,
 			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
-			const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore);
+			const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore);
 
 		void join();
 
@@ -44,12 +44,12 @@ namespace App
 		Physics::Spawner m_spawner{};
 
 		Physics::Notification m_notification{m_simulationClock};
-		Physics::Timestep m_frameCutoff{};
+		Physics::SimulationStep m_frameCutoff{};
 		std::unique_ptr<UDPCommunication> m_udpCommunication;
 
 		void start(GameMode gameMode, Common::AirplaneType airplaneType, Common::MapName map,
 			OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
-			std::shared_ptr<std::binary_semaphore> renderingThreadSemaphore);
+			std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore);
 		bool startMultiplayer(Common::AirplaneType airplaneType, Common::MapName map,
 			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer);
 		void startSingleplayer(Common::AirplaneType airplaneType, Common::MapName map,
@@ -58,9 +58,9 @@ namespace App
 
 		void handleControlFrame(const Physics::Timestamp& sendTimestamp,
 			const Physics::Timestamp& receiveTimestamp, const Physics::Timestamp& serverTimestamp,
-			const Physics::Timestep& timestep, int playerId,
+			const Physics::SimulationStep& simulationStep, int playerId,
 			const Physics::PlayerInput& playerInput);
-		void handleStateFrame(const Physics::Timestep& timestep,
+		void handleStateFrame(const Physics::SimulationStep& simulationStep,
 			const std::unordered_map<int, Physics::PlayerInfo>& playerInfos);
 	};
 }

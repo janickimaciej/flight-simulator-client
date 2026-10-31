@@ -15,6 +15,7 @@ namespace App
 		static std::unique_ptr<Controller> getController(ControllerType type, GLFWwindow* window);
 
 		Controller(GLFWwindow* window);
+		virtual ~Controller() = default;
 
 		Physics::PlayerInput getCurrInput();
 

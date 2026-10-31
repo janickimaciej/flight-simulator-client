@@ -8,7 +8,7 @@
 #include "physics/notification.hpp"
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
-#include "physics/timestep.hpp"
+#include "physics/simulationStep.hpp"
 
 #include <memory>
 #include <semaphore>
@@ -24,7 +24,7 @@ namespace App
 			Physics::SimulationBuffer& simulationBuffer, int ownId,
 			Physics::Notification& notification, Graphics::RenderingBuffer& renderingBuffer,
 			OwnInput& ownInput, UDPCommunication* udpCommunication,
-			const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore);
+			const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore);
 
 		void join();
 
@@ -41,12 +41,12 @@ namespace App
 
 		Graphics::RenderingBuffer& m_renderingBuffer;
 		OwnInput& m_ownInput;
-		Physics::Timestep m_newestStateFrameTimestep{};
+		Physics::SimulationStep m_newestStateFrameSimulationStep{};
 
 		UDPCommunication* m_udpCommunication;
 
-		void start(std::shared_ptr<std::binary_semaphore> renderingThreadSemaphore);
-		void mainLoop(const Physics::Timestep& initialTimestep);
-		void sleepIfFuture(const Physics::Timestep& timestep);
+		void start(std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore);
+		void mainLoop(const Physics::SimulationStep& initialSimulationStep);
+		void sleepIfFuture(const Physics::SimulationStep& simulationStep);
 	};
 }

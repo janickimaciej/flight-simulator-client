@@ -12,7 +12,7 @@ namespace App
 		Physics::SimulationBuffer& simulationBuffer, int ownId, Physics::Notification& notification,
 		Graphics::RenderingBuffer& renderingBuffer, OwnInput& ownInput,
 		UDPCommunication* udpCommunication,
-		const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore) :
+		const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal},
 		m_gameMode{gameMode},
 		m_simulationClock{simulationClock},
@@ -35,62 +35,63 @@ namespace App
 		m_thread.join();
 	}
 
-	void PhysicsThread::start(std::shared_ptr<std::binary_semaphore> renderingThreadSemaphore)
+	void PhysicsThread::start(std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore)
 	{
-		Physics::Timestep initialTimestep{};
+		Physics::SimulationStep initialSimulationStep{};
 
-		m_notification.forceGetNotification(initialTimestep);
+		m_notification.forceGetNotification(initialSimulationStep);
 
-		m_simulationBuffer.writeControlFrame(initialTimestep, m_ownId, Physics::PlayerInput{});
-		m_simulationBuffer.update(initialTimestep);
+		m_simulationBuffer.writeControlFrame(initialSimulationStep, m_ownId,
+			Physics::PlayerInput{});
+		m_simulationBuffer.update(initialSimulationStep);
 
-		Common::SceneInfo sceneInfo = m_simulationBuffer.getSceneInfo(initialTimestep);
+		Common::SceneInfo sceneInfo = m_simulationBuffer.getSceneInfo(initialSimulationStep);
 		m_renderingBuffer.updateBuffer(std::move(sceneInfo));
 		renderingThreadSemaphore->release();
 
-		m_newestStateFrameTimestep = initialTimestep;
-		mainLoop(initialTimestep);
+		m_newestStateFrameSimulationStep = initialSimulationStep;
+		mainLoop(initialSimulationStep);
 	}
 
-	void PhysicsThread::mainLoop(const Physics::Timestep& initialTimestep)
+	void PhysicsThread::mainLoop(const Physics::SimulationStep& initialSimulationStep)
 	{
-		Physics::Timestep timestep = initialTimestep;
+		Physics::SimulationStep simulationStep = initialSimulationStep;
 		while (!m_exitSignal.exiting())
 		{
-			timestep = timestep.next();
-			m_notification.getNotification(timestep);
-			sleepIfFuture(timestep);
+			simulationStep = simulationStep.next();
+			m_notification.getNotification(simulationStep);
+			sleepIfFuture(simulationStep);
 
-			if (timestep > m_newestStateFrameTimestep)
+			if (simulationStep > m_newestStateFrameSimulationStep)
 			{
 				Physics::PlayerInput ownInput = m_ownInput.getOwnInput();
-				m_simulationBuffer.writeOwnInput(timestep, ownInput);
+				m_simulationBuffer.writeOwnInput(simulationStep, ownInput);
 
-				m_simulationBuffer.update(timestep);
+				m_simulationBuffer.update(simulationStep);
 
-				Common::SceneInfo sceneInfo = m_simulationBuffer.getSceneInfo(timestep);
+				Common::SceneInfo sceneInfo = m_simulationBuffer.getSceneInfo(simulationStep);
 				m_renderingBuffer.updateBuffer(std::move(sceneInfo));
 
 				if (m_gameMode == GameMode::multiplayer)
 				{
-					m_udpCommunication->sendControlFrame(timestep, m_ownId, ownInput);
+					m_udpCommunication->sendControlFrame(simulationStep, m_ownId, ownInput);
 				}
 
-				m_newestStateFrameTimestep = timestep;
+				m_newestStateFrameSimulationStep = simulationStep;
 			}
 			else
 			{
-				m_simulationBuffer.update(timestep);
+				m_simulationBuffer.update(simulationStep);
 			}
 		}
 	}
 
-	void PhysicsThread::sleepIfFuture(const Physics::Timestep& timestep)
+	void PhysicsThread::sleepIfFuture(const Physics::SimulationStep& simulationStep)
 	{
-		Physics::Timestep currTimestep = m_simulationClock.getTime();
-		while (currTimestep < timestep)
+		Physics::SimulationStep currSimulationStep = m_simulationClock.getTime();
+		while (currSimulationStep < simulationStep)
 		{
-			currTimestep = m_simulationClock.getTime();
+			currSimulationStep = m_simulationClock.getTime();
 		}
 	}
 }

@@ -42,7 +42,7 @@ namespace Graphics
 		}
 		else
 		{
-			std::shared_ptr<Asset> asset = std::make_shared<Asset>(key);
+			auto asset = std::make_shared<Asset>(key);
 			m_pool.insert({key, asset});
 			return asset;
 		}

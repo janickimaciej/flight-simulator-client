@@ -57,9 +57,9 @@ namespace Graphics
 
 	void HUD::update(const Airplane& ownAirplane, const Map& map, int playerCount)
 	{
-		m_lastUpdateTime += Time::getDeltaTime();
+		m_timeSinceLastUpdate += Time::getDeltaTime();
 		static constexpr float refreshTime = 0.5f;
-		if (m_lastUpdateTime >= refreshTime)
+		if (m_timeSinceLastUpdate >= refreshTime)
 		{
 			Common::State state = ownAirplane.getState();
 			int fps = Time::getFPS();
@@ -74,7 +74,10 @@ namespace Graphics
 				static_cast<int>((state.orientation * state.velocity).y), 4, true);
 			refresh(*m_airspeedNumber, static_cast<int>(3.6f * glm::length(state.velocity)), 4,
 				false);
-			m_lastUpdateTime = 0;
+		}
+		while (m_timeSinceLastUpdate >= refreshTime)
+		{
+			m_timeSinceLastUpdate -= refreshTime;
 		}
 	}
 

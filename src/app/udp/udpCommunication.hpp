@@ -4,8 +4,8 @@
 #include "common/airplaneType.hpp"
 #include "physics/playerInfo.hpp"
 #include "physics/playerInput.hpp"
+#include "physics/simulationStep.hpp"
 #include "physics/timestamp.hpp"
-#include "physics/timestep.hpp"
 
 #include <asio/asio.hpp>
 
@@ -27,18 +27,18 @@ namespace App
 			int serverPhysicsThreadPort, int clientNetworkThreadPort, int clientPhysicsThreadPort);
 
 		void sendInitReqFrame(Common::AirplaneType airplaneType);
-		void sendControlFrame(const Physics::Timestep& timestep, int playerId,
+		void sendControlFrame(const Physics::SimulationStep& simulationStep, int playerId,
 			const Physics::PlayerInput& playerInput);
 		void sendKeepaliveFrames();
 
 		bool receiveInitResFrame(Physics::Timestamp& sendTimestamp,
 			Physics::Timestamp& receiveTimestamp, Physics::Timestamp& serverTimestamp,
 			int& playerId);
-		bool receiveStateFrameWithOwnInfo(Physics::Timestep& timestep,
+		bool receiveStateFrameWithOwnInfo(Physics::SimulationStep& simulationStep,
 			std::unordered_map<int, Physics::PlayerInfo>& playerInfos, int ownId);
 		bool receiveControlOrStateFrameWithOwnInfo(Physics::Timestamp& sendTimestamp,
 			Physics::Timestamp& receiveTimestamp, Physics::Timestamp& serverTimestamp,
-			UDPFrameType& udpFrameType, Physics::Timestep& timestep, int& playerId,
+			UDPFrameType& udpFrameType, Physics::SimulationStep& simulationStep, int& playerId,
 			Physics::PlayerInput& playerInput,
 			std::unordered_map<int, Physics::PlayerInfo>& playerInfos, int ownId);
 

@@ -11,6 +11,7 @@ namespace App
 	{
 	public:
 		Gamepad(GLFWwindow* window);
+		virtual ~Gamepad() = default;
 
 	private:
 		static bool m_wasDecreaseThrustPressed;

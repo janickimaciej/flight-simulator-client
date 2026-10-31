@@ -3,7 +3,6 @@
 #include "app/exitCode.hpp"
 #include "app/threads/physicsThread.hpp"
 #include "app/udp/udpFrameType.hpp"
-#include "common/config.hpp"
 #include "physics/airplaneDefinitions.hpp"
 
 #include <utility>
@@ -12,7 +11,7 @@ namespace App
 {
 	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args,
 		OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
-		const std::shared_ptr<std::binary_semaphore>& renderingThreadSemaphore) :
+		const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal}
 	{
 		if (args.gameMode == GameMode::multiplayer)
@@ -37,7 +36,7 @@ namespace App
 	void NetworkThread::start(GameMode gameMode, Common::AirplaneType airplaneType,
 		Common::MapName map, OwnInput& ownInput,
 		std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
-		std::shared_ptr<std::binary_semaphore> renderingThreadSemaphore)
+		std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore)
 	{
 		if (gameMode == GameMode::multiplayer)
 		{
@@ -60,8 +59,7 @@ namespace App
 		}
 		else
 		{
-			std::shared_ptr<std::binary_semaphore> semaphore =
-				std::make_shared<std::binary_semaphore>(0);
+			auto semaphore = std::make_shared<std::counting_semaphore<1>>(0);
 			m_exitSignal.registerOnExit(
 				[semaphore] ()
 				{
@@ -99,18 +97,18 @@ namespace App
 		m_simulationBuffer = std::make_unique<Physics::SimulationBuffer>(m_ownId, map);
 		renderingBuffer = std::make_unique<Graphics::RenderingBuffer>(m_ownId);
 
-		Physics::Timestep initialTimestep{};
+		Physics::SimulationStep initialSimulationStep{};
 		std::unordered_map<int, Physics::PlayerInfo> playerInfos{};
-		if (!m_udpCommunication->receiveStateFrameWithOwnInfo(initialTimestep, playerInfos,
+		if (!m_udpCommunication->receiveStateFrameWithOwnInfo(initialSimulationStep, playerInfos,
 			m_ownId))
 		{
 			m_exitSignal.exit(ExitCode::failedToConnect);
 			return false;
 		}
-		m_simulationBuffer->writeStateFrame(initialTimestep, playerInfos);
-		m_frameCutoff = initialTimestep;
+		m_simulationBuffer->writeStateFrame(initialSimulationStep, playerInfos);
+		m_frameCutoff = initialSimulationStep;
 
-		m_notification.setNotification(initialTimestep, true);
+		m_notification.setNotification(initialSimulationStep, true);
 
 		return true;
 	}
@@ -122,7 +120,7 @@ namespace App
 		m_simulationBuffer = std::make_unique<Physics::SimulationBuffer>(ownId, map);
 		renderingBuffer = std::make_unique<Graphics::RenderingBuffer>(ownId);
 
-		Physics::Timestep initialTimestep = m_simulationClock.getTime();
+		Physics::SimulationStep initialSimulationStep = m_simulationClock.getTime();
 
 		Physics::PlayerInfo ownInfo;
 
@@ -132,9 +130,9 @@ namespace App
 
 		std::unordered_map<int, Physics::PlayerInfo> playerInfos;
 		playerInfos.insert({ownId, ownInfo});
-		m_simulationBuffer->writeStateFrame(initialTimestep, std::move(playerInfos));
+		m_simulationBuffer->writeStateFrame(initialSimulationStep, std::move(playerInfos));
 
-		m_notification.setNotification(initialTimestep, true);
+		m_notification.setNotification(initialSimulationStep, true);
 	}
 
 	void NetworkThread::mainLoopMultiplayer()
@@ -145,48 +143,50 @@ namespace App
 			Physics::Timestamp receiveTimestamp{};
 			Physics::Timestamp serverTimestamp{};
 			UDPFrameType udpFrameType{};
-			Physics::Timestep timestep{};
+			Physics::SimulationStep simulationStep{};
 			int playerId{};
 			Physics::PlayerInput playerInput{};
 			std::unordered_map<int, Physics::PlayerInfo> playerInfos{};
 
 			if (!m_udpCommunication->receiveControlOrStateFrameWithOwnInfo(sendTimestamp,
-				receiveTimestamp, serverTimestamp, udpFrameType, timestep, playerId, playerInput,
-				playerInfos, m_ownId))
+				receiveTimestamp, serverTimestamp, udpFrameType, simulationStep, playerId,
+				playerInput, playerInfos, m_ownId))
 			{
 				m_exitSignal.exit(ExitCode::connectionLost);
 				return;
 			}
 
-			static constexpr Physics::Timestep frameAgeCutoffOffset{0,
-				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
-			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;
+			static constexpr Physics::SimulationStep frameAgeCutoffOffset{0,
+				static_cast<unsigned int>(Physics::SimulationStep::stepsPerSecond * 0.9f)};
+			Physics::SimulationStep frameAgeCutoff =
+				m_simulationClock.getTime() - frameAgeCutoffOffset;
 			if (m_frameCutoff < frameAgeCutoff)
 			{
 				m_frameCutoff = frameAgeCutoff;
 			}
 
-			if (timestep <= m_frameCutoff)
+			if (simulationStep <= m_frameCutoff)
 			{
 				continue;
 			}
 
 			if (udpFrameType == UDPFrameType::control)
 			{
-				handleControlFrame(sendTimestamp, receiveTimestamp, serverTimestamp, timestep,
+				handleControlFrame(sendTimestamp, receiveTimestamp, serverTimestamp, simulationStep,
 					playerId, playerInput);
 			}
 			else if (udpFrameType == UDPFrameType::state)
 			{
 				m_udpCommunication->sendKeepaliveFrames();
-				handleStateFrame(timestep, playerInfos);
+				handleStateFrame(simulationStep, playerInfos);
 			}
 		}
 	}
 
 	void NetworkThread::handleControlFrame(const Physics::Timestamp& sendTimestamp,
 		const Physics::Timestamp& receiveTimestamp, const Physics::Timestamp& serverTimestamp,
-		const Physics::Timestep& timestep, int playerId, const Physics::PlayerInput& playerInput)
+		const Physics::SimulationStep& simulationStep, int playerId,
+		const Physics::PlayerInput& playerInput)
 	{
 		if (playerId == m_ownId)
 		{
@@ -195,17 +195,17 @@ namespace App
 		}
 		else
 		{
-			m_simulationBuffer->writeControlFrame(timestep, playerId, playerInput);
-			m_notification.setNotification(timestep, false);
+			m_simulationBuffer->writeControlFrame(simulationStep, playerId, playerInput);
+			m_notification.setNotification(simulationStep, false);
 		}
 	}
 
-	void NetworkThread::handleStateFrame(const Physics::Timestep& timestep,
+	void NetworkThread::handleStateFrame(const Physics::SimulationStep& simulationStep,
 		const std::unordered_map<int, Physics::PlayerInfo>& playerInfos)
 	{
-		m_frameCutoff = timestep;
+		m_frameCutoff = simulationStep;
 
-		m_simulationBuffer->writeStateFrame(timestep, playerInfos);
-		m_notification.setNotification(timestep, true);
+		m_simulationBuffer->writeStateFrame(simulationStep, playerInfos);
+		m_notification.setNotification(simulationStep, true);
 	}
 }

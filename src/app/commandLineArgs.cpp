@@ -19,7 +19,7 @@ namespace App
 		}
 
 		int gameModeIndex = std::stoi(argv[toSizeT(CommandLineArg::gameMode)]);
-		if (gameModeIndex < 0 || gameModeIndex > 1)
+		if (gameModeIndex < 0 || gameModeIndex >= gameModeCount)
 		{
 			return false;
 		}

@@ -1,5 +1,7 @@
 #include "graphics/time.hpp"
 
+#include <cmath>
+
 namespace Graphics
 {
 	void Time::initialize()
@@ -22,7 +24,7 @@ namespace Graphics
 
 	int Time::getFPS()
 	{
-		return static_cast<int>(1.0f / m_deltaTime.count() + 0.5f);
+		return static_cast<int>(std::round(1.0f / m_deltaTime.count()));
 	}
 
 	std::chrono::time_point<std::chrono::system_clock> Time::m_time{};

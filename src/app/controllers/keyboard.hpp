@@ -11,6 +11,7 @@ namespace App
 	{
 	public:
 		Keyboard(GLFWwindow* window);
+		virtual ~Keyboard() = default;
 
 	private:
 		static bool m_wasDecreaseThrustPressed;

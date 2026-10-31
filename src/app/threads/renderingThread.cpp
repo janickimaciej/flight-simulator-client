@@ -15,8 +15,7 @@ namespace App
 
 	void RenderingThread::start(const CommandLineArgs& args)
 	{
-		std::shared_ptr<std::binary_semaphore> semaphore =
-			std::make_shared<std::binary_semaphore>(0);
+		auto semaphore = std::make_shared<std::counting_semaphore<2>>(0);
 		m_exitSignal.registerOnExit(
 			[semaphore] ()
 			{
