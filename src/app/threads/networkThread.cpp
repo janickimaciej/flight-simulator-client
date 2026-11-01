@@ -156,7 +156,7 @@ namespace App
 				return;
 			}
 
-			static constexpr Physics::SimulationStep frameAgeCutoffOffset{0,
+			static const Physics::SimulationStep frameAgeCutoffOffset{0,
 				static_cast<unsigned int>(Physics::SimulationStep::stepsPerSecond * 0.9f)};
 			Physics::SimulationStep frameAgeCutoff =
 				m_simulationClock.getTime() - frameAgeCutoffOffset;
