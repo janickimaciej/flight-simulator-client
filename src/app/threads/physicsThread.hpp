@@ -2,14 +2,15 @@
 
 #include "app/exitSignal.hpp"
 #include "app/gameMode.hpp"
-#include "app/ownInput.hpp"
 #include "app/udp/udpCommunication.hpp"
 #include "graphics/renderingBuffer.hpp"
 #include "physics/notification.hpp"
+#include "physics/playerInput.hpp"
 #include "physics/simulationBuffer.hpp"
 #include "physics/simulationClock.hpp"
 #include "physics/simulationStep.hpp"
 
+#include <atomic>
 #include <memory>
 #include <semaphore>
 #include <thread>
@@ -23,7 +24,7 @@ namespace App
 			const Physics::SimulationClock& simulationClock,
 			Physics::SimulationBuffer& simulationBuffer, int ownId,
 			Physics::Notification& notification, Graphics::RenderingBuffer& renderingBuffer,
-			OwnInput& ownInput, UDPCommunication* udpCommunication,
+			std::atomic<Physics::PlayerInput>& ownInput, UDPCommunication* udpCommunication,
 			const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore);
 
 		void join();
@@ -40,7 +41,7 @@ namespace App
 		int m_ownId{};
 
 		Graphics::RenderingBuffer& m_renderingBuffer;
-		OwnInput& m_ownInput;
+		std::atomic<Physics::PlayerInput>& m_ownInput;
 		Physics::SimulationStep m_newestStateFrameSimulationStep{};
 
 		UDPCommunication* m_udpCommunication;

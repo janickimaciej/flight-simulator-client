@@ -10,7 +10,8 @@
 namespace App
 {
 	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args,
-		OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+		std::atomic<Physics::PlayerInput>& ownInput,
+		std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 		const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal}
 	{
@@ -34,7 +35,7 @@ namespace App
 	}
 
 	void NetworkThread::start(GameMode gameMode, Common::AirplaneType airplaneType,
-		Common::MapName map, OwnInput& ownInput,
+		Common::MapName map, std::atomic<Physics::PlayerInput>& ownInput,
 		std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 		std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore)
 	{

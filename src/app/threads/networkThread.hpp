@@ -3,7 +3,6 @@
 #include "app/commandLineArgs.hpp"
 #include "app/exitSignal.hpp"
 #include "app/gameMode.hpp"
-#include "app/ownInput.hpp"
 #include "app/udp/udpCommunication.hpp"
 #include "common/airplaneType.hpp"
 #include "common/mapName.hpp"
@@ -17,6 +16,7 @@
 #include "physics/simulationStep.hpp"
 #include "physics/timestamp.hpp"
 
+#include <atomic>
 #include <memory>
 #include <semaphore>
 #include <string>
@@ -28,7 +28,8 @@ namespace App
 	class NetworkThread
 	{
 	public:
-		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args, OwnInput& ownInput,
+		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args,
+			std::atomic<Physics::PlayerInput>& ownInput,
 			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 			const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore);
 
@@ -48,7 +49,8 @@ namespace App
 		std::unique_ptr<UDPCommunication> m_udpCommunication;
 
 		void start(GameMode gameMode, Common::AirplaneType airplaneType, Common::MapName map,
-			OwnInput& ownInput, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+			std::atomic<Physics::PlayerInput>& ownInput,
+			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
 			std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore);
 		bool startMultiplayer(Common::AirplaneType airplaneType, Common::MapName map,
 			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer);

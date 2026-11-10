@@ -65,7 +65,6 @@
     <ClCompile Include="src\app\controllers\keyboard.cpp" />
     <ClCompile Include="src\app\exitCode.cpp" />
     <ClCompile Include="src\app\threads\networkThread.cpp" />
-    <ClCompile Include="src\app\ownInput.cpp" />
     <ClCompile Include="src\app\threads\physicsThread.cpp" />
     <ClCompile Include="src\app\threads\renderingThread.cpp" />
     <ClCompile Include="src\app\udp\udpCommunication.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="src\app\exitCode.hpp" />
     <ClInclude Include="src\app\gameMode.hpp" />
     <ClInclude Include="src\app\threads\networkThread.hpp" />
-    <ClInclude Include="src\app\ownInput.hpp" />
     <ClInclude Include="src\app\threads\physicsThread.hpp" />
     <ClInclude Include="src\app\threads\renderingThread.hpp" />
     <ClInclude Include="src\app\udp\udpCommunication.hpp" />

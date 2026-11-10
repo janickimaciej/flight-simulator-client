@@ -27,7 +27,6 @@
     <ClCompile Include="src\graphics\maps\map.cpp" />
     <ClCompile Include="src\graphics\time.cpp" />
     <ClCompile Include="src\graphics\renderingBuffer.cpp" />
-    <ClCompile Include="src\app\ownInput.cpp" />
     <ClCompile Include="src\app\threads\networkThread.cpp" />
     <ClCompile Include="src\app\threads\physicsThread.cpp" />
     <ClCompile Include="src\app\threads\renderingThread.cpp" />
@@ -127,7 +126,6 @@
     <ClInclude Include="src\graphics\renderingBuffer.hpp" />
     <ClInclude Include="src\graphics\time.hpp" />
     <ClInclude Include="src\app\controllers\controllerType.hpp" />
-    <ClInclude Include="src\app\ownInput.hpp" />
     <ClInclude Include="src\app\threads\renderingThread.hpp" />
     <ClInclude Include="src\app\threads\physicsThread.hpp" />
     <ClInclude Include="src\app\threads\networkThread.hpp" />

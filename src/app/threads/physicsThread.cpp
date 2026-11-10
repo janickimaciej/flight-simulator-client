@@ -10,7 +10,7 @@ namespace App
 	PhysicsThread::PhysicsThread(ExitSignal& exitSignal, GameMode gameMode,
 		const Physics::SimulationClock& simulationClock,
 		Physics::SimulationBuffer& simulationBuffer, int ownId, Physics::Notification& notification,
-		Graphics::RenderingBuffer& renderingBuffer, OwnInput& ownInput,
+		Graphics::RenderingBuffer& renderingBuffer, std::atomic<Physics::PlayerInput>& ownInput,
 		UDPCommunication* udpCommunication,
 		const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal},
@@ -64,7 +64,7 @@ namespace App
 
 			if (simulationStep > m_newestStateFrameSimulationStep)
 			{
-				Physics::PlayerInput ownInput = m_ownInput.getOwnInput();
+				Physics::PlayerInput ownInput = m_ownInput;
 				m_simulationBuffer.writeOwnInput(simulationStep, ownInput);
 
 				m_simulationBuffer.update(simulationStep);

@@ -3,7 +3,6 @@
 #include "app/exitCode.hpp"
 #include "app/threads/networkThread.hpp"
 #include "graphics/time.hpp"
-#include "physics/playerInput.hpp"
 
 #include <semaphore>
 
@@ -47,16 +46,10 @@ namespace App
 			}
 			Graphics::Time::update();
 
-			processInput();
+			m_ownInput = m_window.getCurrInput();
 			m_renderingBuffer->updateAndRenderScene(m_window.getViewportSize());
 			m_window.swapBuffers();
 			m_window.pollEvents();
 		}
-	}
-
-	void RenderingThread::processInput()
-	{
-		Physics::PlayerInput ownInput = m_window.getCurrInput();
-		m_ownInput.setOwnInput(ownInput);
 	}
 }
