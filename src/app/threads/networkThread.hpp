@@ -29,8 +29,8 @@ namespace App
 	{
 	public:
 		NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args,
-			std::atomic<Physics::PlayerInput>& ownInput,
-			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+			int& ownId, std::atomic<Physics::PlayerInput>& ownInput,
+			Graphics::RenderingBuffer& renderingBuffer,
 			const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore);
 
 		void join();
@@ -48,14 +48,12 @@ namespace App
 		Physics::SimulationStep m_frameCutoff{};
 		std::unique_ptr<UDPCommunication> m_udpCommunication;
 
-		void start(GameMode gameMode, Common::AirplaneType airplaneType, Common::MapName map,
-			std::atomic<Physics::PlayerInput>& ownInput,
-			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+		void run(GameMode gameMode, Common::AirplaneType airplaneType, Common::MapName map,
+			int& ownId, std::atomic<Physics::PlayerInput>& ownInput,
+			Graphics::RenderingBuffer& renderingBuffer,
 			std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore);
-		bool startMultiplayer(Common::AirplaneType airplaneType, Common::MapName map,
-			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer);
-		void startSingleplayer(Common::AirplaneType airplaneType, Common::MapName map,
-			std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer);
+		bool startMultiplayer(Common::AirplaneType airplaneType, Common::MapName map);
+		void startSingleplayer(Common::AirplaneType airplaneType, Common::MapName map);
 		void mainLoopMultiplayer();
 
 		void handleControlFrame(const Physics::Timestamp& sendTimestamp,

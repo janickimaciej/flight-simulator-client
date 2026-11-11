@@ -26,7 +26,7 @@ namespace App
 		m_thread = std::thread(
 			[this, renderingThreadSemaphore]
 			{
-				this->start(std::move(renderingThreadSemaphore));
+				this->run(std::move(renderingThreadSemaphore));
 			});
 	}
 
@@ -35,7 +35,7 @@ namespace App
 		m_thread.join();
 	}
 
-	void PhysicsThread::start(std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore)
+	void PhysicsThread::run(std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore)
 	{
 		Physics::SimulationStep initialSimulationStep{};
 
@@ -46,7 +46,7 @@ namespace App
 		m_simulationBuffer.update(initialSimulationStep);
 
 		Common::SceneInfo sceneInfo = m_simulationBuffer.getSceneInfo(initialSimulationStep);
-		m_renderingBuffer.updateBuffer(std::move(sceneInfo));
+		m_renderingBuffer.update(std::move(sceneInfo));
 		renderingThreadSemaphore->release();
 
 		m_newestStateFrameSimulationStep = initialSimulationStep;
@@ -70,7 +70,7 @@ namespace App
 				m_simulationBuffer.update(simulationStep);
 
 				Common::SceneInfo sceneInfo = m_simulationBuffer.getSceneInfo(simulationStep);
-				m_renderingBuffer.updateBuffer(std::move(sceneInfo));
+				m_renderingBuffer.update(std::move(sceneInfo));
 
 				if (m_gameMode == GameMode::multiplayer)
 				{

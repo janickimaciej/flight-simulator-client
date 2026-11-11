@@ -53,6 +53,13 @@ namespace Graphics
 		m_map = Map::create(map, m_worldShading);
 	}
 
+	void Scene::updateAndRender(const Common::SceneInfo& sceneInfo, const glm::ivec2& viewportSize)
+	{
+		update(sceneInfo);
+		updateShaders();
+		render(viewportSize);
+	}
+
 	void Scene::update(const Common::SceneInfo& sceneInfo)
 	{
 		addAndUpdateAirplanes(sceneInfo.airplaneInfos);

@@ -10,8 +10,8 @@
 namespace App
 {
 	NetworkThread::NetworkThread(ExitSignal& exitSignal, const CommandLineArgs& args,
-		std::atomic<Physics::PlayerInput>& ownInput,
-		std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+		int& ownId, std::atomic<Physics::PlayerInput>& ownInput,
+		Graphics::RenderingBuffer& renderingBuffer,
 		const std::shared_ptr<std::counting_semaphore<2>>& renderingThreadSemaphore) :
 		m_exitSignal{exitSignal}
 	{
@@ -22,10 +22,10 @@ namespace App
 				args.clientNetworkThreadPort, args.clientPhysicsThreadPort);
 		}
 		m_thread = std::thread(
-			[this, args, &ownInput, &renderingBuffer, renderingThreadSemaphore]
+			[this, args, &ownId, &ownInput, &renderingBuffer, renderingThreadSemaphore]
 			{
-				this->start(args.gameMode, args.airplaneType, args.map, ownInput, renderingBuffer,
-					std::move(renderingThreadSemaphore));
+				this->run(args.gameMode, args.airplaneType, args.map, ownId, ownInput,
+					renderingBuffer, std::move(renderingThreadSemaphore));
 			});
 	}
 
@@ -34,14 +34,14 @@ namespace App
 		m_thread.join();
 	}
 
-	void NetworkThread::start(GameMode gameMode, Common::AirplaneType airplaneType,
-		Common::MapName map, std::atomic<Physics::PlayerInput>& ownInput,
-		std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer,
+	void NetworkThread::run(GameMode gameMode, Common::AirplaneType airplaneType,
+		Common::MapName map, int& ownId, std::atomic<Physics::PlayerInput>& ownInput,
+		Graphics::RenderingBuffer& renderingBuffer,
 		std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore)
 	{
 		if (gameMode == GameMode::multiplayer)
 		{
-			if (!startMultiplayer(airplaneType, map, renderingBuffer))
+			if (!startMultiplayer(airplaneType, map))
 			{
 				m_exitSignal.exit(ExitCode::failedToConnect);
 				return;
@@ -49,11 +49,14 @@ namespace App
 		}
 		else
 		{
-			startSingleplayer(airplaneType, map, renderingBuffer);
+			startSingleplayer(airplaneType, map);
 		}
+
+		ownId = m_ownId;
 		PhysicsThread physicsThread{m_exitSignal, gameMode, m_simulationClock, *m_simulationBuffer,
-			m_ownId, m_notification, *renderingBuffer, ownInput, m_udpCommunication.get(),
+			m_ownId, m_notification, renderingBuffer, ownInput, m_udpCommunication.get(),
 			renderingThreadSemaphore};
+
 		if (gameMode == GameMode::multiplayer)
 		{
 			mainLoopMultiplayer();
@@ -69,11 +72,11 @@ namespace App
 			);
 			semaphore->acquire();
 		}
+
 		physicsThread.join();
 	}
 
-	bool NetworkThread::startMultiplayer(Common::AirplaneType airplaneType,
-		Common::MapName map, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer)
+	bool NetworkThread::startMultiplayer(Common::AirplaneType airplaneType, Common::MapName map)
 	{
 		static constexpr int initReqFrameCount = 10;
 		for (int i = 0; i < initReqFrameCount; ++i)
@@ -96,7 +99,6 @@ namespace App
 		m_simulationClock.initializeOffset(sendTimestamp, receiveTimestamp, serverTimestamp);
 
 		m_simulationBuffer = std::make_unique<Physics::SimulationBuffer>(m_ownId, map);
-		renderingBuffer = std::make_unique<Graphics::RenderingBuffer>(m_ownId);
 
 		Physics::SimulationStep initialSimulationStep{};
 		std::unordered_map<int, Physics::PlayerInfo> playerInfos{};
@@ -114,23 +116,21 @@ namespace App
 		return true;
 	}
 
-	void NetworkThread::startSingleplayer(Common::AirplaneType airplaneType,
-		Common::MapName map, std::unique_ptr<Graphics::RenderingBuffer>& renderingBuffer)
+	void NetworkThread::startSingleplayer(Common::AirplaneType airplaneType, Common::MapName map)
 	{
-		static constexpr int ownId = 0;
-		m_simulationBuffer = std::make_unique<Physics::SimulationBuffer>(ownId, map);
-		renderingBuffer = std::make_unique<Graphics::RenderingBuffer>(ownId);
+		m_ownId = 0;
+		m_simulationBuffer = std::make_unique<Physics::SimulationBuffer>(m_ownId, map);
 
 		Physics::SimulationStep initialSimulationStep = m_simulationClock.getTime();
 
-		Physics::PlayerInfo ownInfo;
+		Physics::PlayerInfo ownInfo{};
 
 		ownInfo.state.hp = Physics::airplaneDefinitions[toSizeT(airplaneType)].initialHP;
 		ownInfo.state.state = m_spawner.spawn(airplaneType);
 		ownInfo.state.airplaneType = airplaneType;
 
-		std::unordered_map<int, Physics::PlayerInfo> playerInfos;
-		playerInfos.insert({ownId, ownInfo});
+		std::unordered_map<int, Physics::PlayerInfo> playerInfos{};
+		playerInfos.insert({m_ownId, ownInfo});
 		m_simulationBuffer->writeStateFrame(initialSimulationStep, std::move(playerInfos));
 
 		m_notification.setNotification(initialSimulationStep, true);

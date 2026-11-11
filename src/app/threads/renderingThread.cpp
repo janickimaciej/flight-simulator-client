@@ -2,6 +2,7 @@
 
 #include "app/exitCode.hpp"
 #include "app/threads/networkThread.hpp"
+#include "common/sceneInfo.hpp"
 #include "graphics/time.hpp"
 
 #include <semaphore>
@@ -12,7 +13,7 @@ namespace App
 		m_exitSignal{exitSignal}
 	{ }
 
-	void RenderingThread::start(const CommandLineArgs& args)
+	void RenderingThread::run(const CommandLineArgs& args)
 	{
 		auto semaphore = std::make_shared<std::counting_semaphore<2>>(0);
 		m_exitSignal.registerOnExit(
@@ -23,15 +24,19 @@ namespace App
 		);
 
 		m_window.setControllerType(args.controllerType);
-		NetworkThread networkThread{m_exitSignal, args, m_ownInput, m_renderingBuffer, semaphore};
+		int ownId{};
+		NetworkThread networkThread{m_exitSignal, args, ownId, m_ownInput, m_renderingBuffer,
+			semaphore};
 
 		semaphore->acquire();
 		if (!m_exitSignal.exiting())
 		{
-			m_renderingBuffer->initialize(m_window.getViewportSize(), args.airplaneType, args.map);
+			m_scene = std::make_unique<Graphics::Scene>(
+				m_window.getViewportSize(), ownId, args.airplaneType, args.map);
 			Graphics::Time::initialize();
 			mainLoop();
 		}
+
 		networkThread.join();
 	}
 
@@ -47,7 +52,10 @@ namespace App
 			Graphics::Time::update();
 
 			m_ownInput = m_window.getCurrInput();
-			m_renderingBuffer->updateAndRenderScene(m_window.getViewportSize());
+
+			const Common::SceneInfo& sceneInfo = m_renderingBuffer.getLastUpdated();
+			m_scene->updateAndRender(sceneInfo, m_window.getViewportSize());
+
 			m_window.swapBuffers();
 			m_window.pollEvents();
 		}

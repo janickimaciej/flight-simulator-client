@@ -26,9 +26,7 @@ namespace Graphics
 		Scene(const glm::ivec2& viewportSize, int ownId, Common::AirplaneType ownAirplaneType,
 			Common::MapName map);
 
-		void update(const Common::SceneInfo& sceneInfo);
-		void updateShaders();
-		void render(const glm::ivec2& viewportSize);
+		void updateAndRender(const Common::SceneInfo& sceneInfo, const glm::ivec2& viewportSize);
 
 	private:
 		int m_ownId{};
@@ -46,6 +44,10 @@ namespace Graphics
 		std::unique_ptr<Camera> m_hudCamera{};
 
 		WorldShading m_worldShading{};
+
+		void update(const Common::SceneInfo& sceneInfo);
+		void updateShaders();
+		void render(const glm::ivec2& viewportSize);
 
 		void addAndUpdateAirplanes(
 			const std::unordered_map<int, Common::AirplaneInfo>& airplaneInfos);

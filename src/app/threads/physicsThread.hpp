@@ -46,7 +46,7 @@ namespace App
 
 		UDPCommunication* m_udpCommunication;
 
-		void start(std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore);
+		void run(std::shared_ptr<std::counting_semaphore<2>> renderingThreadSemaphore);
 		void mainLoop(const Physics::SimulationStep& initialSimulationStep);
 		void sleepIfFuture(const Physics::SimulationStep& simulationStep);
 	};
